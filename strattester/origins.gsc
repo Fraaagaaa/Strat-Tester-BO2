@@ -2,6 +2,7 @@
 #include maps\mp\_utility;
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zm_tomb_main_quest;
+#include maps\mp\zombies\_zm_weapons;
 #include maps\mp\zm_tomb_utility;
 #include maps\mp\zm_tomb_challenges;
 #include maps\mp\zm_tomb_capture_zones;
@@ -287,4 +288,136 @@ open_gramophone_door()
 	self delete();
 	t_door tomb_unitrigger_delete();
 	trig_position.trigger = undefined;
+}
+
+
+readchat_origins() 
+{
+    self endon("end_game");
+	level.StratTesterCommands[level.StratTesterCommands.size] = "!gen";
+	level.StratTesterCommands[level.StratTesterCommands.size] = "!unlockgens";
+    while (true) 
+    {
+        level waittill("say", message, player);
+        msg = strtok(message, " ");
+
+        if(msg[0][0] != "!")
+            continue;
+		if(!in_array(msg[0], level.StratTesterCommands))
+			continue;
+
+        switch(msg[0])
+        {
+			case "!gen": changeGenStatus(msg[1]); break;
+			case "!unlockgens": unlockgenscase(); break;
+        }
+    }
+}
+
+strattesterprint(message)
+{
+	foreach(player in level.players)
+		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+}
+
+in_array(data, array)
+{
+	foreach(element in array)
+		if(element == data)
+			return true;
+	return false;
+}
+
+changeGenStatus(generator)
+{
+	generator = string_to_float(generator);
+	switch(generator)
+	{
+		case 1: name = "generator_start_bunker"; break;
+		case 2: name = "generator_tank_trench"; break;
+		case 3: name = "generator_mid_trench"; break;
+		case 4: name = "generator_nml_right"; break;
+		case 5: name = "generator_nml_left"; break;
+		case 6: name = "generator_church"; break;
+	}
+	foreach (gen in getstructarray( "s_generator", "targetname" ))
+	{
+		if(gen.script_noteworthy == name)
+		{
+			if(gen.n_current_progress == 100)
+			{
+				gen.n_current_progress = 0;
+				gen set_zombie_controlled_area();
+				level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+				level setclientfield( "state_" + gen.script_noteworthy, 0 );
+			}
+			else
+			{
+				gen.n_current_progress = 100;
+				gen players_capture_zone();
+				level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+				level setclientfield( "state_" + gen.script_noteworthy, 2 );
+			}
+		}
+	}
+}
+
+unlockgenscase()
+{
+	foreach (gen in getstructarray( "s_generator", "targetname" ))
+		gen thread init_capture_zone();
+	strattesterprint("All generators have been unlocked");
+}
+
+origins_pap_camo(weapon)
+{
+	if ( !isdefined( self.pack_a_punch_weapon_options ) )
+		self.pack_a_punch_weapon_options = [];
+
+	if ( !is_weapon_upgraded( weapon ) )
+		return self calcweaponoptions( 0, 0, 0, 0, 0 );
+
+	if ( isdefined( self.pack_a_punch_weapon_options[weapon] ) )
+		return self.pack_a_punch_weapon_options[weapon];
+
+	smiley_face_reticle_index = 1;
+	base = get_base_name( weapon );
+	camo_index = 39;
+
+	if ( "zm_prison" == level.script )
+		camo_index = 40;
+	else if ( "zm_tomb" == level.script )
+		camo_index = 45;
+
+	lens_index = randomintrange( 0, 6 );
+	reticle_index = randomintrange( 0, 16 );
+	reticle_color_index = randomintrange( 0, 6 );
+	plain_reticle_index = 16;
+	r = randomint( 10 );
+	use_plain = r < 3;
+
+	if ( "saritch_upgraded_zm" == base )
+		reticle_index = smiley_face_reticle_index;
+	else if ( use_plain )
+		reticle_index = plain_reticle_index;
+	scary_eyes_reticle_index = 8;
+	purple_reticle_color_index = 3;
+
+	if ( reticle_index == scary_eyes_reticle_index )
+		reticle_color_index = purple_reticle_color_index;
+
+	letter_a_reticle_index = 2;
+	pink_reticle_color_index = 6;
+
+	if ( reticle_index == letter_a_reticle_index )
+		reticle_color_index = pink_reticle_color_index;
+
+	letter_e_reticle_index = 7;
+	green_reticle_color_index = 1;
+
+	if ( reticle_index == letter_e_reticle_index )
+		reticle_color_index = green_reticle_color_index;
+
+	self.pack_a_punch_weapon_options[weapon] = self calcweaponoptions( camo_index, lens_index, reticle_index, reticle_color_index );
+	return self.pack_a_punch_weapon_options[weapon];
 }

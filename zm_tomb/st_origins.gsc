@@ -2,6 +2,8 @@
 #include maps\mp\_utility;
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm;
+#include maps\mp\zombies\zm_tomb_capture_zones;
+#include maps\mp\zm_tomb_capture_zones;
 
 #include scripts\zm\strattester\origins;
 #include scripts\zm\strattester\buildables;
@@ -15,13 +17,16 @@ main()
 	replacefunc(maps\mp\zm_tomb_capture_zones::pack_a_punch_think, ::pack_a_punch_think);
 	replacefunc(maps\mp\zm_tomb_utility::watch_staff_usage, ::watch_staff_usage);
     replaceFunc(maps\mp\zm_tomb_tank::tank_push_player_off_edge, ::tank_push_player_off_edge);
+	replacefunc(maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options, ::origins_pap_camo);
 }
 
 init()
 {
+	pack_a_punch_enable();
 	level thread enable_all_teleporters();
 	level thread takeAllParts();
 	level thread call_tank();
+	level thread readchat_origins();
     thread wait_for_players();
     
 	flag_wait("initial_blackscreen_passed");
@@ -45,7 +50,6 @@ init()
     	level setclientfield( "state_" + gen.script_noteworthy, 2 );
 	}
 
-	pack_a_punch_enable();
 
 	takecraftableparts( "" );
     thread placeStaffsInChargers();
@@ -163,3 +167,5 @@ fixed_tank_push_player_off_edge()
 {
     return;
 }
+
+
