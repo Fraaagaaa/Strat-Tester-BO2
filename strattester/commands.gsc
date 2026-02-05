@@ -822,12 +822,23 @@ livescase()
 
 buriedcase()
 {
-	setDvar("setupBuried", !getDvarInt("setupBuried"));
-	if(getDvarInt("setupBuried"))
+	if(getDvarInt("setupBuried") == 0)
+    {
 		strattesterprint("Subwofer will be built at jug");
-	else
+	    setDvar("setupBuried", 1);
+    }
+	else if (getDvarInt("setupBuried") == 1)
+    {
 		strattesterprint("Subwofer will be built at saloon");
+	    setDvar("setupBuried", 2);
+    }
+    else
+    {
+		strattesterprint("No buildables will be prebuilt");
+        setDvar("setupBuried", 0);
+    }
 }
+
 boxhitscase()
 {
 	setDvar("boxhits", !getDvarInt("boxhits"));
