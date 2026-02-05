@@ -151,9 +151,7 @@ give_weapons_on_spawn()
 	}
 	if(isorigins())
 	{
-		wait 1;
 		self takeweapon("c96_zm");
-		wait 1;
 		self giveweapon_nzv( "sticky_grenade_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
 		if(getDvarInt("shield"))
@@ -424,6 +422,7 @@ giveweapon_nzv( weapon )
 		}
 	}
 }
+
 
 give_melee_weapon_instant( weapon_name )
 {
