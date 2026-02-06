@@ -68,7 +68,7 @@ connected_st()
 {
     self endon( "disconnect" );
 	self waittill("spawned_player");
-	stversion = 1.8;
+	stversion = 1.9;
 
     while(true)
     {
@@ -111,6 +111,8 @@ setDvars()
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
 
+    createDvar("elevatorkills", 0);
+    createDvar("perkrng", 1);
 	createDvar("healthbar", 0);
 	createDvar("timer", 1);
 	createDvar("zone", 1);
@@ -245,7 +247,6 @@ find_flesh()
 
     while ( true )
     {
-		wait 0.1;
         zombie_poi = undefined;
 
         if ( isdefined( level.zombietheaterteleporterseeklogicfunc ) )
@@ -288,7 +289,10 @@ find_flesh()
 
         player = get_closest_valid_player(self.origin, self.ignore_player);
 		if(isdefined(player.innotarget) && player.innotarget)
+		{
+			wait 0.1;
 			continue;
+		}
 
         if ( !isdefined( player ) && !isdefined( zombie_poi ) )
         {
@@ -298,14 +302,14 @@ find_flesh()
             {
                 if ( isdefined( level._should_skip_ignore_player_logic ) && [[ level._should_skip_ignore_player_logic ]]() )
                 {
-                    wait 0.1;
+                    wait 1;
                     continue;
                 }
 
                 self.ignore_player = [];
             }
 
-            wait 0.1;
+            wait 1;
             continue;
         }
 
