@@ -314,12 +314,6 @@ readchat_origins()
     }
 }
 
-strattesterprint(message)
-{
-	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
-}
-
 in_array(data, array)
 {
 	foreach(element in array)
@@ -420,4 +414,226 @@ origins_pap_camo(weapon)
 
 	self.pack_a_punch_weapon_options[weapon] = self calcweaponoptions( camo_index, lens_index, reticle_index, reticle_color_index );
 	return self.pack_a_punch_weapon_options[weapon];
+}
+
+replacefunctions()
+{
+	replacefunc(maps\mp\zm_tomb_giant_robot::zombie_stomp_death, ::custom_zombie_stomp_death);
+	replacefunc(maps\mp\zm_tomb_tank::flamethrower_damage_zombies, ::custom_flamethrower_damage_zombies);
+	replacefunc(maps\mp\zombies\_zm_weap_one_inch_punch::knockdown_zombie_animate_state, ::custom_knockdown_zombie_animate_state);
+	replacefunc(maps\mp\zm_tomb_tank::tank_drop_powerups, ::tank_drop_powerups);
+	replacefunc(maps\mp\zm_tomb_capture_zones::pack_a_punch_think, ::pack_a_punch_think);
+	replacefunc(maps\mp\zm_tomb_utility::watch_staff_usage, ::watch_staff_usage);
+    replaceFunc(maps\mp\zm_tomb_tank::tank_push_player_off_edge, ::fixed_tank_push_player_off_edge);
+	replacefunc(maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options, ::origins_pap_camo);
+    replaceFunc(maps\mp\zm_tomb_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
+}
+
+custom_flamethrower_damage_zombies(n_flamethrower_id, str_tag)
+{
+	self endon("flamethrower_stop_" + n_flamethrower_id);
+	while(1)
+	{
+		a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
+		foreach(ai_zombie in a_targets)
+		{
+			if(isalive(ai_zombie))
+			{
+				a_players = get_players_on_tank(1);
+				if(a_players.size > 0)
+				{
+					level notify("vo_tank_flame_zombie");
+				}
+				if(str_tag == "tag_flash")
+				{
+					level.tankkills++;
+					ai_zombie do_damage_network_safe(self, ai_zombie.health, "zm_tank_flamethrower", "MOD_BURNED");
+					ai_zombie thread zombie_gib_guts();
+				}
+				else
+				{
+					ai_zombie thread maps\mp\zombies\_zm_weap_staff_fire::flame_damage_fx("zm_tank_flamethrower", self);
+				}
+				wait(0.05);
+			}
+		}
+		wait_network_frame();
+	}
+}
+
+tank_drop_powerups()
+{
+    flag_wait( "start_zombie_round_logic" );
+    a_drop_nodes = [];
+
+    for ( i = 0; i < 3; i++ )
+    {
+        drop_num = i + 1;
+        a_drop_nodes[i] = getvehiclenode( "tank_powerup_drop_" + drop_num, "script_noteworthy" );
+        a_drop_nodes[i].next_drop_round = 0;
+        s_drop = getstruct( "tank_powerup_drop_" + drop_num, "targetname" );
+        a_drop_nodes[i].drop_pos = s_drop.origin;
+    }
+
+    a_possible_powerups = array( "nuke", "full_ammo", "zombie_blood", "insta_kill", "fire_sale", "double_points" );
+
+    while ( true )
+    {
+        self ent_flag_wait( "tank_moving" );
+
+        foreach ( node in a_drop_nodes )
+        {
+            dist_sq = distance2dsquared( node.origin, self.origin );
+
+            if ( dist_sq < 250000 )
+            {
+                a_players = get_players_on_tank( 1 );
+
+                if ( a_players.size > 0 )
+                {
+                    if (level.round_number >= node.next_drop_round )
+                    {
+                        str_powerup = random( a_possible_powerups );
+                        level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop( str_powerup, node.drop_pos );
+                        node.next_drop_round = level.round_number + randomintrange( 8, 12 );
+                        continue;
+                    }
+
+                    level notify( "sam_clue_tank", self );
+                }
+            }
+        }
+
+        wait 2.0;
+    }
+}
+
+fixed_tank_push_player_off_edge()
+{
+    return;
+}
+
+delete_zombie_noone_looking( how_close, how_high )
+{
+    self endon( "death" );
+
+    if ( !isdefined( how_close ) )
+        how_close = 1500;
+
+    if ( !isdefined( how_high ) )
+        how_high = 600;
+
+    distance_squared_check = how_close * how_close;
+    too_far_dist = distance_squared_check * 3;
+
+    if ( isdefined( level.zombie_tracking_too_far_dist ) )
+        too_far_dist = level.zombie_tracking_too_far_dist * level.zombie_tracking_too_far_dist;
+
+    self.inview = 0;
+    self.player_close = 0;
+    n_distance_squared = 0;
+    n_height_difference = 0;
+    players = get_players();
+
+    for ( i = 0; i < players.size; i++ )
+    {
+        if ( players[i].sessionstate == "spectator" )
+            continue;
+
+        if ( isdefined( level.only_track_targeted_players ) )
+        {
+            if ( !isdefined( self.favoriteenemy ) || self.favoriteenemy != players[i] )
+                continue;
+        }
+
+        can_be_seen = self player_can_see_me( players[i] );
+
+        if ( can_be_seen && distancesquared( self.origin, players[i].origin ) < too_far_dist )
+            self.inview++;
+
+        n_modifier = 1.0;
+
+        if ( isdefined( players[i].b_in_tunnels ) && players[i].b_in_tunnels )
+            n_modifier = 2.25;
+
+        n_distance_squared = distancesquared( self.origin, players[i].origin );
+        n_height_difference = abs( self.origin[2] - players[i].origin[2] );
+
+        if ( n_distance_squared < distance_squared_check * n_modifier && n_height_difference < how_high )
+            self.player_close++;
+    }
+
+    if ( self.inview == 0 && self.player_close == 0 )
+    {
+        if ( !isdefined( self.animname ) || self.animname != "zombie" && self.animname != "mechz_zombie" )
+            return;
+
+        if ( isdefined( self.electrified ) && self.electrified == 1 )
+            return;
+
+        if ( isdefined( self.in_the_ground ) && self.in_the_ground == 1 )
+            return;
+
+        zombies = getaiarray( "axis" );
+
+        if ( ( !isdefined( self.damagemod ) || self.damagemod == "MOD_UNKNOWN" ) && self.health < self.maxhealth )
+        {
+            if ( !( isdefined( self.exclude_distance_cleanup_adding_to_total ) && self.exclude_distance_cleanup_adding_to_total ) && !( isdefined( self.isscreecher ) && self.isscreecher ) )
+            {
+                level.zombie_total++;
+                level.zombie_respawned_health[level.zombie_respawned_health.size] = self.health;
+            }
+        }
+        else if ( zombies.size + level.zombie_total > 24 || zombies.size + level.zombie_total <= 24 && self.health >= self.maxhealth )
+        {
+            if ( !( isdefined( self.exclude_distance_cleanup_adding_to_total ) && self.exclude_distance_cleanup_adding_to_total ) && !( isdefined( self.isscreecher ) && self.isscreecher ) )
+            {
+                level.zombie_total++;
+
+                if ( self.health < level.zombie_health )
+                    level.zombie_respawned_health[level.zombie_respawned_health.size] = self.health;
+            }
+        }
+
+        self maps\mp\zombies\_zm_spawner::reset_attack_spot();
+        self notify( "zombie_delete" );
+
+        if ( isdefined( self.is_mechz ) && self.is_mechz )
+        {
+            self notify( "mechz_cleanup" );
+            level.mechz_left_to_spawn++;
+            wait_network_frame();
+            level notify( "spawn_mechz" );
+        }
+
+		strattesterprint("Zombie Despawned");
+        self delete();
+        recalc_zombie_array();
+    }
+}
+
+strattesterprint(message)
+{
+	foreach(player in level.players)
+		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+}
+
+give_max_ammo_reward()
+{
+	foreach(player in level.players)
+			for(i = 0; i < 6; i++)
+				player maps\mp\zombies\_zm_challenges::increment_stat( "zc_zone_captures" );
+}
+
+turn_gens_on()
+{
+	foreach (gen in getstructarray( "s_generator", "targetname" ))
+	{
+		if(gen.script_noteworthy == "generator_nml_right")
+			continue;
+		gen.n_current_progress = 100;
+		gen players_capture_zone();
+		level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+    	level setclientfield( "state_" + gen.script_noteworthy, 2 );
+	}
 }
