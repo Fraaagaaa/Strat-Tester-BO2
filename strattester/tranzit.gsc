@@ -289,7 +289,11 @@ delete_zombie_noone_looking( how_close )
 
         self maps\mp\zombies\_zm_spawner::reset_attack_spot();
         self notify( "zombie_delete" );
-        strattesterprint("Zombie despawned");
+        if(getDvarInt("despawners"))
+        {
+            strattesterprint("Zombie despawned");
+            level.despawners++;
+        }
         self delete();
         recalc_zombie_array();
     }

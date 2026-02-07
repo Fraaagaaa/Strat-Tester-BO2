@@ -7,6 +7,7 @@
 replacefunctions()
 {
     replaceFunc(maps\mp\zm_buried_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
+    replaceFunc(maps\mp\zm_buried_buildables::piece_maker_unitrigger, ::piece_maker_unitrigger);
 }
 
 delete_zombie_noone_looking( how_close, how_high )
@@ -101,7 +102,11 @@ delete_zombie_noone_looking( how_close, how_high )
         if ( isdefined( self.anchor ) )
             self.anchor delete();
 
-		strattesterprint("Zombie Despawned");
+        if(getDvarInt("despawners"))
+        {
+            strattesterprint("Zombie despawned");
+            level.despawners++;
+        }
         self delete();
         recalc_zombie_array();
     }
@@ -111,4 +116,56 @@ strattesterprint(message)
 {
 	foreach(player in level.players)
 		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+}
+
+
+piece_maker_unitrigger( name, prompt_fn, think_fn )
+{
+    return;
+    // unitrigger_stub = spawnstruct();
+    // unitrigger_stub.origin = self.origin;
+
+    // if ( isdefined( self.script_angles ) )
+    //     unitrigger_stub.angles = self.script_angles;
+    // else if ( isdefined( self.angles ) )
+    //     unitrigger_stub.angles = self.angles;
+    // else
+    //     unitrigger_stub.angles = ( 0, 0, 0 );
+
+    // unitrigger_stub.script_angles = unitrigger_stub.angles;
+
+    // if ( isdefined( self.script_length ) )
+    //     unitrigger_stub.script_length = self.script_length;
+    // else
+    //     unitrigger_stub.script_length = 32;
+
+    // if ( isdefined( self.script_width ) )
+    //     unitrigger_stub.script_width = self.script_width;
+    // else
+    //     unitrigger_stub.script_width = 32;
+
+    // if ( isdefined( self.script_height ) )
+    //     unitrigger_stub.script_height = self.script_height;
+    // else
+    //     unitrigger_stub.script_height = 64;
+
+    // if ( isdefined( self.radius ) )
+    //     unitrigger_stub.radius = self.radius;
+    // else
+    //     unitrigger_stub.radius = 32;
+
+    // if ( isdefined( self.script_unitrigger_type ) )
+    //     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
+    // else
+    // {
+    //     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
+    //     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright( unitrigger_stub.angles ) * ( unitrigger_stub.script_length / 2 );
+    // }
+
+    // unitrigger_stub.cursor_hint = "HINT_NOICON";
+    // unitrigger_stub.targetname = name;
+    // maps\mp\zombies\_zm_unitrigger::unitrigger_force_per_player_triggers( unitrigger_stub, 1 );
+    // unitrigger_stub.prompt_and_visibility_func = prompt_fn;
+    // maps\mp\zombies\_zm_unitrigger::register_static_unitrigger( unitrigger_stub, think_fn );
+    // return unitrigger_stub;
 }

@@ -39,6 +39,7 @@ readchat()
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!boxmove";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!fog";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!notarget";
+	level.StratTesterCommands[level.StratTesterCommands.size] = "!despawners";
 
     if(isgreenrun())
     {
@@ -143,6 +144,7 @@ commands(msg, player)
         case "!boxmove": boxmove(msg[1]); break;
         case "!fog": fogcase(); break;
         case "!notarget": notargetcase(player); break;
+        case "!despawners": despawnerscase(); break;
         // TRANZIT
         case "!denizen": denizencase(); break;
         case "!busoff": case "!buson": busoffcase(); break;
@@ -724,4 +726,9 @@ boxhitscase()
 elevatorcase()
 {
     setDvar("elevatorkills", !getDvarInt("elevatorkills"));
+}
+
+despawnerscase()
+{
+    setDvar("despawners", !getDvarInt("despawners"));
 }

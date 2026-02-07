@@ -606,7 +606,11 @@ delete_zombie_noone_looking( how_close, how_high )
             level notify( "spawn_mechz" );
         }
 
-		strattesterprint("Zombie Despawned");
+        if(getDvarInt("despawners"))
+        {
+            strattesterprint("Zombie despawned");
+            level.despawners++;
+        }
         self delete();
         recalc_zombie_array();
     }

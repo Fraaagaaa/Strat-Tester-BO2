@@ -1,8 +1,13 @@
+#include maps\mp\gametypes_zm\_hud_util;
+#include maps\mp\zombies\_zm_utility;
+#include common_scripts\utility;
+#include maps\mp\_utility;
 
 replacefunctions()
 {
 	replacefunc(maps\mp\zm_highrise_elevators::watch_for_elevator_during_faller_spawn, ::watch_for_elevator_during_faller_spawn);
     replaceFunc(maps\mp\zm_highrise_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
+    replaceFunc(maps\mp\zm_highrise_buildables::springpadbuildable, ::springpadbuildable);
 }
 
 strattesterprint(message)
@@ -67,11 +72,8 @@ displayElevatorKills()
     level.elevatorkills.vertalign = "user_top";
     level.elevatorkills.aligny = "top";
     level.elevatorkills.label = &"^3Elevator Kills: ^5";
-    level.total_chest_accessed_mk2 = 0;
-    level.total_chest_accessed_ray = 0;
     level.elevatorkills.alignx = "left";
     level.elevatorkills.horzalign = "user_left";
-    level.elevatorkills.x = 2;
     level.elevatorkills.alpha = 1;
     level.elevatorkills setvalue(0);
 
@@ -88,6 +90,7 @@ displayWatcher()
     {
         wait 0.1;
         level.elevatorkills.alpha = getDvarInt("elevatorkills");
+        level.elevatorkills.y = 15 * getDvarInt("despawners");
     }
 }
 
@@ -156,9 +159,17 @@ delete_zombie_noone_looking( how_close, how_high )
         }
 
         self maps\mp\zombies\_zm_spawner::reset_attack_spot();
-		strattesterprint("Zombie Despawned");
+        if(getDvarInt("despawners"))
+        {
+            strattesterprint("Zombie despawned");
+            level.despawners++;
+        }
         self notify( "zombie_delete" );
         self delete();
         recalc_zombie_array();
     }
+}
+
+springpadbuildable()
+{
 }
