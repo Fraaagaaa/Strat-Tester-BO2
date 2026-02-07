@@ -10,6 +10,7 @@
 
 main()
 {
+	flag_wait("initial_blackscreen_passed");
     if(!istranzit())
         level thread raygun_counter();
 
