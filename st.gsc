@@ -4,6 +4,7 @@
 #include maps\mp\zombies\_zm_equipment;
 #include maps\mp\zombies\_zm_magicbox;
 #include maps\mp\zombies\_zm_utility;
+#include maps\mp\gametypes_zm\_hud_util;
 
 #include scripts\zm\strattester\fixes;
 #include scripts\zm\strattester\commands;
@@ -35,6 +36,7 @@ init()
 	level thread readChat();
 	level thread readconsole();
 	level thread removeUselessHUD();
+	level thread despawner_counter();
     thread wait_for_players();
     
 	flag_wait("initial_blackscreen_passed");
@@ -111,7 +113,8 @@ setDvars()
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
 
-    createDvar("elevatorkills", 0);
+	createdvar("despawners", 0);
+    createDvar("despawnersCounter", 0);
     createDvar("perkrng", 1);
 	createDvar("healthbar", 0);
 	createDvar("timer", 1);
@@ -195,6 +198,7 @@ tpcase(player, location)
 		{
 			case "shaft": pos = (3805, 1920, 2197); ang = (0, -161, 0); break;
 			case "tramp": pos = (2159, 1161, 3070); ang = (0, 135, 0); break;
+			case "trample": pos = (2159, 1161, 3070); ang = (0, 135, 0); break;
 			default: return;
 		}
 	if(isburied())
@@ -367,4 +371,40 @@ strattesterprint(message)
 {
 	foreach(player in level.players)
 		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+}
+
+despawner_counter()
+{
+	level.despawners = 0;
+
+	level thread displayWatcher();
+	level.despawnersCounter.hidewheninmenu = true;
+    level.despawnersCounter = createserverfontstring( "objective", 1.3 );
+    level.despawnersCounter.y = 0;
+    level.despawnersCounter.x = 0;
+    level.despawnersCounter.fontscale = 1.4;
+    level.despawnersCounter.alignx = "center";
+    level.despawnersCounter.horzalign = "user_center";
+    level.despawnersCounter.vertalign = "user_top";
+    level.despawnersCounter.aligny = "top";
+    level.despawnersCounter.label = &"^3Zombies Despawned: ^5";
+    level.despawnersCounter.alignx = "left";
+    level.despawnersCounter.horzalign = "user_left";
+    level.despawnersCounter.alpha = 1;
+    level.despawnersCounter setvalue(0);
+
+    while(true)
+    {
+    	level.despawnersCounter setvalue(level.despawners);
+        wait 0.1;
+    }
+}
+
+displayWatcher()
+{
+    while(true)
+    {
+        wait 0.1;
+        level.despawnersCounter.alpha = getDvarInt("despawners");
+    }
 }
