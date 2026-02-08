@@ -1,10 +1,11 @@
 # Strat Tester BO2
 
-## [**Donwload**](https://github.com/Fraagaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.rar)
+## [**Donwload**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
 
 ## Chat Commands
 
 ### General
+- `!despawners`    toggles despawners tracker
 - `!boards`        toggles opening window's boards
 - `!delay`         changes delat at the start of the round
 - `!doors`         toggles oppening all necesary doors
@@ -36,6 +37,9 @@
 ### Town
 - `!jug`         changes game set up in town
 
+### Die Rise
+- `!elevator`    displays the ammount of zombies killed by elevators    
+
 ### Mob
 - `!traptimer`   toggles traptimer on mob
 - `!shield`      toggles starting with shield equipped and built
@@ -43,6 +47,7 @@
 
 ### Buried
 - `!buried`      toggles buildable setup on buried
+- `!sub`         toggles subwofer kills per shot
 
 ### Origins
 - `!cherry`      toggles getting cherry in origins
@@ -115,6 +120,7 @@
 
 ### Die Rise
 - Spawned trample steam buildable
+- Elevator kills tracker with `!elevator`
 
 ### MOTD
 - White player will be teleported to the necesary afterlife switches to be able to shock them and pick up the key
@@ -122,9 +128,11 @@
 - Infinite afterlives, can be switched off with !lives
 
 ### Buried
-- 2 buildable setups:
+2 buildable setups:
 - Resonator at jug, Turbine at church and Springpad at saloon (default)
 - Resonator at saloon, Turbine at church and Springpad at jug
+
+Can be switched with `!buried`
 
 ### Origins
 - White player starts with shovel and golden helmet
@@ -135,7 +143,3 @@
 - All portals are oppened
 - Trackers for zombies stopmpt and tumbled
 - Tracker for tank kills (does not count the flamethrower kills) (can be turned on with !tank)
-
-# TO DO
-- Add menus
-- Display when zombies are killed by gondola
