@@ -15,6 +15,7 @@ main()
 	flag_wait("initial_blackscreen_passed");
 
 	deleteSlothBarricade( "juggernaut_alley" );
+	level thread displaysubwooferkills();
 
 	if(getDvarInt("setupBuried") == 1)
 	{

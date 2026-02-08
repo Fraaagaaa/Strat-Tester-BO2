@@ -79,6 +79,7 @@ readchat()
     if(isburied())
     {
         level.StratTesterCommands[level.StratTesterCommands.size] = "!buried";
+        level.StratTesterCommands[level.StratTesterCommands.size] = "!sub";
         level.StratTesterCommands[level.StratTesterCommands.size] = "!perma";
     }
     while (true) 
@@ -169,6 +170,7 @@ commands(msg, player)
         case "!traptimer": setDvar("traptimer", !getDvarInt("traptimer")); break;
         // BURIED
         case "!buried": buriedcase(); break;
+        case "!sub": subcase(); break;
         default: break;
     }
     setDvar("chat", "xxxxxxxxxxxx");
@@ -731,4 +733,9 @@ elevatorcase()
 despawnerscase()
 {
     setDvar("despawners", !getDvarInt("despawners"));
+}
+
+subcase()
+{
+    setDvar("subwooferkills", !getDvarInt("subwooferkills"));
 }

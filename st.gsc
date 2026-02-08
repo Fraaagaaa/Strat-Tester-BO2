@@ -145,7 +145,10 @@ setDvars()
 	if(issurvivalmap())
 		createDvar("avg", 1);
 	if(isburied())
+	{
+    	createdvar("subwooferkills", 0);
 		createDvar("setupBuried", 1); 
+	}
 	if(istranzit())
 	{
 		createDvar("busloc", 0);
