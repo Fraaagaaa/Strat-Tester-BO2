@@ -65,7 +65,7 @@
 ## TP locations for !tp
 | **Map**     | **Tranzit**            | **Die Rise**   | **MOB**     | **Buried**   | **Origins**      |
 |--------------|------------------------|----------------|-------------|--------------|------------------|
-| **Location**| `farm` `town` `dinner` `tunel` `depot` `power` `bus` `nacht` `ak` `ware` | `shaft` `tramp` | `cafe` `cage` `fans` `dt` | `saloon` `jug` `tunel` | `church` `tcp` `gen2` `tank` |
+| **Location**| `farm` `town` `dinner` `tunel` `depot` `power` `bus` `nacht` `ak` `ware` | `shaft` `tramp` | `cafe` `cage` `fans` `dt` | `saloon` `jug` `tunel` | `church` `tcp` `gen[1-6]` `tank` |
 
 ## Box move locations
 | **Map**       | **Location**                       |
