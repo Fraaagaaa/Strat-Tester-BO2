@@ -19,6 +19,7 @@ readchat()
 	level.StratTesterCommands = [];
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!a";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!endround";
+	level.StratTesterCommands[level.StratTesterCommands.size] = "!changeround";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!killhorde";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!tpc";
 	level.StratTesterCommands[level.StratTesterCommands.size] = "!tp";
@@ -124,6 +125,7 @@ commands(msg, player)
     switch(msg[0])
     {
         case "!a": strattesterprint(player.origin + "    " + player.angles); break;
+        case "!changeround": changeroundcase(msg[1]); break;
         case "!endround": endroundcase(); break;
         case "!killhorde": killhordecase(); break;
         case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
@@ -294,7 +296,7 @@ endRound(round)
 
         if ( is_magic_bullet_shield_enabled( nuked_zombie ) )
             continue;
-
+        nuked_zombie.health = 10000; // In case they have negative health like in die rise
         nuked_zombie dodamage( nuked_zombie.health + 666, nuked_zombie.origin );
     }
 }
@@ -738,4 +740,13 @@ despawnerscase()
 subcase()
 {
     setDvar("subwooferkills", !getDvarInt("subwooferkills"));
+}
+
+changeroundcase(round)
+{
+    rnd = string_to_float(round);
+
+    level.round_number = rnd - 1;
+    endround(true);
+    strattesterprint("Changing round to " + round);
 }

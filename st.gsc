@@ -25,11 +25,8 @@ main()
 init()
 {
 	level.strat_tester = true;
-	setdvars();
-
     if(!isDefined(level.total_chest_accessed))
         level.total_chest_accessed = 0;
-
     thread turn_on_power();
     thread set_starting_round();
     thread remove_boards_from_windows();
