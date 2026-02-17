@@ -13,83 +13,31 @@
 #include scripts\zm\strattester\ismap;
 #include scripts\zm\strattester\sph;
 
+addCommands(commands)
+{
+    foreach(command in commands)
+        level.StratTesterCommands[level.StratTesterCommands.size] = command;
+}
+
 readchat() 
 {
     self endon("end_game");
 	level.StratTesterCommands = [];
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!a";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!endround";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!changeround";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!killhorde";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!tpc";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!tp";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!sph";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!power";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!boards";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!doors";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!round";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!delay";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!zone";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!remaining";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!weapons";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!perks";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!healthbar";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!timer";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!nuke";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!max";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!boxmove";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!fog";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!notarget";
-	level.StratTesterCommands[level.StratTesterCommands.size] = "!despawners";
+    addCommands(array("!a", "!endround", "!changeround", "!killhorde", "!tpc", "!tp", "!sph", "!power", "!boards", "!doors", "!round", "!delay", "!zone", "!remaining", "!weapons", "!perks", "!healthbar", "!timer", "!nuke", "!max", "!boxmove", "!fog", "!notarget", "!despawners", "!help"));
 
-    if(isgreenrun())
-    {
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!denizen";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!busoff";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!depart";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!busloc";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!bustimer";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!perma";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!jug";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!buson";
-    }
-    if(isorigins())
-    {
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!templars";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!stomp";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!tumble";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!tank";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!cherry";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!shield";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!wm";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!staff";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!gen";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!unlockgens";
-    }
-    if(ismob())
-    {
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!shield";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!lives";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!traptimer";
-    }
-    if(isdierise())
-    {
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!perma";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!elevator";
-    }
-    if(isburied())
-    {
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!buried";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!sub";
-        level.StratTesterCommands[level.StratTesterCommands.size] = "!perma";
-    }
+    if(isgreenrun())    addCommands(array("!denizen","!busoff","!depart","!busloc","!bustimer","!perma","!jug","!buson"));
+    if(isorigins())     addCommands(array("!templars","!stomp","!tumble","!tank","!cherry","!shield","!wm","!staff","!gen","!unlockgens"));
+    if(ismob())         addCommands(array("!shield", "!lives", "!traptimer"));
+    if(isdierise())     addCommands(array("!perma", "!elevator"));
+    if(isburied())      addCommands(array("!buried", "!sub", "!perma"));
+    
     while (true) 
     {
         level waittill("say", message, player);
         msg = strtok(tolower(message), " ");
         if(msg[0][0] != "!")
             continue;
-		if(!in_array(msg[0], level.StratTesterCommands))
+		if(!in_array(msg[0], level.StratTesterCommands) && (!in_array(msg[0], level.FragaCommands)) && (!in_array(msg[0], level.FragaCommandsAliases)))
 		{
 			strattesterprint("Unknown command ^1" + message);
 			continue;
@@ -148,6 +96,7 @@ commands(msg, player)
         case "!fog": fogcase(); break;
         case "!notarget": notargetcase(player); break;
         case "!despawners": despawnerscase(); break;
+        case "!help": helpcase(); break;
         // TRANZIT
         case "!denizen": denizencase(); break;
         case "!busoff": case "!buson": busoffcase(); break;
@@ -749,4 +698,30 @@ changeroundcase(round)
     level.round_number = rnd - 1;
     endround(true);
     strattesterprint("Changing round to " + round);
+}
+
+helpcase()
+{
+	i = 0;
+	while (i < level.StratTesterCommands)
+	{
+		text = "";
+
+		for (j = 0; j < 10; j++)
+		{
+			if (!isdefined(level.StratTesterCommands[i + j]))
+				break;
+
+			if (j > 0)
+				text += "  ";
+
+			text += level.StratTesterCommands[i + j];
+		}
+
+		if (text != "")
+			strattesterprint(text);
+
+		i += 10;
+		wait 0.1;
+	}
 }
