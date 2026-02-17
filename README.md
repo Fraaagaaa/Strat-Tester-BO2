@@ -11,6 +11,7 @@
 - `!doors`         toggles oppening all necesary doors
 - `!drops`         enables drops
 - `!endround`      ends current round
+- `!changeround`   changes the round
 - `!fog`           toggles fog
 - `!healthbar`     toggles healthbar
 - `!killhorde`     kills current horde
