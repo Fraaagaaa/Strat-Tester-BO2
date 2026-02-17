@@ -25,23 +25,24 @@ main()
 init()
 {
 	level.strat_tester = true;
+	setdvars();
+
     if(!isDefined(level.total_chest_accessed))
         level.total_chest_accessed = 0;
-	level thread setdvars();
-	level thread fix_highround();
-    level thread turn_on_power();
-    level thread set_starting_round();
-    level thread remove_boards_from_windows();
+
+    thread turn_on_power();
+    thread set_starting_round();
+    thread remove_boards_from_windows();
 	thread enable_cheats();
-	level thread readChat();
-	level thread readconsole();
-	level thread removeUselessHUD();
-	level thread despawner_counter();
+	thread readChat();
+	thread readconsole();
+	thread removeUselessHUD();
+	thread despawner_counter();
     thread wait_for_players();
     
 	flag_wait("initial_blackscreen_passed");
-	level thread openAllDoors();
-    level thread round_pause_st();
+	thread openAllDoors();
+ 	thread round_pause_st();
 	setdvar("cg_ufo_scaler", 6);
 }
 
@@ -51,18 +52,7 @@ wait_for_players()
     {
         level waittill("connected" , player);
         player thread connected_st();
-        player thread fraga_connected();
     }
-}
-
-fraga_connected()
-{
-	self endon("disconnect");
-	self waittill("spawned_player");
-
-	self thread timer();
-	self thread timerlocation();
-	self thread trap_timer();
 }
 
 
@@ -78,6 +68,9 @@ connected_st()
 		{
 			self iprintln("^6Strat Tester " + stversion);
 			self iprintln("^5Made by BoneCrusher");
+			self thread timer();
+			self thread timerlocation();
+			self thread trap_timer();
 			self thread scanweapons();
 			self thread health_bar_hud();
 			self thread zone_hud();

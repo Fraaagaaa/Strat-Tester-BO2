@@ -72,7 +72,6 @@ openAllDoors()
 
 give_weapons_on_spawn()
 {
-	wait 2; // get mulekick
 	if(!getDvarInt("weapons"))
 		return;
 	
@@ -161,8 +160,8 @@ give_weapons_on_spawn()
 			if(getDvarInt("wm"))
 				self giveweapon( "m32_upgraded_zm" );
 			else
-				self giveweapon( "mp40_upgraded_zm" );
-			self giveweapon( "raygun_mark2_upgraded_zm" );
+				self weapon_give( "mp40_upgraded_zm" );
+			self weapon_give( "raygun_mark2_upgraded_zm" );
 			self equipment_take( "claymore_zm" );
 			self weapon_give( "claymore_zm", undefined, undefined, 0 );
 			self switchToWeapon( "mp40_upgraded_zm" );
