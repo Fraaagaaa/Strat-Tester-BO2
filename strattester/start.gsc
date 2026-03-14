@@ -82,14 +82,14 @@ give_weapons_on_spawn()
 		wait 1;
 		self takeweapon("m1911_zm");
 		wait 1;
-		self giveweapon_nzv( "raygun_mark2_upgraded_zm" );
-		self giveweapon_nzv( "m1911_upgraded_zm" );
+		self weapon_give( "raygun_mark2_upgraded_zm" );
+		self weapon_give( "m1911_upgraded_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
 		self giveweapon_nzv( "claymore_zm" );
 		self giveweapon_nzv( "tazer_knuckles_zm" );
 		if(self == level.players[0])
 		{
-			self giveweapon_nzv( "slowgun_upgraded_zm" );
+			self weapon_give( "slowgun_upgraded_zm" );
 			self switchToWeapon( "slowgun_upgraded_zm" );
 		}
 	}
@@ -97,10 +97,10 @@ give_weapons_on_spawn()
 	{
 		self takeweapon("m1911_zm");
 		if(self == level.players[0])
-			self giveweapon_nzv( "slipgun_zm" );
+			self weapon_give( "slipgun_zm" );
 		else
-			self giveweapon_nzv( "m1911_upgraded_zm" );
-		self giveweapon_nzv( "an94_upgraded_zm+mms" );
+			self weapon_give( "m1911_upgraded_zm" );
+		self weapon_give( "an94_upgraded_zm+mms" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
 		self giveweapon_nzv( "sticky_grenade_zm" );
 		self giveweapon_nzv( "tazer_knuckles_zm" );
@@ -112,10 +112,10 @@ give_weapons_on_spawn()
 	{
 		self takeweapon("m1911_zm");
 		if(self == level.players[0])
-			self giveweapon_nzv( "raygun_mark2_upgraded_zm" );
+			self weapon_give( "raygun_mark2_upgraded_zm" );
 		else
-			self giveweapon_nzv( "ray_gun_zm" );
-		self giveweapon_nzv( "m1911_upgraded_zm" );
+			self weapon_give( "ray_gun_zm" );
+		self weapon_give( "m1911_upgraded_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
 	}
 	if(ismob())
@@ -124,23 +124,23 @@ give_weapons_on_spawn()
 		self takeweapon("m1911_zm");
 		if(self == level.players[0])
 		{
-			self giveweapon_nzv( "blundersplat_upgraded_zm" );
-			self giveweapon_nzv( "raygun_mark2_upgraded_zm" );
+			self weapon_give( "blundersplat_upgraded_zm" );
+			self weapon_give( "raygun_mark2_upgraded_zm" );
 		}
 		else if(self == level.players[1])
 		{
-			self giveweapon_nzv( "blundersplat_upgraded_zm" );
-			self giveweapon_nzv( "m1911_upgraded_zm" );
+			self weapon_give( "blundersplat_upgraded_zm" );
+			self weapon_give( "m1911_upgraded_zm" );
 		}
 		else if(self == level.players[2])
 		{
-			self giveweapon_nzv( "m1911_upgraded_zm" );
-			self giveweapon_nzv( "uzi_zm" );
+			self weapon_give( "m1911_upgraded_zm" );
+			self weapon_give( "uzi_zm" );
 		}
 		else if(self == level.players[3])
 		{
-			self giveweapon_nzv( "m1911_upgraded_zm" );
-			self giveweapon_nzv( "uzi_zm" );
+			self weapon_give( "m1911_upgraded_zm" );
+			self weapon_give( "uzi_zm" );
 		}
 		if(getDvarInt("shield"))
 			self giveweapon_nzv( "alcatraz_shield_zm" );
@@ -158,7 +158,7 @@ give_weapons_on_spawn()
 		if(level.players.size == 1)
 		{
 			if(getDvarInt("wm"))
-				self giveweapon( "m32_upgraded_zm" );
+				self weapon_give( "m32_upgraded_zm" );
 			else
 				self weapon_give( "mp40_upgraded_zm" );
 			self weapon_give( "raygun_mark2_upgraded_zm" );

@@ -104,6 +104,12 @@ display_sph(time, hordes)
 	wait(level.fade_time);
 }
 
+#define HIDE_TIMER 0
+#define TOP_RIGHT_TIMER 1
+#define TOP_LEFT_TIMER 2
+#define MID_LEFT_TIMER 3
+#define AMMO_TIMER 4
+
 timerlocation()
 {
 	self endon("disconnect");
@@ -112,11 +118,11 @@ timerlocation()
 	{
 		switch(getDvarInt("timer"))
 		{
-			case 0:
-				self.timer.alpha = !getDvarInt("st") * 0;
+			case HIDE_TIMER:
+				self.timer.alpha = 0;
 				self.round_timer.alpha = 0;
 				break;
-			case 1:
+			case TOP_RIGHT_TIMER:
 				self.round_timer.alignx = "right";
 				self.round_timer.aligny = "top";
 				self.round_timer.horzalign = "user_right";
@@ -127,21 +133,16 @@ timerlocation()
 				self.timer.vertalign = "user_top";
 				self.timer.x = -1;
 				self.timer.y = 13;
-				self.timer.alpha = !getDvarInt("st") * 1;
+				self.timer.alpha = 1;
 				self.round_timer.alpha = 1;
 				if(getDvar("cg_drawFPS") != "Off")
-					self.timer.y += 4;
+					self.timer.y += 6;
 				if(getDvar("cg_drawFPS") != "Off" && GetDvar("language") == "japanese")
 					self.timer.y += 10;
-				if(ismob())
-				{
-					self.timer.y = 40;
-					self.trap_timer.y = 19;
-				}
 				if(isdierise())
 					self.timer.y = 30;
 				break;
-			case 2:
+			case TOP_LEFT_TIMER:
 				self.round_timer.alignx = "left";
 				self.round_timer.aligny = "top";
 				self.round_timer.horzalign = "user_left";
@@ -152,22 +153,14 @@ timerlocation()
 				self.timer.vertalign = "user_top";
 				self.timer.x = 1;
 				self.timer.y = 0;
-				self.timer.alpha = !getDvarInt("st") * 1;
+				self.timer.alpha = 1;
 				self.round_timer.alpha = 1;
-				if(isorigins())
-					self.timer.y = 45;
-				if(issurvivalmap())
-					self.timer.y = 40;
-				if(isdierise() && level.springpad_hud.alpha != 0)
-					self.timer.y = 10;
-				if(isburied() && level.springpad_hud.alpha != 0)
-					self.timer.y = 35;
-				if(istranzit() && getDvarInt("bus"))
-					self.timer.y = 21;
-				if(istranzit() && getDvarInt("bus") && GetDvar("language") == "japanese")
-					self.timer.y = 25;
+				if(isorigins()) self.timer.y = 45;
+				if(issurvivalmap()) self.timer.y = 40;
+				if(isdierise() && level.springpad_hud.alpha != 0) self.timer.y = 10;
+				if(isburied() && level.springpad_hud.alpha != 0) self.timer.y = 35;
 				break;
-			case 3:
+			case MID_LEFT_TIMER:
 				self.timer.alignx = "left";
 				self.timer.aligny = "top";
 				self.timer.horzalign = "user_left";
@@ -178,10 +171,10 @@ timerlocation()
 				self.round_timer.vertalign = "user_top";
 				self.timer.x = 1;
 				self.timer.y = 250;
-				self.timer.alpha = !getDvarInt("st") * 1;
+				self.timer.alpha = 1;
 				self.round_timer.alpha = 1;
 				break;
-			case 4:
+			case AMMO_TIMER:
 				self.round_timer.alignx = "right";
 				self.round_timer.aligny = "top";
 				self.round_timer.horzalign = "user_right";
@@ -192,7 +185,7 @@ timerlocation()
 				self.timer.vertalign = "user_top";
 				self.timer.x = -170;
 				self.timer.y = 415;
-				self.timer.alpha = !getDvarInt("st") * 1;
+				self.timer.alpha = 1;
 				self.round_timer.alpha = 1;
 				break;
 
@@ -216,12 +209,12 @@ trap_timer()
 	self endon( "disconnect" );
 
 	self.trap_timer = newclienthudelem( self );
-	self.trap_timer.alignx = "right";
+	self.trap_timer.alignx = "left";
 	self.trap_timer.aligny = "top";
-	self.trap_timer.horzalign = "user_right";
+	self.trap_timer.horzalign = "user_left";
 	self.trap_timer.vertalign = "user_top";
-	self.trap_timer.x = -2;
-	self.trap_timer.y = 14;
+	self.trap_timer.x = 2;
+	self.trap_timer.y = 75;
 	self.trap_timer.fontscale = 1.4;
 	self.trap_timer.hidewheninmenu = 1;
 	self.trap_timer.hidden = 0;
