@@ -2,6 +2,10 @@
 
 ## [**Donwload**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
 
+## How to install
+
+- Unzip the download in `%localappdata%\Plutonium\storage\t6`.
+
 ## Chat Commands
 
 ### General
