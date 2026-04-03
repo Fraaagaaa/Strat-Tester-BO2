@@ -53,7 +53,7 @@ CoD.Options.OpenControls = function ( f5_arg0, f5_arg1 )
 	end
 end
 
-CoD.Options.OpenStratTersterSettings = function ( f_arg0, f_arg1 )
+CoD.Options.OpenStratTesterSettings = function ( f_arg0, f_arg1 )
 	if f_arg0:getParent() then
 		f_arg0:saveState()
 		f_arg0:openMenu( "StratTesterMenu", f_arg1.controller )
