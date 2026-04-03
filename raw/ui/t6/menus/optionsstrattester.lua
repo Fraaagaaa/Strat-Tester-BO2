@@ -552,10 +552,6 @@ LUI.createMenu.StratTesterMenu = function ( LocalClientIndex )
 	local menu = CoD.Menu.New( "StratTesterMenu" )
 	menu:addTitle( "STRAT TESTER", LUI.Alignment.Center )
 	
-	if CoD.isSinglePlayer == false then
-		menu:addLargePopupBackground()
-	end
-
 	menu:addBackButton()
 	menu:registerEventHandler( "button_prompt_back", CoD.StratTester.Back )
 	menu:registerEventHandler( "tab_changed", CoD.StratTester.TabChanged )
