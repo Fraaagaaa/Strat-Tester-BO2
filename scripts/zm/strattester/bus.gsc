@@ -3,6 +3,9 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\zombies\_zm;
+
+#include scripts\zm\strattester\commands;
+
 busloc()
 {
 	level.busloc.hidewheninmenu = true;
@@ -115,4 +118,30 @@ busscheduleadd( stopname, isambush, maxwaittimebeforeleaving, busspeedleaving, g
     self.destinations[destinationindex].maxwaittimebeforeleaving = maxwaittimebeforeleaving;
     self.destinations[destinationindex].busspeedleaving = busspeedleaving;
     self.destinations[destinationindex].gasusage = gasusage;
+}
+
+busstatus()
+{
+    dvar = getDvarInt("busstatus");
+    while(true)
+    {
+        wait 0.1;
+        if(dvar == getDvarInt("busstatus"))
+            continue;
+        dvar = getDvarInt("busstatus");
+
+	    if(!isdefined(level.the_bus.off))
+		    level.the_bus.off = false;
+
+        if(level.the_bus.targetspeed > 0)
+	    {
+		    strattesterprint("Stopping Bus");
+		    level.the_bus.targetspeed = 0;
+	    }
+	    else
+	    {
+		    strattesterprint("Starting Bus");
+		    level.the_bus.targetspeed = 10;
+	    }
+    }
 }

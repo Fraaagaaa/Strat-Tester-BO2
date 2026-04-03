@@ -46,7 +46,6 @@ zone_hud_watcher( x, y )
 		while( getDvarInt("zone") )
 		{
 			self.zone_hud.alpha = 1;
-			self.zone_hud.y = (y + (self.zone_hud_offset * !level.hud_health_bar ) );
 
 			zone = self get_zone_name();
 			if(prev_zone != zone)

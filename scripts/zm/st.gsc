@@ -13,6 +13,7 @@
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\ismap;
 #include scripts\zm\strattester\sph;
+#include scripts\zm\strattester\despawners;
 
 main()
 {
@@ -34,8 +35,8 @@ init()
 	thread enable_cheats();
 	level thread readChat();
 	level thread readconsole();
-	level thread removeUselessHUD();
 	level thread despawner_counter();
+	level thread despawners_init();
     thread wait_for_players();
     
 	flag_wait("initial_blackscreen_passed");
@@ -69,14 +70,14 @@ connected_st()
 {
     self endon( "disconnect" );
 	self waittill("spawned_player");
-	stversion = "1.9.2";
+	stversion = "1.10.0";
 
     while(true)
     {
 		if(!isdefined(self.has_hud))
 		{
-			self iprintln("^6Strat Tester " + stversion);
-			self iprintln("^5Made by BoneCrusher");
+			self iprintln("^6Strat Tester " + stversion + " by BoneCrusher");
+			self strattesterprint("Source: https://github.com/Fraaagaaa/Strat-Tester-BO2");
 			self thread scanweapons();
 			self thread health_bar_hud();
 			self thread zone_hud();
@@ -107,7 +108,6 @@ enable_cheats()
 
 setDvars()
 {
-    setdvar("sv_cheats", 0 );
     setdvar("player_strafeSpeedScale", 1 );
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
@@ -123,7 +123,7 @@ setDvars()
 	createDvar("doors", 1);
 	createDvar("perks", 1);
 	createDvar("power", 1);
-	createDvar("boards", 1);
+	createDvar("boards", 0);
 	createDvar("delay", 60);
 	createDvar("round", 100);
 	createDvar("sph", 1);
@@ -135,9 +135,12 @@ setDvars()
 		createDvar("shield", 0); 
 	if(isorigins())
 	{
-		createDvar("staff", 1); 
+		createDvar("staff", 0); 
 		createDvar("cherry", 0);
 		createDvar("wm", 0);
+		createDvar("stomp", 0);
+		createDvar("tumble", 0);
+		createDvar("tank", 0);
 	}
 	if(istown())
 		createDvar("jug", 0); 
@@ -146,13 +149,15 @@ setDvars()
 	if(isburied())
 	{
     	createdvar("subwooferkills", 0);
-		createDvar("setupBuried", 1); 
+		createDvar("setupBuried", 0); 
 	}
 	if(istranzit())
 	{
+		createDvar("busstatus", 1);
 		createDvar("busloc", 0);
 		createDvar("bustimer", 0);
 		createDvar("depart", 1);
+		createDvar("denizens", 1);
 	}
 	if(ismob())
 	{

@@ -100,7 +100,9 @@ raygun_counter()
         {
             level.total_mk2_display.label = &"^3Raygun MK2 AVG: ^5";
             level.total_ray_display.label = &"^3Raygun AVG: ^5";
+            if(level.total_ray != 0)
             if(isDefined(level.total_ray_display)) level.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
+            if(level.total_mk2 != 0)
             if(isDefined(level.total_mk2_display)) level.total_mk2_display setvalue(level.total_chest_accessed_mk2 / level.total_mk2);
         }
         else

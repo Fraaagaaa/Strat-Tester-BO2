@@ -82,7 +82,7 @@ give_weapons_on_spawn()
 		wait 1;
 		self takeweapon("m1911_zm");
 		wait 1;
-		self weapon_give( "raygun_mark2_upgraded_zm" );
+		self weapon_give( "m32_zm" );
 		self weapon_give( "m1911_upgraded_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
 		self giveweapon_nzv( "claymore_zm" );
@@ -169,23 +169,32 @@ give_weapons_on_spawn()
 			self setactionslot( 3, "weapon", "staff_revive_zm" );
 			self giveweapon( "staff_revive_zm" );
 			self givemaxammo( "staff_revive_zm" );
-			if(getDvarInt("staff"))
+			switch(getDvarInt("staff"))
 			{
+				case 0:
 				self weapon_give( "staff_water_upgraded_zm", undefined, undefined, 0 );
 				self switchToWeapon( "staff_water_upgraded_zm" );
-			}
-			else
-			{
-				if(cointoss())
-				{
-					self weapon_give( "staff_air_upgraded_zm", undefined, undefined, 0 );
-					self switchToWeapon( "staff_air_upgraded_zm" );
-				}
-				else
-				{
-					self weapon_give( "staff_water_upgraded_zm", undefined, undefined, 0 );
-					self switchToWeapon( "staff_water_upgraded_zm" );
-				}
+				break;
+
+				case 1:
+				self weapon_give( "staff_air_upgraded_zm", undefined, undefined, 0 );
+				self switchToWeapon( "staff_air_upgraded_zm" );
+				break;
+
+				case 2:
+				self weapon_give( "staff_fire_upgraded_zm", undefined, undefined, 0 );
+				self switchToWeapon( "staff_fire_upgraded_zm" );
+				break;
+				
+				case 3:
+				self weapon_give( "staff_lightning_upgraded_zm", undefined, undefined, 0 );
+				self switchToWeapon( "staff_lightning_upgraded_zm" );
+				break;
+
+				default:
+				self weapon_give( "staff_water_upgraded_zm", undefined, undefined, 0 );
+				self switchToWeapon( "staff_water_upgraded_zm" );
+				break;
 			}
 		}
 		else
@@ -584,7 +593,7 @@ round_pause_st()
 
 remove_boards_from_windows()
 {
-	if(!getDvarInt("boards"))
+	if(getDvarInt("boards"))
 		return;
 
 	flag_wait( "initial_blackscreen_passed" );

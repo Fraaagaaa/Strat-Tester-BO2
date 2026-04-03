@@ -298,3 +298,26 @@ delete_zombie_noone_looking( how_close )
         recalc_zombie_array();
     }
 }
+
+denizens()
+{
+    dvar = getDvarInt("denizens");
+    while(true)
+    {
+        wait 0.1;
+        if(dvar == getDvarInt("denizens"))
+            continue;
+        dvar = getDvarInt("denizens");
+
+        if(dvar)
+        {
+            strattesterprint("Denizens will spawn");
+            level.zombie_ai_limit_screecher = 2;
+        }
+        else
+        {
+            strattesterprint("Denizens wont spawn");
+            level.zombie_ai_limit_screecher = 0;
+        }
+    }
+}

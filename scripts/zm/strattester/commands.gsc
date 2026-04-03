@@ -99,7 +99,7 @@ commands(msg, player)
         case "!help": helpcase(); break;
         // TRANZIT
         case "!denizen": denizencase(); break;
-        case "!busoff": case "!buson": busoffcase(); break;
+        case "!busoff": case "!buson": busstatuscase(); break;
         case "!depart": departcase(msg[1]); break;
         case "!busloc": setDvar("busloc", !getDvarInt("busloc")); break;
         case "!bustimer": setDvar("bustimer", !getDvarInt("bustimer")); break;
@@ -108,9 +108,9 @@ commands(msg, player)
         // DIE RISE
         case "!elevator": elevatorcase(); break;
         // ORIGINS
-        case "!stomp": level.stomp_hud.alpha = !level.stomp_hud.alpha; break;
-        case "!tumble": level.tumble_hud.alpha = !level.tumble_hud.alpha; break;
-        case "!tank": level.tank_hud.alpha = !level.tank_hud.alpha; break;
+        case "!stomp": flipdvar("stomp"); break;
+        case "!tumble": flipdvar("tumble"); break;
+        case "!tank": flipdvar("tank"); break;
         case "!cherry": cherrycase(); break;
         case "!shield": shieldcase(); break;
         case "!wm": wmcase(); break;
@@ -126,6 +126,12 @@ commands(msg, player)
     }
     setDvar("chat", "xxxxxxxxxxxx");
 }
+
+flipDvar(dvar)
+{
+    setDvar(dvar, !getDvarInt(dvar));
+}
+
 boxmove(location)
 {
 	switch(location)
@@ -476,22 +482,12 @@ istranzit()
 }
 
 
-busoffcase()
+busstatuscase()
 {
 	if(!istranzit())
 		return;
-	if(!isdefined(level.the_bus.off))
-		level.the_bus.off = false;
-	if(level.the_bus.targetspeed != 0)
-	{
-		strattesterprint("Stopping Bus");
-		level.the_bus.targetspeed = 0;
-	}
-	else
-	{
-		strattesterprint("Starting Bus");
-		level.the_bus.targetspeed = 10;
-	}
+
+    setDvar("busstatus", !getDvarInt("busstatus"));
 }
 
 permacase(player)
@@ -504,16 +500,7 @@ denizencase()
 {
     if(!istranzit())
         return;
-    if(level.zombie_ai_limit_screecher == 2)
-    {
-        strattesterprint("Denizens wont spwan");
-        level.zombie_ai_limit_screecher = 0;
-    }
-    else
-    {
-        strattesterprint("Denizens will spwan");
-        level.zombie_ai_limit_screecher = 2;
-    }
+    setDvar("denizens", !getDvarInt("denizens"));
 }
 
 award_permaperks_safe()
@@ -657,17 +644,17 @@ buriedcase()
 	if(getDvarInt("setupBuried") == 0)
     {
 		strattesterprint("Subwofer will be built at jug");
-	    setDvar("setupBuried", 1);
+	    setDvar("setupBuried", 0);
     }
 	else if (getDvarInt("setupBuried") == 1)
     {
 		strattesterprint("Subwofer will be built at saloon");
-	    setDvar("setupBuried", 2);
+	    setDvar("setupBuried", 1);
     }
     else
     {
 		strattesterprint("No buildables will be prebuilt");
-        setDvar("setupBuried", 0);
+        setDvar("setupBuried", -1);
     }
 }
 

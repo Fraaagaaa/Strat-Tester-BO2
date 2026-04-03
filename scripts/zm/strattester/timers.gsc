@@ -214,7 +214,7 @@ trap_timer()
 	self.trap_timer.horzalign = "user_left";
 	self.trap_timer.vertalign = "user_top";
 	self.trap_timer.x = 2;
-	self.trap_timer.y = 75;
+	self.trap_timer.y = 40;
 	self.trap_timer.fontscale = 1.4;
 	self.trap_timer.hidewheninmenu = 1;
 	self.trap_timer.hidden = 0;

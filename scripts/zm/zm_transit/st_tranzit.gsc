@@ -18,10 +18,14 @@ main()
         level thread raygun_counter();
 
     if(istranzit())
-    while(true)
     {
-        level waittill("connecting", player);
-        if(!isdefined(player.bustimer))
-            player thread busloc();
+        level thread busstatus();
+        level thread denizens();
+        while(true)
+        {
+            level waittill("connecting", player);
+            if(!isdefined(player.bustimer))
+                player thread busloc();
+        }
     }
 }

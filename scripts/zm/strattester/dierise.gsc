@@ -46,7 +46,8 @@ watch_for_elevator_during_faller_spawn()
             }
             else
             {
-				strattesterprint("Zombie died to elevator");
+                if(getDvarInt("elevatorkills"))
+				    strattesterprint("Zombie died to elevator");
 				level.zombies_died_to_elevator++;
                 self delete();
             }

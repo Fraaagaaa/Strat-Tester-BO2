@@ -17,13 +17,16 @@ main()
 	deleteSlothBarricade( "juggernaut_alley" );
 	level thread displaysubwooferkills();
 
-	if(getDvarInt("setupBuried") == 1)
+    if(getDvarInt("setupBuried") == -1)
+		return;
+		
+	if(getDvarInt("setupBuried") == 0)
 	{
 		level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // jug
 		level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // saloon
 	    level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
 	}
-	if(getDvarInt("setupBuried") == 2)
+	if(getDvarInt("setupBuried") == 1)
 	{
 		level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // jug
 		level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // saloon

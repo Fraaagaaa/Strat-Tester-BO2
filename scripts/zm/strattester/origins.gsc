@@ -127,10 +127,11 @@ stomptracker()
 	level.stomp_hud.x = 0;
 	level.stomp_hud.y = -220;
 	level.stomp_hud.fontscale = 1.6;
-	level.stomp_hud.alpha = 0;
+	level.stomp_hud.alpha = 1;
 	level.stomp_hud.hidewheninmenu = 0;
 	level.stomp_hud.hidden = 0;
 	level.stomp_hud.label = &"^3Stomp: ^5";
+	level thread alphatrackers();
 	flag_wait("initial_blackscreen_passed");
 	while(1)
 	{
@@ -639,5 +640,17 @@ turn_gens_on()
 		gen players_capture_zone();
 		level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
     	level setclientfield( "state_" + gen.script_noteworthy, 2 );
+	}
+}
+
+
+alphatrackers()
+{
+	while(true)
+	{
+		wait 0.1;
+		level.stomp_hud.alpha = getDvarInt("stomp");
+		level.tumble_hud.alpha = getDvarInt("tumble");
+		level.tank_hud.alpha = getDvarInt("tank");
 	}
 }
