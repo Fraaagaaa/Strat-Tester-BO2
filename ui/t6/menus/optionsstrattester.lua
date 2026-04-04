@@ -141,7 +141,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 		defaultTP = "farm"
 	elseif mapname == "zm_highrise" then
 		isTpSupported = true
-		defaultTP = "m16"
+		defaultTP = "shaft"
 	elseif mapname == "zm_buried" then
 		isTpSupported = true
 		defaultTP = "jug"
@@ -159,16 +159,16 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 		local TeleportChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TP_DESTINATION"), tpDvar, Engine.Localize("ST_TP_DESTINATION_DESC"))
 
 		if mapname == "zm_transit" then
-			TeleportChoice:addChoice(Engine.Localize("ST_FARM"), "farm", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_TOWN"), "town", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_DINNER"), "dinner", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_TUNEL"), "tunel", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "power", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_BUS"), "bus", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_TUNEL"), "tunel", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_DINER"), "diner", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_FARM"), "farm", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_NACHT"), "nacht", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "power", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_AK74U"), "ak", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_WAREHOUSE"), "ware", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_TOWN"), "town", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_BUS"), "bus", nil, CoD.StratTester.OnDvarChanged )
 			
 		elseif mapname == "zm_highrise" then
 			TeleportChoice:addChoice(Engine.Localize("ST_SHAFT"), "shaft", nil, CoD.StratTester.OnDvarChanged )
@@ -338,7 +338,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 		end
 		BuriedChoice:setChoice( currentsetup )
 
-		local SubwooferKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER"), "subwooferkills", Engine.Localize("ST_INFINITE_LIVES_DESC"))
+		local SubwooferKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER"), "subwooferkills", Engine.Localize("ST_SUBWOOFER_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( SubwooferKillsChoice , 1 )
 	end
 
@@ -487,7 +487,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 
 			BoxChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "dt", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_QUICK_REVIVE"), "qr", nil, CoD.StratTester.OnDvarChanged )
-			BoxChoice:addChoice(Engine.Localize("ST_DINNER"), "diner", nil, CoD.StratTester.OnDvarChanged )
+			BoxChoice:addChoice(Engine.Localize("ST_DINER"), "diner", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_FARM"), "farm", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "power", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
@@ -505,7 +505,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 			BoxChoice:addChoice(Engine.Localize("ST_GARAGE"), "garage", nil, CoD.StratTester.OnDvarChanged )
 			
 		elseif mapname == "zm_highrise" then
-			BoxChoice:addChoice(Engine.Localize("ST_ST_ROOF"), "roof", nil, CoD.StratTester.OnDvarChanged )
+			BoxChoice:addChoice(Engine.Localize("ST_ROOF"), "roof", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_M16"), "m16", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_BAR"), "bar", nil, CoD.StratTester.OnDvarChanged )
 			

@@ -79,9 +79,8 @@ give_weapons_on_spawn()
 
     if(isburied())
 	{
-		wait 1;
+		wait 2;
 		self takeweapon("m1911_zm");
-		wait 1;
 		self weapon_give( "m32_zm" );
 		self weapon_give( "m1911_upgraded_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
