@@ -4,7 +4,7 @@
 
 ## How to install
 
-- Unzip the download in `%localappdata%\Plutonium\storage\t6`.
+- Unzip the download in `%localappdata%\Plutonium\storage\t6\mods`.
 
 ## Chat Commands
 
