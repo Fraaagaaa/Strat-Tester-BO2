@@ -243,11 +243,11 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 
 	-- TIMER POSITION (Selector Múltiple)
 	local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
-	TimerChoice:addChoice(Engine.Localize("HIDDEN"), 0, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("TOP LEFT"), 1, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("TOP RIGHT"), 2, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("MIDDLE LEFT"), 3, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("BOTTOM"), 4, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_HIDDEN"), 0, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_TOP_LEFT"), 1, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_TOP_RIGHT"), 2, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_MIDDLE_LEFT"), 3, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_BOTTOM"), 4, nil, CoD.StratTester.OnDvarChanged )
 	
 	local currentTimerVal = UIExpression.DvarInt( nil, "timer")
 	if UIExpression.DvarString( nil, "timer") == "" then
