@@ -172,7 +172,7 @@ REFERENCE           ST_BUS_LOCATION_DESC
 LANG_ENGLISH        "Muestra la ubicación actual del autobús."
 
 REFERENCE           ST_BUS_STATUS
-LANG_ENGLISH        "PARAR BUS"
+LANG_ENGLISH        "AUTOBÚS EN MOVIMIENTO"
 
 REFERENCE           ST_BUS_STATUS_DESC
 LANG_ENGLISH        "Muestra si el autobús está en movimiento o estacionado."
