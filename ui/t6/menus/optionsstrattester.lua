@@ -2,6 +2,8 @@
 -- STRAT TESTER BO2 - MENU PRINCIPAL
 -- ==========================================================
 
+-- arreglar lo de perkrng en nuketown
+
 CoD.StratTester = {}
 CoD.StratTester.CurrentTabIndex = 1
 CoD.StratTester.NeedVidRestart = false
@@ -159,10 +161,10 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 		if mapname == "zm_transit" then
 			TeleportChoice:addChoice(Engine.Localize("ST_FARM"), "farm", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_TOWN"), "town", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_ST_DINNER"), "dinner", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_DINNER"), "dinner", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_TUNEL"), "tunel", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_ST_POWER"), "power", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "power", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_BUS"), "bus", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_NACHT"), "nacht", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_AK74U"), "ak", nil, CoD.StratTester.OnDvarChanged )
@@ -179,7 +181,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 			
 		elseif mapname == "zm_prison" then
 			TeleportChoice:addChoice(Engine.Localize("ST_CAFETERIA"), "cafe", nil, CoD.StratTester.OnDvarChanged )
-			TeleportChoice:addChoice(Engine.Localize("ST_WARDEN'S OFFICE"), "fans", nil, CoD.StratTester.OnDvarChanged )
+			TeleportChoice:addChoice(Engine.Localize("ST_WARDENS_OFFICE"), "fans", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "dt", nil, CoD.StratTester.OnDvarChanged )
 			TeleportChoice:addChoice(Engine.Localize("ST_CAGE"), "cage", nil, CoD.StratTester.OnDvarChanged )
 			
@@ -314,7 +316,8 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
 	if mapname == "zm_nuked" then
 		local PapChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_FORCE_PAP"), "perkrng", Engine.Localize("ST_FORCE_PAP_DESC"))
-		CoD.StratTester.AddChoices_OnOrOff( PapChoice, 1 )
+		PapChoice:addChoice(Engine.Localize("ST_MENU_ON"), 0, nil, CoD.StratTester.OnDvarChanged )
+		PapChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 1, nil, CoD.StratTester.OnDvarChanged )
 	end
 
 	if mapname == "zm_highrise" then
@@ -486,7 +489,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 			BoxChoice:addChoice(Engine.Localize("ST_QUICK_REVIVE"), "qr", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_DINNER"), "diner", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_FARM"), "farm", nil, CoD.StratTester.OnDvarChanged )
-			BoxChoice:addChoice(Engine.Localize("ST_POWER"), "power", nil, CoD.StratTester.OnDvarChanged )
+			BoxChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "power", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
 			
 		elseif mapname == "zm_transit" and startlocation == "town" then
@@ -509,7 +512,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 		elseif mapname == "zm_prison" then
 			BoxChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "dt", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_CAFETERIA"), "cafe", nil, CoD.StratTester.OnDvarChanged )
-			BoxChoice:addChoice(Engine.Localize("ST_WARDEN_OFFICE"), "office", nil, CoD.StratTester.OnDvarChanged )
+			BoxChoice:addChoice(Engine.Localize("ST_WARDENS_OFFICE"), "office", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_DOCK"), "dock", nil, CoD.StratTester.OnDvarChanged )
 			BoxChoice:addChoice(Engine.Localize("ST_ROOF"), "roof", nil, CoD.StratTester.OnDvarChanged )
 			
@@ -556,8 +559,7 @@ LUI.createMenu.StratTesterMenu = function ( LocalClientIndex )
 	menu:addBackButton()
 	menu:registerEventHandler("button_prompt_back", CoD.StratTester.Back )
 	menu:registerEventHandler("tab_changed", CoD.StratTester.TabChanged )
-	menu:setAlpha(0.8)
-	menu:setRGB(0, 125, 0)
+	menu:setAlpha(1)
 
 	local SettingsTabs = CoD.Options.SetupTabManager( menu, 500 )
 	

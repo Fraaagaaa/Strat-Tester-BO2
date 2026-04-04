@@ -1,0 +1,457 @@
+VERSION             "1"
+CONFIG              "C:\projects\cod\t6\bin\StringEd.cfg"
+FILENOTES           ""
+
+// ==========================================
+// TÍTULOS Y PESTAÑAS
+// ==========================================
+REFERENCE           ST_MENU_TITLE
+LANG_ENGLISH        "STRAT TESTER"
+
+REFERENCE           ST_TAB_GAME
+LANG_ENGLISH        "PARTIDA"
+
+REFERENCE           ST_TAB_HUD
+LANG_ENGLISH        "INTERFAZ"
+
+REFERENCE           ST_TAB_MAP
+LANG_ENGLISH        "MAPA"
+
+REFERENCE           ST_TAB_START
+LANG_ENGLISH        "INICIO"
+
+REFERENCE           ST_TAB_BOX
+LANG_ENGLISH        "CAJA"
+
+REFERENCE           ST_MENU_OFF
+LANG_ENGLISH        "NO"
+
+REFERENCE           ST_MENU_ON
+LANG_ENGLISH        "SÍ"
+
+REFERENCE           ST_MENU_NONE
+LANG_ENGLISH        "NINGUNO"
+
+// ==========================================
+// PESTAÑA GAME
+// ==========================================
+REFERENCE           ST_CHANGE_ROUND
+LANG_ENGLISH        "CAMBIAR RONDA"
+
+REFERENCE           ST_CHANGE_ROUND_DESC
+LANG_ENGLISH        "Cambia la ronda actual."
+
+REFERENCE           ST_KILL_HORDE
+LANG_ENGLISH        "MATAR HORDA"
+
+REFERENCE           ST_KILL_HORDE_DESC
+LANG_ENGLISH        "Mata a la horda actual instantáneamente."
+
+REFERENCE           ST_END_ROUND
+LANG_ENGLISH        "TERMINAR RONDA"
+
+REFERENCE           ST_END_ROUND_DESC
+LANG_ENGLISH        "Termina la ronda actual instantáneamente."
+
+REFERENCE           ST_DESPAWNERS
+LANG_ENGLISH        "REAPARICIÓN DE ZOMBIES (DESPAWNS)"
+
+REFERENCE           ST_DESPAWNERS_DESC
+LANG_ENGLISH        "Activa o desactiva la reaparición de los zombies al alejarse."
+
+REFERENCE           ST_NOTARGET
+LANG_ENGLISH        "IGNORAR JUGADOR (NOTARGET)"
+
+REFERENCE           ST_NOTARGET_DESC
+LANG_ENGLISH        "Los zombies ignorarán al jugador."
+
+REFERENCE           ST_DROPS
+LANG_ENGLISH        "POWER-UPS (DROPS)"
+
+REFERENCE           ST_DROPS_DESC
+LANG_ENGLISH        "Activa o desactiva los power-ups soltados por los zombies."
+
+REFERENCE           ST_FOG
+LANG_ENGLISH        "NIEBLA"
+
+REFERENCE           ST_FOG_DESC
+LANG_ENGLISH        "Activa o desactiva la niebla del mapa."
+
+REFERENCE           ST_TP_DESTINATION
+LANG_ENGLISH        "DESTINO DE TELETRANSPORTE"
+
+REFERENCE           ST_TP_DESTINATION_DESC
+LANG_ENGLISH        "Elige una zona a la que teletransportarte."
+
+REFERENCE           ST_EXECUTE_TELEPORT
+LANG_ENGLISH        "EJECUTAR TELETRANSPORTE"
+
+REFERENCE           ST_EXECUTE_TELEPORT_DESC
+LANG_ENGLISH        "Te teletransporta a la zona seleccionada."
+
+// ==========================================
+// PESTAÑA HUD
+// ==========================================
+REFERENCE           ST_HEALTHBAR
+LANG_ENGLISH        "BARRA DE VIDA"
+
+REFERENCE           ST_HEALTHBAR_DESC
+LANG_ENGLISH        "Muestra una barra de vida sobre los zombies."
+
+REFERENCE           ST_ZOMBIE_COUNTER
+LANG_ENGLISH        "CONTADOR DE ZOMBIES"
+
+REFERENCE           ST_ZOMBIE_COUNTER_DESC
+LANG_ENGLISH        "Muestra los zombies restantes en la ronda."
+
+REFERENCE           ST_SPH_METER
+LANG_ENGLISH        "MEDIDOR DE SPH"
+
+REFERENCE           ST_SPH_METER_DESC
+LANG_ENGLISH        "Muestra el medidor de Segundos Por Horda (SPH)."
+
+REFERENCE           ST_ZONE_NAME
+LANG_ENGLISH        "NOMBRE DE ZONA"
+
+REFERENCE           ST_ZONE_NAME_DESC
+LANG_ENGLISH        "Muestra el nombre de tu zona actual."
+
+REFERENCE           ST_TIMER_POSITION
+LANG_ENGLISH        "POSICIÓN DEL CRONÓMETRO"
+
+REFERENCE           ST_TIMER_POSITION_DESC
+LANG_ENGLISH        "Cambia la posición del cronómetro en la pantalla."
+
+REFERENCE           ST_TRAP_TIMER
+LANG_ENGLISH        "CRONÓMETRO DE TRAMPAS"
+
+REFERENCE           ST_TRAT_TIMER_DESC
+LANG_ENGLISH        "Muestra el tiempo de actividad restante de las trampas."
+
+// Opciones de posición del HUD
+REFERENCE           HIDDEN
+LANG_ENGLISH        "OCULTO"
+
+REFERENCE           TOP_LEFT
+LANG_ENGLISH        "ARRIBA IZQUIERDA"
+
+REFERENCE           TOP_RIGHT
+LANG_ENGLISH        "ARRIBA DERECHA"
+
+REFERENCE           MIDDLE_LEFT
+LANG_ENGLISH        "CENTRO IZQUIERDA"
+
+REFERENCE           BOTTOM
+LANG_ENGLISH        "ABAJO"
+
+// ==========================================
+// PESTAÑA MAP SETTINGS
+// ==========================================
+REFERENCE           ST_FARM_DEPART
+LANG_ENGLISH        "SALIDA DE LA GRANJA"
+
+REFERENCE           ST_FARM_DEPART_DESC
+LANG_ENGLISH        "Ajusta el tiempo de salida del autobús en la Granja."
+
+REFERENCE           ST_DENIZENS
+LANG_ENGLISH        "CRIATURAS DEL BOSQUE (DENIZENS)"
+
+REFERENCE           ST_DENIZENS_DESC
+LANG_ENGLISH        "Activa o desactiva las criaturas de la niebla."
+
+REFERENCE           ST_BUS_TIMER
+LANG_ENGLISH        "CRONÓMETRO DEL AUTOBÚS"
+
+REFERENCE           ST_BUS_TIMER_DESC
+LANG_ENGLISH        "Muestra la cuenta atrás para la salida del autobús."
+
+REFERENCE           ST_BUS_LOCATION
+LANG_ENGLISH        "UBICACIÓN DEL AUTOBÚS"
+
+REFERENCE           ST_BUS_LOCATION_DESC
+LANG_ENGLISH        "Muestra la ubicación actual del autobús."
+
+REFERENCE           ST_BUS_STATUS
+LANG_ENGLISH        "ESTADO DEL AUTOBÚS"
+
+REFERENCE           ST_BUS_STATUS_DESC
+LANG_ENGLISH        "Muestra si el autobús está en movimiento o estacionado."
+
+REFERENCE           ST_TOWN_DOORS
+LANG_ENGLISH        "PUERTAS DE TOWN"
+
+REFERENCE           ST_TOWN_DOORS_DESC
+LANG_ENGLISH        "Elige qué puertas permanecerán cerradas en Town."
+
+REFERENCE           ST_FORCE_PAP
+LANG_ENGLISH        "FORZAR PAP (PACK-A-PUNCH)"
+
+REFERENCE           ST_FORCE_PAP_DESC
+LANG_ENGLISH        "Fuerza la aparición de la máquina Pack-A-Punch."
+
+REFERENCE           ST_ELEVATOR_KILLS
+LANG_ENGLISH        "BAJAS DE ASCENSOR"
+
+REFERENCE           ST_ELEVATOR_KILLS_DESC
+LANG_ENGLISH        "Registra las bajas realizadas usando los ascensores."
+
+REFERENCE           ST_BUILDABLES
+LANG_ENGLISH        "CONSTRUIBLES"
+
+REFERENCE           ST_BUILDABLES_DESC
+LANG_ENGLISH        "Selecciona qué elemento construible aparecerá ya montado."
+
+REFERENCE           ST_RESONATOR_JUG
+LANG_ENGLISH        "RESONADOR (JUGGERNOG)"
+
+REFERENCE           ST_RESONATOR_SALOON
+LANG_ENGLISH        "RESONADOR (SALOON)"
+
+REFERENCE           ST_SUBWOOFER
+LANG_ENGLISH        "BAJAS DEL SUBWOOFER"
+
+REFERENCE           ST_INFINITE_LIVES
+LANG_ENGLISH        "AFTERLIFE INFINITO"
+
+REFERENCE           ST_INFINITE_LIVES_DESC
+LANG_ENGLISH        "Activa el modo afterlife (modo bestia) infinito."
+
+REFERENCE           ST_SHIELD
+LANG_ENGLISH        "ESCUDO ZOMBIE"
+
+REFERENCE           ST_SHIELD_DESC
+LANG_ENGLISH        "Otorga un Escudo Zombie al jugador."
+
+REFERENCE           ST_SOLO_STAFF
+LANG_ENGLISH        "BASTÓN DE SOLO"
+
+REFERENCE           ST_SOLO_STAFF_DESC
+LANG_ENGLISH        "Selecciona qué bastón equipar al aparecer."
+
+REFERENCE           ST_ICE_STAFF
+LANG_ENGLISH        "BASTÓN DE HIELO"
+
+REFERENCE           ST_WIND_STAFF
+LANG_ENGLISH        "BASTÓN DE VIENTO"
+
+REFERENCE           ST_FIRE_STAFF
+LANG_ENGLISH        "BASTÓN DE FUEGO"
+
+REFERENCE           ST_LIGHTNING_STAFF
+LANG_ENGLISH        "BASTÓN DE RAYO"
+
+REFERENCE           ST_ELECTRIC_CHERRY
+LANG_ENGLISH        "ELECTRIC CHERRY"
+
+REFERENCE           ST_ELECTRIC_CHERRY_DESC
+LANG_ENGLISH        "Otorga Electric Cherry al aparecer."
+
+REFERENCE           ST_WAR_MACHINE
+LANG_ENGLISH        "MÁQUINA DE GUERRA"
+
+REFERENCE           ST_WAR_MACHINE_DESC
+LANG_ENGLISH        "Otorga la Máquina de Guerra al aparecer."
+
+REFERENCE           ST_TANK_KILLS
+LANG_ENGLISH        "BAJAS DEL TANQUE"
+
+REFERENCE           ST_TANK_KILLS_DESC
+LANG_ENGLISH        "Registra las bajas realizadas por el tanque."
+
+REFERENCE           ST_STOMP_KILLS
+LANG_ENGLISH        "BAJAS POR PISOTÓN"
+
+REFERENCE           ST_STOMP_KILLS_DESC
+LANG_ENGLISH        "Registra las bajas por pisotones de los robots gigantes."
+
+REFERENCE           ST_TUMBLE_ANIM
+LANG_ENGLISH        "ANIMACIONES DE TROPIEZO"
+
+REFERENCE           ST_TUMBLE_ANIM_DESC
+LANG_ENGLISH        "Activa o desactiva las animaciones de los zombies tropezando en el barro."
+
+REFERENCE           ST_UNLOCK_GENERATORS
+LANG_ENGLISH        "DESBLOQUEAR GENERADORES"
+
+REFERENCE           ST_UNLOCK_GENERATORS_DESC
+LANG_ENGLISH        "Enciende todos los generadores instantáneamente."
+
+// ==========================================
+// PESTAÑA START SETTINGS
+// ==========================================
+REFERENCE           ST_INITIAL_ROUND
+LANG_ENGLISH        "RONDA INICIAL"
+
+REFERENCE           ST_INITIAL_ROUND_DESC
+LANG_ENGLISH        "Configura en qué ronda empezará la partida."
+
+REFERENCE           ST_INITIAL_DELAY
+LANG_ENGLISH        "RETRASO INICIAL"
+
+REFERENCE           ST_INITIAL_DELAY_DESC
+LANG_ENGLISH        "Configura el tiempo de espera antes de que empiece la primera ronda."
+
+REFERENCE           ST_BOARDS
+LANG_ENGLISH        "BARRERAS DE VENTANAS"
+
+REFERENCE           ST_BOARDS_DESC
+LANG_ENGLISH        "Quita las barreras de las ventanas al empezar."
+
+REFERENCE           ST_POWER
+LANG_ENGLISH        "ENERGÍA"
+
+REFERENCE           ST_POWER_DESC
+LANG_ENGLISH        "Activa la energía automáticamente al empezar."
+
+REFERENCE           ST_OPEN_DOORS
+LANG_ENGLISH        "ABRIR PUERTAS"
+
+REFERENCE           ST_OPEN_DOORS_DESC
+LANG_ENGLISH        "Abre todas las puertas automáticamente al empezar."
+
+REFERENCE           ST_PERKS
+LANG_ENGLISH        "DAR PERKS"
+
+REFERENCE           ST_PERKS_DESC
+LANG_ENGLISH        "Otorga los perks necesarios automáticamente al empezar."
+
+REFERENCE           ST_WEAPONS
+LANG_ENGLISH        "DAR ARMAS"
+
+REFERENCE           ST_WEAPONS_DESC
+LANG_ENGLISH        "Otorga las armas necesarias automáticamente al empezar."
+
+// ==========================================
+// PESTAÑA BOX & ZONAS GENÉRICAS
+// ==========================================
+REFERENCE           ST_BOX_DESTINATION
+LANG_ENGLISH        "DESTINO DE LA CAJA"
+
+REFERENCE           ST_BOX_DESTINATION_DESC
+LANG_ENGLISH        "Elige a dónde se moverá la caja misteriosa."
+
+REFERENCE           ST_MOVE_BOX
+LANG_ENGLISH        "MOVER CAJA"
+
+REFERENCE           ST_MOVE_BOX_DEC
+LANG_ENGLISH        "Mueve la caja misteriosa a la zona seleccionada."
+
+REFERENCE           ST_NOT_SUPPORTED
+LANG_ENGLISH        "NO DISPONIBLE"
+
+REFERENCE           ST_NOT_SUPPORTED_DESC
+LANG_ENGLISH        "Esta función no está disponible en este mapa."
+
+// Nombres de zonas de los mapas
+REFERENCE           ST_FARM
+LANG_ENGLISH        "GRANJA"
+
+REFERENCE           ST_TOWN
+LANG_ENGLISH        "PUEBLO (TOWN)"
+
+REFERENCE           ST_DINNER
+LANG_ENGLISH        "CAFETERÍA (DINER)"
+
+REFERENCE           ST_TUNEL
+LANG_ENGLISH        "TÚNEL"
+
+REFERENCE           ST_DEPOT
+LANG_ENGLISH        "ESTACIÓN (DEPOT)"
+
+REFERENCE           ST_BUS
+LANG_ENGLISH        "AUTOBÚS"
+
+REFERENCE           ST_NACHT
+LANG_ENGLISH        "NACHT DER UNTOTEN"
+
+REFERENCE           ST_AK74U
+LANG_ENGLISH        "PARED DE LA AK74U"
+
+REFERENCE           ST_WAREHOUSE
+LANG_ENGLISH        "ALMACÉN"
+
+REFERENCE           ST_SHAFT
+LANG_ENGLISH        "EJE DEL ASCENSOR"
+
+REFERENCE           ST_TRAMPLESTEAM
+LANG_ENGLISH        "ESCAPA-ZOMBIES"
+
+REFERENCE           ST_JUG
+LANG_ENGLISH        "JUGGERNOG"
+
+REFERENCE           ST_SPEED
+LANG_ENGLISH        "SPEED COLA"
+
+REFERENCE           ST_SALOON
+LANG_ENGLISH        "CANTINA (SALOON)"
+
+REFERENCE           ST_CAFETERIA
+LANG_ENGLISH        "CAFETERÍA"
+
+REFERENCE           ST_WARDENS_OFFICE
+LANG_ENGLISH        "OFICINA DEL ALCAIDE"
+
+REFERENCE           ST_DOUBLE_TAP
+LANG_ENGLISH        "DOBLE TIRO"
+
+REFERENCE           ST_CAGE
+LANG_ENGLISH        "JAULA"
+
+REFERENCE           ST_CHURCH
+LANG_ENGLISH        "IGLESIA"
+
+REFERENCE           ST_GENERATOR_1
+LANG_ENGLISH        "GENERADOR 1"
+
+REFERENCE           ST_GENERATOR_2
+LANG_ENGLISH        "GENERADOR 2"
+
+REFERENCE           ST_GENERATOR_3
+LANG_ENGLISH        "GENERADOR 3"
+
+REFERENCE           ST_GENERATOR_4
+LANG_ENGLISH        "GENERADOR 4"
+
+REFERENCE           ST_GENERATOR_5
+LANG_ENGLISH        "GENERADOR 5"
+
+REFERENCE           ST_GENERATOR_6
+LANG_ENGLISH        "GENERADOR 6"
+
+REFERENCE           ST_THE_CRAZY_PLACE
+LANG_ENGLISH        "EL LUGAR LOCO (CRAZY PLACE)"
+
+REFERENCE           ST_TANK
+LANG_ENGLISH        "ESTACIÓN DEL TANQUE"
+
+REFERENCE           ST_QUICK_REVIVE
+LANG_ENGLISH        "QUICK REVIVE"
+
+REFERENCE           ST_BUNKER
+LANG_ENGLISH        "BÚNKER"
+
+REFERENCE           ST_YELLOW_HOUSE
+LANG_ENGLISH        "CASA AMARILLA"
+
+REFERENCE           ST_GARDEN
+LANG_ENGLISH        "JARDÍN"
+
+REFERENCE           ST_GREEN_HOUSE
+LANG_ENGLISH        "CASA VERDE"
+
+REFERENCE           ST_GARAGE
+LANG_ENGLISH        "GARAJE"
+
+REFERENCE           ST_ROOF
+LANG_ENGLISH        "TEJADO"
+
+REFERENCE           ST_M16
+LANG_ENGLISH        "M16"
+
+REFERENCE           ST_BAR
+LANG_ENGLISH        "BAR"
+
+REFERENCE           ST_DOCK
+LANG_ENGLISH        "MUELLE"
+
+ENDMARKER

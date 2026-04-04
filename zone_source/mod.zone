@@ -1,6 +1,7 @@
 >game,T6
->type,fastfile
 >name,mod
+
+localize,st
 
 script,scripts/zm/st.gsc
 
