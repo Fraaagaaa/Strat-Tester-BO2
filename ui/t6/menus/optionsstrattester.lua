@@ -318,6 +318,13 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 		local PapChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_FORCE_PAP"), "perkrng", Engine.Localize("ST_FORCE_PAP_DESC"))
 		PapChoice:addChoice(Engine.Localize("ST_MENU_ON"), 0, nil, CoD.StratTester.OnDvarChanged )
 		PapChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 1, nil, CoD.StratTester.OnDvarChanged )
+
+		local pap = UIExpression.DvarInt( nil, "perkrng")
+		if UIExpression.DvarString( nil, "perkrng") == "" then
+			pap = 1
+			Engine.SetDvar("perkrng", pap  )
+		end
+		PapChoice:setChoice( pap )
 	end
 
 	if mapname == "zm_highrise" then
