@@ -269,7 +269,7 @@ REFERENCE           ST_TUMBLE_ANIM
 LANG_ENGLISH        "TUMBLE ANIMATIONS"
 
 REFERENCE           ST_TUMBLE_ANIM_DESC
-LANG_ENGLISH        "Enable or disable zombie mud tumble animations."
+LANG_ENGLISH        "Tracks zombie tumble animations."
 
 REFERENCE           ST_UNLOCK_GENERATORS
 LANG_ENGLISH        "UNLOCK GENERATORS"
