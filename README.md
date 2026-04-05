@@ -20,6 +20,7 @@
 - Power-Ups can be desabled
 - Implemented notarget
 - Fog can be desabled
+- Zombie despawner tracker by [Guy](https://github.com/ineedbots)
 
 ## Changes by map
 ### Tranzit
