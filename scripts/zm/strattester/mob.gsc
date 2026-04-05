@@ -9,6 +9,7 @@ replacefunctions()
     replaceFunc(maps\mp\zm_alcatraz_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
 }
 
+
 speeddoor()
 {
     if(getDvarInt("doors") == 0)
@@ -22,13 +23,9 @@ speeddoor()
     waittillframeend;
     a_afterlife_interact = getentarray( "afterlife_interact", "targetname" );
 
-    for ( i = 0; i < a_afterlife_interact.size; i++ )
-    {
-        if ( isdefined( a_afterlife_interact[i].script_string ) )
-        {
-            a_afterlife_interact[i] notify( "damage", 1, level );
-        }
-    }
+    foreach(interact in  a_afterlife_interact)
+        if ( isdefined( interact.script_string ) )
+            interact notify( "damage", 1, level );
 
     m_master_key_pulley = getent( "master_key_pulley_" + ( level.is_master_key_west ? "west" : "east" ), "targetname" );
     m_master_key_pulley notify( "damage", 1, level );
@@ -43,7 +40,7 @@ speeddoor()
     m_docks_shockbox notify( "damage", 1, level );
     a_t_doors = getentarray( "zombie_door", "targetname" );
 
-    for (;;)
+    while(true)
     {
         foreach ( player in level.players )
         {
@@ -52,14 +49,11 @@ speeddoor()
                 prev_dist = level.afterlife_interact_dist;
                 level.afterlife_interact_dist = 2147483647;
 
-                for ( i = 0; i < a_t_doors.size; i++ )
+                foreach (aft_door in a_t_doors)
                 {
-                    
-                    if ( isdefined( a_t_doors[i].script_noteworthy ) && a_t_doors[i].script_noteworthy == "afterlife_door" )
+                    if( isdefined( aft_door.script_noteworthy ) && aft_door.script_noteworthy == "afterlife_door" && Distance( aft_door.origin, (2138, 9210, 1375) ) > 10 )
                     {
-                        if(a_t_doors[i].origin == (2138, 9210, 1375))
-                            continue;
-                        s_struct = getstruct( a_t_doors[i].target, "targetname" );
+                        s_struct = getstruct( aft_door.target, "targetname" );
                         m_shockbox = getent( s_struct.target, "targetname" );
                         m_shockbox notify( "damage", 1, player );
                     }
@@ -85,4 +79,10 @@ infinite_afterlifes()
 		if(getDvarInt("lives"))
 			self.lives++;
 	}
+}
+
+strattesterprint(message)
+{
+	foreach(player in level.players)
+		player iprintln("^5[^6Strat Tester^5]^7 " + message);
 }
