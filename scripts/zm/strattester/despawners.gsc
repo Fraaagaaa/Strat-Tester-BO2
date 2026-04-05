@@ -149,11 +149,13 @@ on_zombie_death()
 	
 	if ( isdefined( anchor ) )
 	{
-		strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor",  "Zombi en " + anchor.origin + " ha muerto dejando una entidad suelta" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor",  "Zombi en " + anchor.origin + " ha muerto dejando una entidad suelta" );
 		debugstar( anchor.origin, 20 * 20, ( 1, 0, 0 ), ( 1, 0, 0 ), "ANCHOR", 10 );
 		
 		level.anchor_deaths++;
-		strattesterprint( "Anchor deaths: " + level.anchor_deaths, "Entidades sueltas por zombis: " + level.anchor_deaths);
+		if(getDvarInt("despawners"))
+			strattesterprint( "Anchor deaths: " + level.anchor_deaths, "Entidades sueltas por zombis: " + level.anchor_deaths);
 	}
 }
 
