@@ -325,54 +325,54 @@ tpcase(player, location)
 	if(istranzit())
 		switch(location)
 		{
-			case "farm": pos = (6908, -5750, -62); ang = (0, 173, 0); break;
-			case "town": pos = (1152, -717, -55); ang = (0, 45, 0); break;
-			case "depot": pos = (-7384, 4693, -63); ang = (0, 18, 0); break;
-			case "tunel": pos = (-11814, -1903, 228); ang = (0, -60, 0); break;
-			case "diner": pos = (-5012, -6694, -60); ang = (0, -127, 0); break;
-			case "nacht": pos = (13840, -261, -188); ang = (0, -108, 0); break;
-			case "power": pos = (12195, 8266, -751); ang = (0, -90, 0); break;
-			case "ak": pos = (11200, 7745, -564); ang = (0, -108, 0); break;
-			case "ware": pos = (10600, 8272, -400); ang = (0, -108, 0); break;
-			case "bus": pos = level.the_bus.origin; ang = level.the_bus.angles; break;
+			case "farm": pos = (6908, -5750, -62); ang = (0, 173, 0); if(getDvar("language") == "spanish") location = "granja"; else location = "farm"; break;
+			case "town": pos = (1152, -717, -55); ang = (0, 45, 0); if(getDvar("language") == "spanish") location = "pueblo"; else location = "town"; break;
+			case "depot": pos = (-7384, 4693, -63); ang = (0, 18, 0); if(getDvar("language") == "spanish") location = "estación"; else location = "bus depot"; break;
+			case "tunel": pos = (-11814, -1903, 228); ang = (0, -60, 0); if(getDvar("language") == "spanish") location = "tunel"; else location = "tunel"; break;
+			case "diner": pos = (-5012, -6694, -60); ang = (0, -127, 0); if(getDvar("language") == "spanish") location = "cafetería"; else location = "diner"; break;
+			case "nacht": pos = (13840, -261, -188); ang = (0, -108, 0); if(getDvar("language") == "spanish") location = "natch"; else location = "natch"; break;
+			case "power": pos = (12195, 8266, -751); ang = (0, -90, 0); if(getDvar("language") == "spanish") location = "estación de energía"; else location = "power station"; break;
+			case "ak": pos = (11200, 7745, -564); ang = (0, -108, 0); if(getDvar("language") == "spanish") location = "ak74u"; else location = "ak74u"; break;
+			case "ware": pos = (10600, 8272, -400); ang = (0, -108, 0); if(getDvar("language") == "spanish") location = "almacén"; else location = "warehouse"; break;
+			case "bus": pos = level.the_bus.origin; ang = level.the_bus.angles; if(getDvar("language") == "spanish") location = "autobús"; else location = "bus"; break;
 			default: return;
 		}
 	if(ismob())
 		switch(location)
 		{
-			case "cafe": pos = (3309, 9329, 1336); ang = (0, 131, 0); break;
-			case "cage": pos = (-1771, 5401, -71); ang = (0, 0, 0); break;
-			case "fans": pos = (-1042, 9489, 1350); ang = (0, -43, 0); break;
-			case "dt":   pos = (25, 8762, 1128); ang = (0, 0, 0); break;
+			case "cafe": pos = (3309, 9329, 1336); ang = (0, 131, 0); if(getDvar("language") == "spanish") location = "cafetería"; else location = "cafeteria"; break;
+			case "cage": pos = (-1771, 5401, -71); ang = (0, 0, 0); if(getDvar("language") == "spanish") location = "jaula"; else location = "cage"; break;
+			case "fans": pos = (-1042, 9489, 1350); ang = (0, -43, 0); if(getDvar("language") == "spanish") location = "oficina del alcaide"; else location = "warden's office"; break;
+			case "dt":   pos = (25, 8762, 1128); ang = (0, 0, 0); if(getDvar("language") == "spanish") location = "doble tiro"; else location = "double tap"; break;
 			default: return;
 		}
 	if(isdierise())
 		switch(location)
 		{
-			case "shaft": pos = (3805, 1920, 2197); ang = (0, -161, 0); break;
-			case "tramp": pos = (2159, 1161, 3070); ang = (0, 135, 0); break;
+			case "shaft": pos = (3805, 1920, 2197); ang = (0, -161, 0); if(getDvar("language") == "spanish") location = "zona de campeo"; else location = "shaft"; break;
+			case "tramp": pos = (2159, 1161, 3070); ang = (0, 135, 0); if(getDvar("language") == "spanish") location = "vapor arrollador"; else location = "tramplesteam"; break;
 			default: return;
 		}
 	if(isburied())
 		switch(location)
 		{
-			case "saloon": pos = (553, -1214, 56); ang = (0, -50, 0); break;
-			case "jug": pos = (-660, 1030, 8); ang = (0, -90, 0); break;
-			case "tunel": pos = (-483, 293, 423); ang = (0, -40, 0); break;
+			case "saloon": pos = (553, -1214, 56); ang = (0, -50, 0); if(getDvar("language") == "spanish") location = "saloon"; else location = "saloon"; break;
+			case "jug": pos = (-660, 1030, 8); ang = (0, -90, 0); if(getDvar("language") == "spanish") location = "titán"; else location = "jug"; break;
+			case "tunel": pos = (-483, 293, 423); ang = (0, -40, 0); if(getDvar("language") == "spanish") location = "tunel"; else location = "tunel"; break;
 			default: return;
 		}
 	if(isorigins())
 		switch(location)
 		{
-			case "church": pos = (1878, -1358, 150); ang = (0, 140, 0); break;
-			case "tcp": pos = (10335, -7902, -411); ang = (0, 140, 0); break;
-			case "gen1": pos = (2340, 4978, -303); ang = (0, -132, 0); break;
-			case "gen2": pos = (469, 4788, -285); ang = (0, -134, 0); break;
-			case "gen3": pos = (740, 2123, -125); ang = (0, 135, 0); break;
-			case "gen4": pos = (2337, -170, 140); ang = (0, 90, 0); break;
-			case "gen5": pos = (-2830, -21, 238); ang = (0, 40, 0); break;
-			case "gen6": pos = (732, -3923, 300); ang = (0, 50, 0); break;
-			case "tank": pos = level.vh_tank.origin + (0, 0, 50); ang = level.vh_tank.angles; break;
+			case "church": pos = (1878, -1358, 150); ang = (0, 140, 0); if(getDvar("language") == "spanish") location = "iglesia"; else location = "church"; break;
+			case "tcp": pos = (10335, -7902, -411); ang = (0, 140, 0); if(getDvar("language") == "spanish") location = "the crazy place"; else location = "the crazy place"; break;
+			case "gen1": pos = (2340, 4978, -303); ang = (0, -132, 0); if(getDvar("language") == "spanish") location = "generador 1"; else location = "generator 1"; break;
+			case "gen2": pos = (469, 4788, -285); ang = (0, -134, 0); if(getDvar("language") == "spanish") location = "generador 2"; else location = "generator 2"; break;
+			case "gen3": pos = (740, 2123, -125); ang = (0, 135, 0); if(getDvar("language") == "spanish") location = "generador 3"; else location = "generator 3"; break;
+			case "gen4": pos = (2337, -170, 140); ang = (0, 90, 0); if(getDvar("language") == "spanish") location = "generador 4"; else location = "generator 4"; break;
+			case "gen5": pos = (-2830, -21, 238); ang = (0, 40, 0); if(getDvar("language") == "spanish") location = "generador 5"; else location = "generator 5"; break;
+			case "gen6": pos = (732, -3923, 300); ang = (0, 50, 0); if(getDvar("language") == "spanish") location = "generador 6"; else location = "generator 6"; break;
+			case "tank": pos = level.vh_tank.origin + (0, 0, 50); ang = level.vh_tank.angles; if(getDvar("language") == "spanish") location = "tanque"; else location = "tank"; break;
 			default: return;
 		}
 

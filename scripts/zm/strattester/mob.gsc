@@ -18,7 +18,7 @@ speeddoor()
         return;
 
     flag_wait( "initial_blackscreen_passed" );
-    wait 2;
+    // wait 2;
     level notify( "gondola_powered_on_docks" );
     waittillframeend;
     a_afterlife_interact = getentarray( "afterlife_interact", "targetname" );
