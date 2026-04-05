@@ -59,7 +59,10 @@ CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
 		return 
 	end
 
-	Engine.Exec( choice.parentSelectorButton.m_currentController, "say !notarget")
+	local controller = choice.parentSelectorButton.m_currentController
+	local playerName = UIExpression.DvarString( controller, "name" )
+	
+	Engine.SetDvar( "chat", "!notarget " .. playerName )
 	
 	Engine.SetDvar( choice.parentSelectorButton.m_profileVarName, choice.value )
 end
@@ -87,7 +90,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 	ChangeRoundSlider:registerEventHandler("button_action", function ( element, event )
 		local rondaSeleccionada = UIExpression.DvarInt( event.controller, "changeround_val")
 		
-		Engine.Exec( event.controller, "say !changeround " .. rondaSeleccionada )
+		Engine.SetDvar( "chat", "!changeround " .. rondaSeleccionada )
 	end )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
@@ -96,12 +99,12 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 
 	local KillHordeBtn = ButtonList:addButton(Engine.Localize("ST_KILL_HORDE"), Engine.Localize("ST_KILL_HORDE_DESC"))
 	KillHordeBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.Exec( event.controller, "say !killhorde")
+		Engine.SetDvar( "chat", "!killhorde" )
 	end )
 
 	local EndRoundBtn = ButtonList:addButton(Engine.Localize("ST_END_ROUND"), Engine.Localize("ST_END_ROUND_DESC"))
 	EndRoundBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.Exec( event.controller, "say !endround")
+		Engine.SetDvar( "chat", "!endround" )
 	end )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
@@ -208,7 +211,9 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 		ExecuteTPBtn:registerEventHandler("button_action", function ( element, event )
 			local selectedDest = UIExpression.DvarString( event.controller, tpDvar )
 			
-			Engine.Exec( event.controller, "say !tp " .. selectedDest )
+			local playerName = UIExpression.DvarString( event.controller, "name" )
+			
+			Engine.SetDvar( "chat", "!tp " .. selectedDest .. " " .. playerName )
 		end )
 	end
 
@@ -395,7 +400,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
 		local UnlockGensBtn = ButtonList:addButton(Engine.Localize("ST_UNLOCK_GENERATORS"), Engine.Localize("ST_UNLOCK_GENERATORS_DESC"))
 		UnlockGensBtn:registerEventHandler("button_action", function ( element, event )
-			Engine.Exec( event.controller, "say !unlockgens")
+			Engine.SetDvar( "chat", "!unlockgens" )
 		end )
 	end
 	return Container
@@ -543,7 +548,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 		ExecuteBoxBtn:registerEventHandler("button_action", function ( element, event )
 			local selectedDest = UIExpression.DvarString( event.controller, boxDvar )
 			
-			Engine.Exec( event.controller, "say !boxmove " .. selectedDest )
+			Engine.SetDvar( "chat", "!boxmove " .. selectedDest )
 		end )
 	else
 		local UnsupportedBtn = ButtonList:addButton( Engine.Localize("ST_NOT_SUPPORTED"), Engine.Localize("ST_NOT_SUPPORTED_DESC") )
