@@ -563,8 +563,6 @@ LUI.createMenu.StratTesterMenu = function ( LocalClientIndex )
 
 	menu:addBackButton()
 	menu:registerEventHandler("button_prompt_back", CoD.StratTester.Back )
-	menu:addBackButton()
-	menu:registerEventHandler("button_prompt_back", CoD.StratTester.Back )
 	menu:registerEventHandler("tab_changed", CoD.StratTester.TabChanged )
 	menu:setAlpha(1)
 

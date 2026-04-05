@@ -455,16 +455,18 @@ CoD.Options.AddOptionCategories = function ( f42_arg0 )
 	end
 	local f42_local0, f42_local1 = nil
 	local f42_local2 = CoD.ButtonList.new()
-if UIExpression.IsInGame() == 0 then
+	if UIExpression.IsInGame() == 0 then
 		local f42_local3 = 50
 		local f42_local4 = 30
 		local f42_local5 = 300
 		local f42_local6 = 2 * (f42_local3 + f42_local4) - f42_local4
 		f42_local2:setLeftRight( false, false, -f42_local5 / 2, f42_local5 / 2 )
-		f42_local2:setTopBottom( false, false, -f42_local6 / 2, f42_local6 / 2 + 100 )
+		f42_local2:setTopBottom( false, false, -f42_local6 / 2, f42_local6 / 2 + 50 )
 		f42_local2:setSpacing( f42_local4 )
+		
 		f42_local0 = f42_local2:addNavButton( Engine.Localize( "MENU_SETTINGS_CAPS" ), "open_settings" )
 		f42_local1 = f42_local2:addNavButton( Engine.Localize( "MENU_CONTROLS_CAPS" ), "open_controls" )
+		
 		-- incluir strat tester
 		local f42_local_strat_tester = f42_local2:addNavButton("STRAT TESTER", "strat_tester")
 		
@@ -479,11 +481,11 @@ if UIExpression.IsInGame() == 0 then
 		end
 	else
 		if CoD.isSinglePlayer then
-			f42_local2:setLeftRight( false, false, -CoD.ObjectiveInfoMenu.ElementWidth - CoD.ObjectiveInfoMenu.ElementSpacing / 2, -CoD.ObjectiveInfoMenu.ElementSpacing / 2 )
+			f42_local2:setLeftRight( false, true, -CoD.ObjectiveInfoMenu.ElementWidth - CoD.ObjectiveInfoMenu.ElementSpacing / 2, -CoD.ObjectiveInfoMenu.ElementSpacing / 2 )
 			f42_local2:setTopBottom( true, true, CoD.ObjectiveInfoMenu.Pause_ButtonsTopAnchor, 0 )
 		else
-			f42_local2:setLeftRight( true, false, 0, CoD.ButtonList.DefaultWidth )
-			f42_local2:setTopBottom( true, true, CoD.Menu.TitleHeight + 50, 0 )
+			f42_local2:setLeftRight( true, false, 0, CoD.Options.ButtonListWidth )
+			f42_local2:setTopBottom( true, true, CoD.Menu.TitleHeight, 0 )
 		end
 		if not CoD.isMultiplayer then
 			f42_local2:setButtonBackingAnimationState( {
@@ -498,14 +500,19 @@ if UIExpression.IsInGame() == 0 then
 				material = RegisterMaterial( "menu_mp_small_row" )
 			} )
 		end
+		
 		f42_local0 = f42_local2:addButton( Engine.Localize( "MENU_SETTINGS_CAPS" ) )
 		f42_local0:setActionEventName( "open_settings" )
-		f42_local1 = f42_local2:addButton( Engine.Localize( "MENU_CONTROLS_CAPS" ) )
-		f42_local1:setActionEventName( "open_controls" )
+		
 		-- añadir strat tester aqui
 		local f42_local_strat_tester = f42_local2:addButton( "STRAT TESTER" )
 		f42_local_strat_tester:setActionEventName( "strat_tester" )
+
+		f42_local1 = f42_local2:addButton( Engine.Localize( "MENU_CONTROLS_CAPS" ) )
+		f42_local1:setActionEventName( "open_controls" )
+		
 	end
+	
 	f42_arg0:addElement( f42_local2 )
 	if not f42_arg0:restoreState() then
 		f42_local0:processEvent( {
