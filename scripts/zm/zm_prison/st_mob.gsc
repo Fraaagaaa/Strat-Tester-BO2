@@ -13,4 +13,5 @@ init()
 	level thread spawn_buildable_trigger_shield((3366, 9406, 1336), "alcatraz_shield_zm", "^3Press &&1 for ^5Shield"); // shield
 	level.players[0] thread speeddoor();
 	level.players[0] thread infinite_afterlifes();
+	level thread takeAllParts();
 }

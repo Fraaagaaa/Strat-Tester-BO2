@@ -9,16 +9,9 @@ replacefunctions()
     replaceFunc(maps\mp\zm_alcatraz_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
 }
 
-
-speeddoor()
+power_on_shit()
 {
-    if(getDvarInt("doors") == 0)
-        return;
-    if(getDvarInt("power") == 0)
-        return;
-
-    flag_wait( "initial_blackscreen_passed" );
-    // wait 2;
+    wait 2;
     level notify( "gondola_powered_on_docks" );
     waittillframeend;
     a_afterlife_interact = getentarray( "afterlife_interact", "targetname" );
@@ -38,8 +31,19 @@ speeddoor()
 
     m_docks_shockbox = getent( "docks_panel", "targetname" );
     m_docks_shockbox notify( "damage", 1, level );
-    a_t_doors = getentarray( "zombie_door", "targetname" );
+}
+speeddoor()
+{
+    if(getDvarInt("doors") == 0)
+        return;
+    if(getDvarInt("power") == 0)
+        return;
 
+    thread power_on_shit();
+
+    flag_wait( "initial_blackscreen_passed" );
+
+    a_t_doors = getentarray( "zombie_door", "targetname" );
     while(true)
     {
         foreach ( player in level.players )
