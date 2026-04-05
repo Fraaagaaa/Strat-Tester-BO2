@@ -86,9 +86,3 @@ infinite_afterlifes()
 			self.lives++;
 	}
 }
-
-strattesterprint(message)
-{
-	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
-}

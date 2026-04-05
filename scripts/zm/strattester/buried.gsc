@@ -103,20 +103,20 @@ delete_zombie_noone_looking( how_close, how_high )
         if ( isdefined( self.anchor ) )
             self.anchor delete();
 
-        if(getDvarInt("despawners"))
-        {
-            strattesterprint("Zombie despawned");
-            level.despawners++;
-        }
         self delete();
         recalc_zombie_array();
     }
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish")
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
 
 subwooferthink( weapon, armed )

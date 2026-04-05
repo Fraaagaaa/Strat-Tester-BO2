@@ -3,10 +3,15 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\gametypes_zm\_hud_util;
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish" && isdefined(mensaje))
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
 
 replacefuncs()
@@ -101,7 +106,7 @@ zombie_tracking_init()
 			
 			if ( c >= 100 )
 			{
-				strattesterprint( "Map doesnt have distance tracking" );
+				strattesterprint( "Map doesnt have distance tracking", "Este mapa no tiene lógica para reapariciones" );
 				return;
 			}
 			
@@ -120,7 +125,7 @@ zombie_tracking_init()
 		wait level.zombie_tracking_wait;
 		
 		if(getDvarInt("despawners"))
-			strattesterprint( "Distance checking zombies..." );
+			strattesterprint( "Distance checking zombies...", "Comprobando distancia con los zombis...");
 		text settimer( level.zombie_tracking_wait );
 	}
 }
@@ -144,11 +149,11 @@ on_zombie_death()
 	
 	if ( isdefined( anchor ) )
 	{
-		strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor" );
+		strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor",  "Zombi en " + anchor.origin + " ha muerto dejando una entidad suelta" );
 		debugstar( anchor.origin, 20 * 20, ( 1, 0, 0 ), ( 1, 0, 0 ), "ANCHOR", 10 );
 		
 		level.anchor_deaths++;
-		strattesterprint( "Anchor deaths: " + level.anchor_deaths );
+		strattesterprint( "Anchor deaths: " + level.anchor_deaths, "Entidades sueltas por zombis: " + level.anchor_deaths);
 	}
 }
 
@@ -283,7 +288,9 @@ delete_zombie_noone_looking_origins( how_close, how_high )
 		}
 		
 		// our stuff
-		strattesterprint( "deleting zombie at " + here + " due to distance tracking" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
+		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
 		//
 		
@@ -419,7 +426,9 @@ delete_zombie_noone_looking_buried( how_close, how_high )
 		}
 		
 		// our stuff
-		strattesterprint( "deleting zombie at " +  here + " due to distance tracking" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
+		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
 		//
 		
@@ -538,7 +547,9 @@ delete_zombie_noone_looking_mob( how_close, how_high )
 		}
 		
 		// our stuff
-		strattesterprint( "deleting zombie at " + here + " due to distance tracking" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
+		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
 		//
 		
@@ -638,7 +649,9 @@ delete_zombie_noone_looking_dierise( how_close, how_high )
 		}
 		
 		// our stuff
-		strattesterprint( "deleting zombie at " + here + " due to distance tracking" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
+		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
 		//
 		
@@ -747,7 +760,9 @@ delete_zombie_noone_looking_tranzit( how_close )
 		}
 		
 		// our stuff
-		strattesterprint( "deleting zombie at " + here + " due to distance tracking" );
+		if(getDvarInt("despawners"))
+			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
+		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
 		//
 		

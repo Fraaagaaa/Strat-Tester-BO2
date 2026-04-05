@@ -10,11 +10,17 @@ replacefunctions()
     replaceFunc(maps\mp\zm_highrise_buildables::springpadbuildable, ::springpadbuildable);
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish" && isdefined(mensaje))
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
+
 
 watch_for_elevator_during_faller_spawn()
 {
@@ -47,7 +53,7 @@ watch_for_elevator_during_faller_spawn()
             else
             {
                 if(getDvarInt("elevatorkills"))
-				    strattesterprint("Zombie died to elevator");
+				    strattesterprint("Zombie died to elevator", "Un zombi ha muerto por el ascensor");
 				level.zombies_died_to_elevator++;
                 self delete();
             }
@@ -160,11 +166,6 @@ delete_zombie_noone_looking( how_close, how_high )
         }
 
         self maps\mp\zombies\_zm_spawner::reset_attack_spot();
-        if(getDvarInt("despawners"))
-        {
-            strattesterprint("Zombie despawned");
-            level.despawners++;
-        }
         self notify( "zombie_delete" );
         self delete();
         recalc_zombie_array();

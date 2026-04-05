@@ -39,7 +39,7 @@ readchat()
             continue;
 		if(!in_array(msg[0], level.StratTesterCommands) && (!in_array(msg[0], level.FragaCommands)) && (!in_array(msg[0], level.FragaCommandsAliases)))
 		{
-			strattesterprint("Unknown command ^1" + message);
+			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
 		}
         level thread commands(msg, player);
@@ -58,7 +58,7 @@ readconsole()
         msg = strtok(tolower(message), " ");
 		if(!in_array(msg[0], level.StratTesterCommands) && (!in_array(msg[0], level.FragaCommands)))
 		{
-			strattesterprint("Unknown command ^1" + message);
+			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
 		}
 		if(!isdefined(player))
@@ -288,22 +288,27 @@ zombie_can_drop_powerups(zombie)
     return !getDvarInt("remove_drops");
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish" && isdefined(mensaje))
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
 
 endroundcase()
 {
     endRound(true);
-    strattesterprint("Ending current round");
+    strattesterprint("Ending current round", "Terminando la ronda actual");
 }
 
 killhordecase()
 {
     endRound(false);
-    strattesterprint("Killing current horde");
+    strattesterprint("Killing current horde", "Matando horda actual");
 }
 
 tpccase(player, x, z, y)
@@ -311,7 +316,7 @@ tpccase(player, x, z, y)
     x = string_to_float(x);
     y = string_to_float(y);
     z = string_to_float(z);
-    strattesterprint("Teleporting " + player.name + " to " + x + " " + y + " " + z);
+    strattesterprint("Teleporting " + player.name + " to " + x + " " + y + " " + z, "Teletransportando " + player.name + " a " + x + " " + y + " " + z);
     player setOrigin((string_to_float(x), string_to_float(y), string_to_float(z)));
 }
 
@@ -371,7 +376,7 @@ tpcase(player, location)
 			default: return;
 		}
 
-	strattesterprint("Teleporting " + player.name + " to " + location);
+	strattesterprint("Teleporting " + player.name + " to " + location, "Teletransportando " + player.name + " a " + location);
     player setOrigin(pos);
     player setPlayerAngles(ang);
 }
@@ -380,63 +385,63 @@ powercase()
 {
     setDvar("power", !getDvarInt("power"));
     if(getDvarInt("power"))
-        strattesterprint("Power will be turned on at the start of the game");
+        strattesterprint("Power will be turned on at the start of the game", "La energía estará activada al principio de la partida");
     else
-        strattesterprint("Power will not be turned on at the start of the game");
+        strattesterprint("Power will not be turned on at the start of the game", "La energía estará desactivada al principio de la partida");
 }
 
 boardscase()
 {
     setDvar("boards", !getDvarInt("boards"));
     if(getDvarInt("boards"))
-        strattesterprint("Boards will be removed at the start of the game");
+        strattesterprint("Boards will be removed at the start of the game", "Las barreras de las ventanas serán quitadas al principio de la partida");
     else
-        strattesterprint("Boards will not be removed at the start of the game");
+        strattesterprint("Boards will not be removed at the start of the game", "Las barreras de las ventanas quedarán puestas al principio de la partida");
 }
 
 doorscase()
 {
     setDvar("doors", !getDvarInt("doors"));
     if(getDvarInt("doors"))
-        strattesterprint("Doors will be opened at the start of the game");
+        strattesterprint("Doors will be opened at the start of the game", "Las puertas estarán abiertas al principio de la partida");
     else
-        strattesterprint("Doors will not be opened at the start of the game");
+        strattesterprint("Doors will not be opened at the start of the game", "Las puertas estarán cerradas al principio de la partida");
 }
 
 weaponscase()
 {
     setDvar("weapons", !getDvarInt("weapons"));
     if(getDvarInt("weapons"))
-        strattesterprint("You will spawn with weapons");
+        strattesterprint("You will spawn with weapons", "Aparecerás con las armas necesarias");
     else
-        strattesterprint("You will not spawn with weapons");
+        strattesterprint("You will not spawn with weapons", "Aparecerás con la pistola del principio");
 }
 
 perkscase()
 {
     setDvar("perks", !getDvarInt("perks"));
     if(getDvarInt("perks"))
-        strattesterprint("You will spawn with perks");
+        strattesterprint("You will spawn with perks", "Aparecerás con ventajas y se te devolverán al revivir");
     else
-        strattesterprint("You will spawn without perks");
+        strattesterprint("You will spawn without perks", "No recibiras ventajas al principio de la partida ni al morir");
 }
 
 dropscase()
 {
     setDvar("remove_drops", !getDvarInt("remove_drops"));
     if(getDvarInt("remove_drops"))
-        strattesterprint("Drops will no longer spawn");
+        strattesterprint("Drops will no longer spawn", "Los Power-Ups no aparecerán");
     else
-        strattesterprint("Drops will spawn");
+        strattesterprint("Drops will spawn", "Los Power-Ups aparecerán");
 }
 
 fogcase()
 {
 	setDvar("r_fog", !getDvarInt("r_fog"));
 	if(!getDvarInt("r_fog"))
-		strattesterprint("Removing fog");
+		strattesterprint("Removing fog", "Quitando niebla");
 	else
-		strattesterprint("Adding fog");
+		strattesterprint("Adding fog", "Añadiendo niebla");
 }
 notargetcase(player)
 {
@@ -445,9 +450,9 @@ notargetcase(player)
 	else
 		player.innotarget = !player.innotarget;
 	if(player.innotarget)
-		strattesterprint(player.name + " will be ignored by zombies");
+		strattesterprint(player.name + " will be ignored by zombies", player.name + " será ignorado por los zombis");
 	else
-		strattesterprint(player.name + " can be targeted by zombies");
+		strattesterprint(player.name + " can be targeted by zombies", player.name + " atrará zombis");
 }
 
 in_array(data, array)
@@ -462,18 +467,18 @@ departcase(time)
 {
     setDvar("depart", time);
     if(time >= 40 && time <= 180)
-        strattesterprint("Next game, bus will stop for " + time + " seconds on farm.");
+        strattesterprint("Next game, bus will stop for " + time + " seconds on farm.", "En la siguiente partida, el bus esperará " + time + " segundos en granja." );
     else
-        strattesterprint("Bad input, try a number between 40 and 180");
+        strattesterprint("Bad input, try a number between 40 and 180", "Usa un número entre 40 y 180");
 }
 
 jugcase()
 {
     setDvar("jug", !getDvarInt("jug"));
     if(getDvarInt("jug"))
-        strattesterprint("You will spawn with jug instead of speed cola");
+        strattesterprint("You will spawn with jug instead of speed cola", "Aparecerás con titán en vez de prestidigitación");
     else
-        strattesterprint("You will spawn with speed cola instead of speed jug");
+        strattesterprint("You will spawn with speed cola instead of jug", "Aparecerás con prestidigitación en vez de titán");
 }
 
 istranzit()
@@ -492,7 +497,7 @@ busstatuscase()
 
 permacase(player)
 {
-    strattesterprint("Awarding perman perks to " + player.name);
+    strattesterprint("Awarding perman perks to " + player.name, "Otorgando las ventajas a " + player.name);
     player thread award_permaperks_safe();
 }
 
@@ -598,62 +603,62 @@ shieldcase()
 {
     setDvar("shield", !getDvarInt("shield"));
     if(getDvarInt("shield"))
-        strattesterprint("restart the match to spawn with shield");
+        strattesterprint("Restart the match to spawn with shield", "Reinicia la partida para empezarla con un escudo");
     else
-        strattesterprint("restart the match to spawn without shield");
+        strattesterprint("Restart the match to spawn without shield", "Reinicia la partida para quitar el escudo");
 }
 
 cherrycase()
 {
     setDvar("cherry", !getDvarInt("cherry"));
     if(getDvarInt("cherry"))
-        strattesterprint("You will spawn with electric cherry");
+        strattesterprint("You will spawn with electric cherry", "Reaparecerás con cherry");
     else
-        strattesterprint("You will not spawn with electric cherry");
+        strattesterprint("You will not spawn with electric cherry", "Reaparecerás sin cherry");
 }
 
 wmcase()
 {
     setDvar("wm", !getDvarInt("wm"));
     if(getDvarInt("wm"))
-        strattesterprint("You will spawn with war machine");
+        strattesterprint("You will spawn with war machine", "Aparecerás con la máquina de guerra");
     else
-        strattesterprint("You will not spawn with war machine");
+        strattesterprint("You will not spawn with war machine", "Aparecerás sin la máquina de guerra");
 }
 
 staffcase()
 {
 	setDvar("staff", !getDvarInt("staff"));
 	if(getDvarInt("staff"))
-		strattesterprint("You will spawn with the ice staff");
+		strattesterprint("You will spawn with the ice staff", "Aparecerás con el bastón de hielo");
 	else
-		strattesterprint("You can spawn with the ice staff or the wind staff");
+		strattesterprint("You can spawn with the wind staff", "Aparecerás con el bastón de viento");
 }
 
 livescase()
 {
     setDvar("lives", !getDvarInt("lives"));
     if(getDvarInt("lives"))
-        strattesterprint("Infinite lives deactivated");
+        strattesterprint("Infinite lives deactivated", "Vidas infinitas desactivadas");
     else
-        strattesterprint("Infinite lives activated");
+        strattesterprint("Infinite lives activated", "Vidas infinitas activadas");
 }
 
 buriedcase()
 {
 	if(getDvarInt("setupBuried") == 0)
     {
-		strattesterprint("Subwofer will be built at jug");
+		strattesterprint("Subwofer will be built at jug", "El resonador estará construido en Titán");
 	    setDvar("setupBuried", 0);
     }
 	else if (getDvarInt("setupBuried") == 1)
     {
-		strattesterprint("Subwofer will be built at saloon");
+		strattesterprint("Subwofer will be built at saloon", "El resonador estará construido en el saloon");
 	    setDvar("setupBuried", 1);
     }
     else
     {
-		strattesterprint("No buildables will be prebuilt");
+		strattesterprint("No buildables will be prebuilt", "Ningún construible aparecerá montado");
         setDvar("setupBuried", -1);
     }
 }
@@ -684,7 +689,7 @@ changeroundcase(round)
 
     level.round_number = rnd - 1;
     endround(true);
-    strattesterprint("Changing round to " + round);
+    strattesterprint("Changing round to " + round, "Cambiado ronda a " + round);
 }
 
 helpcase()

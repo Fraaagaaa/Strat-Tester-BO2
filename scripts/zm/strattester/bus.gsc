@@ -135,12 +135,12 @@ busstatus()
 
         if(level.the_bus.targetspeed > 0)
 	    {
-		    strattesterprint("Stopping Bus");
+		    strattesterprint("Stopping bus", "Parando el autobús");
 		    level.the_bus.targetspeed = 0;
 	    }
 	    else
 	    {
-		    strattesterprint("Starting Bus");
+		    strattesterprint("Starting bus", "Encendiendo el autobús");
 		    level.the_bus.targetspeed = 10;
 	    }
     }

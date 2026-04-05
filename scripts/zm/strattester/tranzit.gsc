@@ -20,12 +20,16 @@ replacefunctions()
 	replaceFunc(maps\mp\zombies\_zm_ai_screecher::screecher_spawning_logic, ::screecher_spawning_logic);
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish" && isdefined(mensaje))
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
-
 
 screecher_spawning_logic()
 {
@@ -178,7 +182,7 @@ screecher_spawning_logic()
         if ( isdefined( ai ) )
         {
             ai.spawn_point = spawn_point;
-			strattesterprint("^2Denizen Spawned!");
+			strattesterprint("^2Denizen Spawned!", "^2Un denizen apareció!");
             level.zombie_screecher_count++;
         }
 
@@ -289,11 +293,6 @@ delete_zombie_noone_looking( how_close )
 
         self maps\mp\zombies\_zm_spawner::reset_attack_spot();
         self notify( "zombie_delete" );
-        if(getDvarInt("despawners"))
-        {
-            strattesterprint("Zombie despawned");
-            level.despawners++;
-        }
         self delete();
         recalc_zombie_array();
     }
@@ -311,12 +310,12 @@ denizens()
 
         if(dvar)
         {
-            strattesterprint("Denizens will spawn");
+            strattesterprint("Denizens will spawn", "Los denizens aparecerán");
             level.zombie_ai_limit_screecher = 2;
         }
         else
         {
-            strattesterprint("Denizens wont spawn");
+            strattesterprint("Denizens wont spawn", "Denizens desactivados");
             level.zombie_ai_limit_screecher = 0;
         }
     }

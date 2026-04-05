@@ -361,7 +361,7 @@ unlockgenscase()
 {
 	foreach (gen in getstructarray( "s_generator", "targetname" ))
 		gen thread init_capture_zone();
-	strattesterprint("All generators have been unlocked");
+	strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
 }
 
 origins_pap_camo(weapon)
@@ -606,21 +606,20 @@ delete_zombie_noone_looking( how_close, how_high )
             wait_network_frame();
             level notify( "spawn_mechz" );
         }
-
-        if(getDvarInt("despawners"))
-        {
-            strattesterprint("Zombie despawned");
-            level.despawners++;
-        }
         self delete();
         recalc_zombie_array();
     }
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish" && isdefined(mensaje))
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
 
 give_max_ammo_reward()

@@ -77,7 +77,7 @@ connected_st()
 		if(!isdefined(self.has_hud))
 		{
 			self iprintln("^6Strat Tester " + stversion + " by BoneCrusher");
-			self strattesterprint("Source: https://github.com/Fraaagaaa/Strat-Tester-BO2");
+			self strattesterprint("Source: https://github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: https://github.com/Fraaagaaa/Strat-Tester-BO2");
 			self thread scanweapons();
 			self thread health_bar_hud();
 			self thread zone_hud();
@@ -231,7 +231,7 @@ tpcase(player, location)
 			default: return;
 		}
 
-	strattesterprint("Teleporting " + player.name + " to " + location);
+	strattesterprint("Teleporting " + player.name + " to " + location, "Teletransportando " + player.name + " a " + location);
     player setOrigin(pos);
     player setPlayerAngles(ang);
 }
@@ -374,10 +374,15 @@ in_array(data, array)
 	return false;
 }
 
-strattesterprint(message)
+strattesterprint(message, mensaje)
 {
 	foreach(player in level.players)
-		player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	{
+		if(getDvar("language") == "spanish")
+			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+		else
+			player iprintln("^5[^6Strat Tester^5]^7 " + message);
+	}
 }
 
 despawner_counter()

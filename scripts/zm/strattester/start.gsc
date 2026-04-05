@@ -79,7 +79,7 @@ give_weapons_on_spawn()
 
     if(isburied())
 	{
-		wait 2;
+		self.max_weapons = 3;
 		self takeweapon("m1911_zm");
 		self weapon_give( "m32_zm" );
 		self weapon_give( "m1911_upgraded_zm" );
@@ -149,6 +149,7 @@ give_weapons_on_spawn()
 	}
 	if(isorigins())
 	{
+		self.max_weapons = 3;
 		self takeweapon("c96_zm");
 		self giveweapon_nzv( "sticky_grenade_zm" );
 		self giveweapon_nzv( "cymbal_monkey_zm" );
