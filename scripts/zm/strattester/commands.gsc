@@ -77,7 +77,7 @@ commands(msg, player)
         case "!endround": endroundcase(); break;
         case "!killhorde": killhordecase(); break;
         case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
-        case "!tp": tpcase(player, msg[1]); break;
+        case "!tp": tpcase(player, msg[1], msg[2]); break;
         case "!sph": setDvar("sph", !getDvarInt("sph")); break;
         case "!power": powercase(); break;
         case "!boards": boardscase(); break;
@@ -320,7 +320,7 @@ tpccase(player, x, z, y)
     player setOrigin((string_to_float(x), string_to_float(y), string_to_float(z)));
 }
 
-tpcase(player, location)
+tpcase(player, location, who)
 {
 	if(istranzit())
 		switch(location)
@@ -375,6 +375,13 @@ tpcase(player, location)
 			case "tank": pos = level.vh_tank.origin + (0, 0, 50); ang = level.vh_tank.angles; if(getDvar("language") == "spanish") location = "tanque"; else location = "tank"; break;
 			default: return;
 		}
+
+    if(isdefined(who))
+    {
+        foreach(zplayer in level.players)
+            if(level.players.name == who)
+                player = zplayer;
+    }
 
 	strattesterprint("Teleporting " + player.name + " to " + location, "Teletransportando " + player.name + " a " + location);
     player setOrigin(pos);
@@ -443,8 +450,15 @@ fogcase()
 	else
 		strattesterprint("Adding fog", "Añadiendo niebla");
 }
-notargetcase(player)
+notargetcase(player, who)
 {
+    if(isdefined(who))
+    {
+        foreach(zplayer in level.players)
+            if(level.players.name == who)
+                player = zplayer;
+    }
+
 	if(!isdefined(player.innotarget))
 		player.innotarget = true;
 	else

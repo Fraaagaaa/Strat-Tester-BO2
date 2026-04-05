@@ -249,8 +249,8 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 	-- TIMER POSITION (Selector Múltiple)
 	local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
 	TimerChoice:addChoice(Engine.Localize("ST_HIDDEN"), 0, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("ST_TOP_LEFT"), 1, nil, CoD.StratTester.OnDvarChanged )
-	TimerChoice:addChoice(Engine.Localize("ST_TOP_RIGHT"), 2, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_TOP_RIGHT"), 1, nil, CoD.StratTester.OnDvarChanged )
+	TimerChoice:addChoice(Engine.Localize("ST_TOP_LEFT"), 2, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_MIDDLE_LEFT"), 3, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_BOTTOM"), 4, nil, CoD.StratTester.OnDvarChanged )
 	
@@ -290,7 +290,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 			Engine.SetDvar("depart", 40 )
 		end
 
-		local FarmSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_FARM_DEPART"), "depart", 40, 240, Engine.Localize("ST_FARM_DEPART_DESC"))
+		local FarmSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_FARM_DEPART"), "depart", 40, 180, Engine.Localize("ST_FARM_DEPART_DESC"))
 		FarmSlider:setNumericDisplayFormatString("%d")
 
 		local DenizenChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZENS"), "denizens", Engine.Localize("ST_DENIZENS_DESC"))
