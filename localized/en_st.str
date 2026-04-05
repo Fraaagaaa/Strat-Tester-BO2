@@ -179,7 +179,7 @@ REFERENCE           ST_TOWN_DOORS
 LANG_ENGLISH        "CHOOSE PERK"
 
 REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Select which doors remain closed in Town."
+LANG_ENGLISH        "Select with what perk you are going to be playing."
 
 REFERENCE           ST_FORCE_PAP
 LANG_ENGLISH        "FORCE PAP"
