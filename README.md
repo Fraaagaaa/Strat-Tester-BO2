@@ -128,7 +128,7 @@
 - `!wm`          toggles getting war machine on origins
 - `!unlockgens`  unlocks all generators
 
-# Credits
+# Shout out to:
 - [NoMoleMan](https://www.twitch.tv/nomoleman) for beeing the main tester and translating the menus into portuguese.
 - [Guy](https://github.com/ineedbots) for making the despawner test script.
 - [5and5](https://github.com/5and5) for making the original strat tester and helping me 5 years ago when I started modding Black Ops.
