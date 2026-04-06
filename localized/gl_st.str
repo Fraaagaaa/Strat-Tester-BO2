@@ -34,10 +34,10 @@ LANG_ENGLISH        "NINGÚN"
 // PESTAÑA GAME
 // ==========================================
 REFERENCE           ST_CHANGE_ROUND
-LANG_ENGLISH        "CAMBIAR ROLDA"
+LANG_ENGLISH        "CAMBIAR RONDA"
 
 REFERENCE           ST_CHANGE_ROUND_DESC
-LANG_ENGLISH        "Cambia a rolda actual."
+LANG_ENGLISH        "Cambia a ronda actual."
 
 REFERENCE           ST_KILL_HORDE
 LANG_ENGLISH        "MATAR HORDA"
@@ -46,10 +46,10 @@ REFERENCE           ST_KILL_HORDE_DESC
 LANG_ENGLISH        "Mata a horda actual instantaneamente."
 
 REFERENCE           ST_END_ROUND
-LANG_ENGLISH        "REMATAR ROLDA"
+LANG_ENGLISH        "REMATAR RONDA"
 
 REFERENCE           ST_END_ROUND_DESC
-LANG_ENGLISH        "Remata a rolda actual instantaneamente."
+LANG_ENGLISH        "Remata a ronda actual instantaneamente."
 
 REFERENCE           ST_DESPAWNERS
 LANG_ENGLISH        "REAPARICIÓN DE ZOMBIS"
@@ -100,7 +100,7 @@ REFERENCE           ST_ZOMBIE_COUNTER
 LANG_ENGLISH        "CONTADOR DE ZOMBIS"
 
 REFERENCE           ST_ZOMBIE_COUNTER_DESC
-LANG_ENGLISH        "Mostra os zombis restantes na rolda."
+LANG_ENGLISH        "Mostra os zombis restantes na ronda."
 
 REFERENCE           ST_SPH_METER
 LANG_ENGLISH        "MEDIDOR DE SPH"
@@ -281,16 +281,16 @@ LANG_ENGLISH        "Arranxa todos os xeradores."
 // PESTAÑA START SETTINGS
 // ==========================================
 REFERENCE           ST_INITIAL_ROUND
-LANG_ENGLISH        "ROLDA INICIAL"
+LANG_ENGLISH        "RONDA INICIAL"
 
 REFERENCE           ST_INITIAL_ROUND_DESC
-LANG_ENGLISH        "Configura en que rolda empezará a partida."
+LANG_ENGLISH        "Configura en que ronda empezará a partida."
 
 REFERENCE           ST_INITIAL_DELAY
 LANG_ENGLISH        "RETRASO INICIAL"
 
 REFERENCE           ST_INITIAL_DELAY_DESC
-LANG_ENGLISH        "Configura o tempo de espera antes de que empece a primeira rolda."
+LANG_ENGLISH        "Configura o tempo de espera antes de que empece a primeira ronda."
 
 REFERENCE           ST_BOARDS
 LANG_ENGLISH        "BARREIRAS NAS VENTÁS"
