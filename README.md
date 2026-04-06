@@ -1,6 +1,11 @@
-# Strat Tester BO2
+# Strat Tester for Black Ops II
 
-## [**Donwload**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
+## Downloads:
+
+- [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)
+- [**Donwload in english**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
+- [**Descargar en galego**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Galego.rar)
+- [**Baixar em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.PT-BR.rar), traduzido por [NoMoleMan](https://www.twitch.tv/nomoleman)
 
 ## How to install
 
@@ -122,3 +127,9 @@
 - `!tumble`      toggles tumble counter on origins
 - `!wm`          toggles getting war machine on origins
 - `!unlockgens`  unlocks all generators
+
+# Credits
+- [NoMoleMan](https://www.twitch.tv/nomoleman) for beeing the main tester and translating the menus into portuguese.
+- [Guy](https://github.com/ineedbots) for making the despawner test script.
+- [5and5](https://github.com/5and5) for making the original strat tester and helping me 5 years ago when I started modding Black Ops.
+- [Hadi77KSA](https://github.com/Hadi77KSA) for making the script to power on afterlife doors.
