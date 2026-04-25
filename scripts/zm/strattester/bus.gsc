@@ -31,13 +31,19 @@ busloc()
     self.bustimer.horzalign = "user_right";
     self.bustimer.vertalign = "user_top";
     self.bustimer.x = -1;
-    self.bustimer.y = 43;
+    self.bustimer.y = self.timer + 30;
 	
     while(true)
     {
         wait 0.1;
-        self.bustimer.alpha = getDvarInt("bustimer");
-        level.busloc.alpha = getDvarInt("busloc");
+        self.bustimer.x = self.timer.x;
+        self.bustimer.y = self.timer.y + 30;
+		self.bustimer.alignx = self.timer.alignx;
+		self.bustimer.aligny = self.timer.aligny;
+		self.bustimer.horzalign = self.timer.horzalign;
+		self.bustimer.vertalign = self.timer.vertalign;
+        self.bustimer.alpha = getDvarInt("st_bustimer");
+        level.busloc.alpha = getDvarInt("st_busloc");
         zone = level.the_bus get_current_zone();
         if(!isdefined(zone))
             continue;
@@ -122,13 +128,13 @@ busscheduleadd( stopname, isambush, maxwaittimebeforeleaving, busspeedleaving, g
 
 busstatus()
 {
-    dvar = getDvarInt("busstatus");
+    dvar = getDvarInt("st_busstatus");
     while(true)
     {
         wait 0.1;
-        if(dvar == getDvarInt("busstatus"))
+        if(dvar == getDvarInt("st_busstatus"))
             continue;
-        dvar = getDvarInt("busstatus");
+        dvar = getDvarInt("st_busstatus");
 
 	    if(!isdefined(level.the_bus.off))
 		    level.the_bus.off = false;

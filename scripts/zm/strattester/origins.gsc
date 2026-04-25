@@ -7,6 +7,29 @@
 #include maps\mp\zm_tomb_challenges;
 #include maps\mp\zm_tomb_capture_zones;
 
+#include scripts\zm\strattester\utility;
+
+origins_tackers()
+{
+	self endon("disconnect");
+    self.stompkills  = self createHudElem(&"^3Stomp: ^5", 0, -220, 1.6, 0, "left", "bottom");
+    self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
+    self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");
+	level.tumbles = 0;
+	level.tankkills = 0;
+	level.stompkills = 0;
+	level thread alphatrackers();
+
+	flag_wait("initial_blackscreen_passed");
+	while(true)
+	{
+		level.stomp_hud setvalue(level.stompkills);
+		level.tank_hud setvalue(level.tankkills);
+		level.tumble_hud setvalue(level.tumbles);
+		wait(0.05);
+	}
+}
+
 pack_a_punch_think()
 {
 	pack_a_punch_enable();
@@ -115,78 +138,6 @@ call_tank()
 	wait 0.1;
 }
 
-stomptracker()
-{
-	self endon("disconnect");
-	level.stompkills = 0;
-	level.stomp_hud = newclienthudelem(self);
-	level.stomp_hud.alignx = "left";
-	level.stomp_hud.aligny = "bottom";
-	level.stomp_hud.horzalign = "user_left";
-	level.stomp_hud.vertalign = "user_bottom";
-	level.stomp_hud.x = 0;
-	level.stomp_hud.y = -220;
-	level.stomp_hud.fontscale = 1.6;
-	level.stomp_hud.alpha = 1;
-	level.stomp_hud.hidewheninmenu = 0;
-	level.stomp_hud.hidden = 0;
-	level.stomp_hud.label = &"^3Stomp: ^5";
-	level thread alphatrackers();
-	flag_wait("initial_blackscreen_passed");
-	while(1)
-	{
-		level.stomp_hud setvalue(level.stompkills);
-		wait(0.05);
-	}
-}
-
-tanktracker()
-{
-	self endon("disconnect");
-	level.tankkills = 0;
-	level.tank_hud = newclienthudelem(self);
-	level.tank_hud.alignx = "left";
-	level.tank_hud.aligny = "bottom";
-	level.tank_hud.horzalign = "user_left";
-	level.tank_hud.vertalign = "user_bottom";
-	level.tank_hud.x = level.tank_hud.x - 0;
-	level.tank_hud.y = level.tank_hud.y - 180;
-	level.tank_hud.fontscale = 1.6;
-	level.tank_hud.alpha = 0;
-	level.tank_hud.hidewheninmenu = 0;
-	level.tank_hud.hidden = 0;
-	level.tank_hud.label = &"^3Tank: ^5";
-	flag_wait("initial_blackscreen_passed");
-	while(1)
-	{
-		level.tank_hud setvalue(level.tankkills);
-		wait(0.05);
-	}
-}
-
-tumbletracker()
-{
-	self endon("disconnect");
-	level.tumbles = 0;
-	level.tumble_hud = newclienthudelem(self);
-	level.tumble_hud.alignx = "left";
-	level.tumble_hud.aligny = "bottom";
-	level.tumble_hud.horzalign = "user_left";
-	level.tumble_hud.vertalign = "user_bottom";
-	level.tumble_hud.x = 0;
-	level.tumble_hud.y = -200;
-	level.tumble_hud.fontscale = 1.6;
-	level.tumble_hud.alpha = 0;
-	level.tumble_hud.hidewheninmenu = 0;
-	level.tumble_hud.hidden = 0;
-	level.tumble_hud.label = &"^3Tumble: ^5";
-	flag_wait("initial_blackscreen_passed");
-	while(1)
-	{
-		level.tumble_hud setvalue(level.tumbles);
-		wait(0.05);
-	}
-}
 
 custom_zombie_stomp_death(robot, a_zombies_to_kill)
 {
@@ -222,7 +173,7 @@ enable_all_teleporters()
 {
 	flag_wait( "initial_blackscreen_passed" );
 	flag_set( "activate_zone_chamber" );
-	while(1)
+	while(true)
 	{
 		if ( level.zones[ "zone_nml_18" ].is_enabled && !isDefined(gramo))
 		{
@@ -642,14 +593,13 @@ turn_gens_on()
 	}
 }
 
-
 alphatrackers()
 {
 	while(true)
 	{
 		wait 0.1;
-		level.stomp_hud.alpha = getDvarInt("stomp");
-		level.tumble_hud.alpha = getDvarInt("tumble");
-		level.tank_hud.alpha = getDvarInt("tank");
+		level.stomp_hud.alpha = getDvarInt("st_stomp");
+		level.tumble_hud.alpha = getDvarInt("st_tumble");
+		level.tank_hud.alpha = getDvarInt("st_tank");
 	}
 }

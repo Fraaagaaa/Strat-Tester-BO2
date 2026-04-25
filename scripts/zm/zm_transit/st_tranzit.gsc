@@ -7,6 +7,7 @@
 #include scripts\zm\strattester\bus;
 #include scripts\zm\strattester\ismap;
 #include scripts\zm\strattester\tranzit;
+#include scripts\zm\strattester\schreecher;
 
 main()
 {
@@ -21,11 +22,12 @@ main()
     {
         level thread busstatus();
         level thread denizens();
+        level thread busloc();
+        // level thread screecher_test();
         while(true)
         {
             level waittill("connecting", player);
-            if(!isdefined(player.bustimer))
-                player thread busloc();
+            // player thread busloc();
         }
     }
 }

@@ -11,8 +11,6 @@ timer()
 
 	self thread round_timer();
 	self.timer = newclienthudelem(self);
-	self.timer.alpha = !getDvarInt("st") * 0;
-	self.timer.color = (1, 1, 1);
 	self.timer.hidewheninmenu = 1;
 	self.timer.fontscale = 1.7;
 	flag_wait("initial_blackscreen_passed");
@@ -116,17 +114,13 @@ timerlocation()
 
 	while(true)
 	{
-		switch(getDvarInt("timer"))
+		switch(getDvarInt("st_timer"))
 		{
 			case HIDE_TIMER:
 				self.timer.alpha = 0;
 				self.round_timer.alpha = 0;
 				break;
 			case TOP_RIGHT_TIMER:
-				self.round_timer.alignx = "right";
-				self.round_timer.aligny = "top";
-				self.round_timer.horzalign = "user_right";
-				self.round_timer.vertalign = "user_top";
 				self.timer.alignx = "right";
 				self.timer.aligny = "top";
 				self.timer.horzalign = "user_right";
@@ -143,10 +137,6 @@ timerlocation()
 					self.timer.y = 30;
 				break;
 			case TOP_LEFT_TIMER:
-				self.round_timer.alignx = "left";
-				self.round_timer.aligny = "top";
-				self.round_timer.horzalign = "user_left";
-				self.round_timer.vertalign = "user_top";
 				self.timer.alignx = "left";
 				self.timer.aligny = "top";
 				self.timer.horzalign = "user_left";
@@ -165,20 +155,12 @@ timerlocation()
 				self.timer.aligny = "top";
 				self.timer.horzalign = "user_left";
 				self.timer.vertalign = "user_top";
-				self.round_timer.alignx = "left";
-				self.round_timer.aligny = "top";
-				self.round_timer.horzalign = "user_left";
-				self.round_timer.vertalign = "user_top";
 				self.timer.x = 1;
 				self.timer.y = 250;
 				self.timer.alpha = 1;
 				self.round_timer.alpha = 1;
 				break;
 			case AMMO_TIMER:
-				self.round_timer.alignx = "right";
-				self.round_timer.aligny = "top";
-				self.round_timer.horzalign = "user_right";
-				self.round_timer.vertalign = "user_top";
 				self.timer.alignx = "right";
 				self.timer.aligny = "top";
 				self.timer.horzalign = "user_right";
@@ -193,6 +175,10 @@ timerlocation()
 		}
 		self.round_timer.x = self.timer.x;
 		self.round_timer.y = self.timer.y + 15;
+		self.round_timer.alignx = self.timer.alignx;
+		self.round_timer.aligny = self.timer.aligny;
+		self.round_timer.horzalign = self.timer.horzalign;
+		self.round_timer.vertalign = self.timer.vertalign;
 		
 		wait 0.1;
 		if(GetDvar("language") == "japanese")
@@ -222,7 +208,7 @@ trap_timer()
 
 	while(true)
 	{
-		if(getDvarInt("traptimer"))
+		if(getDvarInt("st_traptimer"))
 		{
 			level waittill( "trap_activated" );
 			if( level.trap_activated )

@@ -34,9 +34,9 @@ power_on_shit()
 }
 speeddoor()
 {
-    if(getDvarInt("doors") == 0)
+    if(getDvarInt("st_doors") == 0)
         return;
-    if(getDvarInt("power") == 0)
+    if(getDvarInt("st_power") == 0)
         return;
 
     thread power_on_shit();

@@ -65,7 +65,7 @@ bring_perks()
 
 checkpaplocation()
 {
-	if(!getDvarInt("perkrng"))
+	if(!getDvarInt("st_perkrng"))
 	{
 		wait 1;
 		if(level.players.size > 1)

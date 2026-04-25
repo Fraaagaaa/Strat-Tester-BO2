@@ -23,7 +23,7 @@ init()
     
     give_max_ammo_reward();
 
-	if(getDvarInt("shield"))
+	if(getDvarInt("st_shield"))
 	{
 		spawn_buildable_trigger_shield((110, -3000, 60), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
 	    spawn_buildable_trigger_shield((2308, 689, -23), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
@@ -50,10 +50,7 @@ connected_st()
     while(true)
     {
         self waittill( "spawned_player" );
-
-		self thread stomptracker();
-		self thread tanktracker();
-		self thread tumbletracker();
+		self thread origins_tackers();
 
 		if(self == level.players[0])
 			self tomb_give_equipment();

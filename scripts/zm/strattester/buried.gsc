@@ -297,7 +297,7 @@ displayWatcher()
     while(true)
     {
         wait 0.1;
-        level.subwooferkills.alpha = getDvarInt("subwooferkills");
-        level.subwooferkills.y = 15 * getDvarInt("despawners");
+        level.subwooferkills.alpha = getDvarInt("st_subwooferkills");
+        level.subwooferkills.y = 15 * getDvarInt("st_despawners");
     }
 }

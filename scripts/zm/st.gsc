@@ -6,14 +6,17 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\gametypes_zm\_hud_util;
 
+#include scripts\zm\strattester\bus;
 #include scripts\zm\strattester\fixes;
 #include scripts\zm\strattester\commands;
 #include scripts\zm\strattester\start;
-#include scripts\zm\strattester\zone;
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\ismap;
-#include scripts\zm\strattester\sph;
+#include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\despawners;
+#include scripts\zm\strattester\settings;
+#include scripts\zm\strattester\perks;
+#include scripts\zm\strattester\weapons;
 
 main()
 {
@@ -28,7 +31,7 @@ init()
 	level.strat_tester = true;
     if(!isDefined(level.total_chest_accessed))
         level.total_chest_accessed = 0;
-	level thread setdvars();
+	level thread settings_init();
     level thread turn_on_power();
     level thread set_starting_round();
     level thread remove_boards_from_windows();
@@ -63,6 +66,7 @@ fraga_connected()
 	self thread timer();
 	self thread timerlocation();
 	self thread trap_timer();
+    self thread specialcommands();
 }
 
 
@@ -77,19 +81,20 @@ connected_st()
 		if(!isdefined(self.has_hud))
 		{
 			self iprintln("^6Strat Tester " + stversion + " by BoneCrusher");
-			self strattesterprint("Source: https://github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: https://github.com/Fraaagaaa/Strat-Tester-BO2");
+			self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 			self thread scanweapons();
 			self thread health_bar_hud();
 			self thread zone_hud();
 			self thread zombie_remaining_hud();
 			self thread st_sph();
+            if(istranzit())
+                self thread busloc();
 			if(!isdefined(self.has_hud))
 				self.has_hud = true;
 		}
 		self.score = 1000000;
+        self thread perk_init();
 		self thread give_weapons_on_spawn();
-		self thread give_perks_on_spawn();
-		self thread give_perks_on_revive();
         wait 0.05;
 		self waittill("spawned_player");
     }
@@ -104,74 +109,7 @@ enable_cheats()
 		self notify( "stop_player_out_of_playable_area_monitor" );
 
 	level.player_out_of_playable_area_monitor = 0;
-}
-
-setDvars()
-{
-    setdvar("player_strafeSpeedScale", 1 );
-    setdvar("player_backSpeedScale", 1 );
-    setdvar("r_dof_enable", 0 );
-
-	createdvar("despawners", 0);
-    createDvar("despawnersCounter", 0);
-    createDvar("perkrng", 1);
-	createDvar("healthbar", 0);
-	createDvar("timer", 1);
-	createDvar("zone", 1);
-	createDvar("remaining", 1);
-	createDvar("weapons", 1);
-	createDvar("doors", 1);
-	createDvar("perks", 1);
-	createDvar("power", 1);
-	createDvar("boards", 0);
-	createDvar("delay", 60);
-	createDvar("round", 100);
-	createDvar("sph", 1);
-	createDvar("remove_drops", 0);
-	createDvar("boxhits", 1);
-	createDvar("chat", "xxxxxxxxxxxx");
-
-	if(isorigins() || ismob())
-		createDvar("shield", 0); 
-	if(isorigins())
-	{
-		createDvar("staff", 0); 
-		createDvar("cherry", 0);
-		createDvar("wm", 0);
-		createDvar("stomp", 0);
-		createDvar("tumble", 0);
-		createDvar("tank", 0);
-	}
-	if(istown())
-		createDvar("jug", 0); 
-	if(issurvivalmap())
-		createDvar("avg", 1);
-	if(isburied())
-	{
-    	createdvar("subwooferkills", 0);
-		createDvar("setupBuried", 0); 
-	}
-	if(istranzit())
-	{
-		createDvar("busstatus", 1);
-		createDvar("busloc", 0);
-		createDvar("bustimer", 0);
-		createDvar("depart", 1);
-		createDvar("denizens", 1);
-	}
-	if(ismob())
-	{
-		createDvar("traptimer", 1);
-		createDvar("lives", 1);
-	}
-	flag_wait("initial_blackscreen_passed");
-    level.start_time = int(gettime() / 1000);
-}
-
-createDvar(dvar, set)
-{
-	if(getDvar(dvar) == "")
-		setDvar(dvar, set);
+    level.player_too_many_players_check = 0;
 }
 
 tpcase(player, location)
@@ -366,25 +304,6 @@ find_flesh()
     }
 }
 
-in_array(data, array)
-{
-	foreach(element in array)
-		if(element == data)
-			return true;
-	return false;
-}
-
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish")
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
-}
-
 despawner_counter()
 {
 	level.despawners = 0;
@@ -417,6 +336,6 @@ displayWatcher()
     while(true)
     {
         wait 0.1;
-        level.despawnersCounter.alpha = getDvarInt("despawners");
+        level.despawnersCounter.alpha = getDvarInt("st_despawners");
     }
 }

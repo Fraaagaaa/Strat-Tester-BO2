@@ -52,7 +52,7 @@ watch_for_elevator_during_faller_spawn()
             }
             else
             {
-                if(getDvarInt("elevatorkills"))
+                if(getDvarInt("st_elevatorkills"))
 				    strattesterprint("Zombie died to elevator", "Un zombi ha muerto por el ascensor");
 				level.zombies_died_to_elevator++;
                 self delete();
@@ -96,8 +96,8 @@ displayWatcher()
     while(true)
     {
         wait 0.1;
-        level.elevatorkills.alpha = getDvarInt("elevatorkills");
-        level.elevatorkills.y = 15 * getDvarInt("despawners");
+        level.elevatorkills.alpha = getDvarInt("st_elevatorkills");
+        level.elevatorkills.y = 15 * getDvarInt("st_despawners");
     }
 }
 

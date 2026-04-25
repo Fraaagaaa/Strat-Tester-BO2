@@ -11,7 +11,7 @@
 #include scripts\zm\strattester\zone;
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\ismap;
-#include scripts\zm\strattester\sph;
+#include scripts\zm\strattester\hud;
 
 addCommands(commands)
 {
@@ -78,17 +78,17 @@ commands(msg, player)
         case "!killhorde": killhordecase(); break;
         case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
         case "!tp": tpcase(player, msg[1], msg[2]); break;
-        case "!sph": setDvar("sph", !getDvarInt("sph")); break;
+        case "!sph": setDvar("sph", !getDvarInt("st_sph")); break;
         case "!power": powercase(); break;
         case "!boards": boardscase(); break;
         case "!doors": doorscase(); break;
         case "!round": setDvar("round", msg[1]); break;
         case "!delay": setDvar("delay", msg[1]); break;
         case "!zone": setDvar("zone", !getDvarInt("zone")); break;
-        case "!remaining": setDvar("remaining", !getDvarInt("remaining")); break;
+        case "!remaining": setDvar("remaining", !getDvarInt("st_remaining")); break;
         case "!weapons": weaponscase(); break;
         case "!perks": perkscase(); break;
-        case "!healthbar": setDvar("healthbar", !getDvarInt("healthbar")); break;
+        case "!healthbar": setDvar("healthbar", !getDvarInt("st_healthbar")); break;
         case "!timer": setDvar("timer", msg[1]); break;
         case "!nuke": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("nuke", player.origin + (0, 0, 40)); break;
         case "!max": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", player.origin + (0, 0, 40)); break;
@@ -101,8 +101,8 @@ commands(msg, player)
         case "!denizen": denizencase(); break;
         case "!busoff": case "!buson": busstatuscase(); break;
         case "!depart": departcase(msg[1]); break;
-        case "!busloc": setDvar("busloc", !getDvarInt("busloc")); break;
-        case "!bustimer": setDvar("bustimer", !getDvarInt("bustimer")); break;
+        case "!busloc": setDvar("busloc", !getDvarInt("st_busloc")); break;
+        case "!bustimer": setDvar("bustimer", !getDvarInt("st_bustimer")); break;
         case "!perma": permacase(player); break;
         case "!jug": jugcase(); break;
         // DIE RISE
@@ -118,7 +118,7 @@ commands(msg, player)
         // MOB
         case "!shield": shieldcase(); break;
         case "!lives": livescase(); break;
-        case "!traptimer": setDvar("traptimer", !getDvarInt("traptimer")); break;
+        case "!traptimer": setDvar("st_traptimer", !getDvarInt("st_traptimer")); break;
         // BURIED
         case "!buried": buriedcase(); break;
         case "!sub": subcase(); break;
@@ -285,7 +285,7 @@ zombie_can_drop_powerups(zombie)
     if ( isdefined( zombie.no_powerups ) && zombie.no_powerups )
         return false;
 
-    return !getDvarInt("remove_drops");
+    return !getDvarInt("st_remove_drops");
 }
 
 strattesterprint(message, mensaje)
@@ -390,8 +390,8 @@ tpcase(player, location, who)
 
 powercase()
 {
-    setDvar("power", !getDvarInt("power"));
-    if(getDvarInt("power"))
+    setDvar("power", !getDvarInt("st_power"));
+    if(getDvarInt("st_power"))
         strattesterprint("Power will be turned on at the start of the game", "La energía estará activada al principio de la partida");
     else
         strattesterprint("Power will not be turned on at the start of the game", "La energía estará desactivada al principio de la partida");
@@ -399,8 +399,8 @@ powercase()
 
 boardscase()
 {
-    setDvar("boards", !getDvarInt("boards"));
-    if(getDvarInt("boards"))
+    setDvar("boards", !getDvarInt("st_boards"));
+    if(getDvarInt("st_boards"))
         strattesterprint("Boards will be removed at the start of the game", "Las barreras de las ventanas serán quitadas al principio de la partida");
     else
         strattesterprint("Boards will not be removed at the start of the game", "Las barreras de las ventanas quedarán puestas al principio de la partida");
@@ -417,8 +417,8 @@ doorscase()
 
 weaponscase()
 {
-    setDvar("weapons", !getDvarInt("weapons"));
-    if(getDvarInt("weapons"))
+    setDvar("weapons", !getDvarInt("st_weapons"));
+    if(getDvarInt("st_weapons"))
         strattesterprint("You will spawn with weapons", "Aparecerás con las armas necesarias");
     else
         strattesterprint("You will not spawn with weapons", "Aparecerás con la pistola del principio");
@@ -426,8 +426,8 @@ weaponscase()
 
 perkscase()
 {
-    setDvar("perks", !getDvarInt("perks"));
-    if(getDvarInt("perks"))
+    setDvar("perks", !getDvarInt("st_perks"));
+    if(getDvarInt("st_perks"))
         strattesterprint("You will spawn with perks", "Aparecerás con ventajas y se te devolverán al revivir");
     else
         strattesterprint("You will spawn without perks", "No recibiras ventajas al principio de la partida ni al morir");
@@ -435,8 +435,8 @@ perkscase()
 
 dropscase()
 {
-    setDvar("remove_drops", !getDvarInt("remove_drops"));
-    if(getDvarInt("remove_drops"))
+    setDvar("remove_drops", !getDvarInt("st_remove_drops"));
+    if(getDvarInt("st_remove_drops"))
         strattesterprint("Drops will no longer spawn", "Los Power-Ups no aparecerán");
     else
         strattesterprint("Drops will spawn", "Los Power-Ups aparecerán");
@@ -488,8 +488,8 @@ departcase(time)
 
 jugcase()
 {
-    setDvar("jug", !getDvarInt("jug"));
-    if(getDvarInt("jug"))
+    setDvar("st_jug_setup", !getDvarInt("st_jug_setup"));
+    if(getDvarInt("st_jug_setup"))
         strattesterprint("You will spawn with jug instead of speed cola", "Aparecerás con titán en vez de prestidigitación");
     else
         strattesterprint("You will spawn with speed cola instead of jug", "Aparecerás con prestidigitación en vez de titán");
@@ -506,7 +506,7 @@ busstatuscase()
 	if(!istranzit())
 		return;
 
-    setDvar("busstatus", !getDvarInt("busstatus"));
+    setDvar("busstatus", !getDvarInt("st_busstatus"));
 }
 
 permacase(player)
@@ -615,8 +615,8 @@ remove_permaperk(perk_code)
 
 shieldcase()
 {
-    setDvar("shield", !getDvarInt("shield"));
-    if(getDvarInt("shield"))
+    setDvar("shield", !getDvarInt("st_shield"));
+    if(getDvarInt("st_shield"))
         strattesterprint("Restart the match to spawn with shield", "Reinicia la partida para empezarla con un escudo");
     else
         strattesterprint("Restart the match to spawn without shield", "Reinicia la partida para quitar el escudo");
@@ -624,8 +624,8 @@ shieldcase()
 
 cherrycase()
 {
-    setDvar("cherry", !getDvarInt("cherry"));
-    if(getDvarInt("cherry"))
+    setDvar("st_cherry", !getDvarInt("st_cherry"));
+    if(getDvarInt("st_cherry"))
         strattesterprint("You will spawn with electric cherry", "Reaparecerás con cherry");
     else
         strattesterprint("You will not spawn with electric cherry", "Reaparecerás sin cherry");
@@ -633,8 +633,8 @@ cherrycase()
 
 wmcase()
 {
-    setDvar("wm", !getDvarInt("wm"));
-    if(getDvarInt("wm"))
+    setDvar("st_wm", !getDvarInt("st_wm"));
+    if(getDvarInt("st_wm"))
         strattesterprint("You will spawn with war machine", "Aparecerás con la máquina de guerra");
     else
         strattesterprint("You will not spawn with war machine", "Aparecerás sin la máquina de guerra");
@@ -642,8 +642,8 @@ wmcase()
 
 staffcase()
 {
-	setDvar("staff", !getDvarInt("staff"));
-	if(getDvarInt("staff"))
+	setDvar("st_staff", !getDvarInt("st_staff"));
+	if(getDvarInt("st_staff"))
 		strattesterprint("You will spawn with the ice staff", "Aparecerás con el bastón de hielo");
 	else
 		strattesterprint("You can spawn with the wind staff", "Aparecerás con el bastón de viento");
@@ -651,7 +651,7 @@ staffcase()
 
 livescase()
 {
-    setDvar("lives", !getDvarInt("lives"));
+    setDvar("st_lives", !getDvarInt("st_lives"));
     if(getDvarInt("lives"))
         strattesterprint("Infinite lives deactivated", "Vidas infinitas desactivadas");
     else
@@ -660,41 +660,41 @@ livescase()
 
 buriedcase()
 {
-	if(getDvarInt("setupBuried") == 0)
+	if(getDvarInt("st_setupBuried") == 0)
     {
 		strattesterprint("Subwofer will be built at jug", "El resonador estará construido en Titán");
-	    setDvar("setupBuried", 0);
+	    setDvar("st_setupBuried", 0);
     }
-	else if (getDvarInt("setupBuried") == 1)
+	else if (getDvarInt("st_setupBuried") == 1)
     {
 		strattesterprint("Subwofer will be built at saloon", "El resonador estará construido en el saloon");
-	    setDvar("setupBuried", 1);
+	    setDvar("st_setupBuried", 1);
     }
     else
     {
 		strattesterprint("No buildables will be prebuilt", "Ningún construible aparecerá montado");
-        setDvar("setupBuried", -1);
+        setDvar("st_setupBuried", -1);
     }
 }
 
 boxhitscase()
 {
-	setDvar("boxhits", !getDvarInt("boxhits"));
+	setDvar("st_boxhits", !getDvarInt("st_boxhits"));
 }
 
 elevatorcase()
 {
-    setDvar("elevatorkills", !getDvarInt("elevatorkills"));
+    setDvar("st_elevatorkills", !getDvarInt("st_elevatorkills"));
 }
 
 despawnerscase()
 {
-    setDvar("despawners", !getDvarInt("despawners"));
+    setDvar("st_despawners", !getDvarInt("st_despawners"));
 }
 
 subcase()
 {
-    setDvar("subwooferkills", !getDvarInt("subwooferkills"));
+    setDvar("st_subwooferkills", !getDvarInt("st_subwooferkills"));
 }
 
 changeroundcase(round)
@@ -730,4 +730,137 @@ helpcase()
 		i += 10;
 		wait 0.1;
 	}
+}
+
+
+changeroundrework()
+{
+//     flag_wait("initial_blackscreen_passed");
+
+//     last_requested = getDvarInt("round");
+//     setDvar("changeround", last_requested);
+
+//     while(true)
+//     {
+//         wait 0.1;
+
+//         requested_ui = getDvarInt("changeround");
+//         desired_rnd = requested_ui - 1;
+//         current_rnd = level.round_number;
+
+//         if(requested_ui == last_requested || desired_rnd == current_rnd)
+//             continue;
+
+//         last_requested = requested_ui;
+
+//         level.round_number = desired_rnd;
+//         endround(true);
+
+//         strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
+
+//         level waittill("start_of_round");
+//     }
+}
+
+killhorderework()
+{
+	flag_wait("initial_blackscreen_passed");
+    setDvar("st_killhorde", 0);
+    while(true)
+    {
+        while(getDvarInt("st_killhorde") == 0)
+            wait 0.1;
+        setDvar("killhorde", 0);
+        endround(false);
+        strattesterprint("Killing current horde", "Matando horda actual");
+    }
+}
+
+endroundrework()
+{
+	flag_wait("initial_blackscreen_passed");
+    while(true)
+    {
+        wait 0.1;
+        if(getDvarInt("st_endround") == 0)
+            continue;
+        desired_rnd = getDvarInt("st_endround");
+        setDvar("endround", 0);
+        endround(true);
+        strattesterprint("Changing round to " + desired_rnd, "Cambiado ronda a " + desired_rnd);
+    }
+}
+
+unlockgensrework()
+{
+    setDvar("st_unlockgens", 0);
+    while(true)
+    {
+        while(getDvarInt("st_unlockgens") == 0)
+            wait 0.1;
+        setDvar("st_unclockgens", 0);
+
+	    foreach (gen in getstructarray( "s_generator", "targetname" ))
+		    gen thread [[getfunction("maps\mp\zm_tomb_capture_zones", "init_capture_zone")]]();
+	    strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
+    }
+}
+
+notargetrework()
+{
+    setDvar("st_notarget" + self.name, 0);
+    while(true)
+    {
+        while(getDvarInt("st_notarget" + self.name) == 0)
+            wait 0.1;
+        setDvar("st_notarget" + self.name, 0);
+
+        if(!isdefined(self.innotarget))
+            self.innotarget = true;
+        else
+            self.innotarget = !self.innotarget;
+
+	    if(self.innotarget)
+		    strattesterprint(self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis");
+	    else
+		    strattesterprint(self.name + " can be targeted by zombies", self.name + " atrará zombis");
+    }
+}
+
+boxmoverework()
+{
+    while(true)
+    {
+        wait 0.1;
+        location = getDvar("st_boxmove");
+        if(location == "none")
+            continue;
+            
+        setDvar("st_boxmove", "none");
+        boxmove(location);
+    }
+}
+
+tprework()
+{
+    while(true)
+    {
+        wait 0.1;
+        destination = getDvar("st_tp" + self.name);
+        if(destination == "none")
+            continue;
+        setDvar("st_tp" + self.name, "none");
+        tpcase(self, destination, self);
+    }
+}
+
+specialcommands()
+{
+    self thread tprework();
+    self thread boxmoverework();
+    self thread notargetrework();
+    self thread unlockgensrework();
+    self thread endroundrework();
+    self thread killhorderework();
+    self thread changeroundrework();
 }

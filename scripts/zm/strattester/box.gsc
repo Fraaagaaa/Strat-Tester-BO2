@@ -96,7 +96,7 @@ raygun_counter()
 
     while(true)
     {
-        if(getDvarInt("avg"))
+        if(getDvarInt("st_avg"))
         {
             level.total_mk2_display.label = &"^3Raygun MK2 AVG: ^5";
             level.total_ray_display.label = &"^3Raygun AVG: ^5";
@@ -150,8 +150,9 @@ displayWatcher()
     while(true)
     {
         wait 0.1;
-        level.total_mk2_display.alpha = getDvarInt("boxhits");
-        level.total_ray_display.alpha = getDvarInt("boxhits");
-        level.boxhitsst.alpha = getDvarInt("boxhits");
+        alpha = getDvarInt("st_boxhits");
+        level.total_mk2_display.alpha = alpha;
+        level.total_ray_display.alpha = alpha;
+        level.boxhitsst.alpha = alpha;
     }
 }

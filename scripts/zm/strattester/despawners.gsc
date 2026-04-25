@@ -37,7 +37,7 @@ despawners_init()
 	{
 		wait 0.1;
 		setdvar( "developer", 0 );
-		while(getDvarInt("despawners"))
+		while(getDvarInt("st_despawners"))
 		{
 
 			setdvar( "developer", 2 );
@@ -124,7 +124,7 @@ zombie_tracking_init()
 	{
 		wait level.zombie_tracking_wait;
 		
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Distance checking zombies...", "Comprobando distancia con los zombis...");
 		text settimer( level.zombie_tracking_wait );
 	}
@@ -135,7 +135,7 @@ checkalpha()
 	while(true)
 	{
 		wait 0.1;
-		self.alpha = getDvarInt("despawners");
+		self.alpha = getDvarInt("st_despawners");
 	}
 }
 
@@ -149,12 +149,12 @@ on_zombie_death()
 	
 	if ( isdefined( anchor ) )
 	{
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor",  "Zombi en " + anchor.origin + " ha muerto dejando una entidad suelta" );
 		debugstar( anchor.origin, 20 * 20, ( 1, 0, 0 ), ( 1, 0, 0 ), "ANCHOR", 10 );
 		
 		level.anchor_deaths++;
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Anchor deaths: " + level.anchor_deaths, "Entidades sueltas por zombis: " + level.anchor_deaths);
 	}
 }
@@ -290,7 +290,7 @@ delete_zombie_noone_looking_origins( how_close, how_high )
 		}
 		
 		// our stuff
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
 		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
@@ -428,7 +428,7 @@ delete_zombie_noone_looking_buried( how_close, how_high )
 		}
 		
 		// our stuff
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
 		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
@@ -549,7 +549,7 @@ delete_zombie_noone_looking_mob( how_close, how_high )
 		}
 		
 		// our stuff
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
 		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
@@ -651,7 +651,7 @@ delete_zombie_noone_looking_dierise( how_close, how_high )
 		}
 		
 		// our stuff
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
 		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );
@@ -762,7 +762,7 @@ delete_zombie_noone_looking_tranzit( how_close )
 		}
 		
 		// our stuff
-		if(getDvarInt("despawners"))
+		if(getDvarInt("st_despawners"))
 			strattesterprint( "Deleting zombie at " + here + " due to distance tracking",  "Eliminando zombie en " + here + " por estar demasiado lejos" );
 		level.despawners++;
 		debugstar( here, 20 * 10, ( 1, 1, 0 ), ( 1, 1, 0 ), "DISTANCE", 10 );

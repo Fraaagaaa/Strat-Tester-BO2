@@ -1,33 +1,159 @@
-#include common_scripts\utility;
-#include maps\mp\zombies\_zm;
+#include maps\mp\gametypes_zm\_hud_util;
 #include maps\mp\zombies\_zm_utility;
+#include common_scripts\utility;
 #include maps\mp\_utility;
 
 #include scripts\zm\strattester\ismap;
+#include scripts\zm\strattester\utility;
+
+st_sph()
+{
+	self.sph = newclienthudelem(self);
+	self.sph.fontscale = 1.7;
+	self.sph.color = (0.8, 0.8, 0.8);
+	self.sph.hidewheninmenu = 1;
+	self.sph.x = 2;
+	self.sph.y = 75;
+	self.sph.alpha = getDvarInt("st_sph");
+	self.sph.label = &"^3SPH:^5 ";
+	self.sph.alignx = "left";
+	self.sph.aligny = "top";
+	self.sph.horzalign = "user_left";
+	self.sph.vertalign = "user_top";
+	self.sph setvalue(0);
+
+	level waittill("start_of_round");
+	while(isdefined(level.countdown_hud))
+		wait 0.1;
+	self.sph.time_start = gettime() / 1000;
+	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
+	self.sph.kills = 0;
+	foreach(player in level.players)
+		player.last_kills_check = 0;
+    self thread updateSPH();
+
+	while (true) 
+	{
+		level waittill("start_of_round");
+		self.sph.time_start = gettime() / 1000;
+    	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
+	}
+}
+
+updateSPH()
+{
+    while (true) 
+	{
+        wait 0.1;
+        time = gettime() / 1000;
+        self.sph.time_elapsed = int(time - self.sph.time_start);
+		self.sph.kills = self.sph.zombies_total_start - (maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total);
+        self.sph.hordas_fraction = self.sph.kills / 24.0;
+        if (self.sph.hordas_fraction > 0)
+            self.sph.sph_value = self.sph.time_elapsed / self.sph.hordas_fraction;
+        else
+            self.sph.sph_value = 0;
+        self.sph setvalue(self.sph.sph_value);
+		self.sph.alpha = getDvarInt("st_sph");
+    }
+}
+
+health_bar_hud()
+{
+	level endon("end_game");
+	self endon("disconnect");
+	flag_wait("initial_blackscreen_passed");
+
+	self.health_bar = self createprimaryprogressbar();
+	self.health_bar.hidewheninmenu = 1;
+	self.health_bar.bar.hidewheninmenu = 1;
+	self.health_bar.barframe.hidewheninmenu = 1;
+	self.health_bar_text = self createprimaryprogressbartext();
+	self.health_bar_text.hidewheninmenu = 1;
+	
+	self.health_bar setpoint(undefined, "BOTTOM", 0, 5);
+	self.health_bar_text setpoint(undefined, "BOTTOM", 75, 5);
+
+	while(true)
+	{
+		if(!getDvarInt("st_healthbar"))
+		{
+			self.health_bar.alpha = 0;
+			self.health_bar.bar.alpha = 0;
+			self.health_bar.barframe.alpha = 0;
+			self.health_bar_text.alpha = 0;
+			while(!getDvarInt("st_healthbar"))
+				wait 0.1;
+		}
+		if (isDefined(self.e_afterlife_corpse))
+		{
+			if (self.health_bar.alpha != 0)
+			{
+				self.health_bar.alpha = 0;
+				self.health_bar.bar.alpha = 0;
+				self.health_bar.barframe.alpha = 0;
+				self.health_bar_text.alpha = 0;
+			}
+			
+			wait 0.05;
+			continue;
+		}
+
+		if (self.health_bar.alpha != 1)
+		{
+			self.health_bar.alpha = 1;
+			self.health_bar.bar.alpha = 1;
+			self.health_bar.barframe.alpha = 1;
+			self.health_bar_text.alpha = 1;
+		}
+
+		self.health_bar updatebar (self.health / self.maxhealth);
+		self.health_bar_text setvalue(self.health);
+		self.health_bar.bar.color = (1 - self.health / self.maxhealth, self.health / self.maxhealth, 0);
+		wait 0.05;
+	}
+}
+
+
+zombie_remaining_hud()
+{
+	self endon( "disconnect" );
+	level endon( "end_game" );
+
+    self.zombie_counter_hud = maps\mp\gametypes_zm\_hud_util::createFontString( "hudsmall" , 1.4 );
+    self.zombie_counter_hud maps\mp\gametypes_zm\_hud_util::setPoint( "CENTER", "CENTER", "CENTER", 190 );
+    self.zombie_counter_hud.alpha = 0;
+    self.zombie_counter_hud.label = &"^3Zombies: ^5";
+	self thread zombie_remaining_hud_watcher();
+
+    while(true)
+    {
+        self.zombie_counter_hud setValue((maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total));
+        wait 0.05; 
+    }
+}
+
+zombie_remaining_hud_watcher()
+{	
+	self endon("disconnect");
+	level endon( "end_game" );
+
+	while(true)
+	{
+		self.zombie_counter_hud.alpha = getDvarInt("st_remaining");
+        wait 0.1;
+	}
+}
 
 zone_hud()
 {
 	self endon("disconnect");
 
-	x = 8;
-	y = -95;
-	if (isburied())
-		y += 15;
-	if (isorigins())
-		y += 10;
+	x = 8;	y = -95;
+	if (isburied()) 	y += 15;
+	if (isorigins()) 	y += 10;
 
-	self.zone_hud = newClientHudElem(self);
-	self.zone_hud.alignx = "left";
-	self.zone_hud.aligny = "bottom";
-	self.zone_hud.horzalign = "user_left";
-	self.zone_hud.vertalign = "user_bottom";
-	self.zone_hud.x = x;
-	self.zone_hud.y = y;
-	self.zone_hud.fontscale = 1.3;
-	self.zone_hud.alpha = 0;
-	self.zone_hud.color = ( 1, 1, 1 );
-	self.zone_hud.hidewheninmenu = 1;
-
+    self.zone_hud = self createHudElem(&"^3", x, y, 1.3, 0, "left", "bottom");
 	flag_wait( "initial_blackscreen_passed" );
 
 	self thread zone_hud_watcher(x, y);
@@ -43,7 +169,7 @@ zone_hud_watcher( x, y )
 	{
 		wait 0.05;
 
-		while( getDvarInt("zone") )
+		while( getDvarInt("st_zone") )
 		{
 			self.zone_hud.alpha = 1;
 

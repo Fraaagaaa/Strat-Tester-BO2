@@ -198,8 +198,8 @@ print_busschedule()
     farm = randomintrange( 40, 180 );
     power = randomintrange( 40, 180 );
     town = randomintrange( 40, 180 );
-	if(getDvarInt("depart") >= 40 && getDvarInt("depart") <= 180)
-    farm = getDvarInt("depart");
+	if(getDvarInt("st_depart") >= 40 && getDvarInt("st_depart") <= 180)
+    farm = getDvarInt("st_depart");
 
     level.busschedule = busschedulecreate();
     level.busschedule busscheduleadd( "depot", 0, depot, 19, 15 );
@@ -300,13 +300,13 @@ delete_zombie_noone_looking( how_close )
 
 denizens()
 {
-    dvar = getDvarInt("denizens");
+    dvar = getDvarInt("st_denizens");
     while(true)
     {
         wait 0.1;
-        if(dvar == getDvarInt("denizens"))
+        if(dvar == getDvarInt("st_denizens"))
             continue;
-        dvar = getDvarInt("denizens");
+        dvar = getDvarInt("st_denizens");
 
         if(dvar)
         {
