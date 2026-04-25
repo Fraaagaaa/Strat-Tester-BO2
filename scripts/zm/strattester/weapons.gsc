@@ -172,8 +172,6 @@ give_weapons_on_spawn()
 	if(istranzit())
 	{
 		self takeweapon("m1911_zm");
-		self equipment_take( "claymore_zm" );
-		self weapon_give( "claymore_zm", undefined, undefined, 0 );
 		self giveweapon_nzv( "m16_gl_upgraded_zm" );
 		self giveweapon_nzv( "m1911_upgraded_zm" );
 		if(self == level.players[0])
