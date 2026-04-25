@@ -11,7 +11,7 @@
 #include scripts\zm\strattester\commands;
 #include scripts\zm\strattester\start;
 #include scripts\zm\strattester\timers;
-#include scripts\zm\strattester\ismap;
+#include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\despawners;
 #include scripts\zm\strattester\settings;
@@ -29,19 +29,19 @@ main()
 init()
 {
 	level.strat_tester = true;
-    if(!isDefined(level.total_chest_accessed))
-        level.total_chest_accessed = 0;
+	level thread enable_cheats();
 	level thread settings_init();
     level thread turn_on_power();
     level thread set_starting_round();
     level thread remove_boards_from_windows();
-	thread enable_cheats();
 	level thread readChat();
 	level thread readconsole();
 	level thread despawner_counter();
 	level thread despawners_init();
-    thread wait_for_players();
+    level thread wait_for_players();
     
+    if(!isDefined(level.total_chest_accessed))
+        level.total_chest_accessed = 0;
 	flag_wait("initial_blackscreen_passed");
 	level thread openAllDoors();
     level thread round_pause_st();
@@ -94,7 +94,7 @@ connected_st()
 		}
 		self.score = 1000000;
         self thread perk_init();
-		self thread give_weapons_on_spawn();
+		self thread loadouts_init();
         wait 0.05;
 		self waittill("spawned_player");
     }
@@ -107,7 +107,6 @@ enable_cheats()
 
     if( level.player_out_of_playable_area_monitor && IsDefined( level.player_out_of_playable_area_monitor ) )
 		self notify( "stop_player_out_of_playable_area_monitor" );
-
 	level.player_out_of_playable_area_monitor = 0;
     level.player_too_many_players_check = 0;
 }

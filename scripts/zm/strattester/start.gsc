@@ -14,7 +14,7 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm_weapons;
 
-#include scripts\zm\strattester\ismap;
+#include scripts\zm\strattester\utility;
 
 openAllDoors()
 {

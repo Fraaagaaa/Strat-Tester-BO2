@@ -6,7 +6,6 @@
 
 #include scripts\zm\strattester\settings;
 #include scripts\zm\strattester\utility;
-#include scripts\zm\strattester\ismap;
 
 #define JUG_PERK "specialty_armorvest"
 #define SPEED_PERK "specialty_fastreload"
@@ -84,7 +83,7 @@ st_give_perks()
 		if(ignorePerk(self.name, perk))
 			continue;
 		self give_perk(perk, 0 );
-		wait 0.15;
+		wait 0.05;
 	}
 }
 

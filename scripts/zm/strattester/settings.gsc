@@ -4,7 +4,6 @@
 #include maps\mp\_utility;
 
 #include scripts\zm\strattester\utility;
-#include scripts\zm\strattester\ismap;
 
 #define ON 1
 #define OFF 0

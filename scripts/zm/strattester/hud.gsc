@@ -3,7 +3,6 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
-#include scripts\zm\strattester\ismap;
 #include scripts\zm\strattester\utility;
 
 st_sph()
@@ -122,6 +121,7 @@ zombie_remaining_hud()
 
     self.zombie_counter_hud = maps\mp\gametypes_zm\_hud_util::createFontString( "hudsmall" , 1.4 );
     self.zombie_counter_hud maps\mp\gametypes_zm\_hud_util::setPoint( "CENTER", "CENTER", "CENTER", 190 );
+	self.zombie_counter_hud.hidewheninmenu = 1;
     self.zombie_counter_hud.alpha = 0;
     self.zombie_counter_hud.label = &"^3Zombies: ^5";
 	self thread zombie_remaining_hud_watcher();

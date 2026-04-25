@@ -10,7 +10,7 @@
 #include scripts\zm\strattester\start;
 #include scripts\zm\strattester\zone;
 #include scripts\zm\strattester\timers;
-#include scripts\zm\strattester\ismap;
+#include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\hud;
 
 addCommands(commands)

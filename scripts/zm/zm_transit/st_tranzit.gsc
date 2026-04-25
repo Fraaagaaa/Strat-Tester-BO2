@@ -5,7 +5,7 @@
 
 #include scripts\zm\strattester\box;
 #include scripts\zm\strattester\bus;
-#include scripts\zm\strattester\ismap;
+#include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\tranzit;
 #include scripts\zm\strattester\schreecher;
 
