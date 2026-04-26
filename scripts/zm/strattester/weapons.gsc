@@ -83,7 +83,10 @@ giveloadout()
 		self equipment_buy(equipment);
 
 	foreach(weapon in self.st_loadout_weapons)
+	{
 		self weapon_give( weapon, undefined, undefined, 0 );
+		wait 0.15;
+	}
 
 	wait 0.5;
 	if(map_has_mulekick() && player_wants_mulekick(self.name) && isdefined(self.st_loadout_mule))
@@ -222,19 +225,18 @@ main_loadouts()
 
 		if(iswhite(self) && level.players.size == 1)
 		{
-			self.st_loadout_weapons = array(MK2_U, MONKS, SEMTEX, CLAYMORE);
 			if(getDvarInt("st_wm_origins"))
-				self.st_loadout_mule = WAR_MACHINE_U;
+				self.st_loadout_weapons = array(MK2_U, MP40_U, MONKS, SEMTEX, CLAYMORE);
 			else
-				self.st_loadout_mule = MP40_U;
+				self.st_loadout_weapons = array(MK2_U, MP40_U, MONKS, SEMTEX, CLAYMORE);
 
 			switch(getDvarInt("st_staff"))
 			{
-				case 0: self.st_loadout_weapons[self.st_loadout_weapons.size] = ICE; self.st_loadout_main = ICE; break;
-				case 1: self.st_loadout_weapons[self.st_loadout_weapons.size] = WIND; self.st_loadout_main = WIND; break;
-				case 2: self.st_loadout_weapons[self.st_loadout_weapons.size] = FIRE; self.st_loadout_main = FIRE; break;
-				case 3: self.st_loadout_weapons[self.st_loadout_weapons.size] = ELECTRIC; self.st_loadout_main = ELECTRIC; break;
-				default: self.st_loadout_weapons[self.st_loadout_weapons.size] = ICE; self.st_loadout_main = ICE; break;
+				case 0: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
+				case 1: self.st_loadout_mule = WIND; self.st_loadout_main = WIND; break;
+				case 2: self.st_loadout_mule = FIRE; self.st_loadout_main = FIRE; break;
+				case 3: self.st_loadout_mule = ELECTRIC; self.st_loadout_main = ELECTRIC; break;
+				default: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
 			}
 		}
 		else
