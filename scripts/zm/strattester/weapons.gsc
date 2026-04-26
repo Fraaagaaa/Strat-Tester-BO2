@@ -53,13 +53,15 @@ map_has_mulekick()
 
 player_wants_mulekick(player)
 {
+	if(!getDvarInt("st_weapons"))
+		return false;
 	return getDvarInt("st_give_perk_" + MULE_PERK + "_" + player);
 }
 
 loadouts_init()
 {
-	// if(!getDvarInt("st_weapons"))
-	// 	return;
+	if(!getDvarInt("st_weapons"))
+		return;
 	
     level waittill("initial_blackscreen_passed");
 
@@ -205,14 +207,14 @@ main_loadouts()
 	{
 		if(iswhite(self))
 		{
-			self.st_loadout_weapons = array(WAR_MACHINE, PARA_U, MONKS);
+			self.st_loadout_weapons = array(WAR_MACHINE, PARA_U, MONKS, CLAYMORE);
 			self.st_loadout_melee = GALVA;
 			self.st_loadout_main = PARA_U;
 			self.st_loadout_mule = SALLYS;
 		}
 		else
 		{
-			self.st_loadout_weapons = array(WAR_MACHINE, MK2_U, MONKS);
+			self.st_loadout_weapons = array(WAR_MACHINE, MK2_U, MONKS, CLAYMORE);
 			self.st_loadout_melee = GALVA;
 			self.st_loadout_mule = SALLYS;
 			self.st_loadout_main = WAR_MACHINE;

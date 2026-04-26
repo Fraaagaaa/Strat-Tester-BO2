@@ -61,9 +61,12 @@ CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
 
 	local controller = choice.parentSelectorButton.m_currentController
 	local playerName = UIExpression.DvarString( controller, "name" )
+	if playerName == nil then playerName = "" end
 	
-	Engine.SetDvar( "chat", "!notarget " .. playerName )
+	-- Envía el valor 1 a la variable st_notarget del jugador específico
+	Engine.SetDvar( "st_notarget" .. playerName, 1 )
 	
+	-- Guarda el estado en el dummy para que el selector no pierda visualmente el valor
 	Engine.SetDvar( choice.parentSelectorButton.m_profileVarName, choice.value )
 end
 
@@ -80,41 +83,32 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 	Tab.buttonList = ButtonList
 	Container:addElement( ButtonList )
 
-	if UIExpression.DvarString( nil, "changeround_val") == "" then
-		Engine.SetDvar("changeround_val", 100 )
+	if UIExpression.DvarString( nil, "st_changeround") == "" then
+		Engine.SetDvar("st_changeround", 100 )
 	end
 	
-	local ChangeRoundSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex, Engine.Localize("ST_CHANGE_ROUND"), "changeround_val", 1, 255, Engine.Localize("ST_CHANGE_ROUND_DESC"))
+	local ChangeRoundSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex, Engine.Localize("ST_CHANGE_ROUND"), "st_changeround", 1, 255, Engine.Localize("ST_CHANGE_ROUND_DESC"))
 	ChangeRoundSlider:setNumericDisplayFormatString("%d")
-	
-	ChangeRoundSlider:registerEventHandler("button_action", function ( element, event )
-		local rondaSeleccionada = UIExpression.DvarInt( event.controller, "changeround_val")
-		
-		Engine.SetDvar( "chat", "!changeround " .. rondaSeleccionada )
-	end )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
-
-
 	local KillHordeBtn = ButtonList:addButton(Engine.Localize("ST_KILL_HORDE"), Engine.Localize("ST_KILL_HORDE_DESC"))
 	KillHordeBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.SetDvar( "chat", "!killhorde" )
+		Engine.SetDvar( "st_killhorde", 1 )
 	end )
 
 	local EndRoundBtn = ButtonList:addButton(Engine.Localize("ST_END_ROUND"), Engine.Localize("ST_END_ROUND_DESC"))
 	EndRoundBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.SetDvar( "chat", "!endround" )
+		Engine.SetDvar( "st_endround", 1 )
 	end )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
-
 
 	-- DESPAWNERS
 	local DespawnChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DESPAWNERS"), "despawners", Engine.Localize("ST_DESPAWNERS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( DespawnChoice, 0 )
 
-	-- NOTARGET
+	-- NOTARGET (Utiliza el handler específico)
 	local NotargetChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_NOTARGET"), "dummy_notarget", Engine.Localize("ST_NOTARGET_DESC"))
 	NotargetChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 0, nil, CoD.StratTester.OnNotargetChanged )
 	NotargetChoice:addChoice(Engine.Localize("ST_MENU_ON"), 1, nil, CoD.StratTester.OnNotargetChanged )
@@ -127,7 +121,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 	NotargetChoice:setChoice( currentNotarget )
 
 	-- DROPS
-	local BoardsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DROPS"), "drops", Engine.Localize("ST_DROPS_DESC"))
+	local BoardsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DROPS"), "st_remove_drops", Engine.Localize("ST_DROPS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( BoardsChoice, 0)
 
 	-- FOG
@@ -210,10 +204,10 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 		local ExecuteTPBtn = ButtonList:addButton(Engine.Localize("ST_EXECUTE_TELEPORT"), Engine.Localize("ST_EXECUTE_TELEPORT_DESC"))
 		ExecuteTPBtn:registerEventHandler("button_action", function ( element, event )
 			local selectedDest = UIExpression.DvarString( event.controller, tpDvar )
+			local reqPlayerName = UIExpression.DvarString( event.controller, "name" )
+			if reqPlayerName == nil then reqPlayerName = "" end
 			
-			local playerName = UIExpression.DvarString( event.controller, "name" )
-			
-			Engine.SetDvar( "chat", "!tp " .. selectedDest .. " " .. playerName )
+			Engine.SetDvar( "st_tp" .. reqPlayerName, selectedDest )
 		end )
 	end
 
@@ -231,40 +225,40 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 	Container:addElement( ButtonList )
 	
 	-- HEALTHBAR
-	local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_HEALTHBAR"), "healthbar", Engine.Localize("ST_HEALTHBAR_DESC"))
+	local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_HEALTHBAR"), "st_healthbar", Engine.Localize("ST_HEALTHBAR_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( HealthbarChoice, 0)
 
 	-- ZOMBIE COUNTER
-	local RemainingChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZOMBIE_COUNTER"), "remaining", Engine.Localize("ST_ZOMBIE_COUNTER_DESC"))
+	local RemainingChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZOMBIE_COUNTER"), "st_remaining", Engine.Localize("ST_ZOMBIE_COUNTER_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( RemainingChoice, 1 )
 
 	-- SPH METER
-	local SPHChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SPH_METER"), "sph", Engine.Localize("ST_SPH_METER_DESC"))
+	local SPHChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SPH_METER"), "st_sph", Engine.Localize("ST_SPH_METER_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( SPHChoice, 1 )
 
 	-- ZONE NAME
-	local ZoneChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZONE_NAME"), "zone", Engine.Localize("ST_ZONE_NAME_DESC"))
+	local ZoneChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZONE_NAME"), "st_zone", Engine.Localize("ST_ZONE_NAME_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( ZoneChoice, 1 )
 
 	-- TIMER POSITION (Selector Múltiple)
-	local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
+	local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "st_timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
 	TimerChoice:addChoice(Engine.Localize("ST_HIDDEN"), 0, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_TOP_RIGHT"), 1, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_TOP_LEFT"), 2, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_MIDDLE_LEFT"), 3, nil, CoD.StratTester.OnDvarChanged )
 	TimerChoice:addChoice(Engine.Localize("ST_BOTTOM"), 4, nil, CoD.StratTester.OnDvarChanged )
 	
-	local currentTimerVal = UIExpression.DvarInt( nil, "timer")
-	if UIExpression.DvarString( nil, "timer") == "" then
+	local currentTimerVal = UIExpression.DvarInt( nil, "st_timer")
+	if UIExpression.DvarString( nil, "st_timer") == "" then
 		currentTimerVal = 1
-		Engine.SetDvar("timer", currentTimerVal )
+		Engine.SetDvar("st_timer", currentTimerVal )
 	end
 	
 	TimerChoice:setChoice( currentTimerVal )
 
 
 	if mapname == "zm_prison" then
-		local TrapTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TRAP_TIMER"), "traptimer", Engine.Localize("ST_TRAT_TIMER_DESC"))
+		local TrapTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TRAP_TIMER"), "st_traptimer", Engine.Localize("ST_TRAT_TIMER_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( TrapTimerChoice , 1 )
 	end
 
@@ -286,67 +280,67 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
 	if mapname == "zm_transit" and gametype == "zclassic" then
 
-		if UIExpression.DvarString( nil, "depart") == "" then
-			Engine.SetDvar("depart", 40 )
+		if UIExpression.DvarString( nil, "st_depart") == "" then
+			Engine.SetDvar("st_depart", 40 )
 		end
 
-		local FarmSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_FARM_DEPART"), "depart", 40, 180, Engine.Localize("ST_FARM_DEPART_DESC"))
+		local FarmSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_FARM_DEPART"), "st_depart", 40, 180, Engine.Localize("ST_FARM_DEPART_DESC"))
 		FarmSlider:setNumericDisplayFormatString("%d")
 
-		local DenizenChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZENS"), "denizens", Engine.Localize("ST_DENIZENS_DESC"))
+		local DenizenChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZENS"), "st_denizens", Engine.Localize("ST_DENIZENS_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( DenizenChoice  , 1 )
 
-		local BusTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "bustimer", Engine.Localize("ST_BUS_TIMER_DESC"))
+		local BusTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "st_bustimer", Engine.Localize("ST_BUS_TIMER_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( BusTimerChoice , 1 )
 
-		local BusLocChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOCATION"), "busloc", Engine.Localize("ST_BUS_LOCATION_DESC"))
+		local BusLocChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOCATION"), "st_busloc", Engine.Localize("ST_BUS_LOCATION_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( BusLocChoice , 1 )
 
-		local BusStatusChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_STATUS"), "busstatus", Engine.Localize("ST_BUS_STATUS_DESC"))
+		local BusStatusChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_STATUS"), "st_busstatus", Engine.Localize("ST_BUS_STATUS_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( BusStatusChoice  , 1 )
 	end
 
 	if mapname == "zm_transit" and startlocation == "town" then
-		local TownSetUpChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TOWN_DOORS"), "jug", Engine.Localize("ST_TOWN_DOORS_DESC"))
+		local TownSetUpChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TOWN_DOORS"), "st_jug_setup", Engine.Localize("ST_TOWN_DOORS_DESC"))
 		TownSetUpChoice:addChoice(Engine.Localize("ST_JUG"), 1, nil, CoD.StratTester.OnDvarChanged )
 		TownSetUpChoice:addChoice(Engine.Localize("ST_SPEED"), 0, nil, CoD.StratTester.OnDvarChanged )
 		
-		local currentJug = UIExpression.DvarInt( nil, "jug")
-		if UIExpression.DvarString( nil, "jug") == "" then
+		local currentJug = UIExpression.DvarInt( nil, "st_jug_setup")
+		if UIExpression.DvarString( nil, "st_jug_setup") == "" then
 			currentJug = 1
-			Engine.SetDvar("jug", currentJug )
+			Engine.SetDvar("st_jug_setup", currentJug )
 		end
 		TownSetUpChoice:setChoice( currentJug )
 	end
 
 	if mapname == "zm_nuked" then
-		local PapChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_FORCE_PAP"), "perkrng", Engine.Localize("ST_FORCE_PAP_DESC"))
+		local PapChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_FORCE_PAP"), "st_perkrng", Engine.Localize("ST_FORCE_PAP_DESC"))
 		PapChoice:addChoice(Engine.Localize("ST_MENU_ON"), 0, nil, CoD.StratTester.OnDvarChanged )
 		PapChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 1, nil, CoD.StratTester.OnDvarChanged )
 
-		local pap = UIExpression.DvarInt( nil, "perkrng")
-		if UIExpression.DvarString( nil, "perkrng") == "" then
+		local pap = UIExpression.DvarInt( nil, "st_perkrng")
+		if UIExpression.DvarString( nil, "st_perkrng") == "" then
 			pap = 1
-			Engine.SetDvar("perkrng", pap  )
+			Engine.SetDvar("st_perkrng", pap  )
 		end
 		PapChoice:setChoice( pap )
 	end
 
 	if mapname == "zm_highrise" then
-		local ElevatorKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
+		local ElevatorKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( ElevatorKillsChoice, 1 )
 	end
 
 	if mapname == "zm_buried" then
-		local BuriedChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUILDABLES"), "setupBuried", Engine.Localize("ST_BUILDABLES_DESC"))
+		local BuriedChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUILDABLES"), "st_setupBuried", Engine.Localize("ST_BUILDABLES_DESC"))
 		BuriedChoice:addChoice(Engine.Localize("ST_RESONATOR_JUG"), 0, nil, CoD.StratTester.OnDvarChanged)
 		BuriedChoice:addChoice(Engine.Localize("ST_RESONATOR_SALOON"), 1, nil, CoD.StratTester.OnDvarChanged)
 		BuriedChoice:addChoice(Engine.Localize("ST_MENU_NONE"), -1, nil, CoD.StratTester.OnDvarChanged)
 		
-		local currentsetup = UIExpression.DvarInt( nil, "setupBuried")
-		if UIExpression.DvarString( nil, "setupBuried") == "" then
+		local currentsetup = UIExpression.DvarInt( nil, "st_setupBuried")
+		if UIExpression.DvarString( nil, "st_setupBuried") == "" then
 			currentsetup = 0
-			Engine.SetDvar("setupBuried", currentsetup  )
+			Engine.SetDvar("st_setupBuried", currentsetup  )
 		end
 		BuriedChoice:setChoice( currentsetup )
 
@@ -355,52 +349,52 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 	end
 
 	if mapname == "zm_prison" then
-		local MotdLivesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_INFINITE_LIVES"), "lives", Engine.Localize("ST_INFINITE_LIVES_DESC"))
+		local MotdLivesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_INFINITE_LIVES"), "st_lives", Engine.Localize("ST_INFINITE_LIVES_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( MotdLivesChoice, 1 )
 
-		local MotdShieldChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SHIELD"), "shield", Engine.Localize("ST_SHIELD_DESC"))
+		local MotdShieldChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SHIELD"), "st_shield", Engine.Localize("ST_SHIELD_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( MotdShieldChoice , 1 )
 	end
 
 	if mapname == "zm_tomb" then
 
-		local StaffChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SOLO_STAFF"), "staff", Engine.Localize("ST_SOLO_STAFF_DESC"))
+		local StaffChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SOLO_STAFF"), "st_staff", Engine.Localize("ST_SOLO_STAFF_DESC"))
 		StaffChoice:addChoice(Engine.Localize("ST_ICE_STAFF"), 0, nil, CoD.StratTester.OnDvarChanged )
 		StaffChoice:addChoice(Engine.Localize("ST_WIND_STAFF"), 1, nil, CoD.StratTester.OnDvarChanged )
 		StaffChoice:addChoice(Engine.Localize("ST_FIRE_STAFF"), 2, nil, CoD.StratTester.OnDvarChanged )
 		StaffChoice:addChoice(Engine.Localize("ST_LIGHTNING_STAFF"), 3, nil, CoD.StratTester.OnDvarChanged )
-		local currentStaffVal = UIExpression.DvarInt( nil, "staff")
-		if UIExpression.DvarString( nil, "staff") == "" then
+		local currentStaffVal = UIExpression.DvarInt( nil, "st_staff")
+		if UIExpression.DvarString( nil, "st_staff") == "" then
 			currentStaffVal = 0
-			Engine.SetDvar("staff", currentStaffVal )
+			Engine.SetDvar("st_staff", currentStaffVal )
 		end
 		StaffChoice:setChoice( currentStaffVal )
 		
-		local OriginsShieldChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SHIELD"), "shield", Engine.Localize("ST_SHIELD_DESC"))
+		local OriginsShieldChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SHIELD"), "st_shield", Engine.Localize("ST_SHIELD_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsShieldChoice , 1 )
 		
-		local OriginsCherryChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELECTRIC_CHERRY"), "cherry", Engine.Localize("ST_ELECTRIC_CHERRY_DESC"))
+		local OriginsCherryChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELECTRIC_CHERRY"), "st_cherry_origins", Engine.Localize("ST_ELECTRIC_CHERRY_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsCherryChoice  , 0 )
 
-		local OriginsWMChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_WAR_MACHINE"), "wm", Engine.Localize("ST_WAR_MACHINE_DESC"))
+		local OriginsWMChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_WAR_MACHINE"), "st_wm", Engine.Localize("ST_WAR_MACHINE_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsWMChoice  , 0 )
 		
 		ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
-		local OriginsTankKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TANK_KILLS"), "tank", Engine.Localize("ST_TANK_KILLS_DESC"))
+		local OriginsTankKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TANK_KILLS"), "st_tank", Engine.Localize("ST_TANK_KILLS_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsTankKillsChoice  , 0 )
 		
-		local OriginsStompKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP_KILLS"), "stomp", Engine.Localize("ST_STOMP_KILLS_DESC"))
+		local OriginsStompKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP_KILLS"), "st_stomp", Engine.Localize("ST_STOMP_KILLS_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsStompKillsChoice   , 0 )
 		
-		local OriginsTumbleTrackerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE_ANIM"), "tumble", Engine.Localize("ST_TUMBLE_ANIM_DESC"))
+		local OriginsTumbleTrackerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE_ANIM"), "st_tumble", Engine.Localize("ST_TUMBLE_ANIM_DESC"))
 		CoD.StratTester.AddChoices_OnOrOff( OriginsTumbleTrackerChoice, 0 )
 
 		ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
 		local UnlockGensBtn = ButtonList:addButton(Engine.Localize("ST_UNLOCK_GENERATORS"), Engine.Localize("ST_UNLOCK_GENERATORS_DESC"))
 		UnlockGensBtn:registerEventHandler("button_action", function ( element, event )
-			Engine.SetDvar( "chat", "!unlockgens" )
+			Engine.SetDvar( "st_unlockgens", 1 )
 		end )
 	end
 	return Container
@@ -416,37 +410,37 @@ CoD.StratTester.CreateStartTab = function ( Tab, LocalClientIndex )
 	Container:addElement( ButtonList )
 
 
-	if UIExpression.DvarString( nil, "round") == "" then
-		Engine.SetDvar("round", 100 )
+	if UIExpression.DvarString( nil, "st_round") == "" then
+		Engine.SetDvar("st_round", 100 )
 	end
-	if UIExpression.DvarString( nil, "delay") == "" then
-		Engine.SetDvar("delay", 60 )
+	if UIExpression.DvarString( nil, "st_delay") == "" then
+		Engine.SetDvar("st_delay", 60 )
 	end
 
-	local RoundSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_INITIAL_ROUND"), "round", 1, 255, Engine.Localize("ST_INITIAL_ROUND_DESC"))
+	local RoundSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_INITIAL_ROUND"), "st_round", 1, 255, Engine.Localize("ST_INITIAL_ROUND_DESC"))
 	RoundSlider:setNumericDisplayFormatString("%d")
 	
 	-- Delay
-	local DelaySlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_INITIAL_DELAY"), "delay", 0, 300, Engine.Localize("ST_INITIAL_DELAY_DESC"))
+	local DelaySlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex,Engine.Localize("ST_INITIAL_DELAY"), "st_delay", 0, 300, Engine.Localize("ST_INITIAL_DELAY_DESC"))
 	DelaySlider:setNumericDisplayFormatString("%d")
 	
 	-- BOARDS
-	local BoardsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BOARDS"), "boards", Engine.Localize("ST_BOARDS_DESC"))
+	local BoardsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BOARDS"), "st_boards", Engine.Localize("ST_BOARDS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( BoardsChoice, 1)
 
 	-- POWER
-	local PowerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_POWER"), "power", Engine.Localize("ST_POWER_DESC"))
+	local PowerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_POWER"), "st_power", Engine.Localize("ST_POWER_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( PowerChoice, 1 )
 
 	-- DOORS
-	local DoorsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_OPEN_DOORS"), "doors", Engine.Localize("ST_OPEN_DOORS_DESC"))
+	local DoorsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_OPEN_DOORS"), "st_doors", Engine.Localize("ST_OPEN_DOORS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( DoorsChoice, 1 )
 
 	-- PERKS & WEAPONS ON SPAWN
-	local PerksChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_PERKS"), "perks", Engine.Localize("ST_PERKS_DESC"))
+	local PerksChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_PERKS"), "st_perks", Engine.Localize("ST_PERKS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( PerksChoice, 1 )
 	
-	local WeaponsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_WEAPONS"), "weapons", Engine.Localize("ST_WEAPONS_DESC"))
+	local WeaponsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_WEAPONS"), "st_weapons", Engine.Localize("ST_WEAPONS_DESC"))
 	CoD.StratTester.AddChoices_OnOrOff( WeaponsChoice, 1 )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
@@ -548,7 +542,7 @@ CoD.StratTester.CreateBoxTab = function ( Tab, LocalClientIndex )
 		ExecuteBoxBtn:registerEventHandler("button_action", function ( element, event )
 			local selectedDest = UIExpression.DvarString( event.controller, boxDvar )
 			
-			Engine.SetDvar( "chat", "!boxmove " .. selectedDest )
+			Engine.SetDvar( "st_boxmove", selectedDest )
 		end )
 	else
 		local UnsupportedBtn = ButtonList:addButton( Engine.Localize("ST_NOT_SUPPORTED"), Engine.Localize("ST_NOT_SUPPORTED_DESC") )

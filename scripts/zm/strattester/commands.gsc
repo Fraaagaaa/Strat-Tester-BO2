@@ -735,31 +735,31 @@ helpcase()
 
 changeroundrework()
 {
-//     flag_wait("initial_blackscreen_passed");
+    flag_wait("initial_blackscreen_passed");
 
-//     last_requested = getDvarInt("round");
-//     setDvar("changeround", last_requested);
+    last_requested = getDvarInt("round");
+    setDvar("st_changeround", last_requested);
 
-//     while(true)
-//     {
-//         wait 0.1;
+    while(true)
+    {
+        wait 0.1;
 
-//         requested_ui = getDvarInt("changeround");
-//         desired_rnd = requested_ui - 1;
-//         current_rnd = level.round_number;
+        requested_ui = getDvarInt("st_changeround");
+        desired_rnd = requested_ui - 1;
+        current_rnd = level.round_number;
 
-//         if(requested_ui == last_requested || desired_rnd == current_rnd)
-//             continue;
+        if(requested_ui == last_requested || desired_rnd == current_rnd)
+            continue;
 
-//         last_requested = requested_ui;
+        last_requested = requested_ui;
 
-//         level.round_number = desired_rnd;
-//         endround(true);
+        level.round_number = desired_rnd;
+        endround(true);
 
-//         strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
+        strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
 
-//         level waittill("start_of_round");
-//     }
+        level waittill("start_of_round");
+    }
 }
 
 killhorderework()
@@ -770,7 +770,7 @@ killhorderework()
     {
         while(getDvarInt("st_killhorde") == 0)
             wait 0.1;
-        setDvar("killhorde", 0);
+        setDvar("st_killhorde", 0);
         endround(false);
         strattesterprint("Killing current horde", "Matando horda actual");
     }
@@ -785,7 +785,7 @@ endroundrework()
         if(getDvarInt("st_endround") == 0)
             continue;
         desired_rnd = getDvarInt("st_endround");
-        setDvar("endround", 0);
+        setDvar("st_endround", 0);
         endround(true);
         strattesterprint("Changing round to " + desired_rnd, "Cambiado ronda a " + desired_rnd);
     }

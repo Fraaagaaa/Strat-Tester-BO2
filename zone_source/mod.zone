@@ -20,12 +20,14 @@ script,scripts/zm/strattester/commands.gsc
 script,scripts/zm/strattester/despawners.gsc
 script,scripts/zm/strattester/dierise.gsc
 script,scripts/zm/strattester/fixes.gsc
-script,scripts/zm/strattester/ismap.gsc
+script,scripts/zm/strattester/hud.gsc
 script,scripts/zm/strattester/mob.gsc
 script,scripts/zm/strattester/nuketown.gsc
 script,scripts/zm/strattester/origins.gsc
-script,scripts/zm/strattester/sph.gsc
+script,scripts/zm/strattester/perks.gsc
+script,scripts/zm/strattester/settings.gsc
 script,scripts/zm/strattester/start.gsc
 script,scripts/zm/strattester/timers.gsc
 script,scripts/zm/strattester/tranzit.gsc
-script,scripts/zm/strattester/zone.gsc
+script,scripts/zm/strattester/utility.gsc
+script,scripts/zm/strattester/weapons.gsc

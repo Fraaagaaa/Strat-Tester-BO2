@@ -116,6 +116,7 @@ round_pause_st()
 	level.countdown_hud SetValue(getDvarInt("st_delay"));
 	level.countdown_hud.color = ( 0.21, 0, 0 );
 	level.countdown_hud.alpha = 1;
+	level.countdown_hud.hidewheninmenu = 1;
 	level.countdown_hud.alignx = "center";
 	level.countdown_hud.aligny = "center";
 	level.countdown_hud.horzalign = "user_center";

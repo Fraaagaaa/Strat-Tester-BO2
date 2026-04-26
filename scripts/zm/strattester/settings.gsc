@@ -50,7 +50,6 @@ createDvars()
 	createDvar("st_remove_drops", OFF);
 	createDvar("st_boxhits", ON);
     createDvar("st_changeround", level.round_number);
-	createDvar("st_st_action_queue", "");
     createDvar("chat", "xxxxxxxxxxxx");
 
 	if(isorigins() || ismob())
