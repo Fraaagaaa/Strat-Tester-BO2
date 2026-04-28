@@ -159,6 +159,8 @@ changeRound(rnd)
 {
 	setDvar("st_round", rnd);
 	level.round_number = rnd;
+	endRound();
+	changeSpawnRate();
 }
 
 changeSpawnRate()
@@ -184,4 +186,51 @@ changeSpawnRate()
         }
 
 	level.zombie_move_speed = level.round_number * level.zombie_vars["zombie_move_speed_multiplier"];
+}
+
+endRound()
+{
+	level.zombie_total = 0;
+    killHorde();
+}
+
+killHorde()
+{
+	location = level.players[0].origin;
+    zombies = getaiarray( level.zombie_team );
+    zombies = arraysort( zombies, location );
+    zombies_nuked = [];
+
+    foreach(zombie in zombies)
+    {
+        if ( isdefined( zombie.ignore_nuke ) && zombie.ignore_nuke )
+            continue;
+
+        if ( isdefined( zombie.marked_for_death ) && zombie.marked_for_death )
+            continue;
+
+        if ( isdefined( zombie.nuke_damage_func ) )
+        {
+            zombie thread [[ zombie.nuke_damage_func ]]();
+            continue;
+        }
+
+        if ( is_magic_bullet_shield_enabled( zombie ) )
+            continue;
+
+        zombie.marked_for_death = 1;
+        zombie.nuked = 1;
+        zombies_nuked[zombies_nuked.size] = zombie;
+    }
+
+    foreach (nuked_zombie in zombies_nuked)
+    {
+        if ( !isdefined( nuked_zombie ) )
+            continue;
+
+        if ( is_magic_bullet_shield_enabled( nuked_zombie ) )
+            continue;
+        nuked_zombie.health = 10000; // In case they have negative health like in die rise
+        nuked_zombie dodamage( nuked_zombie.health + 666, nuked_zombie.origin );
+    }
 }

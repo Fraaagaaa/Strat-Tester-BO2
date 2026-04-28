@@ -4,6 +4,7 @@
 #include maps\mp\_utility;
 #include maps\mp\zombies\zm_buried_distance_tracking;
 
+#include scripts\zm\strattester\utility;
 
 replacefunctions()
 {
@@ -106,17 +107,6 @@ delete_zombie_noone_looking( how_close, how_high )
         self delete();
         recalc_zombie_array();
     }
-}
-
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish")
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
 }
 
 subwooferthink( weapon, armed )

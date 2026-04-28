@@ -16,6 +16,13 @@
 
 #include scripts\zm\strattester\utility;
 
+start_init()
+{
+    level thread turn_on_power();
+    level thread remove_boards_from_windows();
+    level thread changeRound(getDvarInt("st_round"));
+}
+
 openAllDoors()
 {
 	if(!getDvarInt("st_doors"))

@@ -3,16 +3,7 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\gametypes_zm\_hud_util;
 
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish" && isdefined(mensaje))
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
-}
+#include scripts\zm\strattester\utility;
 
 replacefuncs()
 {
@@ -25,6 +16,7 @@ replacefuncs()
 
 despawners_init()
 {
+	level thread despawner_counter();
 	level.anchor_deaths = 0;
 	
 	thread replacefuncs();
@@ -773,4 +765,40 @@ delete_zombie_noone_looking_tranzit( how_close )
 		self delete ();
 		recalc_zombie_array();
 	}
+}
+
+despawner_counter()
+{
+	level.despawners = 0;
+
+	level thread displayWatcher();
+	level.despawnersCounter.hidewheninmenu = true;
+    level.despawnersCounter = createserverfontstring( "objective", 1.3 );
+    level.despawnersCounter.y = 0;
+    level.despawnersCounter.x = 0;
+    level.despawnersCounter.fontscale = 1.4;
+    level.despawnersCounter.alignx = "center";
+    level.despawnersCounter.horzalign = "user_center";
+    level.despawnersCounter.vertalign = "user_top";
+    level.despawnersCounter.aligny = "top";
+    level.despawnersCounter.label = &"^3Zombies Despawned: ^5";
+    level.despawnersCounter.alignx = "left";
+    level.despawnersCounter.horzalign = "user_left";
+    level.despawnersCounter.alpha = 1;
+    level.despawnersCounter setvalue(0);
+
+    while(true)
+    {
+    	level.despawnersCounter setvalue(level.despawners);
+        wait 0.1;
+    }
+}
+
+displayWatcher()
+{
+    while(true)
+    {
+        wait 0.1;
+        level.despawnersCounter.alpha = getDvarInt("st_despawners");
+    }
 }

@@ -212,53 +212,6 @@ force_next_location()
 }
 
 
-killHorde()
-{
-	location = level.players[0].origin;
-    zombies = getaiarray( level.zombie_team );
-    zombies = arraysort( zombies, location );
-    zombies_nuked = [];
-
-    foreach(zombie in zombies)
-    {
-        if ( isdefined( zombie.ignore_nuke ) && zombie.ignore_nuke )
-            continue;
-
-        if ( isdefined( zombie.marked_for_death ) && zombie.marked_for_death )
-            continue;
-
-        if ( isdefined( zombie.nuke_damage_func ) )
-        {
-            zombie thread [[ zombie.nuke_damage_func ]]();
-            continue;
-        }
-
-        if ( is_magic_bullet_shield_enabled( zombie ) )
-            continue;
-
-        zombie.marked_for_death = 1;
-        zombie.nuked = 1;
-        zombies_nuked[zombies_nuked.size] = zombie;
-    }
-
-    foreach (nuked_zombie in zombies_nuked)
-    {
-        if ( !isdefined( nuked_zombie ) )
-            continue;
-
-        if ( is_magic_bullet_shield_enabled( nuked_zombie ) )
-            continue;
-        nuked_zombie.health = 10000; // In case they have negative health like in die rise
-        nuked_zombie dodamage( nuked_zombie.health + 666, nuked_zombie.origin );
-    }
-}
-
-endRound()
-{
-	level.zombie_total = 0;
-    killHorde();
-}
-
 fast_chest_move()
 {
     if ( isdefined( self.zbarrier ) )
@@ -289,17 +242,6 @@ zombie_can_drop_powerups(zombie)
         return false;
 
     return !getDvarInt("st_remove_drops");
-}
-
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish" && isdefined(mensaje))
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
 }
 
 endroundcase()
@@ -703,9 +645,7 @@ subcase()
 changeroundcase(round)
 {
     rnd = string_to_float(round);
-    endRound();
-    changeRound(rnd);
-    changeSpawnRate();
+    changeRound(rnd - 1);
     strattesterprint("Changing round to " + round, "Cambiado ronda a " + round);
 }
 
@@ -755,9 +695,7 @@ changeroundrework()
 
         last_requested = requested_ui;
 
-        endround();
         changeRound(desired_rnd);
-        changeSpawnRate();
 
         strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
 

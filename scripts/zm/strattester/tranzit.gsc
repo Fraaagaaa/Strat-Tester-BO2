@@ -12,23 +12,13 @@
 #include maps\mp\zombies\_zm_weapons;
 #include maps\mp\zm_transit_bus;
 
+#include scripts\zm\strattester\utility;
 
 replacefunctions()
 {
     replaceFunc(maps\mp\zm_transit_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
 	replacefunc(maps\mp\zm_transit_bus::busschedule, ::print_busschedule);
 	replaceFunc(maps\mp\zombies\_zm_ai_screecher::screecher_spawning_logic, ::screecher_spawning_logic);
-}
-
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish" && isdefined(mensaje))
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
 }
 
 screecher_spawning_logic()

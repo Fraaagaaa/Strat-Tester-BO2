@@ -320,7 +320,11 @@ give_mule_weapon_on_revive()
 		self waittill( "player_revived", reviver );
 		wait 2;
         if(self hasperk(MULE_PERK))
+		{
 		    self thread giveplayerdata();
+			self iprintln("MULE PERK");
+		}
+		self iprintln("NO MULE PERK");
 	}
 }
 

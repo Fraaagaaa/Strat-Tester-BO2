@@ -3,24 +3,14 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
+#include scripts\zm\strattester\utility;
+
 replacefunctions()
 {
 	replacefunc(maps\mp\zm_highrise_elevators::watch_for_elevator_during_faller_spawn, ::watch_for_elevator_during_faller_spawn);
     replaceFunc(maps\mp\zm_highrise_distance_tracking::delete_zombie_noone_looking, ::delete_zombie_noone_looking);
     replaceFunc(maps\mp\zm_highrise_buildables::springpadbuildable, ::springpadbuildable);
 }
-
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish" && isdefined(mensaje))
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
-}
-
 
 watch_for_elevator_during_faller_spawn()
 {

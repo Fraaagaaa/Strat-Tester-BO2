@@ -562,17 +562,6 @@ delete_zombie_noone_looking( how_close, how_high )
     }
 }
 
-strattesterprint(message, mensaje)
-{
-	foreach(player in level.players)
-	{
-		if(getDvar("language") == "spanish" && isdefined(mensaje))
-			player iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
-		else
-			player iprintln("^5[^6Strat Tester^5]^7 " + message);
-	}
-}
-
 give_max_ammo_reward()
 {
 	foreach(player in level.players)

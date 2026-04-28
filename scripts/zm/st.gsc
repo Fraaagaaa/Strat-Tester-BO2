@@ -18,12 +18,13 @@
 #include scripts\zm\strattester\perks;
 #include scripts\zm\strattester\weapons;
 
+#define VERSION "2.2.0"
+
 main()
 {
 	replaceFunc(maps\mp\animscripts\zm_utility::wait_network_frame, ::base_game_network_frame);
 	replaceFunc(maps\mp\zombies\_zm_utility::wait_network_frame, ::base_game_network_frame);
-	replaceFunc(maps\mp\zombies\_zm_spawner::zombie_can_drop_powerups, ::zombie_can_drop_powerups);
-	replaceFunc(maps\mp\zombies\_zm_ai_basic::find_flesh, ::find_flesh);
+	replaceFunc(maps\mp\zombies\_zm_utility::is_player_valid, ::is_player_valid);
 }
 
 init()
@@ -31,13 +32,10 @@ init()
 	level.strat_tester = true;
 	level thread enable_cheats();
 	level thread settings_init();
-    level thread turn_on_power();
-    level thread set_starting_round();
-    level thread remove_boards_from_windows();
+	level thread despawners_init();
+    level thread start_init();
 	level thread readChat();
 	level thread readconsole();
-	level thread despawner_counter();
-	level thread despawners_init();
     level thread wait_for_players();
     
     if(!isDefined(level.total_chest_accessed))
@@ -45,7 +43,6 @@ init()
 	flag_wait("initial_blackscreen_passed");
 	level thread openAllDoors();
     level thread round_pause_st();
-	setdvar("cg_ufo_scaler", 6);
 }
 
 wait_for_players()
@@ -54,19 +51,7 @@ wait_for_players()
     {
         level waittill("connected" , player);
         player thread connected_st();
-        player thread fraga_connected();
     }
-}
-
-fraga_connected()
-{
-	self endon("disconnect");
-	self waittill("spawned_player");
-
-	self thread timer();
-	self thread timerlocation();
-	self thread trap_timer();
-    self thread specialcommands();
 }
 
 
@@ -74,13 +59,12 @@ connected_st()
 {
     self endon( "disconnect" );
 	self waittill("spawned_player");
-	stversion = "2.1.0";
 
     while(true)
     {
 		if(!isdefined(self.has_hud))
 		{
-			self iprintln("^6Strat Tester " + stversion + " by BoneCrusher");
+			self iprintln("^6Strat Tester " + VERSION + " by BoneCrusher");
 			self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 			self thread scanweapons();
 			self thread health_bar_hud();
@@ -95,6 +79,10 @@ connected_st()
 		self.score = 1000000;
         self thread perk_init();
 		self thread loadouts_init();
+	    self thread timer();
+	    self thread timerlocation();
+	    self thread trap_timer();
+        self thread specialcommands();
         wait 0.05;
 		self waittill("spawned_player");
     }
@@ -102,8 +90,8 @@ connected_st()
 
 enable_cheats()
 {
-    setDvar( "sv_cheats", 1 );
-	setDvar( "cg_ufo_scaler", 0.7 );
+    setDvar("sv_cheats", 1 );
+	setdvar("cg_ufo_scaler", 6);
 
     if( level.player_out_of_playable_area_monitor && IsDefined( level.player_out_of_playable_area_monitor ) )
 		self notify( "stop_player_out_of_playable_area_monitor" );
@@ -173,168 +161,43 @@ tpcase(player, location)
     player setPlayerAngles(ang);
 }
 
-find_flesh()
+is_player_valid( player, checkignoremeflag, ignore_laststand_players )
 {
-    self endon( "death" );
-    level endon( "intermission" );
-    self endon( "stop_find_flesh" );
+    if ( !isdefined( player ) )
+        return 0;
 
-    if ( level.intermission )
-        return;
+    if ( !isalive( player ) )
+        return 0;
 
-    self.ai_state = "find_flesh";
-    self.helitarget = 1;
-    self.ignoreme = 0;
-    self.nododgemove = 1;
-    self.ignore_player = [];
-    self maps\mp\zombies\_zm_spawner::zombie_history( "find flesh -> start" );
-    self.goalradius = 32;
+    if ( !isplayer( player ) )
+        return 0;
 
-    if ( isdefined( self.custom_goalradius_override ) )
-        self.goalradius = self.custom_goalradius_override;
+    if(isdefined(player.innotarget) && player.innotarget)
+        return 0;
 
-    while ( true )
+    if ( isdefined( player.is_zombie ) && player.is_zombie == 1 )
+        return 0;
+
+    if ( player.sessionstate == "spectator" )
+        return 0;
+
+    if ( player.sessionstate == "intermission" )
+        return 0;
+
+    if ( isdefined( self.intermission ) && self.intermission )
+        return 0;
+
+    if ( !( isdefined( ignore_laststand_players ) && ignore_laststand_players ) )
     {
-        zombie_poi = undefined;
-
-        if ( isdefined( level.zombietheaterteleporterseeklogicfunc ) )
-            self [[ level.zombietheaterteleporterseeklogicfunc ]]();
-
-        if ( isdefined( level._poi_override ) )
-            zombie_poi = self [[ level._poi_override ]]();
-
-        if ( !isdefined( zombie_poi ) )
-            zombie_poi = self get_zombie_point_of_interest( self.origin );
-
-        players = get_players();
-		foreach(player in players)
-			if(isdefined(player.innotarget) && player.innotarget)
-				arrayremovevalue(player, players);
-
-        if ( !isdefined( self.ignore_player ) || players.size == 1 )
-            self.ignore_player = [];
-        else if ( !isdefined( level._should_skip_ignore_player_logic ) || ![[ level._should_skip_ignore_player_logic ]]() )
-        {
-            i = 0;
-
-            while ( i < self.ignore_player.size )
-            {
-                if ( isdefined( self.ignore_player[i] ) && isdefined( self.ignore_player[i].ignore_counter ) && self.ignore_player[i].ignore_counter > 3 )
-                {
-                    self.ignore_player[i].ignore_counter = 0;
-                    self.ignore_player = arrayremovevalue( self.ignore_player, self.ignore_player[i] );
-
-                    if ( !isdefined( self.ignore_player ) )
-                        self.ignore_player = [];
-
-                    i = 0;
-                    continue;
-                }
-
-                i++;
-            }
-        }
-
-        player = get_closest_valid_player(self.origin, self.ignore_player);
-		if(isdefined(player.innotarget) && player.innotarget)
-		{
-			wait 0.1;
-			continue;
-		}
-
-        if ( !isdefined( player ) && !isdefined( zombie_poi ) )
-        {
-            self maps\mp\zombies\_zm_spawner::zombie_history( "find flesh -> can't find player, continue" );
-
-            if ( isdefined( self.ignore_player ) )
-            {
-                if ( isdefined( level._should_skip_ignore_player_logic ) && [[ level._should_skip_ignore_player_logic ]]() )
-                {
-                    wait 1;
-                    continue;
-                }
-
-                self.ignore_player = [];
-            }
-
-            wait 1;
-            continue;
-        }
-
-        if ( !isdefined( level.check_for_alternate_poi ) || ![[ level.check_for_alternate_poi ]]() )
-        {
-            self.enemyoverride = zombie_poi;
-            self.favoriteenemy = player;
-        }
-
-        self thread zombie_pathing();
-
-        if ( players.size > 1 )
-        {
-            for ( i = 0; i < self.ignore_player.size; i++ )
-            {
-                if ( isdefined( self.ignore_player[i] ) )
-                {
-                    if ( !isdefined( self.ignore_player[i].ignore_counter ) )
-                    {
-                        self.ignore_player[i].ignore_counter = 0;
-                        continue;
-                    }
-
-                    self.ignore_player[i].ignore_counter = self.ignore_player[i].ignore_counter + 1;
-                }
-            }
-        }
-
-        self thread attractors_generated_listener();
-
-        if ( isdefined( level._zombie_path_timer_override ) )
-            self.zombie_path_timer = [[ level._zombie_path_timer_override ]]();
-        else
-            self.zombie_path_timer = gettime() + randomfloatrange( 1, 3 ) * 1000;
-
-        while ( gettime() < self.zombie_path_timer )
-            wait 0.1;
-
-        self notify( "path_timer_done" );
-        self maps\mp\zombies\_zm_spawner::zombie_history( "find flesh -> bottom of loop" );
-        debug_print( "Zombie is re-acquiring enemy, ending breadcrumb search" );
-        self notify( "zombie_acquire_enemy" );
+        if ( player maps\mp\zombies\_zm_laststand::player_is_in_laststand() )
+            return 0;
     }
-}
 
-despawner_counter()
-{
-	level.despawners = 0;
+    if ( isdefined( checkignoremeflag ) && checkignoremeflag && player.ignoreme )
+        return 0;
 
-	level thread displayWatcher();
-	level.despawnersCounter.hidewheninmenu = true;
-    level.despawnersCounter = createserverfontstring( "objective", 1.3 );
-    level.despawnersCounter.y = 0;
-    level.despawnersCounter.x = 0;
-    level.despawnersCounter.fontscale = 1.4;
-    level.despawnersCounter.alignx = "center";
-    level.despawnersCounter.horzalign = "user_center";
-    level.despawnersCounter.vertalign = "user_top";
-    level.despawnersCounter.aligny = "top";
-    level.despawnersCounter.label = &"^3Zombies Despawned: ^5";
-    level.despawnersCounter.alignx = "left";
-    level.despawnersCounter.horzalign = "user_left";
-    level.despawnersCounter.alpha = 1;
-    level.despawnersCounter setvalue(0);
+    if ( isdefined( level.is_player_valid_override ) )
+        return [[ level.is_player_valid_override ]]( player );
 
-    while(true)
-    {
-    	level.despawnersCounter setvalue(level.despawners);
-        wait 0.1;
-    }
-}
-
-displayWatcher()
-{
-    while(true)
-    {
-        wait 0.1;
-        level.despawnersCounter.alpha = getDvarInt("st_despawners");
-    }
+    return 1;
 }
