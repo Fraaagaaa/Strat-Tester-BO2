@@ -23,8 +23,111 @@
 
 settings_init()
 {
-    thread createDvars();
+    self thread createDvars();
+	self thread createClientDvars();
 }
+
+// createClientDvar(dvar, set)
+// {
+// 	if(self getClientDvar(dvar) == "")
+// 		self createDvar(dvar, set);
+// }
+
+createClientDvars()
+{
+	createDvar("st_zone", 1);
+    createDvar("st_despawnersCounter", 0);
+	createDvar("st_healthbar", 0);
+	createDvar("st_sph", 1);
+	createDvar("st_timer", 1);
+	createDvar("st_remaining", 1);
+
+	if(ismob())
+	{
+		createDvar("st_traptimer", 1);
+	}
+	if(istranzit())
+	{
+		createDvar("st_busloc", 0);
+		createDvar("st_bustimer", 0);
+	}
+	if(isburied())
+	{
+    	createDvar("subwooferkills", 0);
+	}
+	if(isorigins())
+	{
+		createDvar("st_stomp", 0);
+		createDvar("st_tumble", 0);
+		createDvar("st_tank", 0);
+	}
+
+	perk_array = strtok(level.available_perks, " ");
+
+	foreach(perk in perk_array)
+	{
+		if(istranzit())
+		{
+			if(perk == DT_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, 0);
+				continue;
+			}
+		}
+		if(istown())
+		{
+			if(perk == JUG_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, getDvarInt("st_jug_setup"));
+				continue;
+			}
+			if(perk == SPEED_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, !getDvarInt("st_jug_setup"));
+				continue;
+			}
+		}
+		if(isdierise())
+		{
+			if(perk == WHOISWHO_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, 0);
+				continue;
+			}
+		}
+		if(ismob())
+		{
+			if(perk == DEADSHOT_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, 0);
+				continue;
+			}
+		}
+		if(isburied())
+		{
+			if(perk == VULTURE_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, 0);
+				continue;
+			}
+		}
+		if(isorigins())
+		{
+			if(perk == DEADSHOT_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, 0);
+				continue;
+			}
+			if(perk == CHERRY_PERK)
+			{
+				self createDvar("st_give_perk_" + perk, getDvarInt("st_cherry_origins"));
+				continue;
+			}
+		}
+		self createDvar("st_give_perk_" + perk, 1);
+	}
+}
+
 
 createDvars()
 {
@@ -32,13 +135,7 @@ createDvars()
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
 
-	createdvar("despawners", OFF);
-    createDvar("st_despawnersCounter", OFF);
     createDvar("st_perkrng", ON);
-	createDvar("st_healthbar", OFF);
-	createDvar("st_timer", ON);
-	createDvar("st_zone", ON);
-	createDvar("st_remaining", ON);
 	createDvar("st_weapons", ON);
 	createDvar("st_doors", ON);
 	createDvar("st_perks", ON);
@@ -46,7 +143,6 @@ createDvars()
 	createDvar("st_boards", OFF);
 	createDvar("st_delay", START_DELAY);
 	createDvar("st_round", START_ROUND);
-	createDvar("st_sph", ON);
 	createDvar("st_remove_drops", OFF);
 	createDvar("st_boxhits", ON);
     createDvar("st_changeround", level.round_number);
@@ -59,17 +155,14 @@ createDvars()
 		createDvar("st_staff", 0); 
 		createDvar("st_cherry_origins", OFF);
 		createDvar("st_wm", OFF);
-		createDvar("st_stomp", OFF);
-		createDvar("st_tumble", OFF);
-		createDvar("st_tank", OFF);
 	}
 	if(istown())
 		createDvar("st_jug_setup", OFF); 
+
 	if(issurvivalmap())
 		createDvar("st_avg", ON);
 	if(isburied())
 	{
-    	createdvar("subwooferkills", OFF);
 		createDvar("st_setupBuried", OFF); 
 	}
 	if(istranzit())
@@ -77,84 +170,14 @@ createDvars()
 		createDvar("st_busstatus", ON);
 		createDvar("st_busloc", OFF);
 		createDvar("st_bustimer", OFF);
-		createDvar("st_depart", 1);
+		createDvar("st_depart", 40);
 		createDvar("st_denizens", ON);
 	}
 	if(ismob())
 	{
-		createDvar("st_traptimer", ON);
 		createDvar("st_lives", ON);
 	}
 
 	flag_wait("initial_blackscreen_passed");
     level.start_time = int(gettime() / 1000);
-}
-
-setPerkDvars()
-{
-	who = self.name;
-	perk_array = strtok(level.available_perks, " ");
-
-	foreach(perk in perk_array)
-	{
-		if(istranzit())
-		{
-			if(perk == DT_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, OFF);
-				continue;
-			}
-		}
-		if(istown())
-		{
-			if(perk == JUG_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, getDvarInt("st_jug_setup"));
-				continue;
-			}
-			if(perk == SPEED_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, !getDvarInt("st_jug_setup"));
-				continue;
-			}
-		}
-		if(isdierise())
-		{
-			if(perk == WHOISWHO_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, OFF);
-				continue;
-			}
-		}
-		if(ismob())
-		{
-			if(perk == DEADSHOT_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, OFF);
-				continue;
-			}
-		}
-		if(isburied())
-		{
-			if(perk == VULTURE_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, OFF);
-				continue;
-			}
-		}
-		if(isorigins())
-		{
-			if(perk == DEADSHOT_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, OFF);
-				continue;
-			}
-			if(perk == CHERRY_PERK)
-			{
-				createDvar("st_give_perk_" + perk + "_" + who, getDvarInt("st_cherry_origins"));
-				continue;
-			}
-		}
-		createDvar("st_give_perk_" + perk + "_" + who, ON);
-	}
 }

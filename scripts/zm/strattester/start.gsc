@@ -46,8 +46,10 @@ openAllDoors()
 				continue;
 		}
 		if(isburied())
-			if(door.origin == (453, -1188, 100) || door.origin == (-384, -628, 52))
+		{
+			if(door.origin == (453, -1188, 100) || door.origin == (-384, -628, 52) || door.origin == (525, 61, 53) || door.origin == (0, 92, 52) || door.origin == (508, -672, 52) || door.origin == (-188, -440, 188))
 				continue;
+		}
 
         if ( is_true( door.power_door_ignore_flag_wait ) )
             door notify( "power_on" );
@@ -61,9 +63,14 @@ openAllDoors()
 
     for ( i = 0; i < zombie_debris.size; i++ )
     {
+		origin = zombie_debris[i].origin;
+		println(origin);
 		if(isburied())
-			if(zombie_debris[i].origin == (-435, 498, 478))
+		{
+			if(origin == (-435, 498, 478) || origin == (-190, 141, 193))
 				continue;
+
+		}
         zombie_debris[i] notify( "trigger", players[0] );
         wait 0.05;
     }
