@@ -15,6 +15,7 @@ main()
 	flag_wait("initial_blackscreen_passed");
 
 	deleteSlothBarricade( "juggernaut_alley" );
+	setDvar("magic_chest_movable", 0); // Make sure this is set to 1 if the player changes maps
 	level thread displaysubwooferkills();
 
     if(getDvarInt("st_setupBuried") == -1)
