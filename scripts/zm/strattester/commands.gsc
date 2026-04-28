@@ -212,12 +212,9 @@ force_next_location()
 }
 
 
-endRound(round)
+killHorde()
 {
-	if(round) level.zombie_total = 0;
-	
 	location = level.players[0].origin;
-	player_team = level.players[0].team;
     zombies = getaiarray( level.zombie_team );
     zombies = arraysort( zombies, location );
     zombies_nuked = [];
@@ -254,6 +251,12 @@ endRound(round)
         nuked_zombie.health = 10000; // In case they have negative health like in die rise
         nuked_zombie dodamage( nuked_zombie.health + 666, nuked_zombie.origin );
     }
+}
+
+endRound()
+{
+	level.zombie_total = 0;
+    killHorde();
 }
 
 fast_chest_move()
@@ -301,13 +304,13 @@ strattesterprint(message, mensaje)
 
 endroundcase()
 {
-    endRound(true);
+    endRound();
     strattesterprint("Ending current round", "Terminando la ronda actual");
 }
 
 killhordecase()
 {
-    endRound(false);
+    killHorde();
     strattesterprint("Killing current horde", "Matando horda actual");
 }
 
@@ -700,9 +703,9 @@ subcase()
 changeroundcase(round)
 {
     rnd = string_to_float(round);
-
-    level.round_number = rnd - 1;
-    endround(true);
+    endRound();
+    changeRound(rnd);
+    changeSpawnRate();
     strattesterprint("Changing round to " + round, "Cambiado ronda a " + round);
 }
 
@@ -732,7 +735,6 @@ helpcase()
 	}
 }
 
-
 changeroundrework()
 {
     flag_wait("initial_blackscreen_passed");
@@ -753,8 +755,9 @@ changeroundrework()
 
         last_requested = requested_ui;
 
-        level.round_number = desired_rnd;
-        endround(true);
+        endround();
+        changeRound(desired_rnd);
+        changeSpawnRate();
 
         strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
 
@@ -771,7 +774,7 @@ killhorderework()
         while(getDvarInt("st_killhorde") == 0)
             wait 0.1;
         setDvar("st_killhorde", 0);
-        endround(false);
+        killHorde();
         strattesterprint("Killing current horde", "Matando horda actual");
     }
 }
@@ -786,8 +789,8 @@ endroundrework()
             continue;
         desired_rnd = getDvarInt("st_endround");
         setDvar("st_endround", 0);
-        endround(true);
-        strattesterprint("Changing round to " + desired_rnd, "Cambiado ronda a " + desired_rnd);
+        endround();
+        strattesterprint("Ending current round", "Terminando ronda actual");
     }
 }
 

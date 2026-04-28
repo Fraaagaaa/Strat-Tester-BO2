@@ -76,32 +76,6 @@ openAllDoors()
     }
 }
 
-set_starting_round()
-{
-	level.round_number = getDvarInt( "st_round" );
-	level.zombie_vars[ "zombie_spawn_delay" ] = 2;
-	timer = level.zombie_vars["zombie_spawn_delay"];
-
-	for ( i = 1; i <= level.round_number; i++ )
-        {
-            timer = level.zombie_vars["zombie_spawn_delay"];
-
-            if ( timer > 0.08 )
-            {
-                level.zombie_vars["zombie_spawn_delay"] = timer * 0.95;
-                continue;
-            }
-
-            if ( timer < 0.08 )
-			{
-                level.zombie_vars["zombie_spawn_delay"] = 0.08;
-				break;
-			}
-        }
-
-	level.zombie_move_speed = level.round_number * level.zombie_vars["zombie_move_speed_multiplier"];
-}
-
 zombie_spawn_wait()
 {
 	setDvar("ai_disableSpawn", 1);
