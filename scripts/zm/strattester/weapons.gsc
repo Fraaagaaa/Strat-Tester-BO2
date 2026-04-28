@@ -55,7 +55,8 @@ player_wants_mulekick(player)
 {
 	if(!getDvarInt("st_weapons"))
 		return false;
-	return getDvarInt("st_give_perk_" + MULE_PERK + "_" + player);
+	return getDvarInt("st_give_perk_" + MULE_PERK);
+	// return getDvarInt("st_give_perk_" + MULE_PERK + "_" + player);
 }
 
 loadouts_init()
@@ -73,26 +74,32 @@ loadouts_init()
 	self thread giveloadout();
 }
 
+waitformulekick()
+{
+	while(true)
+	{
+		wait 0.1;
+		if(self hasperk(MULE_PERK))
+			return;
+	}
+}
 giveloadout()
 {
     level.player_too_many_players_check = 0;
 	while(!self.st_loadout_completed)
-		wait 1;
-
-	wait 0.5;
+		wait 0.1;
 
 	foreach(equipment in self.st_loadout_equipment)
 		self equipment_buy(equipment);
 
 	foreach(weapon in self.st_loadout_weapons)
-	{
 		self weapon_give( weapon, undefined, undefined, 0 );
-		wait 0.15;
-	}
 
-	wait 0.5;
 	if(map_has_mulekick() && player_wants_mulekick(self.name) && isdefined(self.st_loadout_mule))
+	{
+		self waitformulekick();
 		self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
+	}
 
 	if(istranzit())
 		self give_melee_weapon_instant(self.st_loadout_melee);

@@ -5,6 +5,7 @@
 #include maps\mp\zombies\_zm;
 
 #include scripts\zm\strattester\commands;
+#include scripts\zm\strattester\utility;
 
 busloc()
 {

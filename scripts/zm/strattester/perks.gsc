@@ -28,7 +28,7 @@ perk_init()
 	}
 	self thread give_perks_on_spawn();
 	self thread give_perks_on_revive();
-	// self thread setPerkDvars();
+	self thread setPerkDvars();
 }
 
 increase_perk_limit()
@@ -89,7 +89,8 @@ st_give_perks()
 
 ignorePerk(who, perk)
 {
-	return(getDvarInt("st_give_perk_" + perk + "_" + who) == 0);
+	return(getDvarInt("st_give_perk_" + perk) == 0);
+	// return(getDvarInt("st_give_perk_" + perk + "_" + who) == 0);
 }
 
 give_perks_on_revive()
