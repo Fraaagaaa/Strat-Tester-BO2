@@ -66,7 +66,6 @@ connected_st()
 		{
 			self iprintln("^6Strat Tester " + VERSION + " by BoneCrusher");
 			self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
-			self thread scanweapons();
 			self thread health_bar_hud();
 			self thread zone_hud();
 			self thread zombie_remaining_hud();

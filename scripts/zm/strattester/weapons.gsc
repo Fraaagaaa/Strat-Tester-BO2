@@ -72,6 +72,8 @@ loadouts_init()
 	self thread remove_starting_pistol();
 	self thread main_loadouts();
 	self thread giveloadout();
+	if(map_has_mulekick())
+		self thread give_mule_weapon_on_revive();
 }
 
 waitformulekick()
@@ -278,18 +280,15 @@ main_loadouts()
 // GIVE WEAPONS BACK AFTER DEATH
 /////////////////////////////////////////////////////////
 
-giveplayerdata()
-{
-	self maps\mp\zombies\_zm_weapons::weapondata_give( self.a_saved_primaries_weapons[2] );
-}
-
 scanweapons()
 {
+	prev = undefined;
 	while(true)
 	{
 		wait 5;
 		while(true)
 		{
+			prev = self.saved_mule_weapon;
 			wait 0.1;
 			if(isdefined(self.revivetrigger))
 			{
@@ -303,15 +302,8 @@ scanweapons()
 					wait 0.1;
 				break;
 			}
-			self.a_saved_primaries = self getweaponslistprimaries();
-			self.a_saved_primaries_weapons = [];
-			index = 0;
-
-			foreach ( weapon in self.a_saved_primaries )
-			{
-				self.a_saved_primaries_weapons[index] = maps\mp\zombies\_zm_weapons::get_player_weapondata( self, weapon );
-				index++;
-			}
+			weap = self getweaponslistprimaries();
+			self.saved_mule_weapon = maps\mp\zombies\_zm_weapons::get_player_weapondata( self, weap[2]);
 			wait 0.1;
 		}
 	}
@@ -321,17 +313,16 @@ give_mule_weapon_on_revive()
 {
 	level endon("end_game");
 	self endon( "disconnect" );
+	self thread scanweapons();
 
 	while(true)
 	{
 		self waittill( "player_revived", reviver );
-		wait 2;
-        if(self hasperk(MULE_PERK))
+        if(player_wants_mulekick(self))
 		{
-		    self thread giveplayerdata();
-			self iprintln("MULE PERK");
+			self waitformulekick();
+			self maps\mp\zombies\_zm_weapons::weapondata_give(self.saved_mule_weapon);
 		}
-		self iprintln("NO MULE PERK");
 	}
 }
 
