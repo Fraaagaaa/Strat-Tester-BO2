@@ -3,6 +3,7 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\zombies\zm_buried_distance_tracking;
+#include maps\mp\zm_buried_gamemodes;
 
 #include scripts\zm\strattester\utility;
 
@@ -290,4 +291,15 @@ displayWatcher()
         level.subwooferkills.alpha = getDvarInt("st_subwooferkills");
         level.subwooferkills.y = 15 * getDvarInt("st_despawners");
     }
+}
+
+
+deleteBarricades()
+{
+	deleteSlothBarricade( "juggernaut_alley" );
+	deleteslothbarricade( "candystore_alley" );
+	deleteslothbarricade( "jail" );
+	deleteslothbarricade( "mansion" );
+    level notify( "jail_barricade_down" );
+    level notify( "cell_open" );
 }

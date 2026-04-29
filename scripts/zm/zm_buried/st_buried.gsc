@@ -2,7 +2,6 @@
 #include maps\mp\zombies\_zm_utility;
 #include common_scripts\utility;
 #include maps\mp\_utility;
-#include maps\mp\zm_buried_gamemodes;
 #include maps\mp\zombies\_zm_ai_sloth;
 
 #include scripts\zm\strattester\buildables;
@@ -13,11 +12,8 @@ main()
     replacefunctions();
 
 	flag_wait("initial_blackscreen_passed");
-
-	deleteSlothBarricade( "juggernaut_alley" );
 	setDvar("magic_chest_movable", 0); // Make sure this is set to 1 if the player changes maps
 	level thread displaysubwooferkills();
-
     if(getDvarInt("st_setupBuried") == -1)
 		return;
 		
@@ -33,4 +29,8 @@ main()
 		level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // saloon
 	    level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
 	}
+    sloth_trigs = getentarray( "sloth_barricade", "targetname" );
+	foreach(sloth in sloth_trigs)
+		println(sloth.origin + "  " + sloth.script_location );
+	deletebarricades();
 }
