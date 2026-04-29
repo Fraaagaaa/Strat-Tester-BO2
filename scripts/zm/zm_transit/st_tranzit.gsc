@@ -23,8 +23,6 @@ main()
         level thread busstatus();
         level thread denizens();
         level thread busloc();
-        bhb = maps\mp\zombies\_zm_buildables::vehicle_buildable_trigger_think( level.the_bus, "bus_hatch_bottom_trigger", "bushatch", "bushatch", "", 0, 0 );
-        bhb.origin = (0,0,0);
         // level thread screecher_test();
         while(true)
         {

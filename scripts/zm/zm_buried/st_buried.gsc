@@ -30,7 +30,5 @@ main()
 	    level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
 	}
     sloth_trigs = getentarray( "sloth_barricade", "targetname" );
-	foreach(sloth in sloth_trigs)
-		println(sloth.origin + "  " + sloth.script_location );
 	deletebarricades();
 }
