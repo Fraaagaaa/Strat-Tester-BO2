@@ -75,6 +75,7 @@ createDvars()
 	}
 	if(istranzit())
 	{
+		createDvar("st_remaining_denizens", ON);
 		createDvar("st_showDenizenSpawners", OFF);
 		createDvar("st_buildbus", OFF);
 		createDvar("st_buildbuildables", OFF);

@@ -66,7 +66,8 @@ connected_st()
 			self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 			self thread health_bar_hud();
 			self thread zone_hud();
-			self thread zombie_remaining_hud();
+			self thread zombies_remaining();
+			self thread denizens_alive();
 			self thread st_sph();
             if(istranzit())
                 self thread busloc();
@@ -161,57 +162,57 @@ tpcase(player, location)
 
 bus_debug_pos_hud_think()
 {
-    self endon( "disconnect" );
-    level endon( "end_game" );
+    // self endon( "disconnect" );
+    // level endon( "end_game" );
 
-    lx = 10;
-    vx = 20;
+    // lx = 10;
+    // vx = 20;
 
-    hud_xl = newclienthudelem( self );
-    hud_xl.horzalign = "left"; hud_xl.vertalign = "bottom";
-    hud_xl.alignx = "left";   hud_xl.aligny = "bottom";
-    hud_xl.x = lx; hud_xl.y = -135;
-    hud_xl.font = "small"; hud_xl.fontscale = 1.1;
-    hud_xl.color = ( 0.6, 1, 0.6 ); hud_xl.alpha = 1;
-    hud_xl.hidewheninmenu = true;
-    hud_xl.label =&"X:\t";
+    // hud_xl = newclienthudelem( self );
+    // hud_xl.horzalign = "left"; hud_xl.vertalign = "bottom";
+    // hud_xl.alignx = "left";   hud_xl.aligny = "bottom";
+    // hud_xl.x = lx; hud_xl.y = -135;
+    // hud_xl.font = "small"; hud_xl.fontscale = 1.1;
+    // hud_xl.color = ( 0.6, 1, 0.6 ); hud_xl.alpha = 1;
+    // hud_xl.hidewheninmenu = true;
+    // hud_xl.label =&"X:\t";
 
-    hud_yl = newclienthudelem( self );
-    hud_yl.horzalign = "left"; hud_yl.vertalign = "bottom";
-    hud_yl.alignx = "left";   hud_yl.aligny = "bottom";
-    hud_yl.x = lx; hud_yl.y = -120;
-    hud_yl.font = "small"; hud_yl.fontscale = 1.1;
-    hud_yl.color = ( 0.6, 1, 0.6 ); hud_yl.alpha = 1;
-    hud_yl.hidewheninmenu = true;
-    hud_yl.label =&"Y:\t";
+    // hud_yl = newclienthudelem( self );
+    // hud_yl.horzalign = "left"; hud_yl.vertalign = "bottom";
+    // hud_yl.alignx = "left";   hud_yl.aligny = "bottom";
+    // hud_yl.x = lx; hud_yl.y = -120;
+    // hud_yl.font = "small"; hud_yl.fontscale = 1.1;
+    // hud_yl.color = ( 0.6, 1, 0.6 ); hud_yl.alpha = 1;
+    // hud_yl.hidewheninmenu = true;
+    // hud_yl.label =&"Y:\t";
 
-    hud_zl = newclienthudelem( self );
-    hud_zl.horzalign = "left"; hud_zl.vertalign = "bottom";
-    hud_zl.alignx = "left";   hud_zl.aligny = "bottom";
-    hud_zl.x = lx; hud_zl.y = -105;
-    hud_zl.font = "small"; hud_zl.fontscale = 1.1;
-    hud_zl.color = ( 0.6, 1, 0.6 ); hud_zl.alpha = 1;
-    hud_zl.hidewheninmenu = true;
-    hud_zl.label =&"Z:\t";
+    // hud_zl = newclienthudelem( self );
+    // hud_zl.horzalign = "left"; hud_zl.vertalign = "bottom";
+    // hud_zl.alignx = "left";   hud_zl.aligny = "bottom";
+    // hud_zl.x = lx; hud_zl.y = -105;
+    // hud_zl.font = "small"; hud_zl.fontscale = 1.1;
+    // hud_zl.color = ( 0.6, 1, 0.6 ); hud_zl.alpha = 1;
+    // hud_zl.hidewheninmenu = true;
+    // hud_zl.label =&"Z:\t";
 
-    hud_yawl = newclienthudelem( self );
-    hud_yawl.horzalign = "left"; hud_yawl.vertalign = "bottom";
-    hud_yawl.alignx = "left";   hud_yawl.aligny = "bottom";
-    hud_yawl.x = lx; hud_yawl.y = -90;
-    hud_yawl.font = "small"; hud_yawl.fontscale = 1.1;
-    hud_yawl.color = ( 0.6, 1, 0.6 ); hud_yawl.alpha = 1;
-    hud_yawl.hidewheninmenu = true;
-    hud_yawl.label =&"Yaw:\t";
+    // hud_yawl = newclienthudelem( self );
+    // hud_yawl.horzalign = "left"; hud_yawl.vertalign = "bottom";
+    // hud_yawl.alignx = "left";   hud_yawl.aligny = "bottom";
+    // hud_yawl.x = lx; hud_yawl.y = -90;
+    // hud_yawl.font = "small"; hud_yawl.fontscale = 1.1;
+    // hud_yawl.color = ( 0.6, 1, 0.6 ); hud_yawl.alpha = 1;
+    // hud_yawl.hidewheninmenu = true;
+    // hud_yawl.label =&"Yaw:\t";
 
-    while ( isdefined( self ) )
-    {
-        wait 0.1;
+    // while ( isdefined( self ) )
+    // {
+    //     wait 0.1;
 
-        pos    = self.origin;
-        angles = self getplayerangles();
-        hud_xl   setvalue( int( pos[0] ) );
-        hud_yl   setvalue( int( pos[1] ) );
-        hud_zl   setvalue( int( pos[2] ) );
-        hud_yawl setvalue( int( angles[1] ) );
-    }
+    //     pos    = self.origin;
+    //     angles = self getplayerangles();
+    //     hud_xl   setvalue( int( pos[0] ) );
+    //     hud_yl   setvalue( int( pos[1] ) );
+    //     hud_zl   setvalue( int( pos[2] ) );
+    //     hud_yawl setvalue( int( angles[1] ) );
+    // }
 }

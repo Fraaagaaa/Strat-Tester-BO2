@@ -114,7 +114,26 @@ health_bar_hud()
 }
 
 
-zombie_remaining_hud()
+denizens_alive()
+{
+	self endon( "disconnect" );
+	level endon( "end_game" );
+
+    self.denizen_counter = maps\mp\gametypes_zm\_hud_util::createFontString( "hudsmall" , 1.4 );
+    self.denizen_counter maps\mp\gametypes_zm\_hud_util::setPoint( "CENTER", "CENTER", "CENTER", 205);
+	self.denizen_counter.hidewheninmenu = 1;
+    self.denizen_counter.alpha = 0;
+    self.denizen_counter.label = &"^3Denizens: ^5";
+
+    while(true)
+    {
+        self.denizen_counter setValue(level.zombie_screecher_count);
+		self.denizen_counter.alpha = getDvarInt("st_remaining_denizens");
+        wait 0.05; 
+    }
+}
+
+zombies_remaining()
 {
 	self endon( "disconnect" );
 	level endon( "end_game" );
@@ -124,25 +143,13 @@ zombie_remaining_hud()
 	self.zombie_counter_hud.hidewheninmenu = 1;
     self.zombie_counter_hud.alpha = 0;
     self.zombie_counter_hud.label = &"^3Zombies: ^5";
-	self thread zombie_remaining_hud_watcher();
 
     while(true)
     {
         self.zombie_counter_hud setValue((maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total));
+		self.zombie_counter_hud.alpha = getDvarInt("st_remaining");
         wait 0.05; 
     }
-}
-
-zombie_remaining_hud_watcher()
-{	
-	self endon("disconnect");
-	level endon( "end_game" );
-
-	while(true)
-	{
-		self.zombie_counter_hud.alpha = getDvarInt("st_remaining");
-        wait 0.1;
-	}
 }
 
 zone_hud()

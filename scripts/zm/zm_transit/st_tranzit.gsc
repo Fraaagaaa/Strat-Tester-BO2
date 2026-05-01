@@ -8,6 +8,7 @@
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\tranzit;
 #include scripts\zm\strattester\schreecher;
+#include scripts\zm\strattester\hud;
 
 main()
 {
@@ -27,11 +28,5 @@ main()
         level thread denizens();
         level thread busloc();
         level thread showDenizenLocation();
-        // level thread screecher_test();
-        while(true)
-        {
-            level waittill("connecting", player);
-            // player thread busloc();
-        }
     }
 }
