@@ -162,6 +162,19 @@ delete_zombie_noone_looking( how_close, how_high )
     }
 }
 
-springpadbuildable()
+check_special_round()
 {
+    level endon("end_game");
+
+    while(!isdefined(level.next_leaper_round))
+        wait 0.1;
+
+    while(true)
+    {
+        if(level.next_leaper_round < level.round_number)
+            level.next_leaper_round = level.round_number + randomintrange( 4, 6 );
+        if(level.next_leaper_round > (level.round_number + 6))
+            level.next_leaper_round = level.round_number + randomintrange( 4, 6 );
+        wait 1;
+    }
 }

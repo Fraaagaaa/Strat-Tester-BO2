@@ -159,5 +159,5 @@ turn_on_power()
 	flag_set( "power_on" );
 	level setClientField( "zombie_power_on", 1 ); 
 
-	if(istranzit()) raisereactordoors();
+	if(istranzit()) [[ getfunction( "maps/mp/zm_transit_power", "raisereactordoors" ) ]]();
 }
