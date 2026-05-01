@@ -9,6 +9,16 @@
 
 #include scripts\zm\strattester\utility;
 
+#define FILE_TRANZIT 	"loadouts/tranzit.loadout"
+#define FILE_DEPOT 		"loadouts/buried.loadout"
+#define FILE_FARM 		"loadouts/farm.loadout"
+#define FILE_TOWN	 	"loadouts/town.loadout"
+#define FILE_NUKETOWN 	"loadouts/nuketown.loadout"
+#define FILE_DIERISE 	"loadouts/dierise.loadout"
+#define FILE_MOB 		"loadouts/mob.loadout"
+#define FILE_BURIED 	"loadouts/buried.loadout"
+#define FILE_ORIGINS 	"loadouts/origins.loadout"
+
 #define MULE_PERK "specialty_additionalprimaryweapon"
 
 #define AN_U "an94_upgraded_zm+mms"
@@ -66,11 +76,13 @@ loadouts_init()
 	
     level waittill("initial_blackscreen_passed");
 
+	if(!checkCustomLoadouts())
+		self thread main_loadouts();
+
 	if(ismob())
 		flag_wait( "afterlife_start_over" );
 
 	self thread remove_starting_pistol();
-	self thread main_loadouts();
 	self thread giveloadout();
 	if(map_has_mulekick())
 		self thread give_mule_weapon_on_revive();
@@ -85,6 +97,7 @@ waitformulekick()
 			return;
 	}
 }
+
 giveloadout()
 {
     level.player_too_many_players_check = 0;
@@ -92,10 +105,16 @@ giveloadout()
 		wait 0.1;
 
 	foreach(equipment in self.st_loadout_equipment)
+	{
 		self equipment_buy(equipment);
+		println("Giving equipment: " + equipment);
+	}
 
 	foreach(weapon in self.st_loadout_weapons)
+	{
 		self weapon_give( weapon, undefined, undefined, 0 );
+		println("Giving weapon: " + weapon);
+	}
 
 	if(map_has_mulekick() && player_wants_mulekick(self.name) && isdefined(self.st_loadout_mule))
 	{
@@ -360,4 +379,45 @@ givetomahawk()
 	self giveweapon("upgraded_tomahawk_zm");
 	self givemaxammo("upgraded_tomahawk_zm");
 	self setclientfieldtoplayer( "upgraded_tomahawk_in_use", 1 );
+}
+
+checkCustomLoadouts()
+{
+	if(istranzit()) path = FILE_TRANZIT;
+	if(isdepot()) path = FILE_DEPOT;
+	if(isfarm()) path = FILE_FARM;
+	if(istown()) path = FILE_TOWN;
+	if(isnuketown()) path = FILE_NUKETOWN;
+	if(isdierise()) path = FILE_DIERISE;
+	if(ismob()) path = FILE_MOB;
+	if(isburied()) path = FILE_BURIED;
+	if(isorigins()) path = FILE_ORIGINS;
+
+    f = fs_fopen(path, "read");
+	if(f == -1) return false;
+
+	weapons = fs_readline(f);
+	if(!isdefined(weapons)) return false;
+	mule = fs_readline(f);
+	if(!isdefined(mule)) return false;
+	equipment = fs_readline(f);
+	if(!isdefined(equipment)) return false;
+	melee = fs_readline(f);
+	if(!isdefined(melee)) return false;
+
+	self.st_loadout_melee = melee;
+	self.st_loadout_mule = mule;
+
+	weapons = strtok(weapons, " ");
+	equipment = strtok(equipment, " ");
+	self.loadout_equipment = array();
+	for(i = 0; i < equipment.size; i++)
+		self.st_loadout_equipment[i] = equipment[i];
+	for(i = 0; i < weapons.size; i++)
+		self.st_loadout_weapons[i] = weapons[i];
+
+	self.st_loadout_main = self.st_loadout_weapons[0];
+
+	self.st_loadout_completed = true;
+	return true;
 }
