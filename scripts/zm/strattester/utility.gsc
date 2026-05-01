@@ -234,3 +234,20 @@ killHorde()
         nuked_zombie dodamage( nuked_zombie.health + 666, nuked_zombie.origin );
     }
 }
+
+build_buildable( buildable )
+{
+    player = get_players()[0];
+
+    for ( i = 0; i < level.buildable_stubs.size; i++ )
+    {
+        if ( !isdefined( buildable ) || level.buildable_stubs[i].equipname == buildable )
+        {
+            if ( !isdefined( buildable ) && is_true( level.buildable_stubs[i].ignore_open_sesame ) )
+                continue;
+
+            if ( isdefined( buildable ) || level.buildable_stubs[i].persistent != 3 )
+                level.buildable_stubs[i] maps\mp\zombies\_zm_buildables::buildablestub_finish_build( player );
+        }
+    }
+}

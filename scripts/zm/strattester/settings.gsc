@@ -75,6 +75,9 @@ createDvars()
 	}
 	if(istranzit())
 	{
+		createDvar("st_showDenizenSpawners", OFF);
+		createDvar("st_buildbus", OFF);
+		createDvar("st_buildbuildables", OFF);
 		createDvar("st_busstatus", ON);
 		createDvar("st_busloc", OFF);
 		createDvar("st_bustimer", OFF);
