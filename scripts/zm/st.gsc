@@ -19,12 +19,10 @@
 #include scripts\zm\strattester\weapons;
 
 #define VERSION "2.2.0"
-
 main()
 {
 	replaceFunc(maps\mp\animscripts\zm_utility::wait_network_frame, ::base_game_network_frame);
 	replaceFunc(maps\mp\zombies\_zm_utility::wait_network_frame, ::base_game_network_frame);
-	replaceFunc(maps\mp\zombies\_zm_utility::is_player_valid, ::is_player_valid);
 }
 
 init()
@@ -82,6 +80,7 @@ connected_st()
 	    self thread timerlocation();
 	    self thread trap_timer();
         self thread specialcommands();
+    	self thread bus_debug_pos_hud_think();
         wait 0.05;
 		self waittill("spawned_player");
     }
@@ -160,43 +159,59 @@ tpcase(player, location)
     player setPlayerAngles(ang);
 }
 
-is_player_valid( player, checkignoremeflag, ignore_laststand_players )
+bus_debug_pos_hud_think()
 {
-    if ( !isdefined( player ) )
-        return 0;
+    self endon( "disconnect" );
+    level endon( "end_game" );
 
-    if ( !isalive( player ) )
-        return 0;
+    lx = 10;
+    vx = 20;
 
-    if ( !isplayer( player ) )
-        return 0;
+    hud_xl = newclienthudelem( self );
+    hud_xl.horzalign = "left"; hud_xl.vertalign = "bottom";
+    hud_xl.alignx = "left";   hud_xl.aligny = "bottom";
+    hud_xl.x = lx; hud_xl.y = -135;
+    hud_xl.font = "small"; hud_xl.fontscale = 1.1;
+    hud_xl.color = ( 0.6, 1, 0.6 ); hud_xl.alpha = 1;
+    hud_xl.hidewheninmenu = true;
+    hud_xl.label =&"X:\t";
 
-    if(isdefined(player.innotarget) && player.innotarget)
-        return 0;
+    hud_yl = newclienthudelem( self );
+    hud_yl.horzalign = "left"; hud_yl.vertalign = "bottom";
+    hud_yl.alignx = "left";   hud_yl.aligny = "bottom";
+    hud_yl.x = lx; hud_yl.y = -120;
+    hud_yl.font = "small"; hud_yl.fontscale = 1.1;
+    hud_yl.color = ( 0.6, 1, 0.6 ); hud_yl.alpha = 1;
+    hud_yl.hidewheninmenu = true;
+    hud_yl.label =&"Y:\t";
 
-    if ( isdefined( player.is_zombie ) && player.is_zombie == 1 )
-        return 0;
+    hud_zl = newclienthudelem( self );
+    hud_zl.horzalign = "left"; hud_zl.vertalign = "bottom";
+    hud_zl.alignx = "left";   hud_zl.aligny = "bottom";
+    hud_zl.x = lx; hud_zl.y = -105;
+    hud_zl.font = "small"; hud_zl.fontscale = 1.1;
+    hud_zl.color = ( 0.6, 1, 0.6 ); hud_zl.alpha = 1;
+    hud_zl.hidewheninmenu = true;
+    hud_zl.label =&"Z:\t";
 
-    if ( player.sessionstate == "spectator" )
-        return 0;
+    hud_yawl = newclienthudelem( self );
+    hud_yawl.horzalign = "left"; hud_yawl.vertalign = "bottom";
+    hud_yawl.alignx = "left";   hud_yawl.aligny = "bottom";
+    hud_yawl.x = lx; hud_yawl.y = -90;
+    hud_yawl.font = "small"; hud_yawl.fontscale = 1.1;
+    hud_yawl.color = ( 0.6, 1, 0.6 ); hud_yawl.alpha = 1;
+    hud_yawl.hidewheninmenu = true;
+    hud_yawl.label =&"Yaw:\t";
 
-    if ( player.sessionstate == "intermission" )
-        return 0;
-
-    if ( isdefined( self.intermission ) && self.intermission )
-        return 0;
-
-    if ( !( isdefined( ignore_laststand_players ) && ignore_laststand_players ) )
+    while ( isdefined( self ) )
     {
-        if ( player maps\mp\zombies\_zm_laststand::player_is_in_laststand() )
-            return 0;
+        wait 0.1;
+
+        pos    = self.origin;
+        angles = self getplayerangles();
+        hud_xl   setvalue( int( pos[0] ) );
+        hud_yl   setvalue( int( pos[1] ) );
+        hud_zl   setvalue( int( pos[2] ) );
+        hud_yawl setvalue( int( angles[1] ) );
     }
-
-    if ( isdefined( checkignoremeflag ) && checkignoremeflag && player.ignoreme )
-        return 0;
-
-    if ( isdefined( level.is_player_valid_override ) )
-        return [[ level.is_player_valid_override ]]( player );
-
-    return 1;
 }

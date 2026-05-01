@@ -404,11 +404,9 @@ notargetcase(player, who)
                 player = zplayer;
     }
 
-	if(!isdefined(player.innotarget))
-		player.innotarget = true;
-	else
-		player.innotarget = !player.innotarget;
-	if(player.innotarget)
+    player.ignoreme = !player.ignoreme;
+
+	if(player.ignoreme)
 		strattesterprint(player.name + " will be ignored by zombies", player.name + " será ignorado por los zombis");
 	else
 		strattesterprint(player.name + " can be targeted by zombies", player.name + " atrará zombis");
