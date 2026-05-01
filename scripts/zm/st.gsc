@@ -67,10 +67,12 @@ connected_st()
 			self thread health_bar_hud();
 			self thread zone_hud();
 			self thread zombies_remaining();
-			self thread denizens_alive();
 			self thread st_sph();
             if(istranzit())
+            {
+			    self thread denizens_alive();
                 self thread busloc();
+            }
 			if(!isdefined(self.has_hud))
 				self.has_hud = true;
 		}
