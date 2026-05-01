@@ -13,6 +13,7 @@
 #include maps\mp\zombies\_zm_score;
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm_weapons;
+#include maps\mp\zm_transit_power;
 
 #include scripts\zm\strattester\utility;
 
@@ -157,4 +158,6 @@ turn_on_power()
 	powerSwitch waittill( "rotatedone" );
 	flag_set( "power_on" );
 	level setClientField( "zombie_power_on", 1 ); 
+
+	if(istranzit()) raisereactordoors();
 }
