@@ -175,12 +175,6 @@ LANG_ENGLISH        "AUTOBÚS EN MOVIMIENTO"
 REFERENCE           ST_BUS_STATUS_DESC
 LANG_ENGLISH        "Muestra si el autobús está en movimiento o estacionado."
 
-REFERENCE           ST_TOWN_DOORS
-LANG_ENGLISH        "VENTAJA CON LA QUE JUGARÁS"
-
-REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Elige qué puertas permanecerán cerradas en Town."
-
 REFERENCE           ST_FORCE_PAP
 LANG_ENGLISH        "FORZAR PAP (PACK-A-PUNCH)"
 
@@ -477,7 +471,7 @@ REFERENCE          ST_PERK_MULEKICK
 LANG_ENGLISH       "COZ"
 
 REFERENCE          ST_PERK_REVIVE
-LANG_ENGLISH       "REANIMAIÓN RÁPIDA"
+LANG_ENGLISH       "REANIMACIÓN RÁPIDA"
 
 REFERENCE          ST_PERK_CHERRY
 LANG_ENGLISH       "CEREZA ELÉCTRICA"
@@ -510,7 +504,7 @@ REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
 LANG_ENGLISH       "CONSTRUIR TRAMPAS"
 
 REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
-LANG_ENGLISH       "Construirá la turbina, la torreta, el escudo, la trampa eléctirica y la jetgun al principio de la partida."
+LANG_ENGLISH       "Construirá la turbina, la torreta, el escudo, la trampa eléctrica y la jetgun al principio de la partida."
 
 REFERENCE           ST_TOWN_DOORS
 LANG_ENGLISH        "PUERTA ABIERTA"
