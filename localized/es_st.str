@@ -506,10 +506,10 @@ LANG_ENGLISH       "CONSTRUIR EL BUS"
 REFERENCE          ST_BUILD_BUS_DESC
 LANG_ENGLISH       "Añadirá todas las parte del bus."
 
-REFERENCE          ST_BUILD_BUILDABLES
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
 LANG_ENGLISH       "CONSTRUIR TRAMPAS"
 
-REFERENCE          ST_BUILD_BUILDABLES_DESC
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
 LANG_ENGLISH       "Construirá la turbina, la torreta, el escudo, la trampa eléctirica y la jetgun al principio de la partida."
 
 REFERENCE           ST_TOWN_DOORS
@@ -517,5 +517,11 @@ LANG_ENGLISH        "PUERTA ABIERTA"
 
 REFERENCE           ST_TOWN_DOORS_DESC
 LANG_ENGLISH        "Selecciona la puerta que va a estar abierta."
+
+REFERENCE           ST_DENIZEN_COUNTER
+LANG_ENGLISH        "CONTADOR DE DENIZENS"
+
+REFERENCE           ST_DENIZEN_COUNTER_DESC
+LANG_ENGLISH        "Muestra los denizens que están vivos."
 
 ENDMARKER

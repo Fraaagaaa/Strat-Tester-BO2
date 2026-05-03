@@ -175,12 +175,6 @@ LANG_ENGLISH        "AUTOBÚS EN MOVEMENTO"
 REFERENCE           ST_BUS_STATUS_DESC
 LANG_ENGLISH        "Mostra se o autobús está en movemento ou estacionado."
 
-REFERENCE           ST_TOWN_DOORS
-LANG_ENGLISH        "VANTAXE COA QUE XOGARÁS"
-
-REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Elixe que portas permanecerán pechadas en Town."
-
 REFERENCE           ST_FORCE_PAP
 LANG_ENGLISH        "FORZAR PAP (PACK-A-PUNCH)"
 
@@ -506,10 +500,10 @@ LANG_ENGLISH       "CONSTRUÍR O BUS"
 REFERENCE          ST_BUILD_BUS_DESC
 LANG_ENGLISH       "Engadirá todas as pezas do bus."
 
-REFERENCE          ST_BUILD_BUILDABLES
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
 LANG_ENGLISH       "CONSTRUÍR TRAMPAS"
 
-REFERENCE          ST_BUILD_BUILDABLES_DESC
+REFERENCE          ST_BUILD_BUILDABLES_DESC_TRANZIT
 LANG_ENGLISH       "Construirá a turbina, a torreta, o escudo, a trampa eléctrica e a jetgun ao comezo da partida."
 
 REFERENCE           ST_TOWN_DOORS
@@ -517,3 +511,11 @@ LANG_ENGLISH        "PORTA ABERTA"
 
 REFERENCE           ST_TOWN_DOORS_DESC
 LANG_ENGLISH        "Selecciona a porta que vai estar aberta."
+
+REFERENCE           ST_DENIZEN_COUNTER
+LANG_ENGLISH        "CONTADOR DE DENIZENS"
+
+REFERENCE           ST_DENIZEN_COUNTER_DESC
+LANG_ENGLISH        "Mostra os denizens que están vivos."
+
+ENDMARKER

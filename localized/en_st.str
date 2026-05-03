@@ -497,10 +497,10 @@ LANG_ENGLISH       "BUILD BUS"
 REFERENCE          ST_BUILD_BUS_DESC
 LANG_ENGLISH       "Will add all the parts to the bus at the start of the game."
 
-REFERENCE          ST_BUILD_BUILDABLES
-LANG_ENGLISH       "BUILD ST_BUILDABLES"
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
+LANG_ENGLISH       "BUILD BUILDABLES"
 
-REFERENCE          ST_BUILD_BUILDABLES_DESC
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
 LANG_ENGLISH       "Will build the turbine, turret, shield, electric trap and jetgun at the start."
 
 REFERENCE           ST_TOWN_DOORS
@@ -508,5 +508,11 @@ LANG_ENGLISH        "CHOOSE DOOR TO BE OPEN"
 
 REFERENCE           ST_TOWN_DOORS_DESC
 LANG_ENGLISH        "Select with what door will open on town."
+
+REFERENCE           ST_DENIZEN_COUNTER
+LANG_ENGLISH        "DENIZEN COUNTER"
+
+REFERENCE           ST_DENIZEN_COUNTER_DESC
+LANG_ENGLISH        "Show the amount of denizens that are alive."
 
 ENDMARKER
