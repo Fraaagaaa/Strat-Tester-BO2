@@ -405,7 +405,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         local SubwooferKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER"), "st_subwooferkills", Engine.Localize("ST_SUBWOOFER_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( SubwooferKillsChoice , 1 )
 
-        local BarricadesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BARRICADES_BURIED"), "st_deleteBarricades", Engine.Localize("ST_BARRICADES_BURIED"))
+        local BarricadesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BARRICADES_BURIED"), "st_deleteBarricades", Engine.Localize("ST_BARRICADES_BURIED_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( BarricadesChoice  , 1 )
     end
 
@@ -635,8 +635,8 @@ local Container = LUI.UIContainer.new()
     end
 
     local isDepot    = (mapname == "zm_transit" and gametype == "zsurvival" and startlocation == "transit")
-    local isFarm     = (mapname == "zm_transit" and gametype == "zsurvival" and startlocation == "farm")
-    local isTown     = (mapname == "zm_transit" and gametype == "zsurvival" and startlocation == "town")
+    local isFarm     =  startlocation == "farm"
+    local isTown     =  startlocation == "town"
     local isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
     local isNuketown = (mapname == "zm_nuked")
     local isDieRise  = (mapname == "zm_highrise")
@@ -753,7 +753,7 @@ LUI.createMenu.StratTesterMenu = function ( LocalClientIndex )
     SettingsTabs:addTab( LocalClientIndex, Engine.Localize("ST_TAB_HUD"), CoD.StratTester.CreateHUDTab )
     SettingsTabs:addTab( LocalClientIndex, Engine.Localize("ST_TAB_MAP"), CoD.StratTester.CreateMapTab )
     SettingsTabs:addTab( LocalClientIndex, Engine.Localize("ST_TAB_START"), CoD.StratTester.CreateStartTab )
-    SettingsTabs:addTab( LocalClientIndex, Engine.Localize("ST_PERKS_MENU"), CoD.StratTester.CreatePerksTab )
+    SettingsTabs:addTab( LocalClientIndex, Engine.Localize("ST_TAB_PERKS"), CoD.StratTester.CreatePerksTab )
 
     if CoD.StratTester.CurrentTabIndex then
         SettingsTabs:loadTab( LocalClientIndex, CoD.StratTester.CurrentTabIndex )
