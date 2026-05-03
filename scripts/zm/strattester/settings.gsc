@@ -70,7 +70,7 @@ createDvars()
 	if(isburied())
 	{
 		createDvar("st_deleteBarricades", ON);
-    	createDvar("subwooferkills", OFF);
+    	createDvar("st_subwooferkills", OFF);
 		createDvar("st_setupBuried", OFF); 
 	}
 	if(istranzit())

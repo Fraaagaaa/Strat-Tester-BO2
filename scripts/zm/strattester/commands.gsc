@@ -306,78 +306,48 @@ unlockgensrework()
     }
 }
 
-notargetrework()
+boxmove( location )
 {
-    setDvar("st_notarget" + self.name, 0);
+    if ( isDefined( level._zombiemode_custom_box_move_logic ) )
+        kept_move_logic = level._zombiemode_custom_box_move_logic;
 
-    while(true)
+    level._zombiemode_custom_box_move_logic = ::force_next_location;
+
+    foreach ( chest in level.chests )
     {
-        wait 0.1;
-        last_requested = getDvarInt("st_notarget" + self.name);
-        if(getDvarInt("st_notarget" + self.name) == last_requested)
-            continue;
-
-        self.ignoreme = !self.ignoreme;
-
-	    if(self.innotarget)
-		    strattesterprint(self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis");
-	    else
-		    strattesterprint(self.name + " can be targeted by zombies", self.name + " atrará zombis");
-    }
-}
-
-boxmoverework()
-{
-    while(true)
-    {
-        wait 0.1;
-        location = getDvar("st_boxmove");
-        if(location == "none")
-            continue;
-            
-        setDvar("st_boxmove", "none");
-
-        if(isDefined(level._zombiemode_custom_box_move_logic))
-            kept_move_logic = level._zombiemode_custom_box_move_logic;
-
-        level._zombiemode_custom_box_move_logic = ::force_next_location;
-
-        foreach (chest in level.chests)
+        if ( !chest.hidden && chest.script_noteworthy == location )
         {
-            if (!chest.hidden && chest.script_noteworthy == location)
-            {
-                if (isDefined(kept_move_logic))
-                    level._zombiemode_custom_box_move_logic = kept_move_logic;
-                return;
-            }
-            if (!chest.hidden)
-            {
-                level.chest_min_move_usage = 8;
-                level.chest_name = location;
-
-                flag_set("moving_chest_now");
-                chest thread fast_chest_move();
-
-                wait 0.05;
-                level notify("weapon_fly_away_start");
-                wait 0.05;
-                level notify("weapon_fly_away_end");
-
-                break;
-            }
+            if ( isDefined( kept_move_logic ) )
+                level._zombiemode_custom_box_move_logic = kept_move_logic;
+            return;
         }
+        if ( !chest.hidden )
+        {
+            level.chest_min_move_usage = 8;
+            level.chest_name = location;
 
-        while (flag("moving_chest_now"))
+            flag_set( "moving_chest_now" );
+            chest thread fast_chest_move();
+
             wait 0.05;
+            level notify( "weapon_fly_away_start" );
+            wait 0.05;
+            level notify( "weapon_fly_away_end" );
 
-        if (isDefined(kept_move_logic))
-            level._zombiemode_custom_box_move_logic = kept_move_logic;
-
-        if (isDefined(level.chest_name) && isDefined(level.dig_magic_box_moved))
-            level.dig_magic_box_moved = 0;
-
-        level.chest_min_move_usage = 4;
+            break;
+        }
     }
+
+    while ( flag( "moving_chest_now" ) )
+        wait 0.05;
+
+    if ( isDefined( kept_move_logic ) )
+        level._zombiemode_custom_box_move_logic = kept_move_logic;
+
+    if ( isDefined( level.chest_name ) && isDefined( level.dig_magic_box_moved ) )
+        level.dig_magic_box_moved = 0;
+
+    level.chest_min_move_usage = 4;
 }
 
 force_next_location()
@@ -387,26 +357,60 @@ force_next_location()
             level.chest_index = i;
 }
 
-tprework()
-{
-    while(true)
-    {
-        wait 0.1;
-        destination = getDvar("st_tp" + self.name);
-        if(destination == "none")
-            continue;
-        setDvar("st_tp" + self.name, "none");
-        tpcase(self, destination, self);
-    }
-}
-
 specialcommands()
 {
-    self thread tprework();
-    self thread boxmoverework();
-    self thread notargetrework();
     self thread unlockgensrework();
     self thread endroundrework();
     self thread killhorderework();
+    self thread commandmenulistener();
     self thread changeroundrework();
+}
+
+commandmenulistener()
+{
+    self endon( "disconnect" );
+    self notify( "commandmenulistener" );
+    self endon( "commandmenulistener" );
+    level endon( "game_ended" );
+
+    while ( true )
+    {
+        self waittill( "menuresponse", menu, response );
+
+        if ( !isdefined( menu ) || !isdefined( response ) )
+            continue;
+
+        if ( menu != "restartgamepopup" )
+            continue;
+
+        if ( issubstr( response, "sttp+" ) )
+        {
+            parts = strtok( response, "+" );
+            if ( parts.size >= 2 )
+                tpcase( self, parts[1], undefined );
+            continue;
+        }
+
+        if ( issubstr( response, "stnotarget+" ) )
+        {
+            parts = strtok( response, "+" );
+            if ( parts.size >= 2 )
+            {
+                self.ignoreme = ( parts[1] == "1" );
+                if ( self.ignoreme )
+                    strattesterprint( self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis" );
+                else
+                    strattesterprint( self.name + " can be targeted by zombies", self.name + " atraerá zombis" );
+            }
+            continue;
+        }
+
+        if ( issubstr( response, "stboxmove+" ) )
+        {
+            parts = strtok( response, "+" );
+            if ( parts.size >= 2 )
+                level thread boxmove( parts[1] );
+            continue;
+        }
+    }
 }
