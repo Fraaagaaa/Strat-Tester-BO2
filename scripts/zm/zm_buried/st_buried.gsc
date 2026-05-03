@@ -29,6 +29,7 @@ main()
 		level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // saloon
 	    level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
 	}
-    sloth_trigs = getentarray( "sloth_barricade", "targetname" );
-	deletebarricades();
+
+	if(getDvarInt("st_deleteBarricades"))
+		deletebarricades();
 }

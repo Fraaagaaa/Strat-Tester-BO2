@@ -50,7 +50,6 @@ createDvars()
 	createDvar("st_remove_drops", OFF);
 	createDvar("st_boxhits", ON);
     createDvar("st_changeround", level.round_number);
-	createDvar("st_st_action_queue", "");
     createDvar("chat", "xxxxxxxxxxxx");
 
 	if(isorigins() || ismob())
@@ -70,7 +69,8 @@ createDvars()
 		createDvar("st_avg", ON);
 	if(isburied())
 	{
-    	createdvar("subwooferkills", OFF);
+		createDvar("st_deleteBarricades", ON);
+    	createDvar("subwooferkills", OFF);
 		createDvar("st_setupBuried", OFF); 
 	}
 	if(istranzit())
@@ -98,11 +98,6 @@ createDvars()
 setPerkDvars()
 {
 	who = self.name;
-	while(!isdefined(level.available_perks))
-	{
-		level.players[0] iprintln("Undefined");
-		wait 0.1;
-	}
 	perk_array = strtok(level.available_perks, " ");
 
 	foreach(perk in perk_array)

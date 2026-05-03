@@ -70,8 +70,8 @@ health_bar_hud()
 	self.health_bar_text = self createprimaryprogressbartext();
 	self.health_bar_text.hidewheninmenu = 1;
 	
-	self.health_bar setpoint(undefined, "BOTTOM", 0, 5);
-	self.health_bar_text setpoint(undefined, "BOTTOM", 75, 5);
+	self.health_bar setpoint(undefined, "BOTTOM", 0, 0);
+	self.health_bar_text setpoint(undefined, "BOTTOM", 75, 0);
 
 	while(true)
 	{

@@ -1,7 +1,9 @@
 #include maps\mp\gametypes_zm\_hud_util;
-#include maps\mp\zombies\_zm_utility;
+
 #include common_scripts\utility;
 #include maps\mp\_utility;
+#include maps\mp\zombies\_zm;
+#include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm_weapons;
 #include maps\mp\zombies\_zm_melee_weapon;
 #include maps\mp\zombies\_zm_buildables;

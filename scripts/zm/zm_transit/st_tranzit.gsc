@@ -21,9 +21,7 @@ main()
 
     if(istranzit())
     {
-        buildables = array("dinerhatch", "bushatch", "busladder", "cattlecatcher", "jetgun_zm", "electric_trap", "turret", "turbine", "pap", "powerswitch", "riotshield_zm");
-        foreach(buildable in buildables)
-            build_buildable( buildable );
+        level thread buildtranzitstuff();
         level thread busstatus();
         level thread denizens();
         level thread busloc();

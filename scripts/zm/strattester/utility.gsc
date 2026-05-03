@@ -15,12 +15,6 @@ strattesterprint(message, mensaje)
 	}
 }
 
-// createClientDvar(dvar, set)
-// {
-// 	if(self getClientDvar(dvar) == "")
-// 		self setClientDvar(dvar, set);
-// }
-
 createDvar(dvar, set)
 {
 	if(getDvar(dvar) == "")

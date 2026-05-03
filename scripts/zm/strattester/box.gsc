@@ -156,3 +156,24 @@ displayWatcher()
         level.boxhitsst.alpha = alpha;
     }
 }
+
+fast_chest_move()
+{
+    if ( isdefined( self.zbarrier ) )
+        self hide_chest( 1 );
+
+    level.verify_chest = 0;
+
+    if ( isdefined( level._zombiemode_custom_box_move_logic ) )
+        [[ level._zombiemode_custom_box_move_logic ]]();
+    else
+        default_box_move_logic();
+
+    if ( isdefined( level.chests[level.chest_index].box_hacks["summon_box"] ) )
+        level.chests[level.chest_index] [[ level.chests[level.chest_index].box_hacks["summon_box"] ]]( 0 );
+
+    playfx( level._effect["poltergeist"], level.chests[level.chest_index].zbarrier.origin );
+    level.chests[level.chest_index] show_chest();
+    flag_clear( "moving_chest_now" );
+    self.zbarrier.chest_moving = 0;
+}

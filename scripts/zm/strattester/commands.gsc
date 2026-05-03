@@ -5,13 +5,11 @@
 #include maps\mp\zombies\_zm_magicbox;
 #include maps\mp\zombies\_zm_utility;
 
-#include scripts\zm\strattester\fixes;
-#include scripts\zm\strattester\commands;
-#include scripts\zm\strattester\start;
-#include scripts\zm\strattester\zone;
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\box;
+
 
 addCommands(commands)
 {
@@ -23,14 +21,8 @@ readchat()
 {
     self endon("end_game");
 	level.StratTesterCommands = [];
-    addCommands(array("!a", "!endround", "!changeround", "!killhorde", "!tpc", "!tp", "!sph", "!power", "!boards", "!doors", "!round", "!delay", "!zone", "!remaining", "!weapons", "!perks", "!healthbar", "!timer", "!nuke", "!max", "!boxmove", "!fog", "!notarget", "!despawners", "!help"));
+    addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta"));
 
-    if(isgreenrun())    addCommands(array("!denizen","!busoff","!depart","!busloc","!bustimer","!perma","!jug","!buson"));
-    if(isorigins())     addCommands(array("!templars","!stomp","!tumble","!tank","!cherry","!shield","!wm","!staff","!gen","!unlockgens"));
-    if(ismob())         addCommands(array("!shield", "!lives", "!traptimer"));
-    if(isdierise())     addCommands(array("!perma", "!elevator"));
-    if(isburied())      addCommands(array("!buried", "!sub", "!perma"));
-    
     while (true) 
     {
         level waittill("say", message, player);
@@ -42,195 +34,20 @@ readchat()
 			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
 		}
-        level thread commands(msg, player);
-    }
-}
-
-readconsole()
-{
-    self endon("end_game");
-    while (true) 
-    {
-		wait 0.05;
-		message = getDvar("chat");
-		if(message == "xxxxxxxxxxxx")
-			continue;
-        msg = strtok(tolower(message), " ");
-		if(!in_array(msg[0], level.StratTesterCommands) && (!in_array(msg[0], level.FragaCommands)))
-		{
-			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
-			continue;
-		}
-		if(!isdefined(player))
-			player = level.players[0];
-        level thread commands(msg, player);
-		setDvar("chat", "xxxxxxxxxxxx");
-    }
-}
-
-commands(msg, player)
-{
-    switch(msg[0])
-    {
-        case "!a": strattesterprint(player.origin + "    " + player.angles); break;
-        case "!changeround": changeroundcase(msg[1]); break;
-        case "!endround": endroundcase(); break;
-        case "!killhorde": killhordecase(); break;
-        case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
-        case "!tp": tpcase(player, msg[1], msg[2]); break;
-        case "!sph": setDvar("sph", !getDvarInt("st_sph")); break;
-        case "!power": powercase(); break;
-        case "!boards": boardscase(); break;
-        case "!doors": doorscase(); break;
-        case "!round": setDvar("round", msg[1]); break;
-        case "!delay": setDvar("delay", msg[1]); break;
-        case "!zone": setDvar("zone", !getDvarInt("zone")); break;
-        case "!remaining": setDvar("remaining", !getDvarInt("st_remaining")); break;
-        case "!weapons": weaponscase(); break;
-        case "!perks": perkscase(); break;
-        case "!healthbar": setDvar("healthbar", !getDvarInt("st_healthbar")); break;
-        case "!timer": setDvar("timer", msg[1]); break;
-        case "!nuke": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("nuke", player.origin + (0, 0, 40)); break;
-        case "!max": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", player.origin + (0, 0, 40)); break;
-        case "!boxmove": boxmove(msg[1]); break;
-        case "!fog": fogcase(); break;
-        case "!notarget": notargetcase(player); break;
-        case "!despawners": despawnerscase(); break;
-        case "!help": helpcase(); break;
-        // TRANZIT
-        case "!denizen": denizencase(); break;
-        case "!busoff": case "!buson": busstatuscase(); break;
-        case "!depart": departcase(msg[1]); break;
-        case "!busloc": setDvar("busloc", !getDvarInt("st_busloc")); break;
-        case "!bustimer": setDvar("bustimer", !getDvarInt("st_bustimer")); break;
-        case "!perma": permacase(player); break;
-        case "!jug": jugcase(); break;
-        // DIE RISE
-        case "!elevator": elevatorcase(); break;
-        // ORIGINS
-        case "!stomp": flipdvar("stomp"); break;
-        case "!tumble": flipdvar("tumble"); break;
-        case "!tank": flipdvar("tank"); break;
-        case "!cherry": cherrycase(); break;
-        case "!shield": shieldcase(); break;
-        case "!wm": wmcase(); break;
-        case "!staff": staffcase(); break;
-        // MOB
-        case "!shield": shieldcase(); break;
-        case "!lives": livescase(); break;
-        case "!traptimer": setDvar("st_traptimer", !getDvarInt("st_traptimer")); break;
-        // BURIED
-        case "!buried": buriedcase(); break;
-        case "!sub": subcase(); break;
-        default: break;
-    }
-    setDvar("chat", "xxxxxxxxxxxx");
-}
-
-flipDvar(dvar)
-{
-    setDvar(dvar, !getDvarInt(dvar));
-}
-
-boxmove(location)
-{
-	switch(location)
-	{
-		case "bunker": if(!isnuketown()) return; location = "start_chest1"; break;
-		case "yellow": if(!isnuketown()) return; location = "start_chest2"; break;
-		case "garden": if(!isnuketown()) return; location = "culdesac_chest"; break;
-		case "green": if(!isnuketown()) return; location = "oh1_chest"; break;
-		case "garage": if(!isnuketown()) return; location = "oh2_chest"; break;
-		case "dt": if(!istranzit() && !istown() && !ismob()) return; if(istranzit() || istown()) location = "town_chest_2"; if(ismob()) location = "citadel_chest"; break;
-		case "qr": if(!istranzit() && !istown()) return; location = "town_chest"; break;
-		case "farm": if(!istranzit()) return; location = "farm_chest"; break;
-		case "power": if(!istranzit()) return; location = "pow_chest"; break;
-		case "diner": if(!istranzit()) return; location = "start_chest"; break;
-		case "depot": if(!istranzit()) return; location = "depot_chest"; break;
-		case "cafe": if(!ismob()) return; location = "cafe_chest"; break;
-		case "roof": if(!ismob() && !isdierise()) return; if(!isdierise()) location = "roof_chest"; else location = "ob6_chest"; break;
-		case "dock": if(!ismob()) return; location = "dock_chest"; break;
-		case "office": if(!ismob()) return; location = "start_chest"; break;
-		case "gen1": if(!isorigins()) return; location = "bunker_start_chest"; break;
-		case "gen2": if(!isorigins()) return; location = "bunker_tank_chest"; break;
-		case "gen3": if(!isorigins()) return; location = "bunker_cp_chest"; break;
-		case "gen4": if(!isorigins()) return; location = "nml_open_chest"; break;
-		case "gen5": if(!isorigins()) return; location = "nml_farm_chest"; break;
-		case "gen6": if(!isorigins()) return; location = "village_church_chest"; break;
-		case "m16": if(!isdierise()) return; location = "start_chest"; break;
-		case "bar": if(!isdierise()) return; location = "gb1_chest"; break;
-		default: break;
-	}
-    if(isDefined(level._zombiemode_custom_box_move_logic))
-        kept_move_logic = level._zombiemode_custom_box_move_logic;
-
-    level._zombiemode_custom_box_move_logic = ::force_next_location;
-
-    foreach (chest in level.chests)
-    {
-        if (!chest.hidden && chest.script_noteworthy == location)
+        switch(msg[0])
         {
-            if (isDefined(kept_move_logic))
-                level._zombiemode_custom_box_move_logic = kept_move_logic;
-            return;
-        }
-        if (!chest.hidden)
-        {
-            level.chest_min_move_usage = 8;
-            level.chest_name = location;
-
-            flag_set("moving_chest_now");
-            chest thread fast_chest_move();
-
-            wait 0.05;
-            level notify("weapon_fly_away_start");
-            wait 0.05;
-            level notify("weapon_fly_away_end");
-
-            break;
+            case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
+            case "!tp": tpcase(player, msg[1], msg[2]); break;
+            case "!nuke": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("nuke", player.origin + (0, 0, 40)); break;
+            case "!max": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", player.origin + (0, 0, 40)); break;
+            case "!x2": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("double_points", player.origin + (0, 0, 40)); break;
+            case "!sale": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("fire_sale", player.origin + (0, 0, 40)); break;
+            case "!blood": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("zombie_blood", player.origin + (0, 0, 40)); break;
+            case "!perk": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("free_perk", player.origin + (0, 0, 40)); break;
+            case "!insta": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("insta_kill", player.origin + (0, 0, 40)); break;
+            default: break;
         }
     }
-
-    while (flag("moving_chest_now"))
-        wait 0.05;
-
-    if (isDefined(kept_move_logic))
-        level._zombiemode_custom_box_move_logic = kept_move_logic;
-
-    if (isDefined(level.chest_name) && isDefined(level.dig_magic_box_moved))
-        level.dig_magic_box_moved = 0;
-
-    level.chest_min_move_usage = 4;
-}
-
-
-force_next_location()
-{
-    for (i = 0; i < level.chests.size; i++)
-        if (level.chests[i].script_noteworthy == level.chest_name)
-            level.chest_index = i;
-}
-
-
-fast_chest_move()
-{
-    if ( isdefined( self.zbarrier ) )
-        self hide_chest( 1 );
-
-    level.verify_chest = 0;
-
-    if ( isdefined( level._zombiemode_custom_box_move_logic ) )
-        [[ level._zombiemode_custom_box_move_logic ]]();
-    else
-        default_box_move_logic();
-
-    if ( isdefined( level.chests[level.chest_index].box_hacks["summon_box"] ) )
-        level.chests[level.chest_index] [[ level.chests[level.chest_index].box_hacks["summon_box"] ]]( 0 );
-
-    playfx( level._effect["poltergeist"], level.chests[level.chest_index].zbarrier.origin );
-    level.chests[level.chest_index] show_chest();
-    flag_clear( "moving_chest_now" );
-    self.zbarrier.chest_moving = 0;
 }
 
 zombie_can_drop_powerups(zombie)
@@ -242,18 +59,6 @@ zombie_can_drop_powerups(zombie)
         return false;
 
     return !getDvarInt("st_remove_drops");
-}
-
-endroundcase()
-{
-    endRound();
-    strattesterprint("Ending current round", "Terminando la ronda actual");
-}
-
-killhordecase()
-{
-    killHorde();
-    strattesterprint("Killing current horde", "Matando horda actual");
 }
 
 tpccase(player, x, z, y)
@@ -331,138 +136,6 @@ tpcase(player, location, who)
 	strattesterprint("Teleporting " + player.name + " to " + location, "Teletransportando " + player.name + " a " + location);
     player setOrigin(pos);
     player setPlayerAngles(ang);
-}
-
-powercase()
-{
-    setDvar("power", !getDvarInt("st_power"));
-    if(getDvarInt("st_power"))
-        strattesterprint("Power will be turned on at the start of the game", "La energía estará activada al principio de la partida");
-    else
-        strattesterprint("Power will not be turned on at the start of the game", "La energía estará desactivada al principio de la partida");
-}
-
-boardscase()
-{
-    setDvar("boards", !getDvarInt("st_boards"));
-    if(getDvarInt("st_boards"))
-        strattesterprint("Boards will be removed at the start of the game", "Las barreras de las ventanas serán quitadas al principio de la partida");
-    else
-        strattesterprint("Boards will not be removed at the start of the game", "Las barreras de las ventanas quedarán puestas al principio de la partida");
-}
-
-doorscase()
-{
-    setDvar("doors", !getDvarInt("doors"));
-    if(getDvarInt("doors"))
-        strattesterprint("Doors will be opened at the start of the game", "Las puertas estarán abiertas al principio de la partida");
-    else
-        strattesterprint("Doors will not be opened at the start of the game", "Las puertas estarán cerradas al principio de la partida");
-}
-
-weaponscase()
-{
-    setDvar("weapons", !getDvarInt("st_weapons"));
-    if(getDvarInt("st_weapons"))
-        strattesterprint("You will spawn with weapons", "Aparecerás con las armas necesarias");
-    else
-        strattesterprint("You will not spawn with weapons", "Aparecerás con la pistola del principio");
-}
-
-perkscase()
-{
-    setDvar("perks", !getDvarInt("st_perks"));
-    if(getDvarInt("st_perks"))
-        strattesterprint("You will spawn with perks", "Aparecerás con ventajas y se te devolverán al revivir");
-    else
-        strattesterprint("You will spawn without perks", "No recibiras ventajas al principio de la partida ni al morir");
-}
-
-dropscase()
-{
-    setDvar("remove_drops", !getDvarInt("st_remove_drops"));
-    if(getDvarInt("st_remove_drops"))
-        strattesterprint("Drops will no longer spawn", "Los Power-Ups no aparecerán");
-    else
-        strattesterprint("Drops will spawn", "Los Power-Ups aparecerán");
-}
-
-fogcase()
-{
-	setDvar("r_fog", !getDvarInt("r_fog"));
-	if(!getDvarInt("r_fog"))
-		strattesterprint("Removing fog", "Quitando niebla");
-	else
-		strattesterprint("Adding fog", "Añadiendo niebla");
-}
-notargetcase(player, who)
-{
-    if(isdefined(who))
-    {
-        foreach(zplayer in level.players)
-            if(level.players.name == who)
-                player = zplayer;
-    }
-
-    player.ignoreme = !player.ignoreme;
-
-	if(player.ignoreme)
-		strattesterprint(player.name + " will be ignored by zombies", player.name + " será ignorado por los zombis");
-	else
-		strattesterprint(player.name + " can be targeted by zombies", player.name + " atrará zombis");
-}
-
-in_array(data, array)
-{
-	foreach(element in array)
-		if(element == data)
-			return true;
-	return false;
-}
-
-departcase(time)
-{
-    setDvar("depart", time);
-    if(time >= 40 && time <= 180)
-        strattesterprint("Next game, bus will stop for " + time + " seconds on farm.", "En la siguiente partida, el bus esperará " + time + " segundos en granja." );
-    else
-        strattesterprint("Bad input, try a number between 40 and 180", "Usa un número entre 40 y 180");
-}
-
-jugcase()
-{
-    setDvar("st_jug_setup", !getDvarInt("st_jug_setup"));
-    if(getDvarInt("st_jug_setup"))
-        strattesterprint("You will spawn with jug instead of speed cola", "Aparecerás con titán en vez de prestidigitación");
-    else
-        strattesterprint("You will spawn with speed cola instead of jug", "Aparecerás con prestidigitación en vez de titán");
-}
-
-istranzit()
-{
-	return (level.script == "zm_transit" && level.scr_zm_map_start_location == "transit" && level.scr_zm_ui_gametype_group == "zclassic");
-}
-
-
-busstatuscase()
-{
-	if(!istranzit())
-		return;
-
-    setDvar("busstatus", !getDvarInt("st_busstatus"));
-}
-
-permacase(player)
-{
-    strattesterprint("Awarding perman perks to " + player.name, "Otorgando las ventajas a " + player.name);
-    player thread award_permaperks_safe();
-}
-
-denizencase()
-{
-    if(!istranzit())
-        return;
-    setDvar("denizens", !getDvarInt("denizens"));
 }
 
 award_permaperks_safe()
@@ -555,122 +228,9 @@ remove_permaperk(perk_code)
 	self playsoundtoplayer("evt_player_downgrade", self);
 }
 
-
-shieldcase()
-{
-    setDvar("shield", !getDvarInt("st_shield"));
-    if(getDvarInt("st_shield"))
-        strattesterprint("Restart the match to spawn with shield", "Reinicia la partida para empezarla con un escudo");
-    else
-        strattesterprint("Restart the match to spawn without shield", "Reinicia la partida para quitar el escudo");
-}
-
-cherrycase()
-{
-    setDvar("st_cherry", !getDvarInt("st_cherry"));
-    if(getDvarInt("st_cherry"))
-        strattesterprint("You will spawn with electric cherry", "Reaparecerás con cherry");
-    else
-        strattesterprint("You will not spawn with electric cherry", "Reaparecerás sin cherry");
-}
-
-wmcase()
-{
-    setDvar("st_wm", !getDvarInt("st_wm"));
-    if(getDvarInt("st_wm"))
-        strattesterprint("You will spawn with war machine", "Aparecerás con la máquina de guerra");
-    else
-        strattesterprint("You will not spawn with war machine", "Aparecerás sin la máquina de guerra");
-}
-
-staffcase()
-{
-	setDvar("st_staff", !getDvarInt("st_staff"));
-	if(getDvarInt("st_staff"))
-		strattesterprint("You will spawn with the ice staff", "Aparecerás con el bastón de hielo");
-	else
-		strattesterprint("You can spawn with the wind staff", "Aparecerás con el bastón de viento");
-}
-
-livescase()
-{
-    setDvar("st_lives", !getDvarInt("st_lives"));
-    if(getDvarInt("lives"))
-        strattesterprint("Infinite lives deactivated", "Vidas infinitas desactivadas");
-    else
-        strattesterprint("Infinite lives activated", "Vidas infinitas activadas");
-}
-
-buriedcase()
-{
-	if(getDvarInt("st_setupBuried") == 0)
-    {
-		strattesterprint("Subwofer will be built at jug", "El resonador estará construido en Titán");
-	    setDvar("st_setupBuried", 0);
-    }
-	else if (getDvarInt("st_setupBuried") == 1)
-    {
-		strattesterprint("Subwofer will be built at saloon", "El resonador estará construido en el saloon");
-	    setDvar("st_setupBuried", 1);
-    }
-    else
-    {
-		strattesterprint("No buildables will be prebuilt", "Ningún construible aparecerá montado");
-        setDvar("st_setupBuried", -1);
-    }
-}
-
 boxhitscase()
 {
 	setDvar("st_boxhits", !getDvarInt("st_boxhits"));
-}
-
-elevatorcase()
-{
-    setDvar("st_elevatorkills", !getDvarInt("st_elevatorkills"));
-}
-
-despawnerscase()
-{
-    setDvar("st_despawners", !getDvarInt("st_despawners"));
-}
-
-subcase()
-{
-    setDvar("st_subwooferkills", !getDvarInt("st_subwooferkills"));
-}
-
-changeroundcase(round)
-{
-    rnd = string_to_float(round);
-    changeRound(rnd - 1);
-    strattesterprint("Changing round to " + round, "Cambiado ronda a " + round);
-}
-
-helpcase()
-{
-	i = 0;
-	while (i < level.StratTesterCommands)
-	{
-		text = "";
-
-		for (j = 0; j < 10; j++)
-		{
-			if (!isdefined(level.StratTesterCommands[i + j]))
-				break;
-
-			if (j > 0)
-				text += "  ";
-
-			text += level.StratTesterCommands[i + j];
-		}
-
-		if (text != "")
-			strattesterprint(text);
-
-		i += 10;
-		wait 0.1;
-	}
 }
 
 changeroundrework()
@@ -733,6 +293,7 @@ endroundrework()
 unlockgensrework()
 {
     setDvar("st_unlockgens", 0);
+
     while(true)
     {
         while(getDvarInt("st_unlockgens") == 0)
@@ -748,16 +309,15 @@ unlockgensrework()
 notargetrework()
 {
     setDvar("st_notarget" + self.name, 0);
+
     while(true)
     {
-        while(getDvarInt("st_notarget" + self.name) == 0)
-            wait 0.1;
-        setDvar("st_notarget" + self.name, 0);
+        wait 0.1;
+        last_requested = getDvarInt("st_notarget" + self.name);
+        if(getDvarInt("st_notarget" + self.name) == last_requested)
+            continue;
 
-        if(!isdefined(self.innotarget))
-            self.innotarget = true;
-        else
-            self.innotarget = !self.innotarget;
+        self.ignoreme = !self.ignoreme;
 
 	    if(self.innotarget)
 		    strattesterprint(self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis");
@@ -776,8 +336,55 @@ boxmoverework()
             continue;
             
         setDvar("st_boxmove", "none");
-        boxmove(location);
+
+        if(isDefined(level._zombiemode_custom_box_move_logic))
+            kept_move_logic = level._zombiemode_custom_box_move_logic;
+
+        level._zombiemode_custom_box_move_logic = ::force_next_location;
+
+        foreach (chest in level.chests)
+        {
+            if (!chest.hidden && chest.script_noteworthy == location)
+            {
+                if (isDefined(kept_move_logic))
+                    level._zombiemode_custom_box_move_logic = kept_move_logic;
+                return;
+            }
+            if (!chest.hidden)
+            {
+                level.chest_min_move_usage = 8;
+                level.chest_name = location;
+
+                flag_set("moving_chest_now");
+                chest thread fast_chest_move();
+
+                wait 0.05;
+                level notify("weapon_fly_away_start");
+                wait 0.05;
+                level notify("weapon_fly_away_end");
+
+                break;
+            }
+        }
+
+        while (flag("moving_chest_now"))
+            wait 0.05;
+
+        if (isDefined(kept_move_logic))
+            level._zombiemode_custom_box_move_logic = kept_move_logic;
+
+        if (isDefined(level.chest_name) && isDefined(level.dig_magic_box_moved))
+            level.dig_magic_box_moved = 0;
+
+        level.chest_min_move_usage = 4;
     }
+}
+
+force_next_location()
+{
+    for (i = 0; i < level.chests.size; i++)
+        if (level.chests[i].script_noteworthy == level.chest_name)
+            level.chest_index = i;
 }
 
 tprework()

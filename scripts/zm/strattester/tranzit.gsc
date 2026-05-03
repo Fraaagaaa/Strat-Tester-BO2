@@ -320,7 +320,7 @@ buildtranzitstuff()
     buildables = array("jetgun_zm", "electric_trap", "turret", "turbine", "pap", "riotshield_zm");
 
     if(getDvarInt("st_buildbus"))
-        foreach(busbuild in buildables)
+        foreach(busbuild in busparts)
             build_buildable(busbuild);
     if(getDvarInt("st_buildbuildables"))
         foreach(buildable in buildables)
