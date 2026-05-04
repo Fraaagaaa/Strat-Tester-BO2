@@ -71,65 +71,22 @@
 ## Chat Commands
 
 ### General
-- `!despawners`    toggles despawners tracker
-- `!boards`        toggles opening window's boards
-- `!delay`         changes delat at the start of the round
-- `!doors`         toggles oppening all necesary doors
-- `!drops`         enables drops
-- `!endround`      ends current round
-- `!changeround`   changes the round
-- `!fog`           toggles fog
-- `!healthbar`     toggles healthbar
-- `!killhorde`     kills current horde
-- `!notarget`      zombies will ignore player
-- `!perks`         toggles spawning with perks / reviving with perks
-- `!power`         toggles between power and no power
-- `!remaining`     toggles zombie counter
-- `!round`         changes initial round
-- `!sph`           toggles seconds per horde display
-- `!timer`         changes timer position or hides it
+- `!nuke`          spawns a nuke power up on top of the player
+- `!x2`            spawns a double points power up on top of the player
+- `!max`           spawns a max power up on top of the player
+- `!insta`           spawns a insta kill power up on top of the player
+- `!sale`          spawns a fire sale power up on top of the player
+- `!blood`         spawns a zombie blood power up on top of the player
+- `!perk`          spawns a random perk power up on top of the player
 - `!tp`            teleports player to desired location
 - `!tpc`           teleports player to desired coordinates
-- `!weapons`       toggles spawning with weapons
-- `!zone`          toggles zone name
-
-### Tranzit
-- `!denizen`     toggles denizens spawns
-- `!buson / !busoff` stops/starts the bus
-- `!perma`       awards perman perks to player
-- `!depart`      changes bus depart time on farm
-- `!busloc`      displays the bus location
-- `!bustimer`    displays a bus timer
-
-### Town
-- `!jug`         changes game set up in town
-
-### Die Rise
-- `!elevator`    displays the ammount of zombies killed by elevators    
-
-### Mob
-- `!traptimer`   toggles traptimer on mob
-- `!shield`      toggles starting with shield equipped and built
-- `!lives`       toggles infinite afterlives
-
-### Buried
-- `!buried`      toggles buildable setup on buried
-- `!sub`         toggles subwofer kills per shot
 
 ### Origins
-- `!cherry`      toggles getting cherry in origins
 - `!gen x`       activates generator number x
-- `!shield`      toggles starting with shield equipped and built
-- `!stomp`       toggles stomp counter on origins
-- `!staff`       toggles ice/wind staff on solo
-- `!tank`        toggles tank kill counter on origins
-- `!templars`    starts a templar round if more than 3 generator are on
-- `!tumble`      toggles tumble counter on origins
-- `!wm`          toggles getting war machine on origins
-- `!unlockgens`  unlocks all generators
 
 # Shout out to:
 - [NoMoleMan](https://www.twitch.tv/nomoleman) for beeing the main tester and translating the menus into portuguese.
 - [Guy](https://github.com/ineedbots) for making the despawner test script.
 - [5and5](https://github.com/5and5) for making the original strat tester and helping me 5 years ago when I started modding Black Ops.
 - [Hadi77KSA](https://github.com/Hadi77KSA) for making the script to power on afterlife doors.
+- MJ for helping me with the perk selection menu.
