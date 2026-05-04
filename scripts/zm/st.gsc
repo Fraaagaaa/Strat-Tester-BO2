@@ -18,7 +18,7 @@
 #include scripts\zm\strattester\perks;
 #include scripts\zm\strattester\weapons;
 
-#define VERSION "2.3.0"
+#define VERSION "2.2.0"
 main()
 {
 	replaceFunc(maps\mp\animscripts\zm_utility::wait_network_frame, ::base_game_network_frame);
@@ -172,7 +172,7 @@ watermark()
     level.watermark.aligny = "top";
     level.watermark.alignx = "center";
     level.watermark.horzalign = "user_center";
-    level.watermark.label = &"START TESTER 2.3";
+    level.watermark.label = &"START TESTER 2.2";
     level.watermark.alpha = 0.2;
 
     r = 1;

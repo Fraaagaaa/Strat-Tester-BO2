@@ -293,16 +293,14 @@ endroundrework()
 unlockgensrework()
 {
     setDvar("st_unlockgens", 0);
-
     while(true)
     {
         while(getDvarInt("st_unlockgens") == 0)
             wait 0.1;
-        setDvar("st_unclockgens", 0);
-
-	    foreach (gen in getstructarray( "s_generator", "targetname" ))
-		    gen thread [[getfunction("maps\mp\zm_tomb_capture_zones", "init_capture_zone")]]();
-	    strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
+        setDvar("st_unlockgens", 0);
+        foreach (gen in getstructarray("s_generator", "targetname"))
+            gen thread [[getfunction("maps\mp\zm_tomb_capture_zones", "init_capture_zone")]]();
+        strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
     }
 }
 

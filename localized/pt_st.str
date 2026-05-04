@@ -175,12 +175,6 @@ LANG_ENGLISH        "ÔNIBUS MOVENDO"
 REFERENCE           ST_BUS_STATUS_DESC
 LANG_ENGLISH        "Mostra quando o ônibus está em movimento ou estacionado."
 
-REFERENCE           ST_TOWN_DOORS
-LANG_ENGLISH        "SETUP DE PORTAS"
-
-REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Seleciona quais portas ficarão fechadas na Cidade."
-
 REFERENCE           ST_FORCE_PAP
 LANG_ENGLISH        "FORÇAR PACK-A-PUNCH"
 
@@ -457,5 +451,71 @@ LANG_ENGLISH        "BAR"
 
 REFERENCE           ST_DOCK
 LANG_ENGLISH        "DOCAS"
+
+REFERENCE           ST_TAB_PERKS
+LANG_ENGLISH        "PERKS"
+
+REFERENCE          ST_PERK_JUG
+LANG_ENGLISH       "JUGGERNOG"
+
+REFERENCE          ST_PERK_DOUBLETAP
+LANG_ENGLISH       "DOUBLE TAP"
+
+REFERENCE          ST_PERK_STAMINUP
+LANG_ENGLISH       "STAMIN-UP"
+
+REFERENCE          ST_PERK_SPEED
+LANG_ENGLISH       "SPEED COLA"
+
+REFERENCE          ST_PERK_MULEKICK
+LANG_ENGLISH       "MULE KICK"
+
+REFERENCE          ST_PERK_REVIVE
+LANG_ENGLISH       "QUICK REVIVE"
+
+REFERENCE          ST_PERK_CHERRY
+LANG_ENGLISH       "ELECTRIC CHERRY"
+
+REFERENCE          ST_PERK_PHD
+LANG_ENGLISH       "PHD FLOPPER"
+
+REFERENCE          ST_PERK_DEADSHOT
+LANG_ENGLISH       "DEADSHOT DAIQUIRI"
+
+REFERENCE          ST_PERK_WHOISWHO
+LANG_ENGLISH       "WHO'S WHO"
+
+REFERENCE          ST_PERK_VULTURE
+LANG_ENGLISH       "VULTURE AID"
+
+REFERENCE          ST_BARRICADES_BURIED
+LANG_ENGLISH       "MANTER BARRICADAS"
+
+REFERENCE          ST_BARRICADES_BURIED_DESC
+LANG_ENGLISH       "Se desligado, removerá as barricadas no Juggernog, na mansão e a que fica ao lado da loja de doces."
+
+REFERENCE          ST_BUILD_BUS
+LANG_ENGLISH       "CONSTRUIR ÔNIBUS"
+
+REFERENCE          ST_BUILD_BUS_DESC
+LANG_ENGLISH       "Isso adicionará todas as peças ao ônibus no início do jogo."
+
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
+LANG_ENGLISH       "CONSTRUIR EQUIPAMENTOS"
+
+REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
+LANG_ENGLISH       "No início do jogo, serão construídos a turbina, a torreta, o escudo, a armadilha elétrica e a JetGun."
+
+REFERENCE           ST_TOWN_DOORS
+LANG_ENGLISH        "ESCOLHER QUAL PORTA ABRIR"
+
+REFERENCE           ST_TOWN_DOORS_DESC
+LANG_ENGLISH        "Selecione qual porta você abrirá no mapa Town."
+
+REFERENCE           ST_DENIZEN_COUNTER
+LANG_ENGLISH        "CONTADOR DE DENIZEN"
+
+REFERENCE           ST_DENIZEN_COUNTER_DESC
+LANG_ENGLISH        "Mostre a quantidade de Denizens que estão vivos."
 
 ENDMARKER
