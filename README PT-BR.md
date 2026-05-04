@@ -45,7 +45,7 @@
 
 ### Die Rise
 - Trample Steam construído desde o começo 
-- Rastreador de kills de elevador com o comando
+- Rastreador de kills de elevador
 
 ### MOTD (Mob of the Dead)
 - Escudo construído desde o começo do jogo na cafeteria 
