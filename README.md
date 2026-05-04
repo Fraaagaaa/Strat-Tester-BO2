@@ -68,6 +68,16 @@
 - Trackers for zombies stopmpt and tumbled
 - Tracker for tank kills
 
+## Loadouts
+You can choose the weapons provided by the mod at the start of the game.
+In the `zm_strattester\scriptdata\loadouts` folder, you will find the files that the mod reads for each map. To ensure the format is valid, it must follow these rules:
+
+1. First Line: Enter the code for the weapons you wish to receive (e.g., `ray_gun_zm`).
+2. Second Line: Enter the weapon you want for the Mule Kick slot (Coz).
+3. Third Line: Enter the equipment you wish to receive (everything that requires the D-pad when playing with a controller).
+4. Fourth Line: Enter the melee weapon you wish to receive (e.g., `tazer_knuckles_zm`).
+5. No line can be left blank: If you do not want a specific item, you must write `undefined`.
+
 ## Chat Commands
 
 ### General
