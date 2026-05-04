@@ -66,7 +66,17 @@
 - Todos os cajados com upgrade são colocados no Crazy Place 
 - Todos os portais estão abertos 
 - Rastreadores para zumbis pisoteados e derrubados pelos Robôs 
-- Tracker for tank kills
+- Rastreador para as eliminações com o tank
+
+## Loadouts
+Você pode escolher as armas fornecidas pelo mod no início do jogo.
+Na pasta `zm_strattester\scriptdata\loadouts`, você encontrará os arquivos que o mod lê para cada mapa. Para garantir que o formato seja válido, ele deve seguir estas regras:
+
+1. Primeira linha: Insira o código das armas que você deseja receber (ex: `ray_gun_zm`).
+2. Segunda linha: Insira a arma que você quer para o slot do Mule Kick (Coz).
+3. Terceira linha: Insira o equipamento que você deseja receber (tudo que usa o D-pad ao jogar com controle).
+4. Quarta linha: Insira a arma melee que você deseja receber (ex: `tazer_knuckles_zm`).
+5. Nenhuma linha pode ficar em branco: Se você não quiser um item específico, deve escrever `undefined`.
 
 ## Comandos de chat 
 
