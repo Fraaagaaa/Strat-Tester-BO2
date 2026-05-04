@@ -1,6 +1,6 @@
 # Strat Tester para Black Ops II
 
-## Downloads:
+## Descargas:
 
 - [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)
 - [**Donwload in english**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
