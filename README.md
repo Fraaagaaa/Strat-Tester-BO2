@@ -33,8 +33,8 @@
 
 ## Changes by map
 ### Tranzit
-- Added a third timer for the bus (use !bustimer)
-- Added a display for the bus location (use !busloc)
+- Added a third timer for the bus
+- Added a display for the bus location
 - Players will get a notification when a denizen spawns
 - Can choose the depart time for farm
 
@@ -45,15 +45,15 @@
 
 ### Nuketown
 - All perks fall from the sky at the start of the game
-- Can automatically restart for pap on green house with `!perkrng`
+- Can automatically restart for pap on green house
 
 ### Die Rise
 - Spawned trample steam buildable
-- Elevator kills tracker with `!elevator`
+- Elevator kills tracker
 
 ### MOTD
 - Spawned shield buildable at cafeteria
-- Infinite afterlives, can be switched off with !lives
+- Infinite afterlives
 - All pieces are collected at the start of the game
 
 ### Buried
