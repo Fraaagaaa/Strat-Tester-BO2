@@ -1,8 +1,8 @@
 # Strat Tester for Black Ops II
 
-[**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20PT-BR.md)
-[**Ler en galego**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20GL.md)
-[**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20ES.md)
+- [**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20PT-BR.md)
+- [**Ler en galego**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20GL.md)
+- [**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README%20ES.md)
 
 ## Downloads:
 
