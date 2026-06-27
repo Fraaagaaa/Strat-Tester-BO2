@@ -197,34 +197,9 @@ endRound()
 
 killHorde()
 {
-	location = level.players[0].origin;
     zombies = getaiarray( level.zombie_team );
-    zombies = arraysort( zombies, location );
-    zombies_nuked = [];
 
-    foreach(zombie in zombies)
-    {
-        if ( isdefined( zombie.ignore_nuke ) && zombie.ignore_nuke )
-            continue;
-
-        if ( isdefined( zombie.marked_for_death ) && zombie.marked_for_death )
-            continue;
-
-        if ( isdefined( zombie.nuke_damage_func ) )
-        {
-            zombie thread [[ zombie.nuke_damage_func ]]();
-            continue;
-        }
-
-        if ( is_magic_bullet_shield_enabled( zombie ) )
-            continue;
-
-        zombie.marked_for_death = 1;
-        zombie.nuked = 1;
-        zombies_nuked[zombies_nuked.size] = zombie;
-    }
-
-    foreach (nuked_zombie in zombies_nuked)
+    foreach (nuked_zombie in zombies)
     {
         if ( !isdefined( nuked_zombie ) )
             continue;
