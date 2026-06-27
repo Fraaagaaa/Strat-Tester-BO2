@@ -1,0 +1,3 @@
+- Toggle for boxhits
+- Try to add localized strings to strattesterprint
+- Killhorde should kill panzers and brutus, also endround

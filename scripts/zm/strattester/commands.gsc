@@ -91,6 +91,7 @@ permacase(player)
 
 tpccase(player, x, z, y)
 {
+    // Order is changed just so you can copy the coords from the terminal when using pritnln (IDK why they print wrong)
     x = string_to_float(x);
     y = string_to_float(y);
     z = string_to_float(z);

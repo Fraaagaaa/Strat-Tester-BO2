@@ -73,7 +73,7 @@ watermark()
 
 main()
 {
-	replaceFunc(maps\mp\animscripts\zm_utility::wait_network_frame, ::base_game_network_frame);
+	replaceFunc(maps\mp\zombies\_zm_spawner::zombie_can_drop_powerups, ::zombie_can_drop_powerups);
 }
 
 init()
@@ -137,7 +137,6 @@ connected_st()
 	    self thread timerlocation();
 	    self thread trap_timer();
         self thread specialcommands();
-		self thread setPerkDvars();
         wait 0.05;
 		self waittill("spawned_player");
     }

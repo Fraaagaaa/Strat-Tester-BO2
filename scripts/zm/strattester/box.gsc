@@ -13,21 +13,21 @@ displayBoxHits()
     level.boxhitsst.y = 0;
     level.boxhitsst.x = 0;
     level.boxhitsst.fontscale = 1.4;
-    level.boxhitsst.alignx = "center";
-    level.boxhitsst.horzalign = "user_center";
     level.boxhitsst.vertalign = "user_top";
-    level.boxhitsst.aligny = "top";
-    level.boxhitsst.label = &"^3Box Hits: ^5";
-    level.total_chest_accessed_mk2 = 0;
-    level.total_chest_accessed_ray = 0;
-    level.boxhitsst.alignx = "left";
     level.boxhitsst.horzalign = "user_left";
+    level.boxhitsst.aligny = "top";
+    level.boxhitsst.alignx = "left";
+    level.boxhitsst.label = &"^3Box Hits: ^5";
     level.boxhitsst.x = 2;
     level.boxhitsst.alpha = 1;
     level.boxhitsst setvalue(0);
 
+    level.total_chest_accessed_mk2 = 0;
+    level.total_chest_accessed_ray = 0;
+
     while(!isdefined(level.total_chest_accessed) || !isdefined(level.chest_accessed))
         wait 0.1;
+
     counter = 0;
     while(true)
     {

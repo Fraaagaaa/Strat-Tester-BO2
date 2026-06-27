@@ -67,7 +67,8 @@ player_wants_mulekick(player)
 {
 	if(!getDvarInt("st_weapons"))
 		return false;
-	return getDvarInt("st_give_perk_" + MULE_PERK);
+
+	return (isdefined(player.wants_mule) && player.wants_mule);
 }
 
 waitformulekick()

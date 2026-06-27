@@ -22,13 +22,10 @@
 
 perk_init()
 {
+    level.st_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
     if ( self == gethostplayer() )
     {
         increase_perk_limit();
-        if(getDvarInt("st_power"))
-            availablePerks();
-        else
-            availablePerks_nopower();
     }
 
     self.menu_perk_jugg     = getDvarInt( "st_perk_" + JUG_PERK );
@@ -53,25 +50,7 @@ increase_perk_limit()
     level.perk_purchase_limit = 10;
 }
 
-availablePerks()
-{
-    if ( isdepot() )
-        level.available_perks = QR_PERK;
-    else if ( isfarm() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( istown() || istranzit() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( isnuketown() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( isdierise() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK;
-    else if ( ismob() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + CHERRY_PERK + " " + DEADSHOT_PERK;
-    else if ( isburied() )
-        level.available_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK;
-    else if ( isorigins() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
-}
+
 
 perk_apply_loop()
 {
@@ -85,7 +64,7 @@ perk_apply_loop()
 
     wait 1;
 
-    perk_array = strtok( level.available_perks, " " );
+    perk_array = strtok( level.st_perks , " " );
 
     self give_configured_perks( perk_array );
 
@@ -190,11 +169,15 @@ start_perk_menu_response( response )
                 continue;
             perk = entry[0];
 
-            if(!in_array(perk, strtok( level.available_perks, " " )))
+            if(!in_array(perk, strtok( level.st_perks , " " )))
                 continue;
 
             value = perk_response_value( entry[1] );
-            self set_menu_perk( entry[0], value );
+
+            self set_menu_perk( perk, value );
+
+            if(perk == MULE_PERK)
+                self.wants_mule = value;
         }
         self notify( "perk_config_changed" );
         return;

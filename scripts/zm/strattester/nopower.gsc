@@ -194,27 +194,3 @@ givetomahawk_unupgraded()
 	self giveweapon(TOMAHAWK);
 	self givemaxammo(TOMAHAWK);
 }
-
-availablePerks_nopower()
-{
-
-    if ( isdepot() )
-        level.available_perks = QR_PERK;
-    else if ( isfarm() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( istown() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( isnuketown() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-
-    else if ( istranzit() && level.players.size == 1)
-        level.available_perks =  QR_PERK;
-    else if ( isdierise() )
-        level.available_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK;
-    else if ( isburied() )
-        level.available_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK;
-    else if ( isorigins() )
-        level.available_perks = DT_PERK;
-	else 
-        level.available_perks =  "";
-}
