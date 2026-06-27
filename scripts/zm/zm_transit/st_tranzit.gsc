@@ -9,6 +9,7 @@
 #include scripts\zm\strattester\tranzit;
 #include scripts\zm\strattester\schreecher;
 #include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\weapons;
 
 main()
 {
@@ -37,16 +38,4 @@ waitSpawn()
         level waittill("connecting", player);
         player thread fridge();
     }
-}
-
-fridge()
-{
-	if(istranzit())
-	{
-		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "name", "m16_gl_upgraded_zm");
-		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "stock", 270);
-		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "clip", 30);
-		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "alt_clip", 1);
-		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "alt_stock", 8);
-	}
 }
