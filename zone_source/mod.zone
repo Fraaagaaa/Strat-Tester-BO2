@@ -19,7 +19,6 @@ script,scripts/zm/strattester/bus.gsc
 script,scripts/zm/strattester/commands.gsc
 script,scripts/zm/strattester/despawners.gsc
 script,scripts/zm/strattester/dierise.gsc
-script,scripts/zm/strattester/fixes.gsc
 script,scripts/zm/strattester/hud.gsc
 script,scripts/zm/strattester/mob.gsc
 script,scripts/zm/strattester/nuketown.gsc
