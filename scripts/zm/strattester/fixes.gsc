@@ -26,18 +26,3 @@ fix_highround()
 		wait(0.1);
 	}
 }
-
-base_game_network_frame()
-{
-    if (level.players.size == 1)
-        wait 0.1;
-    else if (numremoteclients())
-    {
-        snapshot_ids = getsnapshotindexarray();
-
-        for (acked = undefined; !isdefined(acked); acked = snapshotacknowledged(snapshot_ids))
-            level waittill("snapacknowledged");
-    }
-    else
-        wait 0.1;
-}
