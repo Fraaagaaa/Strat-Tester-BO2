@@ -80,26 +80,7 @@ display_round_time(time, hordes, dog_round, leaper_round)
 		self.round_timer fadeovertime(level.fade_time);
 		self.round_timer.alpha = 0;
 		wait(level.fade_time * 2);
-		self display_sph(time, hordes);
 	}
-}
-
-display_sph(time, hordes)
-{
-	sph = time / hordes;
-	self.round_timer fadeovertime(level.fade_time);
-	self.round_timer.alpha = 1;
-	self.round_timer.label = &"SPH: ";
-	self.round_timer setvalue(sph);
-
-	for(i = 0; i < 5; i++)
-	{
-		wait(1);
-	}
-
-	self.round_timer fadeovertime(level.fade_time);
-	self.round_timer.alpha = 0;
-	wait(level.fade_time);
 }
 
 #define HIDE_TIMER 0
