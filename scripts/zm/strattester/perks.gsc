@@ -22,7 +22,22 @@
 
 perk_init()
 {
-    level.st_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
+    if ( isdepot() )
+        level.st_perks = QR_PERK;
+    else if ( isfarm() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
+    else if ( istown() || istranzit() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + QR_PERK;
+    else if ( isnuketown() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
+    else if ( isdierise() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK;
+    else if ( ismob() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + CHERRY_PERK + " " + DEADSHOT_PERK;
+    else if ( isburied() )
+        level.st_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK;
+    else if ( isorigins() )
+        level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
     if ( self == gethostplayer() )
     {
         increase_perk_limit();
@@ -49,8 +64,6 @@ increase_perk_limit()
 {
     level.perk_purchase_limit = 10;
 }
-
-
 
 perk_apply_loop()
 {
@@ -174,10 +187,10 @@ start_perk_menu_response( response )
 
             value = perk_response_value( entry[1] );
 
-            self set_menu_perk( perk, value );
-
             if(perk == MULE_PERK)
                 self.wants_mule = value;
+
+            self set_menu_perk( perk, value );
         }
         self notify( "perk_config_changed" );
         return;
@@ -188,10 +201,10 @@ start_perk_menu_response( response )
         value = perk_response_value( parts[3] );
         perk = parts[2];
 
-        self set_menu_perk( perk, value );
-
         if(perk == MULE_PERK)
             self.wants_mule = value;
+
+        self set_menu_perk( perk, value );
 
         self notify( "perk_config_changed" );
         return;
