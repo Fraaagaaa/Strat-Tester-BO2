@@ -28,7 +28,7 @@ watermark()
     level.watermark.aligny = "top";
     level.watermark.alignx = "center";
     level.watermark.horzalign = "user_center";
-    level.watermark.label = &"STRAT TESTER 2.4";
+    level.watermark.label = &"ST_WATERMARK";
     level.watermark.alpha = 0.2;
 
     r = 1;

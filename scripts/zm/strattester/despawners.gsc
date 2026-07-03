@@ -778,7 +778,7 @@ despawner_counter()
     level.despawnersCounter.fontscale = 1.4;
     level.despawnersCounter.aligny = "top";
     level.despawnersCounter.alignx = "left";
-    level.despawnersCounter.label = &"^3Zombies Despawned: ^5";
+    level.despawnersCounter.label = &"ST_ZOMBIES_DESPAWNED";
     level.despawnersCounter.horzalign = "user_left";
     level.despawnersCounter.vertalign = "user_top";
     level.despawnersCounter.alpha = 0;
@@ -805,7 +805,7 @@ anchorLeak_counter()
     level.anchorLeakCounter.aligny = "top";
     level.anchorLeakCounter.horzalign = "user_center";
     level.anchorLeakCounter.vertalign = "user_top";
-    level.anchorLeakCounter.label = &"^3Anchor Leaks: ^5";
+    level.anchorLeakCounter.label = &"ST_ANCHOR_LEAKS";
     level.anchorLeakCounter.alpha = 0;
     level.anchorLeakCounter setvalue(0);
 

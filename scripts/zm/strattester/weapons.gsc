@@ -68,11 +68,17 @@ player_wants_mulekick(player)
 	if(!getDvarInt("st_weapons"))
 		return false;
 
-	return (isdefined(player.wants_mule) && player.wants_mule);
+	while(!isdefined(player.wants_mule))
+		wait 0.05;
+
+	return player.wants_mule;
 }
 
 waitformulekick()
 {
+	self endon("disconnect");
+	level endon("end_game");
+
 	while(true)
 	{
 		wait 0.1;
@@ -114,7 +120,7 @@ giveloadout()
 	foreach(weapon in self.st_loadout_weapons)
 		self weapon_give( weapon, undefined, undefined, 0 );
 
-	if(map_has_mulekick() && player_wants_mulekick(self.name) && isdefined(self.st_loadout_mule))
+	if(map_has_mulekick() && player_wants_mulekick(self) && isdefined(self.st_loadout_mule))
 	{
 		self waitformulekick();
 		self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );

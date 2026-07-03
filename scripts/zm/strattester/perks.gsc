@@ -186,7 +186,13 @@ start_perk_menu_response( response )
     if ( parts[1] == "set" && parts.size >= 4 )
     {
         value = perk_response_value( parts[3] );
-        self set_menu_perk( parts[2], value );
+        perk = parts[2];
+
+        self set_menu_perk( perk, value );
+
+        if(perk == MULE_PERK)
+            self.wants_mule = value;
+
         self notify( "perk_config_changed" );
         return;
     }

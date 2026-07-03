@@ -14,7 +14,7 @@ st_sph()
 	self.sph.x = 2;
 	self.sph.y = 75;
 	self.sph.alpha = getDvarInt("st_sph");
-	self.sph.label = &"^3SPH:^5 ";
+	self.sph.label = &"ST_SPH_HUD";
 	self.sph.alignx = "left";
 	self.sph.aligny = "top";
 	self.sph.horzalign = "user_left";
@@ -123,7 +123,7 @@ denizens_alive()
     self.denizen_counter maps\mp\gametypes_zm\_hud_util::setPoint( "CENTER", "CENTER", "CENTER", 205);
 	self.denizen_counter.hidewheninmenu = 1;
     self.denizen_counter.alpha = 0;
-    self.denizen_counter.label = &"^3Denizens: ^5";
+    self.denizen_counter.label = &"ST_DENIZENS_HUD";
 
     while(true)
     {
@@ -142,7 +142,7 @@ zombies_remaining()
     self.zombie_counter_hud maps\mp\gametypes_zm\_hud_util::setPoint( "CENTER", "CENTER", "CENTER", 190 );
 	self.zombie_counter_hud.hidewheninmenu = 1;
     self.zombie_counter_hud.alpha = 0;
-    self.zombie_counter_hud.label = &"^3Zombies: ^5";
+    self.zombie_counter_hud.label = &"ST_REMAINING_HUD";
 
     while(true)
     {

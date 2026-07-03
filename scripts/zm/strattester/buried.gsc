@@ -172,7 +172,7 @@ displaysubwooferkills()
     level.subwooferkills.horzalign = "user_center";
     level.subwooferkills.vertalign = "user_top";
     level.subwooferkills.aligny = "top";
-    level.subwooferkills.label = &"^3Subwoofer Kills: ^5";
+    level.subwooferkills.label = &"ST_SUBWOOFER_KILLS_HUD";
     level.subwooferkills.alignx = "left";
     level.subwooferkills.horzalign = "user_left";
     level.subwooferkills.alpha = 0;

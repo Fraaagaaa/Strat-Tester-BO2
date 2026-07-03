@@ -68,7 +68,7 @@ displayElevatorKills()
     level.elevatorkills.horzalign = "user_center";
     level.elevatorkills.vertalign = "user_top";
     level.elevatorkills.aligny = "top";
-    level.elevatorkills.label = &"^3Elevator Kills: ^5";
+    level.elevatorkills.label = &"ST_ELEVATOR_KILLS_HUD";
     level.elevatorkills.alignx = "left";
     level.elevatorkills.horzalign = "user_left";
     level.elevatorkills.alpha = 1;

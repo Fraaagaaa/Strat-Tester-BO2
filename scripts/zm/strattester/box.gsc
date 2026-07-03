@@ -17,7 +17,7 @@ displayBoxHits()
     level.boxhitsst.horzalign = "user_left";
     level.boxhitsst.aligny = "top";
     level.boxhitsst.alignx = "left";
-    level.boxhitsst.label = &"^3Box Hits: ^5";
+    level.boxhitsst.label = &"ST_BOX_HITS";
     level.boxhitsst.x = 2;
     level.boxhitsst.alpha = 1;
     level.boxhitsst setvalue(0);
@@ -98,8 +98,8 @@ raygun_counter()
     {
         if(getDvarInt("st_avg"))
         {
-            level.total_mk2_display.label = &"^3Raygun MK2 AVG: ^5";
-            level.total_ray_display.label = &"^3Raygun AVG: ^5";
+            level.total_mk2_display.label = &"ST_AVG_MK2";
+            level.total_ray_display.label = &"ST_AVG_RAY";
             if(level.total_ray != 0)
             if(isDefined(level.total_ray_display)) level.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
             if(level.total_mk2 != 0)
@@ -107,8 +107,8 @@ raygun_counter()
         }
         else
         {
-            level.total_mk2_display.label = &"^3Total Raygun MK2: ^5";
-            level.total_ray_display.label = &"^3Total Raygun: ^5";
+            level.total_mk2_display.label = &"ST_TOTAL_MK2";
+            level.total_ray_display.label = &"ST_TOTAL_RAY";
             if(isDefined(level.total_ray_display)) level.total_ray_display setvalue(level.total_ray);
             if(isDefined(level.total_mk2_display)) level.total_mk2_display setvalue(level.total_mk2);
         }
