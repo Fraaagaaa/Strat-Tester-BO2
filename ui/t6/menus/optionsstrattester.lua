@@ -391,7 +391,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
     if mapname == "zm_highrise" then
         local ElevatorKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( ElevatorKillsChoice, 1 )
+        CoD.StratTester.AddChoices_OnOrOff( ElevatorKillsChoice, 0 )
     end
 
     if mapname == "zm_buried" then
