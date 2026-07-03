@@ -6,6 +6,9 @@ FILENOTES           "TRANSLATED BY BONECRUSHER"
 REFERENCE           ST_MENU_TITLE
 LANG_ENGLISH        "STRAT TESTER"
 
+REFERENCE           ST_WATERMARK
+LANG_ENGLISH        "STRAT TESTER 2.5"
+
 REFERENCE           ST_TAB_GAME
 LANG_ENGLISH        "GAME"
 
@@ -514,5 +517,42 @@ LANG_ENGLISH        "SHOW DENIZEN SPAWNS"
 
 REFERENCE           ST_DENIZEN_SPAWNS_DESC
 LANG_ENGLISH        "Place a manequin in every denizen spawner."
+
+REFERENCE           ST_BOX_HITS
+LANG_ENGLISH        "^3Box Hits: ^5"
+
+REFERENCE           ST_AVG_MK2
+LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
+
+REFERENCE           ST_AVG_RAY
+LANG_ENGLISH        "^3Raygun AVG: ^5"
+
+REFERENCE           ST_TOTAL_RAY
+LANG_ENGLISH        "^3Total Raygun: ^5"
+
+REFERENCE           ST_TOTAL_MK2
+LANG_ENGLISH        "^3Total Raygun MK2: ^5"
+
+REFERENCE           ST_SUBWOOFER_KILLS_HUD
+LANG_ENGLISH        "^3Subwoofer kills: ^5"
+
+REFERENCE           ST_ELEVATOR_KILLS_HUD
+LANG_ENGLISH        "^3Elevator kills: ^5"
+
+REFERENCE           ST_ZOMBIES_DESPAWNED
+LANG_ENGLISH        "^3Zombies Despawned: ^5"
+
+REFERENCE           ST_ANCHOR_LEAKS
+LANG_ENGLISH        "^3Anchor Leaks: ^5"
+
+REFERENCE           ST_DENIZENS_HUD
+LANG_ENGLISH        "SUBNORMALES"
+
+REFERENCE           ST_REMAINING_HUD
+LANG_ENGLISH        "^3Zombies: ^5"
+
+REFERENCE           ST_SPH_HUD
+LANG_ENGLISH        "^3SPH: ^5"
+
 
 ENDMARKER
