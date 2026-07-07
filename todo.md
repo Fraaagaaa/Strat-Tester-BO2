@@ -1,5 +1,6 @@
 - Toggle for boxhits
-- Try to add localized strings to strattesterprint
-- Killhorde should kill panzers and brutus, also endround
 - Localize HUD elements
 - End infinite wait on mule kick
+- Change game end text
+- Fix mule kick weapon
+- Leroy is dead

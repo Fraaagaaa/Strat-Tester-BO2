@@ -4,6 +4,8 @@
 #include maps\mp\zombies\_zm_craftables;
 #include maps\mp\zombies\_zm_equipment;
 
+#include scripts\zm\strattester\utility;
+
 changecraftableoption( index )
 {
 	foreach (craftable in level.a_uts_craftables)
@@ -111,6 +113,8 @@ piece_unspawn()
 
 takeAllParts() 
 {
+	if(ismob() && !getDvarInt("st_power"))
+		return;
     p = getPlayers()[0];
     foreach ( craftable in level.a_uts_craftables ) 
 	{
@@ -183,5 +187,41 @@ spawn_buildable_trigger(origin, build, string, limit)
 
 
 		wait 0.1;
+	}
+}
+
+buildables_buried(setup, power)
+{
+    if(setup == -1)
+		return;
+		
+	if(power)
+	{
+		if(setup == 0)
+		{
+			level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // jug
+			level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // saloon
+			level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
+		}
+		if(setup == 1)
+		{
+			level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // jug
+			level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // saloon
+			level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
+		}
+	}
+	else
+	{
+		level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // jug
+		level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // saloon
+	}
+}
+
+buildables_origins(condition)
+{
+	if(condition)
+	{
+		spawn_buildable_trigger_shield((110, -3000, 60), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
+	    spawn_buildable_trigger_shield((2308, 689, -23), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
 	}
 }
