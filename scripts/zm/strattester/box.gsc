@@ -70,8 +70,8 @@ raygun_counter()
     if(!isDefined(level.total_mk2)) level.total_mk2 = 0;
     if(!isDefined(level.total_ray)) level.total_ray = 0;
 
-	level.total_ray_display.hidewheninmenu = true;
     level.total_ray_display = createserverfontstring( "objective", 1.3 );
+	level.total_ray_display.hidewheninmenu = true;
     level.total_ray_display.y = 26;
     level.total_ray_display.x = 2;
     level.total_ray_display.fontscale = 1.3;
@@ -80,8 +80,8 @@ raygun_counter()
     level.total_ray_display.vertalign = "user_top";
     level.total_ray_display.aligny = "top";
     level.total_ray_display.alpha = 1;
-	level.total_mk2_display.hidewheninmenu = true;
     level.total_mk2_display = createserverfontstring( "objective", 1.3 );
+	level.total_mk2_display.hidewheninmenu = true;
     level.total_mk2_display.y = 14;
     level.total_mk2_display.x = 2;
     level.total_mk2_display.fontscale = 1.3;
