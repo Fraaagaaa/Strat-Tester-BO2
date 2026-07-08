@@ -18,59 +18,6 @@
 #include scripts\zm\strattester\perks;
 #include scripts\zm\strattester\weapons;
 
-watermark()
-{
-	level.watermark.hidewheninmenu = true;
-    level.watermark = createserverfontstring( "objective", 1.4 );
-    level.watermark.alignx = "center";
-    level.watermark.horzalign = "user_center";
-    level.watermark.vertalign = "user_top";
-    level.watermark.aligny = "top";
-    level.watermark.alignx = "center";
-    level.watermark.horzalign = "user_center";
-    level.watermark.label = &"ST_WATERMARK";
-    level.watermark.alpha = 0.2;
-
-    r = 1;
-    g = 0;
-    b = 0;
-    step = 0.02;
-
-    while ( true )
-    {
-        for ( g = 0; g < 1; g += step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-        for ( r = 1; r > 0; r -= step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-        for ( b = 0; b < 1; b += step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-        for ( g = 1; g > 0; g -= step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-        for ( r = 0; r < 1; r += step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-        for ( b = 1; b > 0; b -= step )
-        {
-            level.watermark.color = ( r, g, b );
-            wait 0.05;
-        }
-    }
-}
-
 main()
 {
 	replaceFunc(maps\mp\zombies\_zm_spawner::zombie_can_drop_powerups, ::zombie_can_drop_powerups);
@@ -224,4 +171,57 @@ zombie_can_drop_powerups(zombie)
         return false;
 
     return getDvarInt("st_enable_drops");
+}
+
+watermark()
+{
+	level.watermark.hidewheninmenu = true;
+    level.watermark = createserverfontstring( "objective", 1.4 );
+    level.watermark.alignx = "center";
+    level.watermark.horzalign = "user_center";
+    level.watermark.vertalign = "user_top";
+    level.watermark.aligny = "top";
+    level.watermark.alignx = "center";
+    level.watermark.horzalign = "user_center";
+    level.watermark.label = &"ST_WATERMARK";
+    level.watermark.alpha = 0.2;
+
+    r = 1;
+    g = 0;
+    b = 0;
+    step = 0.02;
+
+    while ( true )
+    {
+        for ( g = 0; g < 1; g += step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+        for ( r = 1; r > 0; r -= step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+        for ( b = 0; b < 1; b += step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+        for ( g = 1; g > 0; g -= step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+        for ( r = 0; r < 1; r += step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+        for ( b = 1; b > 0; b -= step )
+        {
+            level.watermark.color = ( r, g, b );
+            wait 0.05;
+        }
+    }
 }
