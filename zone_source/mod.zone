@@ -1,6 +1,5 @@
 >game,T6
 >name,mod
->iwd,mod
 
 localize,st
 
@@ -27,9 +26,5 @@ script,scripts/zm/strattester/utility.gsc
 script,scripts/zm/strattester/weapons.gsc
 script,scripts/zm/strattester/nopower.gsc
 
-// script,scripts/zm/strattester/tranzit.gsc
-// script,scripts/zm/strattester/nuketown.gsc
-// script,scripts/zm/strattester/dierise.gsc
-// script,scripts/zm/strattester/mob.gsc
-// script,scripts/zm/strattester/buried.gsc
-// script,scripts/zm/strattester/origins.gsc
+rawfile,ui/t6/options.lua
+rawfile,ui/t6/menus/optionsstrattester.lua

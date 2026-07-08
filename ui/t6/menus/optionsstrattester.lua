@@ -376,19 +376,6 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         TownSetUpChoice:setChoice( currentJug )
     end
 
-    if mapname == "zm_nuked" then
-        local PapChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_FORCE_PAP"), "st_perkrng", Engine.Localize("ST_FORCE_PAP_DESC"))
-        PapChoice:addChoice(Engine.Localize("ST_MENU_ON"), 0, nil, CoD.StratTester.OnDvarChanged )
-        PapChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 1, nil, CoD.StratTester.OnDvarChanged )
-
-        local pap = UIExpression.DvarInt( nil, "st_perkrng")
-        if UIExpression.DvarString( nil, "st_perkrng") == "" then
-            pap = 1
-            Engine.SetDvar("st_perkrng", pap )
-        end
-        PapChoice:setChoice( pap )
-    end
-
     if mapname == "zm_highrise" then
         local ElevatorKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( ElevatorKillsChoice, 0 )
