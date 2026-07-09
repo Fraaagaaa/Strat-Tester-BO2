@@ -53,6 +53,7 @@
 - Todas as pezas recollidas ao principio da partida
 
 ### Buried
+- A caixa está bloquead
 - Dúas formas de establecer os equipamentos:
     - Resonador en titán, Turbina na igrexa e Trampolín no saloon (modo por defecto)
     - Resonador no saloon, Turbina na igrexa e Trampolín en titán

@@ -53,6 +53,7 @@
 - Todas as peças já estão coletadas no início do jogo 
 
 ### Buried
+- A caixa está trancada
 - Duas configurações (setups) de equipamentos: 
     - Ressonador no jug, Turbina na igreja e Trample Steam no saloon (padrão) 
     - Ressonador no saloon, Turbina na igreja e Trample Steam no jug 

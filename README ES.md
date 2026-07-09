@@ -53,6 +53,7 @@
 - Todas las piezas recogidas al principio de la partida
 
 ### Buried
+- La caja está bloqueada
 - Dos formas de establecer los equipamientos:
     - Resonador en titán, Turbina en la iglesia y Trampolín en el saloon (modo por defecto)
     - Resonador en el saloon, Turbina en la iglesia y Trampolín en titán

@@ -57,6 +57,7 @@
 - All pieces are collected at the start of the game
 
 ### Buried
+- Box is locked
 - Two buildable setups:
     - Resonator at jug, Turbine at church and Springpad at saloon (default)
     - Resonator at saloon, Turbine at church and Springpad at jug
