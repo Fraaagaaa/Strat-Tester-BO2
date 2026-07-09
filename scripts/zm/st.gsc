@@ -20,7 +20,7 @@
 
 main()
 {
-	replaceFunc(maps\mp\zombies\_zm_spawner::zombie_can_drop_powerups, ::zombie_can_drop_powerups);
+	replaceFunc(getfunction("maps/mp/zombies/_zm_spawner", "zombie_can_drop_powerups"), ::zombie_can_drop_powerups);
 }
 
 init()
