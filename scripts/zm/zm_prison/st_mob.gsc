@@ -6,7 +6,7 @@
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
-init_mob()
+init()
 {
 	flag_wait("initial_blackscreen_passed");
 	level thread spawn_buildable_trigger_shield((3366, 9406, 1336), "alcatraz_shield_zm", "^3Press &&1 for ^5Shield"); // shield

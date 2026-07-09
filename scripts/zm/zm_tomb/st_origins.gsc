@@ -11,7 +11,7 @@
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
-init_origins()
+init()
 {
 	replacefunc(getfunction("maps/mp/zm_tomb_giant_robot", "zombie_stomp_death"), ::custom_zombie_stomp_death);
 	replacefunc(getfunction("maps/mp/zm_tomb_tank", "flamethrower_damage_zombies"), ::custom_flamethrower_damage_zombies);

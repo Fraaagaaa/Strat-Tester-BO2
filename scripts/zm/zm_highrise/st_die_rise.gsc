@@ -3,14 +3,15 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 #include maps\mp\zm_highrise_buildables;
+#include maps\mp\zombies\_zm_ai_leaper;
 
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
-init_dierise()
+init()
 {
 	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
-    replaceFunc(getfunction("maps/mp/zm_highrise_buildables", "springpadbuildable"), ::springpadbuildable);
+    // replaceFunc(getfunction("maps/mp/zm_highrise_buildables", "springpadbuildable"), ::springpadbuildable);
 	level thread spawn_buildable_trigger((1879, 1354, 3034), "equip_springpad_zm", "^3Press &&1 for ^5Springpad", 0);
 	level.zombies_died_to_elevator = 0;
 	level thread displayElevatorKills();
@@ -43,7 +44,7 @@ watch_for_elevator_during_faller_spawn()
 
             if ( isdefined( self.is_leaper ) && self.is_leaper )
             {
-                self [[getfunction("maps/mp/zombies/_zm_ai_leaper", "leaper_cleanup")]]();
+                self maps\mp\zombies\_zm_ai_leaper::leaper_cleanup();
                 self dodamage( self.health + 100, self.origin );
             }
             else

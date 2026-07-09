@@ -20,7 +20,7 @@
 #include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\weapons;
 
-init_tranzit()
+init()
 {
 	replacefunc(getfunction("maps/mp/zm_transit_bus", "busschedule"), ::print_busschedule);
 	replaceFunc(getfunction("maps/mp/zombies/_zm_ai_screecher", "screecher_spawning_logic"), ::screecher_spawning_logic);
@@ -85,7 +85,7 @@ screecher_spawning_logic()
 
             foreach (player in level.players)
             {
-                if ( is_player_valid( player ) && [[getfunction("maps/mp/zombies/_zm_ai_screecher","player_in_screecher_zone")]]( player ) && !isdefined( player.screecher ) )
+                if ( is_player_valid( player ) && player_in_screecher_zone( player ) && !isdefined( player.screecher ) )
                 {
                     valid_players_in_screecher_zone++;
                     valid_players[valid_players.size] = player;
@@ -94,7 +94,7 @@ screecher_spawning_logic()
 
             if ( players.size == 1 )
             {
-                if ( is_player_valid( players[0] ) && ![[getfunction("maps/mp/zombies/_zm_ai_screecher","player_in_screecher_zone")]]( players[0] ) )
+                if ( is_player_valid( players[0] ) && !player_in_screecher_zone( players[0] ) )
                     level.spawn_delay = 1;
             }
 
@@ -135,7 +135,7 @@ screecher_spawning_logic()
                 if (!is_player_valid( valid_players[0]))
                     break;
 
-                if ([[getfunction("maps/mp/zombies/_zm_ai_screecher","player_in_screecher_zone")]](valid_players[0]))
+                if (player_in_screecher_zone(valid_players[0]))
                     in_zone = 1;
 
                 if (!in_zone)

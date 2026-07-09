@@ -5,11 +5,12 @@
 #include maps\mp\zombies\_zm_ai_sloth;
 #include maps\mp\zombies\zm_buried_distance_tracking;
 #include maps\mp\zm_buried_gamemodes;
+#include maps\mp\zombies\_zm_equip_subwoofer;
 
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
-init_buried()
+init()
 {
     replaceFunc(getfunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink"), ::subwooferthink);
 	flag_wait("initial_blackscreen_passed");
@@ -55,7 +56,7 @@ subwooferthink( weapon, armed )
             continue;
 
         if ( !isdefined( level._subwoofer_choke ) )
-            level thread [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "subwoofer_choke")]]();
+            level thread subwoofer_choke();
 
         while ( level._subwoofer_choke )
             wait 0.05;
@@ -105,12 +106,12 @@ subwooferthink( weapon, armed )
             if ( !within_fov( original_origin, original_angles, ent.origin, cos( 45 ) ) )
             {
                 if ( isplayer( ent ) )
-                    ent [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "hit_player")]](action, 0);
+                    ent hit_player( action, 0 );
 
                 continue;
             }
 
-            weapon  [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "subwoofer_network_choke")]]();
+            weapon subwoofer_network_choke();
             ent_trace_origin = ent.origin;
 
             if ( isai( ent ) || isplayer( ent ) )
@@ -134,7 +135,7 @@ subwooferthink( weapon, armed )
             if ( isplayer( ent ) )
             {
                 ent notify( "player_" + action );
-                ent [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "hit_player")]](action, 1);
+                ent hit_player( action, 1 );
                 continue;
             }
 
@@ -145,7 +146,7 @@ subwooferthink( weapon, armed )
 
                 if ( action == "fling" )
                 {
-                    ent thread [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "fling_zombie")]]( weapon, direction_vector / 4, self, onlydamage );
+                    ent thread fling_zombie( weapon, direction_vector / 4, self, onlydamage );
                     weapon.subwoofer_kills++;
                     diff++;
                     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog( "kill", "subwoofer" );
@@ -154,7 +155,7 @@ subwooferthink( weapon, armed )
 
                 if ( action == "burst" )
                 {
-                    ent thread [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "burst_zombie")]]( weapon, self );
+                    ent thread burst_zombie( weapon, self );
                     weapon.subwoofer_kills++;
                     diff++;
                     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog( "kill", "subwoofer" );
@@ -162,14 +163,14 @@ subwooferthink( weapon, armed )
                 }
 
                 if ( action == "stumble" )
-                    ent thread [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "knockdown_zombie")]]( weapon, shouldgib, onlydamage );
+                    ent thread knockdown_zombie( weapon, shouldgib, onlydamage );
             }
         }
 
         level.subwooferkills_count += diff;
 
         if ( weapon.subwoofer_kills >= 45 )
-            self thread [[getfunction("maps/mp/zombies/_zm_equip_subwoofer", "subwoofer_expired")]]( weapon );
+            self thread subwoofer_expired( weapon );
     }
 }
 
@@ -212,10 +213,10 @@ displayWatcher()
 deleteSlothbarricades()
 {
 
-    [[getfunction("maps/mp/zombies/_zm_ai_sloth","deleteSlothBarricade")]]( "juggernaut_alley" );
-    [[getfunction("maps/mp/zombies/_zm_ai_sloth","deleteSlothBarricade")]]( "candystore_alley" );
-    [[getfunction("maps/mp/zombies/_zm_ai_sloth","deleteSlothBarricade")]]( "jail" );
-    [[getfunction("maps/mp/zombies/_zm_ai_sloth","deleteSlothBarricade")]]( "mansion" );
+    deleteSlothBarricade( "juggernaut_alley" );
+    deleteSlothBarricade( "candystore_alley" );
+    deleteSlothBarricade( "jail" );
+    deleteSlothBarricade( "mansion" );
     level notify( "jail_barricade_down" );
     level notify( "cell_open" );
 }

@@ -1,6 +1,4 @@
-- Toggle for boxhits
-- Localize HUD elements
 - End infinite wait on mule kick
-- Change game end text
 - Fix mule kick weapon
-- Leroy is dead
+
+- añadir al md que la caja está fija en buried
