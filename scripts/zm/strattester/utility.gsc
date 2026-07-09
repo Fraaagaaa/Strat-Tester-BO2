@@ -156,8 +156,10 @@ isgreenrun()
 	return (istown() || istranzit() || isfarm() || isdepot());
 }
 
-changeRound(rnd)
+changeRound(rnd, w)
 {
+	if(!isdefined(w)) w = 0;
+	wait w;
 	setDvar("st_round", rnd);
 	level.round_number = rnd;
 	endRound();
