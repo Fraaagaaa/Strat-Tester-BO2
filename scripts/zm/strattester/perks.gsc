@@ -125,15 +125,12 @@ give_configured_perks( perk_array )
     {
         if ( isdefined(self.revivetrigger) )
             return;
-
+        
         if (self get_menu_perk(perk) && !self hasperk(perk))
-        {
             self give_perk(perk);
-        }
         else if(!self get_menu_perk(perk) && self hasperk(perk))
-        {
             self delete_perk(perk);
-        }
+
         wait 0.01;
     }
 }

@@ -24,11 +24,14 @@
 #define MULE_PERK "specialty_additionalprimaryweapon"
 
 #define AN_U "an94_upgraded_zm+mms"
+#define AIR_STRIKE "beacon_zm"
 #define BOOMHILDA "c96_upgraded_zm"
+#define BOWIE "bowie_knife_zm"
 #define CHICOM "qcw05_zm"
 #define CLAYMORE "claymore_zm"
 #define ELECTRIC "staff_lightning_upgraded_zm"
 #define FIRE "staff_fire_upgraded_zm"
+#define FISTS "zombie_fists_zm"
 #define GALVA "tazer_knuckles_zm"
 #define GAT "blundersplat_upgraded_zm"
 #define ICE "staff_water_upgraded_zm"
@@ -48,6 +51,7 @@
 #define SHIELD_MOB "alcatraz_shield_zm"
 #define SHIELD_ORIGINS "tomb_shield_zm"
 #define SLIQ "slipgun_zm"
+#define SPORK "spork_zm_alcatraz"
 #define SPRINGPAD "equip_springpad_zm"
 #define STAFF_ALT "staff_revive_zm"
 #define TOMAHAWK "upgraded_tomahawk_zm"
@@ -120,16 +124,22 @@ giveloadout()
 	foreach(weapon in self.st_loadout_weapons)
 		self weapon_give( weapon, undefined, undefined, 0 );
 
-	if(map_has_mulekick() && player_wants_mulekick(self) && isdefined(self.st_loadout_mule))
-	{
-		self waitformulekick();
-		self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
-	}
+	if(map_has_mulekick() && isdefined(self.st_loadout_mule))
+		self thread mulekick_wepaon();
 
-	if(istranzit() && getDvarInt("st_power"))
+	// if(istranzit() && getDvarInt("st_power"))
 		self give_melee_weapon_instant(self.st_loadout_melee);
 
 	self switchToWeapon(self.st_loadout_main);
+}
+
+mulekick_wepaon()
+{
+	self endon("disconnect");
+	level endon("end_game");
+
+	self waitformulekick();
+	self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
 }
 
 remove_starting_pistol()
@@ -221,6 +231,7 @@ main_loadouts()
 		{
 			self.st_loadout_weapons = array(GAT, MK2_U, CLAYMORE);
 			self.st_loadout_main = GAT;
+			// self.st_loadout_melee = SPORK;
 		}
 		if(isblue(self))
 		{
@@ -282,11 +293,11 @@ main_loadouts()
 				else
 					self.st_loadout_mule = MP40_U;
 
-				self.st_loadout_weapons = array(MK2_U, MONKS, SEMTEX);
+				self.st_loadout_weapons = array(MK2_U, SEMTEX, MONKS);
 			}
 			else
 			{
-				self.st_loadout_weapons = array(BOOMHILDA, MONKS, SEMTEX);
+				self.st_loadout_weapons = array(BOOMHILDA, SEMTEX, AIR_STRIKE);
 				self.st_loadout_mule = MP40_U;
 			}
 
@@ -319,7 +330,7 @@ scanweapons()
 					wait 0.1;
 				break;
 			}
-			if(self.origin[2] < 0 && isdierise())	//die rise
+			if(self.origin[2] < 0 && isdierise())
 			{
 				while(self.origin[2] < 0)
 					wait 0.1;
@@ -351,10 +362,15 @@ give_mule_weapon_on_revive()
 
 give_melee_weapon_instant( weapon_name )
 {
-	self giveweapon( weapon_name );
-	gun = change_melee_weapon( weapon_name, "knife_zm" );
+	if(!isdefined(weapon_name))
+		return;
+
+	// wait 1;
+	// gun = change_melee_weapon( weapon_name, "knife_zm" );
 	if ( self hasweapon( "knife_zm" ) )
 		self takeweapon( "knife_zm" );
+
+	self weapon_give( weapon_name, undefined, undefined, 0 );
 
     gun = self getcurrentweapon();
 	if ( gun != "none" && !is_placeable_mine( gun ) && !is_equipment( gun ) )
