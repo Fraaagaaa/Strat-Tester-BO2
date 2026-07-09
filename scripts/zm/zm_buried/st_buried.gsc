@@ -15,7 +15,6 @@ init()
     replaceFunc(getfunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink"), ::subwooferthink);
 	flag_wait("initial_blackscreen_passed");
 	level thread displaysubwooferkills();
-	setDvar("magic_chest_movable", 0); // Make sure this is set to 1 if the player changes maps
     deleteBarricades();
     buildables_buried(getDvarInt("st_setupBuried"), getDvarInt("st_power"));
 }
