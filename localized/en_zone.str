@@ -1,0 +1,730 @@
+FILENOTES           "TRANSLATED BY BONECRUSHER"
+
+// TRANZIT
+
+REFERENCE           ZONE_BUS_DEPOT
+LANG_ENGLISH        "^3Bus Depot"
+
+REFERENCE           ZONE_BUS_DEPOT_HALLWAY
+LANG_ENGLISH        "^3Bus Depot Hallway"
+
+REFERENCE           ZONE_OUTSIDE_BUS_DEPOT
+LANG_ENGLISH        "^3Outside Bus Depot"
+
+REFERENCE           ZONE_FOG_AFTER_BUS_DEPOT
+LANG_ENGLISH        "^3Fog After Bus Depot"
+
+REFERENCE           ZONE_TUNNEL_ENTRANCE
+LANG_ENGLISH        "^3Tunnel Entrance"
+
+REFERENCE           ZONE_TUNNEL
+LANG_ENGLISH        "^3Tunnel"
+
+REFERENCE           ZONE_TUNNEL_EXIT
+LANG_ENGLISH        "^3Tunnel Exit"
+
+REFERENCE           ZONE_OUTSIDE_DINER
+LANG_ENGLISH        "^3Outside Diner"
+
+REFERENCE           ZONE_GAS_STATION
+LANG_ENGLISH        "^3Gas Station"
+
+REFERENCE           ZONE_OUTSIDE_GARAGE
+LANG_ENGLISH        "^3Outside Garage"
+
+REFERENCE           ZONE_FOG_OUTSIDE_DINER
+LANG_ENGLISH        "^3Fog Outside Diner"
+
+REFERENCE           ZONE_FOG_OUTSIDE_GARAGE
+LANG_ENGLISH        "^3Fog Outside Garage"
+
+REFERENCE           ZONE_GARAGE
+LANG_ENGLISH        "^3Garage"
+
+REFERENCE           ZONE_DINER
+LANG_ENGLISH        "^3Diner"
+
+REFERENCE           ZONE_DINER_ROOF
+LANG_ENGLISH        "^3Diner Roof"
+
+REFERENCE           ZONE_FOG_AFTER_DINER
+LANG_ENGLISH        "^3Fog After Diner"
+
+REFERENCE           ZONE_FOREST
+LANG_ENGLISH        "^3Forest"
+
+REFERENCE           ZONE_OUTSIDE_CHURCH
+LANG_ENGLISH        "^3Outside Church"
+
+REFERENCE           ZONE_CHURCH
+LANG_ENGLISH        "^3Church"
+
+REFERENCE           ZONE_FOG_BEFORE_FARM
+LANG_ENGLISH        "^3Fog Before Farm"
+
+REFERENCE           ZONE_OUTSIDE_FARM
+LANG_ENGLISH        "^3Outside Farm"
+
+REFERENCE           ZONE_FARM
+LANG_ENGLISH        "^3Farm"
+
+REFERENCE           ZONE_BARN
+LANG_ENGLISH        "^3Barn"
+
+REFERENCE           ZONE_FARMHOUSE
+LANG_ENGLISH        "^3Farmhouse"
+
+REFERENCE           ZONE_FOG_AFTER_FARM
+LANG_ENGLISH        "^3Fog After Farm"
+
+REFERENCE           ZONE_CORNFIELD
+LANG_ENGLISH        "^3Cornfield"
+
+REFERENCE           ZONE_NACHT
+LANG_ENGLISH        "^3Nacht"
+
+REFERENCE           ZONE_UPPER_FOG_BEFORE_POWER
+LANG_ENGLISH        "^3Upper Fog Before Power"
+
+REFERENCE           ZONE_ZONE_POW_EXT1
+LANG_ENGLISH        "^3zone_pow_ext1"
+
+REFERENCE           ZONE_FOG_BEFORE_POWER
+LANG_ENGLISH        "^3Fog Before Power"
+
+REFERENCE           ZONE_OUTSIDE_POWER_STATION
+LANG_ENGLISH        "^3Outside Power Station"
+
+REFERENCE           ZONE_POWER_STATION
+LANG_ENGLISH        "^3Power Station"
+
+REFERENCE           ZONE_POWER_CONTROL_ROOM
+LANG_ENGLISH        "^3Power Control Room"
+
+REFERENCE           ZONE_WAREHOUSE
+LANG_ENGLISH        "^3Warehouse"
+
+REFERENCE           ZONE_FOG_AFTER_POWER
+LANG_ENGLISH        "^3Fog After Power"
+
+REFERENCE           ZONE_CABIN
+LANG_ENGLISH        "^3Cabin"
+
+REFERENCE           ZONE_FOG_BEFORE_TOWN
+LANG_ENGLISH        "^3Fog Before Town"
+
+REFERENCE           ZONE_NORTH_TOWN
+LANG_ENGLISH        "^3North Town"
+
+REFERENCE           ZONE_CENTER_TOWN
+LANG_ENGLISH        "^3Center Town"
+
+REFERENCE           ZONE_EAST_TOWN
+LANG_ENGLISH        "^3East Town"
+
+REFERENCE           ZONE_WEST_TOWN
+LANG_ENGLISH        "^3West Town"
+
+REFERENCE           ZONE_WEST_TOWN2
+LANG_ENGLISH        "^3West Town2"
+
+REFERENCE           ZONE_SOUTH_TOWN
+LANG_ENGLISH        "^3South Town"
+
+REFERENCE           ZONE_BAR
+LANG_ENGLISH        "^3Bar"
+
+REFERENCE           ZONE_BOOKSTORE
+LANG_ENGLISH        "^3Bookstore"
+
+REFERENCE           ZONE_BANK_VAULT
+LANG_ENGLISH        "^3Bank Vault"
+
+REFERENCE           ZONE_BELOW_BANK
+LANG_ENGLISH        "^3Below Bank"
+
+REFERENCE           ZONE_FOG_AFTER_TOWN
+LANG_ENGLISH        "^3Fog After Town"
+
+REFERENCE           ZONE_BRIDGE
+LANG_ENGLISH        "^3Bridge"
+
+REFERENCE           ZONE_FOG_BEFORE_BUS_DEPOT
+LANG_ENGLISH        "^3Fog Before Bus Depot"
+
+// NUKETOWN
+
+REFERENCE           ZONE_YELLOW_HOUSE_MIDDLE
+LANG_ENGLISH        "^3Yellow House Middle"
+
+REFERENCE           ZONE_GREEN_HOUSE_MIDDLE
+LANG_ENGLISH        "^3Green House Middle"
+
+REFERENCE           ZONE_TRUCK
+LANG_ENGLISH        "^3Truck"
+
+REFERENCE           ZONE_GREEN_HOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Green House Downstairs"
+
+REFERENCE           ZONE_GREEN_HOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Green House Upstairs"
+
+REFERENCE           ZONE_GREEN_HOUSE_BACKYARD
+LANG_ENGLISH        "^3Green House Backyard"
+
+REFERENCE           ZONE_YELLOW_HOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Yellow House Downstairs"
+
+REFERENCE           ZONE_YELLOW_HOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Yellow House Upstairs"
+
+REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD
+LANG_ENGLISH        "^3Yellow House Backyard"
+
+REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD_DOOR
+LANG_ENGLISH        "^3Yellow House Backyard Door"
+
+// DIE RISE
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3B
+LANG_ENGLISH        "^3Green Highrise Level 3b"
+
+REFERENCE           ZONE_ESCAPE_POD
+LANG_ENGLISH        "^3Escape Pod"
+
+REFERENCE           ZONE_ESCAPE_POD_SHAFT
+LANG_ENGLISH        "^3Escape Pod Shaft"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3A
+LANG_ENGLISH        "^3Green Highrise Level 3a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Green Highrise Level 2a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Green Highrise Level 2b"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_RESTAURANT
+LANG_ENGLISH        "^3Green Highrise Restaurant"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Green Highrise Level 1a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Green Highrise Level 1b"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_BEHIND_RESTAURANT
+LANG_ENGLISH        "^3Green Highrise Behind Restaurant"
+
+REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_2
+LANG_ENGLISH        "^3Upper Orange Highrise Level 2"
+
+REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_1
+LANG_ENGLISH        "^3Upper Orange Highrise Level 1"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_3
+LANG_ENGLISH        "^3Elevator Shaft Level 3"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_2
+LANG_ENGLISH        "^3Elevator Shaft Level 2"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_1
+LANG_ENGLISH        "^3Elevator Shaft Level 1"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_BOTTOM
+LANG_ENGLISH        "^3Elevator Shaft Bottom"
+
+REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Lower Orange Highrise Level 1a"
+
+REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Lower Orange Highrise Level 1b"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_1
+LANG_ENGLISH        "^3Lower Blue Highrise Level 1"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Lower Blue Highrise Level 2a"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Lower Blue Highrise Level 2b"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2C
+LANG_ENGLISH        "^3Lower Blue Highrise Level 2c"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Upper Blue Highrise Level 1a"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Upper Blue Highrise Level 1b"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1C
+LANG_ENGLISH        "^3Upper Blue Highrise Level 1c"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1D
+LANG_ENGLISH        "^3Upper Blue Highrise Level 1d"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Upper Blue Highrise Level 2a"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Upper Blue Highrise Level 2b"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2C
+LANG_ENGLISH        "^3Upper Blue Highrise Level 2c"
+
+// MOB
+
+REFERENCE           ZONE_DBLOCK
+LANG_ENGLISH        "^3D-Block"
+
+REFERENCE           ZONE_LIBRARY
+LANG_ENGLISH        "^3Library"
+
+REFERENCE           ZONE_CELLBLOCK_2ND_FLOOR
+LANG_ENGLISH        "^3Cellblock 2nd Floor"
+
+REFERENCE           ZONE_CELLBLOCK_3RD_FLOOR
+LANG_ENGLISH        "^3Cellblock 3rd Floor"
+
+REFERENCE           ZONE_CELLBLOCK_GONDOLA
+LANG_ENGLISH        "^3Cellblock Gondola"
+
+REFERENCE           ZONE_MICHIGAN_AVENUE
+LANG_ENGLISH        "^3Michigan Avenue"
+
+REFERENCE           ZONE_TIMES_SQUARE
+LANG_ENGLISH        "^3Times Square"
+
+REFERENCE           ZONE_CAFETERIA
+LANG_ENGLISH        "^3Cafeteria"
+
+REFERENCE           ZONE_CAFETERIA_END
+LANG_ENGLISH        "^3Cafeteria End"
+
+REFERENCE           ZONE_INFIRMARY_1
+LANG_ENGLISH        "^3Infirmary 1"
+
+REFERENCE           ZONE_INFIRMARY_2
+LANG_ENGLISH        "^3Infirmary 2"
+
+REFERENCE           ZONE_ROOF_1
+LANG_ENGLISH        "^3Roof 1"
+
+REFERENCE           ZONE_ROOF_2
+LANG_ENGLISH        "^3Roof 2"
+
+REFERENCE           ZONE_SALLY_PORT
+LANG_ENGLISH        "^3Sally Port"
+
+REFERENCE           ZONE_WARDENS_OFFICE
+LANG_ENGLISH        "^3Warden's Office"
+
+REFERENCE           ZONE_SHOWERS
+LANG_ENGLISH        "^3Showers"
+
+REFERENCE           ZONE_CITADEL_TO_SHOWERS
+LANG_ENGLISH        "^3Citadel To Showers"
+
+REFERENCE           ZONE_CITADEL
+LANG_ENGLISH        "^3Citadel"
+
+REFERENCE           ZONE_CITADEL_TO_WARDENS_OFFICE
+LANG_ENGLISH        "^3Citadel To Warden's Office"
+
+REFERENCE           ZONE_CITADEL_TUNNELS
+LANG_ENGLISH        "^3Citadel Tunnels"
+
+REFERENCE           ZONE_CITADEL_BASEMENT
+LANG_ENGLISH        "^3Citadel Basement"
+
+REFERENCE           ZONE_CHINA_ALLEY
+LANG_ENGLISH        "^3China Alley"
+
+REFERENCE           ZONE_BUILDING_64
+LANG_ENGLISH        "^3Building 64"
+
+REFERENCE           ZONE_DOCKS
+LANG_ENGLISH        "^3Docks"
+
+REFERENCE           ZONE_DOCKS_GATES
+LANG_ENGLISH        "^3Docks Gates"
+
+REFERENCE           ZONE_UPPER_DOCKS
+LANG_ENGLISH        "^3Upper Docks"
+
+REFERENCE           ZONE_GOLDEN_GATE_BRIDGE
+LANG_ENGLISH        "^3Golden Gate Bridge"
+
+REFERENCE           ZONE_GONDOLA
+LANG_ENGLISH        "^3Gondola"
+
+
+// BURIED
+
+REFERENCE           ZONE_PROCESSING
+LANG_ENGLISH        "^3Processing"
+
+REFERENCE           ZONE_LOWER_PROCESSING
+LANG_ENGLISH        "^3Lower Processing"
+
+REFERENCE           ZONE_CENTER_TUNNELS
+LANG_ENGLISH        "^3Center Tunnels"
+
+REFERENCE           ZONE_COURTHOUSE_TUNNELS_2
+LANG_ENGLISH        "^3Courthouse Tunnels 2"
+
+REFERENCE           ZONE_COURTHOUSE_TUNNELS_1
+LANG_ENGLISH        "^3Courthouse Tunnels 1"
+
+REFERENCE           ZONE_SALOON_TUNNELS_3
+LANG_ENGLISH        "^3Saloon Tunnels 3"
+
+REFERENCE           ZONE_SALOON_TUNNELS_2
+LANG_ENGLISH        "^3Saloon Tunnels 2"
+
+REFERENCE           ZONE_SALOON_TUNNELS_1
+LANG_ENGLISH        "^3Saloon Tunnels 1"
+
+REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK
+LANG_ENGLISH        "^3Outside General Store & Bank"
+
+REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK_ALLEY
+LANG_ENGLISH        "^3Outside General Store & Bank Alley"
+
+REFERENCE           ZONE_MORGUE
+LANG_ENGLISH        "^3Morgue"
+
+REFERENCE           ZONE_JAIL_DOWNSTAIRS
+LANG_ENGLISH        "^3Jail Downstairs"
+
+REFERENCE           ZONE_JAIL_UPSTAIRS
+LANG_ENGLISH        "^3Jail Upstairs"
+
+REFERENCE           ZONE_GENERAL_STORE
+LANG_ENGLISH        "^3General Store"
+
+REFERENCE           ZONE_STABLES
+LANG_ENGLISH        "^3Stables"
+
+REFERENCE           ZONE_OUTSIDE_GUNSMITH
+LANG_ENGLISH        "^3Outside Gunsmith"
+
+REFERENCE           ZONE_OUTSIDE_GUNSMITH_NOOK
+LANG_ENGLISH        "^3Outside Gunsmith Nook"
+
+REFERENCE           ZONE_GUNSMITH
+LANG_ENGLISH        "^3Gunsmith"
+
+REFERENCE           ZONE_BANK
+LANG_ENGLISH        "^3Bank"
+
+REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL_2
+LANG_ENGLISH        "^3Stables To Gunsmith Tunnel 2"
+
+REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL
+LANG_ENGLISH        "^3Stables To Gunsmith Tunnel"
+
+REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE
+LANG_ENGLISH        "^3Outside Saloon & Toy Store"
+
+REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE_NOOK
+LANG_ENGLISH        "^3Outside Saloon & Toy Store Nook"
+
+REFERENCE           ZONE_SALOON
+LANG_ENGLISH        "^3Saloon"
+
+REFERENCE           ZONE_SALOON_TO_GUNSMITH_TUNNEL
+LANG_ENGLISH        "^3Saloon To Gunsmith Tunnel"
+
+REFERENCE           ZONE_TOY_STORE_DOWNSTAIRS
+LANG_ENGLISH        "^3Toy Store Downstairs"
+
+REFERENCE           ZONE_TOY_STORE_UPSTAIRS
+LANG_ENGLISH        "^3Toy Store Upstairs"
+
+REFERENCE           ZONE_TOY_STORE_TUNNEL
+LANG_ENGLISH        "^3Toy Store Tunnel"
+
+REFERENCE           ZONE_CANDY_STORE_DOWNSTAIRS
+LANG_ENGLISH        "^3Candy Store Downstairs"
+
+REFERENCE           ZONE_CANDY_STORE_UPSTAIRS
+LANG_ENGLISH        "^3Candy Store Upstairs"
+
+REFERENCE           ZONE_OUTSIDE_COURTHOUSE_CANDY_STORE
+LANG_ENGLISH        "^3Outside Courthouse & Candy Store"
+
+REFERENCE           ZONE_COURTHOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Courthouse Downstairs"
+
+REFERENCE           ZONE_COURTHOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Courthouse Upstairs"
+
+REFERENCE           ZONE_FOUNTAIN
+LANG_ENGLISH        "^3Fountain"
+
+REFERENCE           ZONE_GRAVEYARD
+LANG_ENGLISH        "^3Graveyard"
+
+REFERENCE           ZONE_CHURCH_DOWNSTAIRS
+LANG_ENGLISH        "^3Church Downstairs"
+
+REFERENCE           ZONE_CHURCH_UPSTAIRS
+LANG_ENGLISH        "^3Church Upstairs"
+
+REFERENCE           ZONE_MANSION_LAWN
+LANG_ENGLISH        "^3Mansion Lawn"
+
+REFERENCE           ZONE_MANSION
+LANG_ENGLISH        "^3Mansion"
+
+REFERENCE           ZONE_MANSION_BACKYARD
+LANG_ENGLISH        "^3Mansion Backyard"
+
+REFERENCE           ZONE_MAZE
+LANG_ENGLISH        "^3Maze"
+
+REFERENCE           ZONE_MAZE_STAIRCASE
+LANG_ENGLISH        "^3Maze Staircase"
+
+// ORIGINS
+
+REFERENCE           ZONE_LOWER_LABORATORY
+LANG_ENGLISH        "^3Lower Laboratory"
+
+REFERENCE           ZONE_UPPER_LABORATORY
+LANG_ENGLISH        "^3Upper Laboratory"
+
+REFERENCE           ZONE_GENERATOR_1
+LANG_ENGLISH        "^3Generator 1"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_1
+LANG_ENGLISH        "^3Generator 3 Bunker 1"
+
+REFERENCE           ZONE_FIRE_TUNNEL
+LANG_ENGLISH        "^3Fire Tunnel"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_2
+LANG_ENGLISH        "^3Generator 3 Bunker 2"
+
+REFERENCE           ZONE_GENERATOR_3
+LANG_ENGLISH        "^3Generator 3"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_3
+LANG_ENGLISH        "^3Generator 3 Bunker 3"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_1
+LANG_ENGLISH        "^3Generator 2 Bunker 1"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_2
+LANG_ENGLISH        "^3Generator 2 Bunker 2"
+
+REFERENCE           ZONE_GENERATOR_2
+LANG_ENGLISH        "^3Generator 2"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_3
+LANG_ENGLISH        "^3Generator 2 Bunker 3"
+
+REFERENCE           ZONE_ABOVE_TANK_STATION
+LANG_ENGLISH        "^3Above Tank Station"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generator 2 Tank Route 1"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generator 2 Tank Route 2"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generator 2 Tank Route 3"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generator 2 Tank Route 4"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generator 2 Tank Route 5"
+
+REFERENCE           ZONE_WORKSHOP_DOWNSTAIRS
+LANG_ENGLISH        "^3Workshop Downstairs"
+
+REFERENCE           ZONE_WORKSHOP_UPSTAIRS
+LANG_ENGLISH        "^3Workshop Upstairs"
+
+REFERENCE           ZONE_NO_MANS_LAND_WALKWAY
+LANG_ENGLISH        "^3No Man's Land Walkway"
+
+REFERENCE           ZONE_NO_MANS_LAND_ENTRANCE
+LANG_ENGLISH        "^3No Man's Land Entrance"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generator 5 Tank Route 1"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generator 5 Tank Route 2"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generator 5 Tank Route 3"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generator 5 Tank Route 4"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generator 5 Tank Route 5"
+
+REFERENCE           ZONE_GENERATOR_5_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generator 5 Left Footstep"
+
+REFERENCE           ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY
+LANG_ENGLISH        "^3Generator 5 Right Footstep Walkway"
+
+REFERENCE           ZONE_GENERATOR_5
+LANG_ENGLISH        "^3Generator 5"
+
+REFERENCE           ZONE_GENERATOR_5_CELLAR
+LANG_ENGLISH        "^3Generator 5 Cellar"
+
+REFERENCE           ZONE_LIGHTNING_TUNNEL
+LANG_ENGLISH        "^3Lightning Tunnel"
+
+REFERENCE           ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3No Man's Land 1st Right Footstep"
+
+REFERENCE           ZONE_NO_MANS_LAND_STAIRS
+LANG_ENGLISH        "^3No Man's Land Stairs"
+
+REFERENCE           ZONE_NO_MANS_LAND_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3No Man's Land Left Footstep"
+
+REFERENCE           ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3No Man's Land 2nd Right Footstep"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generator 4 Tank Route 1"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generator 4 Tank Route 2"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generator 4 Tank Route 3"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generator 4 Tank Route 4"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generator 4 Tank Route 5"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_6
+LANG_ENGLISH        "^3Generator 4 Tank Route 6"
+
+REFERENCE           ZONE_GENERATOR_4_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generator 4 Left Footstep"
+
+REFERENCE           ZONE_WIND_TUNNEL
+LANG_ENGLISH        "^3Wind Tunnel"
+
+REFERENCE           ZONE_GENERATOR_4
+LANG_ENGLISH        "^3Generator 4"
+
+REFERENCE           ZONE_GENERATOR_4_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Generator 4 Right Footstep"
+
+REFERENCE           ZONE_EXCAVATION_SITE_FRONT_PATH
+LANG_ENGLISH        "^3Excavation Site Front Path"
+
+REFERENCE           ZONE_EXCAVATION_SITE_BACK_PATH
+LANG_ENGLISH        "^3Excavation Site Back Path"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_3
+LANG_ENGLISH        "^3Excavation Site Level 3"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_2
+LANG_ENGLISH        "^3Excavation Site Level 2"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_1
+LANG_ENGLISH        "^3Excavation Site Level 1"
+
+REFERENCE           ZONE_GENERATOR_5_TO_GENERATOR_6_PATH
+LANG_ENGLISH        "^3Generator 5 To Generator 6 Path"
+
+REFERENCE           ZONE_GENERATOR_4_TO_GENERATOR_6_PATH
+LANG_ENGLISH        "^3Generator 4 To Generator 6 Path"
+
+REFERENCE           ZONE_GENERATOR_6_ENTRANCE
+LANG_ENGLISH        "^3Generator 6 Entrance"
+
+REFERENCE           ZONE_GENERATOR_6_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generator 6 Left Footstep"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generator 6 Tank Route 1"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generator 6 Tank Route 2"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generator 6 Tank Route 3"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generator 6 Tank Route 4"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generator 6 Tank Route 5"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_6
+LANG_ENGLISH        "^3Generator 6 Tank Route 6"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_7
+LANG_ENGLISH        "^3Generator 6 Tank Route 7"
+
+REFERENCE           ZONE_GENERATOR_6_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Generator 6 Right Footstep"
+
+REFERENCE           ZONE_GENERATOR_6
+LANG_ENGLISH        "^3Generator 6"
+
+REFERENCE           ZONE_ICE_TUNNEL
+LANG_ENGLISH        "^3Ice Tunnel"
+
+REFERENCE           ZONE_ABOVE_GENERATOR_3_BUNKER
+LANG_ENGLISH        "^3Above Generator 3 Bunker"
+
+REFERENCE           ZONE_ABOVE_NO_MANS_LAND
+LANG_ENGLISH        "^3Above No Man's Land"
+
+REFERENCE           ZONE_BEHIND_CHURCH
+LANG_ENGLISH        "^3Behind Church"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER
+LANG_ENGLISH        "^3The Crazy Place Lightning Chamber"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE
+LANG_ENGLISH        "^3The Crazy Place Lightning & Ice"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_CHAMBER
+LANG_ENGLISH        "^3The Crazy Place Ice Chamber"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING
+LANG_ENGLISH        "^3The Crazy Place Fire & Lightning"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_CENTER
+LANG_ENGLISH        "^3The Crazy Place Center"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_WIND
+LANG_ENGLISH        "^3The Crazy Place Ice & Wind"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER
+LANG_ENGLISH        "^3The Crazy Place Fire Chamber"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_FIRE
+LANG_ENGLISH        "^3The Crazy Place Wind & Fire"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_CHAMBER
+LANG_ENGLISH        "^3The Crazy Place Wind Chamber"
+
+REFERENCE           ZONE_ROBOTS_HEAD
+LANG_ENGLISH        "^3Robot's Head"
+
+REFERENCE           ZONE_TANK_STATION
+LANG_ENGLISH        "^3Tank Station"
+
+ENDMARKER

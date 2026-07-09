@@ -1,7 +1,7 @@
 FILENOTES           "TRANSLATED BY BONECRUSHER"
 
 // ==========================================
-// TÍTULOS Y PESTAÑAS
+// TÍTULOS E PESTAÑAS
 // ==========================================
 REFERENCE           ST_MENU_TITLE
 LANG_ENGLISH        "STRAT TESTER"
@@ -10,366 +10,369 @@ REFERENCE           ST_WATERMARK
 LANG_ENGLISH        "STRAT TESTER 2.5"
 
 REFERENCE           ST_TAB_GAME
-LANG_ENGLISH        "GAME"
+LANG_ENGLISH        "PARTIDA"
 
 REFERENCE           ST_TAB_HUD
-LANG_ENGLISH        "HUD"
+LANG_ENGLISH        "INTERFAZ"
 
 REFERENCE           ST_TAB_MAP
-LANG_ENGLISH        "MAP"
+LANG_ENGLISH        "MAPA"
 
 REFERENCE           ST_TAB_START
-LANG_ENGLISH        "START"
+LANG_ENGLISH        "INICIO"
+
+REFERENCE           ST_TAB_BOX
+LANG_ENGLISH        "CAIXA"
 
 REFERENCE           ST_MENU_OFF
-LANG_ENGLISH        "OFF"
+LANG_ENGLISH        "NON"
 
 REFERENCE           ST_MENU_ON
-LANG_ENGLISH        "ON"
+LANG_ENGLISH        "SI"
 
 REFERENCE           ST_MENU_NONE
-LANG_ENGLISH        "NONE"
+LANG_ENGLISH        "NINGÚN"
 
 // ==========================================
 // PESTAÑA GAME
 // ==========================================
 REFERENCE           ST_CHANGE_ROUND
-LANG_ENGLISH        "CHANGE ROUND"
+LANG_ENGLISH        "CAMBIAR RONDA"
 
 REFERENCE           ST_CHANGE_ROUND_DESC
-LANG_ENGLISH        "Set the current round."
+LANG_ENGLISH        "Cambia a ronda actual."
 
 REFERENCE           ST_KILL_HORDE
-LANG_ENGLISH        "KILL HORDE"
+LANG_ENGLISH        "MATAR HORDA"
 
 REFERENCE           ST_KILL_HORDE_DESC
-LANG_ENGLISH        "Instantly kills the current horde."
+LANG_ENGLISH        "Mata a horda actual instantaneamente."
 
 REFERENCE           ST_END_ROUND
-LANG_ENGLISH        "END ROUND"
+LANG_ENGLISH        "REMATAR RONDA"
 
 REFERENCE           ST_END_ROUND_DESC
-LANG_ENGLISH        "Instantly ends the current round."
+LANG_ENGLISH        "Remata a ronda actual instantaneamente."
 
 REFERENCE           ST_DESPAWNERS
-LANG_ENGLISH        "DESPAWNERS"
+LANG_ENGLISH        "REAPARICIÓN DE ZOMBIS"
 
 REFERENCE           ST_DESPAWNERS_DESC
-LANG_ENGLISH        "Enable or disable zombie respawns."
+LANG_ENGLISH        "Engade información sobre a reaparición dos zombis."
 
 REFERENCE           ST_NOTARGET
-LANG_ENGLISH        "NOTARGET"
+LANG_ENGLISH        "IGNORAR XOGADOR"
 
 REFERENCE           ST_NOTARGET_DESC
-LANG_ENGLISH        "Zombies will ignore the player."
+LANG_ENGLISH        "Os zombis ignorarán o xogador."
 
 REFERENCE           ST_DROPS
-LANG_ENGLISH        "DROPS"
+LANG_ENGLISH        "POWER-UPS"
 
 REFERENCE           ST_DROPS_DESC
-LANG_ENGLISH        "Enable or disable power-up drops."
+LANG_ENGLISH        "Activa ou desactiva os power-ups soltados polos zombis."
 
 REFERENCE           ST_FOG
-LANG_ENGLISH        "FOG"
+LANG_ENGLISH        "NÉBOA"
 
 REFERENCE           ST_FOG_DESC
-LANG_ENGLISH        "Enable or disable map fog."
+LANG_ENGLISH        "Activa ou desactiva a néboa do mapa. (modo okla)"
 
 REFERENCE           ST_TP_DESTINATION
-LANG_ENGLISH        "TP DESTINATION"
+LANG_ENGLISH        "DESTINO DO TELETRANSPORTE"
 
 REFERENCE           ST_TP_DESTINATION_DESC
-LANG_ENGLISH        "Choose a location to teleport to."
+LANG_ENGLISH        "Elixe unha zona á que teletransportarte."
 
 REFERENCE           ST_EXECUTE_TELEPORT
-LANG_ENGLISH        "EXECUTE TELEPORT"
+LANG_ENGLISH        "EXECUTAR TELETRANSPORTE"
 
 REFERENCE           ST_EXECUTE_TELEPORT_DESC
-LANG_ENGLISH        "Teleport to the selected destination."
+LANG_ENGLISH        "Teletranspórtate á zona seleccionada."
 
 // ==========================================
 // PESTAÑA HUD
 // ==========================================
 REFERENCE           ST_HEALTHBAR
-LANG_ENGLISH        "HEALTHBAR"
+LANG_ENGLISH        "BARRA DE VIDA"
 
 REFERENCE           ST_HEALTHBAR_DESC
-LANG_ENGLISH        "Show a healthbar over zombies."
+LANG_ENGLISH        "Mostra a túa barra de vida."
 
 REFERENCE           ST_ZOMBIE_COUNTER
-LANG_ENGLISH        "ZOMBIE COUNTER"
+LANG_ENGLISH        "CONTADOR DE ZOMBIS"
 
 REFERENCE           ST_ZOMBIE_COUNTER_DESC
-LANG_ENGLISH        "Show the remaining zombies in the round."
+LANG_ENGLISH        "Mostra os zombis restantes na ronda."
 
 REFERENCE           ST_SPH_METER
-LANG_ENGLISH        "SPH METER"
+LANG_ENGLISH        "MEDIDOR DE SPH"
 
 REFERENCE           ST_SPH_METER_DESC
-LANG_ENGLISH        "Show the Seconds Per Horde (SPH) tracker."
+LANG_ENGLISH        "Mostra o medidor de Segundos Por Horda (SPH)."
 
 REFERENCE           ST_ZONE_NAME
-LANG_ENGLISH        "ZONE NAME"
+LANG_ENGLISH        "NOME DE ZONA"
 
 REFERENCE           ST_ZONE_NAME_DESC
-LANG_ENGLISH        "Show your current zone name."
+LANG_ENGLISH        "Mostra o nome da túa zona actual."
 
 REFERENCE           ST_TIMER_POSITION
-LANG_ENGLISH        "TIMER POSITION"
+LANG_ENGLISH        "POSICIÓN DO CRONÓMETRO"
 
 REFERENCE           ST_TIMER_POSITION_DESC
-LANG_ENGLISH        "Change the position of the speedrun timer."
+LANG_ENGLISH        "Cambia a posición do cronómetro na pantalla."
 
 REFERENCE           ST_TRAP_TIMER
-LANG_ENGLISH        "TRAP TIMER"
+LANG_ENGLISH        "CRONÓMETRO DE TRAMPA"
 
 REFERENCE           ST_TRAT_TIMER_DESC
-LANG_ENGLISH        "Show the active duration of traps."
+LANG_ENGLISH        "Mostra o tempo de actividade restante das trampas."
 
 // Opciones de posición del HUD
 REFERENCE           ST_HIDDEN
-LANG_ENGLISH        "HIDDEN"
+LANG_ENGLISH        "OCULTO"
 
 REFERENCE           ST_TOP_LEFT
-LANG_ENGLISH        "TOP LEFT"
+LANG_ENGLISH        "ARRIBA ESQUERDA"
 
 REFERENCE           ST_TOP_RIGHT
-LANG_ENGLISH        "TOP RIGHT"
+LANG_ENGLISH        "ARRIBA DEREITA"
 
 REFERENCE           ST_MIDDLE_LEFT
-LANG_ENGLISH        "MIDDLE LEFT"
+LANG_ENGLISH        "CENTRO ESQUERDA"
 
 REFERENCE           ST_BOTTOM
-LANG_ENGLISH        "BOTTOM"
+LANG_ENGLISH        "ABAIXO"
 
 // ==========================================
 // PESTAÑA MAP SETTINGS
 // ==========================================
 REFERENCE           ST_FARM_DEPART
-LANG_ENGLISH        "FARM DEPARTURE"
+LANG_ENGLISH        "PARADA NA GRANXA"
 
 REFERENCE           ST_FARM_DEPART_DESC
-LANG_ENGLISH        "Adjust bus departure time from Farm."
+LANG_ENGLISH        "Axusta o tempo de parada do autobús na Granxa."
 
 REFERENCE           ST_DENIZENS
 LANG_ENGLISH        "DENIZENS"
 
 REFERENCE           ST_DENIZENS_DESC
-LANG_ENGLISH        "Enable or disable denizens in the fog."
+LANG_ENGLISH        "Activa ou desactiva os denizens."
 
 REFERENCE           ST_BUS_TIMER
-LANG_ENGLISH        "BUS TIMER"
+LANG_ENGLISH        "CRONÓMETRO DO AUTOBÚS"
 
 REFERENCE           ST_BUS_TIMER_DESC
-LANG_ENGLISH        "Show the bus departure countdown."
+LANG_ENGLISH        "Mostra a conta atrás para a saída do autobús."
 
 REFERENCE           ST_BUS_LOCATION
-LANG_ENGLISH        "BUS LOCATION"
+LANG_ENGLISH        "UBICACIÓN DO AUTOBÚS"
 
 REFERENCE           ST_BUS_LOCATION_DESC
-LANG_ENGLISH        "Show the current location of the bus."
+LANG_ENGLISH        "Mostra a localización actual do autobús."
 
 REFERENCE           ST_BUS_STATUS
-LANG_ENGLISH        "BUS MOOVING"
+LANG_ENGLISH        "AUTOBÚS EN MOVEMENTO"
 
 REFERENCE           ST_BUS_STATUS_DESC
-LANG_ENGLISH        "Show whether the bus is moving or parked."
+LANG_ENGLISH        "Mostra se o autobús está en movemento ou estacionado."
 
 REFERENCE           ST_FORCE_PAP
-LANG_ENGLISH        "FORCE PAP"
+LANG_ENGLISH        "FORZAR PAP (PACK-A-PUNCH)"
 
 REFERENCE           ST_FORCE_PAP_DESC
-LANG_ENGLISH        "Force the Pack-A-Punch machine to spawn."
+LANG_ENGLISH        "Forza a aparición da máquina Pack-A-Punch."
 
 REFERENCE           ST_ELEVATOR_KILLS
-LANG_ENGLISH        "ELEVATOR KILLS"
+LANG_ENGLISH        "BAIXAS DE ASCENSOR"
 
 REFERENCE           ST_ELEVATOR_KILLS_DESC
-LANG_ENGLISH        "Track kills made using the elevators."
+LANG_ENGLISH        "Rexistra as baixas polos ascensores."
 
 REFERENCE           ST_BUILDABLES
-LANG_ENGLISH        "SUBWOOFER"
+LANG_ENGLISH        "RESONADOR"
 
 REFERENCE           ST_BUILDABLES_DESC
-LANG_ENGLISH        "Select where the subwoofer setup will be used."
+LANG_ENGLISH        "Selecciona onde aparecerá o resonador."
 
 REFERENCE           ST_RESONATOR_JUG
-LANG_ENGLISH        "JUG"
+LANG_ENGLISH        "TITÁN"
 
 REFERENCE           ST_RESONATOR_SALOON
 LANG_ENGLISH        "SALOON"
 
 REFERENCE           ST_SUBWOOFER
-LANG_ENGLISH        "SUBWOOFER KILLS"
+LANG_ENGLISH        "BAIXAS DO RESONADOR"
 
 REFERENCE           ST_SUBWOOFER_DESC
-LANG_ENGLISH        "Displays the kills by each subwoofer shot."
+LANG_ENGLISH        "Mostra as baixas de cada disparo do resonador."
 
 REFERENCE           ST_INFINITE_LIVES
-LANG_ENGLISH        "INFINITE AFTERLIFE"
+LANG_ENGLISH        "AFTERLIFE INFINITO"
 
 REFERENCE           ST_INFINITE_LIVES_DESC
-LANG_ENGLISH        "Enable infinite afterlife mode."
+LANG_ENGLISH        "Recarga as vidas de afterlife cando se perden."
 
 REFERENCE           ST_SHIELD
-LANG_ENGLISH        "ZOMBIE SHIELD"
+LANG_ENGLISH        "ESCUDO ZOMBI"
 
 REFERENCE           ST_SHIELD_DESC
-LANG_ENGLISH        "Grant the player a Zombie Shield."
+LANG_ENGLISH        "Outorga un Escudo Zombi ao xogador."
 
 REFERENCE           ST_SOLO_STAFF
-LANG_ENGLISH        "SOLO STAFF"
+LANG_ENGLISH        "BASTÓN NUN XOGADOR"
 
 REFERENCE           ST_SOLO_STAFF_DESC
-LANG_ENGLISH        "Select which staff to equip on spawn."
+LANG_ENGLISH        "Selecciona que bastón equipar ao aparecer xogando só."
 
 REFERENCE           ST_ICE_STAFF
-LANG_ENGLISH        "ICE STAFF"
+LANG_ENGLISH        "BASTÓN DE XEO"
 
 REFERENCE           ST_WIND_STAFF
-LANG_ENGLISH        "WIND STAFF"
+LANG_ENGLISH        "BASTÓN DE VENTO"
 
 REFERENCE           ST_FIRE_STAFF
-LANG_ENGLISH        "FIRE STAFF"
+LANG_ENGLISH        "BASTÓN DE LUME"
 
 REFERENCE           ST_LIGHTNING_STAFF
-LANG_ENGLISH        "LIGHTNING STAFF"
+LANG_ENGLISH        "BASTÓN DE LÓSTREGOS"
 
 REFERENCE           ST_ELECTRIC_CHERRY
 LANG_ENGLISH        "ELECTRIC CHERRY"
 
 REFERENCE           ST_ELECTRIC_CHERRY_DESC
-LANG_ENGLISH        "Grant Electric Cherry on spawn."
+LANG_ENGLISH        "Outorga Electric Cherry ao aparecer."
 
 REFERENCE           ST_WAR_MACHINE
-LANG_ENGLISH        "WAR MACHINE"
+LANG_ENGLISH        "MÁQUINA DE GUERRA"
 
 REFERENCE           ST_WAR_MACHINE_DESC
-LANG_ENGLISH        "Grant the War Machine on spawn."
+LANG_ENGLISH        "Outorga a Máquina de Guerra ao aparecer."
 
 REFERENCE           ST_TANK_KILLS
-LANG_ENGLISH        "TANK KILLS"
+LANG_ENGLISH        "BAIXAS DO TANQUE"
 
 REFERENCE           ST_TANK_KILLS_DESC
-LANG_ENGLISH        "Track kills made by the Tank."
+LANG_ENGLISH        "Rexistra as baixas realizadas polo tanque."
 
 REFERENCE           ST_STOMP_KILLS
-LANG_ENGLISH        "STOMP KILLS"
+LANG_ENGLISH        "BAIXAS POR PISOTÓN"
 
 REFERENCE           ST_STOMP_KILLS_DESC
-LANG_ENGLISH        "Track kills made by Giant Robot stomps."
+LANG_ENGLISH        "Rexistra as baixas por pisotóns dos robots xigantes."
 
 REFERENCE           ST_TUMBLE_ANIM
-LANG_ENGLISH        "TUMBLE ANIMATIONS"
+LANG_ENGLISH        "ANIMACIÓNS DE TROPEZO"
 
 REFERENCE           ST_TUMBLE_ANIM_DESC
-LANG_ENGLISH        "Tracks zombie tumble animations."
+LANG_ENGLISH        "Rexistra as animacións dos zombis tropezando."
 
 REFERENCE           ST_UNLOCK_GENERATORS
-LANG_ENGLISH        "UNLOCK GENERATORS"
+LANG_ENGLISH        "DESBLOQUEAR XERADORES"
 
 REFERENCE           ST_UNLOCK_GENERATORS_DESC
-LANG_ENGLISH        "Instantly turn on all generators."
+LANG_ENGLISH        "Arranxa todos os xeradores."
 
 // ==========================================
 // PESTAÑA START SETTINGS
 // ==========================================
 REFERENCE           ST_INITIAL_ROUND
-LANG_ENGLISH        "STARTING ROUND"
+LANG_ENGLISH        "RONDA INICIAL"
 
 REFERENCE           ST_INITIAL_ROUND_DESC
-LANG_ENGLISH        "Set the round the game will start on."
+LANG_ENGLISH        "Configura en que ronda empezará a partida."
 
 REFERENCE           ST_INITIAL_DELAY
-LANG_ENGLISH        "STARTING DELAY"
+LANG_ENGLISH        "RETRASO INICIAL"
 
 REFERENCE           ST_INITIAL_DELAY_DESC
-LANG_ENGLISH        "Set the delay before the first round starts."
+LANG_ENGLISH        "Configura o tempo de espera antes de que empece a primeira ronda."
 
 REFERENCE           ST_BOARDS
-LANG_ENGLISH        "WINDOWS BOARDS"
+LANG_ENGLISH        "BARREIRAS NAS VENTÁS"
 
 REFERENCE           ST_BOARDS_DESC
-LANG_ENGLISH        "Remove boards from windows on start."
+LANG_ENGLISH        "Quita as barreiras das ventás ao empezar."
+
+REFERENCE           ST_POWER_STATION
+LANG_ENGLISH        "ESTACIÓN DE ENERXÍA"
 
 REFERENCE           ST_POWER
-LANG_ENGLISH        "POWER"
+LANG_ENGLISH        "ENERXÍA"
 
 REFERENCE           ST_POWER_DESC
-LANG_ENGLISH        "Turn on the power automatically."
+LANG_ENGLISH        "Activa a enerxía automaticamente ao empezar."
 
 REFERENCE           ST_OPEN_DOORS
-LANG_ENGLISH        "OPEN DOORS"
+LANG_ENGLISH        "ABRIR PORTAS"
 
 REFERENCE           ST_OPEN_DOORS_DESC
-LANG_ENGLISH        "Open all doors automatically."
+LANG_ENGLISH        "Abre todas as portas automaticamente ao empezar."
 
 REFERENCE           ST_WEAPONS
-LANG_ENGLISH        "GIVE WEAPONS"
+LANG_ENGLISH        "DAR ARMAS"
 
 REFERENCE           ST_WEAPONS_DESC
-LANG_ENGLISH        "Give setup weapons automatically on spawn."
+LANG_ENGLISH        "Outorga as armas necesarias automaticamente ao empezar."
 
 // ==========================================
 // PESTAÑA BOX & ZONAS GENÉRICAS
 // ==========================================
 REFERENCE           ST_BOX_DESTINATION
-LANG_ENGLISH        "BOX DESTINATION"
+LANG_ENGLISH        "DESTINO DA CAIXA"
 
 REFERENCE           ST_BOX_DESTINATION_DESC
-LANG_ENGLISH        "Choose where the mystery box will be moved."
+LANG_ENGLISH        "Elixe a onde se moverá a caixa misteriosa."
 
 REFERENCE           ST_MOVE_BOX
-LANG_ENGLISH        "MOVE BOX"
+LANG_ENGLISH        "MOVER CAIXA"
 
 REFERENCE           ST_MOVE_BOX_DEC
-LANG_ENGLISH        "Move the mystery box to the selected location."
+LANG_ENGLISH        "Move a caixa misteriosa á zona seleccionada."
 
 REFERENCE           ST_NOT_SUPPORTED
-LANG_ENGLISH        "NOT SUPPORTED"
+LANG_ENGLISH        "NON DISPOÑIBLE"
 
 REFERENCE           ST_NOT_SUPPORTED_DESC
-LANG_ENGLISH        "This feature is not supported on this map."
+LANG_ENGLISH        "Esta función non está dispoñible neste mapa."
 
-// Nombres de zonas de los mapas
+// Nomes de zonas dos mapas
 REFERENCE           ST_FARM
-LANG_ENGLISH        "FARM"
+LANG_ENGLISH        "GRANXA"
 
 REFERENCE           ST_TOWN
-LANG_ENGLISH        "TOWN"
+LANG_ENGLISH        "POBO"
 
 REFERENCE           ST_DINER
-LANG_ENGLISH        "DINER"
+LANG_ENGLISH        "CAFETARÍA"
 
 REFERENCE           ST_TUNEL
-LANG_ENGLISH        "TUNNEL"
+LANG_ENGLISH        "TÚNEL"
 
 REFERENCE           ST_DEPOT
-LANG_ENGLISH        "DEPOT"
-
-REFERENCE           ST_POWER_STATION
-LANG_ENGLISH        "POWER STATION"
+LANG_ENGLISH        "ESTACIÓN"
 
 REFERENCE           ST_BUS
-LANG_ENGLISH        "BUS"
+LANG_ENGLISH        "AUTOBÚS"
 
 REFERENCE           ST_NACHT
 LANG_ENGLISH        "NACHT DER UNTOTEN"
 
 REFERENCE           ST_AK74U
-LANG_ENGLISH        "AK74U WALLBUY"
+LANG_ENGLISH        "PAREDE DA AK74U"
 
 REFERENCE           ST_WAREHOUSE
-LANG_ENGLISH        "WAREHOUSE"
+LANG_ENGLISH        "ALMACÉN"
 
 REFERENCE           ST_SHAFT
-LANG_ENGLISH        "SHAFT"
+LANG_ENGLISH        "ZONA DE CAMPEO"
 
 REFERENCE           ST_TRAMPLESTEAM
-LANG_ENGLISH        "TRAMPLE STEAM"
+LANG_ENGLISH        "VAPOR ARROIADOR"
 
 REFERENCE           ST_JUG
-LANG_ENGLISH        "JUGGERNOG"
+LANG_ENGLISH        "TITÁN"
 
 REFERENCE           ST_SPEED
 LANG_ENGLISH        "SPEED COLA"
@@ -378,64 +381,64 @@ REFERENCE           ST_SALOON
 LANG_ENGLISH        "SALOON"
 
 REFERENCE           ST_CAFETERIA
-LANG_ENGLISH        "CAFETERIA"
+LANG_ENGLISH        "CAFETARÍA"
 
 REFERENCE           ST_WARDENS_OFFICE
-LANG_ENGLISH        "WARDEN'S OFFICE"
+LANG_ENGLISH        "OFICINA DO ALCAIDE"
 
 REFERENCE           ST_DOUBLE_TAP
-LANG_ENGLISH        "DOUBLE TAP"
+LANG_ENGLISH        "DOBRE TIRO"
 
 REFERENCE           ST_CAGE
-LANG_ENGLISH        "CAGE"
+LANG_ENGLISH        "GAIOLA"
 
 REFERENCE           ST_CHURCH
-LANG_ENGLISH        "CHURCH"
+LANG_ENGLISH        "IGREXA"
 
 REFERENCE           ST_GENERATOR_1
-LANG_ENGLISH        "GENERATOR 1"
+LANG_ENGLISH        "XERADOR 1"
 
 REFERENCE           ST_GENERATOR_2
-LANG_ENGLISH        "GENERATOR 2"
+LANG_ENGLISH        "XERADOR 2"
 
 REFERENCE           ST_GENERATOR_3
-LANG_ENGLISH        "GENERATOR 3"
+LANG_ENGLISH        "XERADOR 3"
 
 REFERENCE           ST_GENERATOR_4
-LANG_ENGLISH        "GENERATOR 4"
+LANG_ENGLISH        "XERADOR 4"
 
 REFERENCE           ST_GENERATOR_5
-LANG_ENGLISH        "GENERATOR 5"
+LANG_ENGLISH        "XERADOR 5"
 
 REFERENCE           ST_GENERATOR_6
-LANG_ENGLISH        "GENERATOR 6"
+LANG_ENGLISH        "XERADOR 6"
 
 REFERENCE           ST_THE_CRAZY_PLACE
 LANG_ENGLISH        "THE CRAZY PLACE"
 
 REFERENCE           ST_TANK
-LANG_ENGLISH        "TANK STATION"
+LANG_ENGLISH        "TANQUE"
 
 REFERENCE           ST_QUICK_REVIVE
-LANG_ENGLISH        "QUICK REVIVE"
+LANG_ENGLISH        "REANIMACIÓN RÁPIDA"
 
 REFERENCE           ST_BUNKER
-LANG_ENGLISH        "BUNKER"
+LANG_ENGLISH        "BÚNKER"
 
 REFERENCE           ST_YELLOW_HOUSE
-LANG_ENGLISH        "YELLOW HOUSE"
+LANG_ENGLISH        "CASA AMARELA"
 
 REFERENCE           ST_GARDEN
-LANG_ENGLISH        "GARDEN"
+LANG_ENGLISH        "XARDÍN"
 
 REFERENCE           ST_GREEN_HOUSE
-LANG_ENGLISH        "GREEN HOUSE"
+LANG_ENGLISH        "CASA VERDE"
 
 REFERENCE           ST_GARAGE
-LANG_ENGLISH        "GARAGE"
+LANG_ENGLISH        "GARAXE"
 
 REFERENCE           ST_ROOF
-LANG_ENGLISH        "ROOF"
+LANG_ENGLISH        "TELLADO"
 
 REFERENCE           ST_M16
 LANG_ENGLISH        "M16"
@@ -444,1101 +447,117 @@ REFERENCE           ST_BAR
 LANG_ENGLISH        "BAR"
 
 REFERENCE           ST_DOCK
-LANG_ENGLISH        "DOCKS"
+LANG_ENGLISH        "PEIRAO"
 
 REFERENCE           ST_TAB_PERKS
-LANG_ENGLISH        "PERKS"
+LANG_ENGLISH        "VANTAXES"
 
 REFERENCE          ST_PERK_JUG
-LANG_ENGLISH       "JUGGERNOG"
+LANG_ENGLISH       "TITÁN"
 
 REFERENCE          ST_PERK_DOUBLETAP
-LANG_ENGLISH       "DOUBLE TAP"
+LANG_ENGLISH       "DOBRE TIRO"
 
 REFERENCE          ST_PERK_STAMINUP
-LANG_ENGLISH       "STAMIN-UP"
+LANG_ENGLISH       "RESISTENCIA+"
 
 REFERENCE          ST_PERK_SPEED
-LANG_ENGLISH       "SPEED COLA"
+LANG_ENGLISH       "PRESTIDIXITACIÓN"
 
 REFERENCE          ST_PERK_MULEKICK
-LANG_ENGLISH       "MULE KICK"
+LANG_ENGLISH       "COZ"
 
 REFERENCE          ST_PERK_REVIVE
-LANG_ENGLISH       "QUICK REVIVE"
+LANG_ENGLISH       "REANIMACIÓN RÁPIDA"
 
 REFERENCE          ST_PERK_CHERRY
-LANG_ENGLISH       "ELECTRIC CHERRY"
+LANG_ENGLISH       "CEREIXA ELÉCTRICA"
 
 REFERENCE          ST_PERK_PHD
-LANG_ENGLISH       "PHD FLOPPER"
+LANG_ENGLISH       "DR. CHUNGO"
 
 REFERENCE          ST_PERK_DEADSHOT
-LANG_ENGLISH       "DEADSHOT DAIQUIRI"
+LANG_ENGLISH       "DAIQUIRI LETAL"
 
 REFERENCE          ST_PERK_WHOISWHO
-LANG_ENGLISH       "WHO'S WHO"
+LANG_ENGLISH       "QUEN É QUEN"
 
 REFERENCE          ST_PERK_VULTURE
-LANG_ENGLISH       "VULTURE AID"
+LANG_ENGLISH       "AUXILIO DO VOITRE"
 
 REFERENCE          ST_BARRICADES_BURIED
-LANG_ENGLISH       "KEEP BARRICADES"
+LANG_ENGLISH       "MANTER BARREIRAS"
 
 REFERENCE          ST_BARRICADES_BURIED_DESC
-LANG_ENGLISH       "If off it will destroy the barricades at juggernog, the mansion and the one next to the candy shop."
+LANG_ENGLISH       "Destrúe as barreiras de Leroy situadas no titán, a mansión e diante da tenda de caramelos."
 
 REFERENCE          ST_BUILD_BUS
-LANG_ENGLISH       "BUILD BUS"
+LANG_ENGLISH       "CONSTRUÍR O BUS"
 
 REFERENCE          ST_BUILD_BUS_DESC
-LANG_ENGLISH       "Will add all the parts to the bus at the start of the game."
+LANG_ENGLISH       "Engadirá todas as pezas do bus."
 
 REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
-LANG_ENGLISH       "BUILD BUILDABLES"
+LANG_ENGLISH       "CONSTRUÍR TRAMPAS"
 
-REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
-LANG_ENGLISH       "Will build the turbine, turret, shield, electric trap and jetgun at the start."
+REFERENCE          ST_BUILD_BUILDABLES_DESC_TRANZIT
+LANG_ENGLISH       "Construirá a turbina, a torreta, o escudo, a trampa eléctrica e a jetgun ao comezo da partida."
 
 REFERENCE           ST_TOWN_DOORS
-LANG_ENGLISH        "CHOOSE DOOR TO BE OPEN"
+LANG_ENGLISH        "PORTA ABERTA"
 
 REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Select with what door will open on town."
+LANG_ENGLISH        "Selecciona a porta que vai estar aberta."
 
 REFERENCE           ST_DENIZEN_COUNTER
-LANG_ENGLISH        "DENIZEN COUNTER"
+LANG_ENGLISH        "CONTADOR DE DENIZENS"
 
 REFERENCE           ST_DENIZEN_COUNTER_DESC
-LANG_ENGLISH        "Show the amount of denizens that are alive."
+LANG_ENGLISH        "Mostra os denizens que están vivos."
 
 REFERENCE           ST_DENIZEN_SPAWNS
-LANG_ENGLISH        "SHOW DENIZEN SPAWNS"
+LANG_ENGLISH        "SPAWNERS DOS DENIZENS"
 
 REFERENCE           ST_DENIZEN_SPAWNS_DESC
-LANG_ENGLISH        "Place a manequin in every denizen spawner."
+LANG_ENGLISH        "Coloca un maniquí nas zonas de aparición dos denizens."
 
 REFERENCE           ST_BOX_HITS
-LANG_ENGLISH        "^3Box Hits: ^5"
+LANG_ENGLISH        "^3Tiradas da caixa: ^5"
 
 REFERENCE           ST_AVG_MK2
-LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
+LANG_ENGLISH        "^3Arma de raios MK2 AVG: ^5"
 
 REFERENCE           ST_AVG_RAY
-LANG_ENGLISH        "^3Raygun AVG: ^5"
+LANG_ENGLISH        "^3Arma de raios AVG: ^5"
 
 REFERENCE           ST_TOTAL_RAY
-LANG_ENGLISH        "^3Total Raygun: ^5"
+LANG_ENGLISH        "^3Armas de raios: ^5"
 
 REFERENCE           ST_TOTAL_MK2
-LANG_ENGLISH        "^3Total Raygun MK2: ^5"
+LANG_ENGLISH        "^3Armas de raios MK2: ^5"
 
 REFERENCE           ST_SUBWOOFER_KILLS_HUD
-LANG_ENGLISH        "^3Subwoofer kills: ^5"
+LANG_ENGLISH        "^3Baixas por Resonador: ^5"
 
 REFERENCE           ST_ELEVATOR_KILLS_HUD
-LANG_ENGLISH        "^3Elevator kills: ^5"
+LANG_ENGLISH        "^3Baixas por ascensor: ^5"
 
 REFERENCE           ST_ZOMBIES_DESPAWNED
-LANG_ENGLISH        "^3Zombies Despawned: ^5"
+LANG_ENGLISH        "^3Zombis Despawneados: ^5"
 
 REFERENCE           ST_ANCHOR_LEAKS
-LANG_ENGLISH        "^3Anchor Leaks: ^5"
+LANG_ENGLISH        "^3Fugas de anclajes: ^5"
 
 REFERENCE           ST_DENIZENS_HUD
-LANG_ENGLISH        "SUBNORMALES"
+LANG_ENGLISH        "^3Denizens: ^5"
 
 REFERENCE           ST_REMAINING_HUD
-LANG_ENGLISH        "^3Zombies: ^5"
+LANG_ENGLISH        "^3Zombis: ^5"
 
 REFERENCE           ST_SPH_HUD
 LANG_ENGLISH        "^3SPH: ^5"
 
-REFERENCE           ST_HUD_ZONE_LOWER_LABORATORY
-LANG_ENGLISH        "Lower Laboratory"
-
-REFERENCE           ST_HUD_ZONE_UPPER_LABORATORY
-LANG_ENGLISH        "Upper Laboratory"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_1
-LANG_ENGLISH        "Generator 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_1
-LANG_ENGLISH        "Generator 3 Bunker 1"
-
-REFERENCE           ST_HUD_ZONE_FIRE_TUNNEL
-LANG_ENGLISH        "Fire Tunnel"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_2
-LANG_ENGLISH        "Generator 3 Bunker 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3
-LANG_ENGLISH        "Generator 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_3
-LANG_ENGLISH        "Generator 3 Bunker 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_1
-LANG_ENGLISH        "Generator 2 Bunker 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_2
-LANG_ENGLISH        "Generator 2 Bunker 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2
-LANG_ENGLISH        "Generator 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_3
-LANG_ENGLISH        "Generator 2 Bunker 3"
-
-REFERENCE           ST_HUD_ZONE_TANK_STATION
-LANG_ENGLISH        "Tank Station"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_TANK_STATION
-LANG_ENGLISH        "Above Tank Station"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 2 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 2 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 2 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 2 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 2 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_4F
-LANG_ENGLISH        "zone_bunker_4f"
-
-REFERENCE           ST_HUD_ZONE_WORKSHOP_DOWNSTAIRS
-LANG_ENGLISH        "Workshop Downstairs"
-
-REFERENCE           ST_HUD_ZONE_WORKSHOP_UPSTAIRS
-LANG_ENGLISH        "Workshop Upstairs"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_WALKWAY
-LANG_ENGLISH        "No Man's Land Walkway"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_ENTRANCE
-LANG_ENGLISH        "No Man's Land Entrance"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 5 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 5 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_TANK_E2
-LANG_ENGLISH        "zone_bunker_tank_e2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 5 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 5 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 5 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 5 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY
-LANG_ENGLISH        "Generator 5 Right Footstep Walkway"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5
-LANG_ENGLISH        "Generator 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_CELLAR
-LANG_ENGLISH        "Generator 5 Cellar"
-
-REFERENCE           ST_HUD_ZONE_LIGHTNING_TUNNEL
-LANG_ENGLISH        "Lightning Tunnel"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land 1st Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_STAIRS
-LANG_ENGLISH        "No Man's Land Stairs"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_LEFT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land 2nd Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 4 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 4 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 4 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 4 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 4 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_TANK_A2
-LANG_ENGLISH        "zone_bunker_tank_a2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_6
-LANG_ENGLISH        "Generator 4 Tank Route 6"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 4 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_WIND_TUNNEL
-LANG_ENGLISH        "Wind Tunnel"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4
-LANG_ENGLISH        "Generator 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Generator 4 Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_FRONT_PATH
-LANG_ENGLISH        "Excavation Site Front Path"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_BACK_PATH
-LANG_ENGLISH        "Excavation Site Back Path"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_3
-LANG_ENGLISH        "Excavation Site Level 3"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_2
-LANG_ENGLISH        "Excavation Site Level 2"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_1
-LANG_ENGLISH        "Excavation Site Level 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Generator 5 To Generator 6 Path"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Generator 4 To Generator 6 Path"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_ENTRANCE
-LANG_ENGLISH        "Generator 6 Entrance"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 6 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 6 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 6 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 6 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 6 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 6 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_6
-LANG_ENGLISH        "Generator 6 Tank Route 6"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_7
-LANG_ENGLISH        "Generator 6 Tank Route 7"
-
-REFERENCE           ST_HUD_ZONE_CHURCH
-LANG_ENGLISH        "Church"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Generator 6 Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6
-LANG_ENGLISH        "Generator 6"
-
-REFERENCE           ST_HUD_ZONE_ICE_TUNNEL
-LANG_ENGLISH        "Ice Tunnel"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_GENERATOR_3_BUNKER
-LANG_ENGLISH        "Above Generator 3 Bunker"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_NO_MANS_LAND
-LANG_ENGLISH        "Above No Man's Land"
-
-REFERENCE           ST_HUD_ZONE_BEHIND_CHURCH
-LANG_ENGLISH        "Behind Church"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER
-LANG_ENGLISH        "The Crazy Place Lightning Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE
-LANG_ENGLISH        "The Crazy Place Lightning & Ice"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_ICE_CHAMBER
-LANG_ENGLISH        "The Crazy Place Ice Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING
-LANG_ENGLISH        "The Crazy Place Fire & Lightning"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_CENTER
-LANG_ENGLISH        "The Crazy Place Center"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_ICE_WIND
-LANG_ENGLISH        "The Crazy Place Ice & Wind"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER
-LANG_ENGLISH        "The Crazy Place Fire Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_WIND_FIRE
-LANG_ENGLISH        "The Crazy Place Wind & Fire"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_WIND_CHAMBER
-LANG_ENGLISH        "The Crazy Place Wind Chamber"
-
-REFERENCE           ST_HUD_ZONE_ROBOTS_HEAD
-LANG_ENGLISH        "Robot's Head"
-
-REFERENCE           ST_HUD_ZONE_PROCESSING
-LANG_ENGLISH        "Processing"
-
-REFERENCE           ST_HUD_ZONE_LOWER_PROCESSING
-LANG_ENGLISH        "Lower Processing"
-
-REFERENCE           ST_HUD_ZONE_CENTER_TUNNELS
-LANG_ENGLISH        "Center Tunnels"
-
-REFERENCE           ST_HUD_ZONE_COURTHOUSE_TUNNELS_2
-LANG_ENGLISH        "Courthouse Tunnels 2"
-
-REFERENCE           ST_HUD_ZONE_COURTHOUSE_TUNNELS_1
-LANG_ENGLISH        "Courthouse Tunnels 1"
-
-REFERENCE           ST_HUD_ZONE_SALOON_TUNNELS_3
-LANG_ENGLISH        "Saloon Tunnels 3"
-
-REFERENCE           ST_HUD_ZONE_SALOON_TUNNELS_2
-LANG_ENGLISH        "Saloon Tunnels 2"
-
-REFERENCE           ST_HUD_ZONE_SALOON_TUNNELS_1
-LANG_ENGLISH        "Saloon Tunnels 1"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_GENERAL_STORE_BANK
-LANG_ENGLISH        "Outside General Store & Bank"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_GENERAL_STORE_BANK_ALLEY
-LANG_ENGLISH        "Outside General Store & Bank Alley"
-
-REFERENCE           ST_HUD_ZONE_MORGUE
-LANG_ENGLISH        "Morgue"
-
-REFERENCE           ST_HUD_ZONE_JAIL_DOWNSTAIRS
-LANG_ENGLISH        "Jail Downstairs"
-
-REFERENCE           ST_HUD_ZONE_JAIL_UPSTAIRS
-LANG_ENGLISH        "Jail Upstairs"
-
-REFERENCE           ST_HUD_ZONE_GENERAL_STORE
-LANG_ENGLISH        "General Store"
-
-REFERENCE           ST_HUD_ZONE_STABLES
-LANG_ENGLISH        "Stables"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_GUNSMITH
-LANG_ENGLISH        "Outside Gunsmith"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_GUNSMITH_NOOK
-LANG_ENGLISH        "Outside Gunsmith Nook"
-
-REFERENCE           ST_HUD_ZONE_GUNSMITH
-LANG_ENGLISH        "Gunsmith"
-
-REFERENCE           ST_HUD_ZONE_BANK
-LANG_ENGLISH        "Bank"
-
-REFERENCE           ST_HUD_ZONE_STABLES_TO_GUNSMITH_TUNNEL_2
-LANG_ENGLISH        "Stables To Gunsmith Tunnel 2"
-
-REFERENCE           ST_HUD_ZONE_STABLES_TO_GUNSMITH_TUNNEL
-LANG_ENGLISH        "Stables To Gunsmith Tunnel"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_SALOON_TOY_STORE
-LANG_ENGLISH        "Outside Saloon & Toy Store"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_SALOON_TOY_STORE_NOOK
-LANG_ENGLISH        "Outside Saloon & Toy Store Nook"
-
-REFERENCE           ST_HUD_ZONE_SALOON
-LANG_ENGLISH        "Saloon"
-
-REFERENCE           ST_HUD_ZONE_SALOON_TO_GUNSMITH_TUNNEL
-LANG_ENGLISH        "Saloon To Gunsmith Tunnel"
-
-REFERENCE           ST_HUD_ZONE_TOY_STORE_DOWNSTAIRS
-LANG_ENGLISH        "Toy Store Downstairs"
-
-REFERENCE           ST_HUD_ZONE_TOY_STORE_UPSTAIRS
-LANG_ENGLISH        "Toy Store Upstairs"
-
-REFERENCE           ST_HUD_ZONE_TOY_STORE_TUNNEL
-LANG_ENGLISH        "Toy Store Tunnel"
-
-REFERENCE           ST_HUD_ZONE_CANDY_STORE_DOWNSTAIRS
-LANG_ENGLISH        "Candy Store Downstairs"
-
-REFERENCE           ST_HUD_ZONE_CANDY_STORE_UPSTAIRS
-LANG_ENGLISH        "Candy Store Upstairs"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_COURTHOUSE_CANDY_STORE
-LANG_ENGLISH        "Outside Courthouse & Candy Store"
-
-REFERENCE           ST_HUD_ZONE_COURTHOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Courthouse Downstairs"
-
-REFERENCE           ST_HUD_ZONE_COURTHOUSE_UPSTAIRS
-LANG_ENGLISH        "Courthouse Upstairs"
-
-REFERENCE           ST_HUD_ZONE_FOUNTAIN
-LANG_ENGLISH        "Fountain"
-
-REFERENCE           ST_HUD_ZONE_GRAVEYARD
-LANG_ENGLISH        "Graveyard"
-
-REFERENCE           ST_HUD_ZONE_CHURCH_DOWNSTAIRS
-LANG_ENGLISH        "Church Downstairs"
-
-REFERENCE           ST_HUD_ZONE_CHURCH_UPSTAIRS
-LANG_ENGLISH        "Church Upstairs"
-
-REFERENCE           ST_HUD_ZONE_MANSION_LAWN
-LANG_ENGLISH        "Mansion Lawn"
-
-REFERENCE           ST_HUD_ZONE_MANSION
-LANG_ENGLISH        "Mansion"
-
-REFERENCE           ST_HUD_ZONE_MANSION_BACKYARD
-LANG_ENGLISH        "Mansion Backyard"
-
-REFERENCE           ST_HUD_ZONE_MAZE
-LANG_ENGLISH        "Maze"
-
-REFERENCE           ST_HUD_ZONE_MAZE_STAIRCASE
-LANG_ENGLISH        "Maze Staircase"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_3B
-LANG_ENGLISH        "Green Highrise Level 3b"
-
-REFERENCE           ST_HUD_ZONE_ESCAPE_POD
-LANG_ENGLISH        "Escape Pod"
-
-REFERENCE           ST_HUD_ZONE_ESCAPE_POD_SHAFT
-LANG_ENGLISH        "Escape Pod Shaft"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_3A
-LANG_ENGLISH        "Green Highrise Level 3a"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Green Highrise Level 2a"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Green Highrise Level 2b"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_RESTAURANT
-LANG_ENGLISH        "Green Highrise Restaurant"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Green Highrise Level 1a"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Green Highrise Level 1b"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HIGHRISE_BEHIND_RESTAURANT
-LANG_ENGLISH        "Green Highrise Behind Restaurant"
-
-REFERENCE           ST_HUD_ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_2
-LANG_ENGLISH        "Upper Orange Highrise Level 2"
-
-REFERENCE           ST_HUD_ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_1
-LANG_ENGLISH        "Upper Orange Highrise Level 1"
-
-REFERENCE           ST_HUD_ZONE_ELEVATOR_SHAFT_LEVEL_3
-LANG_ENGLISH        "Elevator Shaft Level 3"
-
-REFERENCE           ST_HUD_ZONE_ELEVATOR_SHAFT_LEVEL_2
-LANG_ENGLISH        "Elevator Shaft Level 2"
-
-REFERENCE           ST_HUD_ZONE_ELEVATOR_SHAFT_LEVEL_1
-LANG_ENGLISH        "Elevator Shaft Level 1"
-
-REFERENCE           ST_HUD_ZONE_ELEVATOR_SHAFT_BOTTOM
-LANG_ENGLISH        "Elevator Shaft Bottom"
-
-REFERENCE           ST_HUD_ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Lower Orange Highrise Level 1a"
-
-REFERENCE           ST_HUD_ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Lower Orange Highrise Level 1b"
-
-REFERENCE           ST_HUD_ZONE_LOWER_BLUE_HIGHRISE_LEVEL_1
-LANG_ENGLISH        "Lower Blue Highrise Level 1"
-
-REFERENCE           ST_HUD_ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Lower Blue Highrise Level 2a"
-
-REFERENCE           ST_HUD_ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Lower Blue Highrise Level 2b"
-
-REFERENCE           ST_HUD_ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2C
-LANG_ENGLISH        "Lower Blue Highrise Level 2c"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Upper Blue Highrise Level 1a"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Upper Blue Highrise Level 1b"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1C
-LANG_ENGLISH        "Upper Blue Highrise Level 1c"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1D
-LANG_ENGLISH        "Upper Blue Highrise Level 1d"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Upper Blue Highrise Level 2a"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Upper Blue Highrise Level 2b"
-
-REFERENCE           ST_HUD_ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2C
-LANG_ENGLISH        "Upper Blue Highrise Level 2c"
-
-REFERENCE           ST_HUD_ZONE_YELLOW_HOUSE_MIDDLE
-LANG_ENGLISH        "Yellow House Middle"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HOUSE_MIDDLE
-LANG_ENGLISH        "Green House Middle"
-
-REFERENCE           ST_HUD_ZONE_TRUCK
-LANG_ENGLISH        "Truck"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Green House Downstairs"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HOUSE_UPSTAIRS
-LANG_ENGLISH        "Green House Upstairs"
-
-REFERENCE           ST_HUD_ZONE_GREEN_HOUSE_BACKYARD
-LANG_ENGLISH        "Green House Backyard"
-
-REFERENCE           ST_HUD_ZONE_YELLOW_HOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Yellow House Downstairs"
-
-REFERENCE           ST_HUD_ZONE_YELLOW_HOUSE_UPSTAIRS
-LANG_ENGLISH        "Yellow House Upstairs"
-
-REFERENCE           ST_HUD_ZONE_YELLOW_HOUSE_BACKYARD
-LANG_ENGLISH        "Yellow House Backyard"
-
-REFERENCE           ST_HUD_ZONE_YELLOW_HOUSE_BACKYARD_DOOR
-LANG_ENGLISH        "Yellow House Backyard Door"
-
-REFERENCE           ST_HUD_ZONE_DBLOCK
-LANG_ENGLISH        "D-Block"
-
-REFERENCE           ST_HUD_ZONE_LIBRARY
-LANG_ENGLISH        "Library"
-
-REFERENCE           ST_HUD_ZONE_CELLBLOCK_2ND_FLOOR
-LANG_ENGLISH        "Cellblock 2nd Floor"
-
-REFERENCE           ST_HUD_ZONE_CELLBLOCK_3RD_FLOOR
-LANG_ENGLISH        "Cellblock 3rd Floor"
-
-REFERENCE           ST_HUD_ZONE_CELLBLOCK_GONDOLA
-LANG_ENGLISH        "Cellblock Gondola"
-
-REFERENCE           ST_HUD_ZONE_MICHIGAN_AVENUE
-LANG_ENGLISH        "Michigan Avenue"
-
-REFERENCE           ST_HUD_ZONE_TIMES_SQUARE
-LANG_ENGLISH        "Times Square"
-
-REFERENCE           ST_HUD_ZONE_CAFETERIA
-LANG_ENGLISH        "Cafeteria"
-
-REFERENCE           ST_HUD_ZONE_CAFETERIA_END
-LANG_ENGLISH        "Cafeteria End"
-
-REFERENCE           ST_HUD_ZONE_INFIRMARY_1
-LANG_ENGLISH        "Infirmary 1"
-
-REFERENCE           ST_HUD_ZONE_INFIRMARY_2
-LANG_ENGLISH        "Infirmary 2"
-
-REFERENCE           ST_HUD_ZONE_ROOF_1
-LANG_ENGLISH        "Roof 1"
-
-REFERENCE           ST_HUD_ZONE_ROOF_2
-LANG_ENGLISH        "Roof 2"
-
-REFERENCE           ST_HUD_ZONE_SALLY_PORT
-LANG_ENGLISH        "Sally Port"
-
-REFERENCE           ST_HUD_ZONE_WARDENS_OFFICE
-LANG_ENGLISH        "Warden's Office"
-
-REFERENCE           ST_HUD_ZONE_SHOWERS
-LANG_ENGLISH        "Showers"
-
-REFERENCE           ST_HUD_ZONE_CITADEL_TO_SHOWERS
-LANG_ENGLISH        "Citadel To Showers"
-
-REFERENCE           ST_HUD_ZONE_CITADEL
-LANG_ENGLISH        "Citadel"
-
-REFERENCE           ST_HUD_ZONE_CITADEL_TO_WARDENS_OFFICE
-LANG_ENGLISH        "Citadel To Warden's Office"
-
-REFERENCE           ST_HUD_ZONE_CITADEL_TUNNELS
-LANG_ENGLISH        "Citadel Tunnels"
-
-REFERENCE           ST_HUD_ZONE_CITADEL_BASEMENT
-LANG_ENGLISH        "Citadel Basement"
-
-REFERENCE           ST_HUD_ZONE_CHINA_ALLEY
-LANG_ENGLISH        "China Alley"
-
-REFERENCE           ST_HUD_ZONE_BUILDING_64
-LANG_ENGLISH        "Building 64"
-
-REFERENCE           ST_HUD_ZONE_DOCKS
-LANG_ENGLISH        "Docks"
-
-REFERENCE           ST_HUD_ZONE_DOCKS_GATES
-LANG_ENGLISH        "Docks Gates"
-
-REFERENCE           ST_HUD_ZONE_UPPER_DOCKS
-LANG_ENGLISH        "Upper Docks"
-
-REFERENCE           ST_HUD_ZONE_GOLDEN_GATE_BRIDGE
-LANG_ENGLISH        "Golden Gate Bridge"
-
-REFERENCE           ST_HUD_ZONE_GONDOLA
-LANG_ENGLISH        "Gondola"
-
-REFERENCE           ST_HUD_ZONE_LOWER_LABORATORY
-LANG_ENGLISH        "Lower Laboratory"
-
-REFERENCE           ST_HUD_ZONE_UPPER_LABORATORY
-LANG_ENGLISH        "Upper Laboratory"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_1
-LANG_ENGLISH        "Generator 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_1
-LANG_ENGLISH        "Generator 3 Bunker 1"
-
-REFERENCE           ST_HUD_ZONE_FIRE_TUNNEL
-LANG_ENGLISH        "Fire Tunnel"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_2
-LANG_ENGLISH        "Generator 3 Bunker 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3
-LANG_ENGLISH        "Generator 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_3_BUNKER_3
-LANG_ENGLISH        "Generator 3 Bunker 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_1
-LANG_ENGLISH        "Generator 2 Bunker 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_2
-LANG_ENGLISH        "Generator 2 Bunker 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2
-LANG_ENGLISH        "Generator 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_BUNKER_3
-LANG_ENGLISH        "Generator 2 Bunker 3"
-
-REFERENCE           ST_HUD_ZONE_TANK_STATION
-LANG_ENGLISH        "Tank Station"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_TANK_STATION
-LANG_ENGLISH        "Above Tank Station"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 2 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 2 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 2 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 2 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_2_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 2 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_4F
-LANG_ENGLISH        "zone_bunker_4f"
-
-REFERENCE           ST_HUD_ZONE_WORKSHOP_DOWNSTAIRS
-LANG_ENGLISH        "Workshop Downstairs"
-
-REFERENCE           ST_HUD_ZONE_WORKSHOP_UPSTAIRS
-LANG_ENGLISH        "Workshop Upstairs"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_WALKWAY
-LANG_ENGLISH        "No Man's Land Walkway"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_ENTRANCE
-LANG_ENGLISH        "No Man's Land Entrance"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 5 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 5 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_TANK_E2
-LANG_ENGLISH        "zone_bunker_tank_e2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 5 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 5 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 5 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 5 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY
-LANG_ENGLISH        "Generator 5 Right Footstep Walkway"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5
-LANG_ENGLISH        "Generator 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_CELLAR
-LANG_ENGLISH        "Generator 5 Cellar"
-
-REFERENCE           ST_HUD_ZONE_LIGHTNING_TUNNEL
-LANG_ENGLISH        "Lightning Tunnel"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land 1st Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_STAIRS
-LANG_ENGLISH        "No Man's Land Stairs"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_LEFT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP
-LANG_ENGLISH        "No Man's Land 2nd Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 4 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 4 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 4 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 4 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 4 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_ZONE_BUNKER_TANK_A2
-LANG_ENGLISH        "zone_bunker_tank_a2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TANK_ROUTE_6
-LANG_ENGLISH        "Generator 4 Tank Route 6"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 4 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_WIND_TUNNEL
-LANG_ENGLISH        "Wind Tunnel"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4
-LANG_ENGLISH        "Generator 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Generator 4 Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_FRONT_PATH
-LANG_ENGLISH        "Excavation Site Front Path"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_BACK_PATH
-LANG_ENGLISH        "Excavation Site Back Path"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_3
-LANG_ENGLISH        "Excavation Site Level 3"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_2
-LANG_ENGLISH        "Excavation Site Level 2"
-
-REFERENCE           ST_HUD_ZONE_EXCAVATION_SITE_LEVEL_1
-LANG_ENGLISH        "Excavation Site Level 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_5_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Generator 5 To Generator 6 Path"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_4_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Generator 4 To Generator 6 Path"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_ENTRANCE
-LANG_ENGLISH        "Generator 6 Entrance"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_LEFT_FOOTSTEP
-LANG_ENGLISH        "Generator 6 Left Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_1
-LANG_ENGLISH        "Generator 6 Tank Route 1"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_2
-LANG_ENGLISH        "Generator 6 Tank Route 2"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_3
-LANG_ENGLISH        "Generator 6 Tank Route 3"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_4
-LANG_ENGLISH        "Generator 6 Tank Route 4"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_5
-LANG_ENGLISH        "Generator 6 Tank Route 5"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_6
-LANG_ENGLISH        "Generator 6 Tank Route 6"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_TANK_ROUTE_7
-LANG_ENGLISH        "Generator 6 Tank Route 7"
-
-REFERENCE           ST_HUD_ZONE_CHURCH
-LANG_ENGLISH        "Church"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Generator 6 Right Footstep"
-
-REFERENCE           ST_HUD_ZONE_GENERATOR_6
-LANG_ENGLISH        "Generator 6"
-
-REFERENCE           ST_HUD_ZONE_ICE_TUNNEL
-LANG_ENGLISH        "Ice Tunnel"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_GENERATOR_3_BUNKER
-LANG_ENGLISH        "Above Generator 3 Bunker"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_NO_MANS_LAND
-LANG_ENGLISH        "Above No Man's Land"
-
-REFERENCE           ST_HUD_ZONE_BEHIND_CHURCH
-LANG_ENGLISH        "Behind Church"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER
-LANG_ENGLISH        "The Crazy Place Lightning Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE
-LANG_ENGLISH        "The Crazy Place Lightning & Ice"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_ICE_CHAMBER
-LANG_ENGLISH        "The Crazy Place Ice Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING
-LANG_ENGLISH        "The Crazy Place Fire & Lightning"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_CENTER
-LANG_ENGLISH        "The Crazy Place Center"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_ICE_WIND
-LANG_ENGLISH        "The Crazy Place Ice & Wind"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER
-LANG_ENGLISH        "The Crazy Place Fire Chamber"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_WIND_FIRE
-LANG_ENGLISH        "The Crazy Place Wind & Fire"
-
-REFERENCE           ST_HUD_ZONE_THE_CRAZY_PLACE_WIND_CHAMBER
-LANG_ENGLISH        "The Crazy Place Wind Chamber"
-
-REFERENCE           ST_HUD_ZONE_ROBOTS_HEAD
-LANG_ENGLISH        "Robot's Head"
-
-REFERENCE           ST_HUD_ZONE_BUS_DEPOT
-LANG_ENGLISH        "Bus Depot"
-
-REFERENCE           ST_HUD_ZONE_BUS_DEPOT_HALLWAY
-LANG_ENGLISH        "Bus Depot Hallway"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_BUS_DEPOT
-LANG_ENGLISH        "Outside Bus Depot"
-
-REFERENCE           ST_HUD_ZONE_FOG_AFTER_BUS_DEPOT
-LANG_ENGLISH        "Fog After Bus Depot"
-
-REFERENCE           ST_HUD_ZONE_TUNNEL_ENTRANCE
-LANG_ENGLISH        "Tunnel Entrance"
-
-REFERENCE           ST_HUD_ZONE_TUNNEL
-LANG_ENGLISH        "Tunnel"
-
-REFERENCE           ST_HUD_ZONE_TUNNEL_EXIT
-LANG_ENGLISH        "Tunnel Exit"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_DINER
-LANG_ENGLISH        "Outside Diner"
-
-REFERENCE           ST_HUD_ZONE_GAS_STATION
-LANG_ENGLISH        "Gas Station"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_GARAGE
-LANG_ENGLISH        "Outside Garage"
-
-REFERENCE           ST_HUD_ZONE_FOG_OUTSIDE_DINER
-LANG_ENGLISH        "Fog Outside Diner"
-
-REFERENCE           ST_HUD_ZONE_FOG_OUTSIDE_GARAGE
-LANG_ENGLISH        "Fog Outside Garage"
-
-REFERENCE           ST_HUD_ZONE_GARAGE
-LANG_ENGLISH        "Garage"
-
-REFERENCE           ST_HUD_ZONE_DINER
-LANG_ENGLISH        "Diner"
-
-REFERENCE           ST_HUD_ZONE_DINER_ROOF
-LANG_ENGLISH        "Diner Roof"
-
-REFERENCE           ST_HUD_ZONE_FOG_AFTER_DINER
-LANG_ENGLISH        "Fog After Diner"
-
-REFERENCE           ST_HUD_ZONE_FOREST
-LANG_ENGLISH        "Forest"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_CHURCH
-LANG_ENGLISH        "Outside Church"
-
-REFERENCE           ST_HUD_ZONE_CHURCH
-LANG_ENGLISH        "Church"
-
-REFERENCE           ST_HUD_ZONE_FOG_BEFORE_FARM
-LANG_ENGLISH        "Fog Before Farm"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_FARM
-LANG_ENGLISH        "Outside Farm"
-
-REFERENCE           ST_HUD_ZONE_FARM
-LANG_ENGLISH        "Farm"
-
-REFERENCE           ST_HUD_ZONE_BARN
-LANG_ENGLISH        "Barn"
-
-REFERENCE           ST_HUD_ZONE_FARMHOUSE
-LANG_ENGLISH        "Farmhouse"
-
-REFERENCE           ST_HUD_ZONE_FOG_AFTER_FARM
-LANG_ENGLISH        "Fog After Farm"
-
-REFERENCE           ST_HUD_ZONE_CORNFIELD
-LANG_ENGLISH        "Cornfield"
-
-REFERENCE           ST_HUD_ZONE_NACHT
-LANG_ENGLISH        "Nacht"
-
-REFERENCE           ST_HUD_ZONE_UPPER_FOG_BEFORE_POWER
-LANG_ENGLISH        "Upper Fog Before Power"
-
-REFERENCE           ST_HUD_ZONE_ZONE_POW_EXT1
-LANG_ENGLISH        "zone_pow_ext1"
-
-REFERENCE           ST_HUD_ZONE_FOG_BEFORE_POWER
-LANG_ENGLISH        "Fog Before Power"
-
-REFERENCE           ST_HUD_ZONE_OUTSIDE_POWER_STATION
-LANG_ENGLISH        "Outside Power Station"
-
-REFERENCE           ST_HUD_ZONE_POWER_STATION
-LANG_ENGLISH        "Power Station"
-
-REFERENCE           ST_HUD_ZONE_POWER_CONTROL_ROOM
-LANG_ENGLISH        "Power Control Room"
-
-REFERENCE           ST_HUD_ZONE_WAREHOUSE
-LANG_ENGLISH        "Warehouse"
-
-REFERENCE           ST_HUD_ZONE_FOG_AFTER_POWER
-LANG_ENGLISH        "Fog After Power"
-
-REFERENCE           ST_HUD_ZONE_CABIN
-LANG_ENGLISH        "Cabin"
-
-REFERENCE           ST_HUD_ZONE_FOG_BEFORE_TOWN
-LANG_ENGLISH        "Fog Before Town"
-
-REFERENCE           ST_HUD_ZONE_NORTH_TOWN
-LANG_ENGLISH        "North Town"
-
-REFERENCE           ST_HUD_ZONE_CENTER_TOWN
-LANG_ENGLISH        "Center Town"
-
-REFERENCE           ST_HUD_ZONE_EAST_TOWN
-LANG_ENGLISH        "East Town"
-
-REFERENCE           ST_HUD_ZONE_WEST_TOWN
-LANG_ENGLISH        "West Town"
-
-REFERENCE           ST_HUD_ZONE_WEST_TOWN2
-LANG_ENGLISH        "West Town2"
-
-REFERENCE           ST_HUD_ZONE_SOUTH_TOWN
-LANG_ENGLISH        "South Town"
-
-REFERENCE           ST_HUD_ZONE_BAR
-LANG_ENGLISH        "Bar"
-
-REFERENCE           ST_HUD_ZONE_BOOKSTORE
-LANG_ENGLISH        "Bookstore"
-
-REFERENCE           ST_HUD_ZONE_BANK
-LANG_ENGLISH        "Bank"
-
-REFERENCE           ST_HUD_ZONE_BANK_VAULT
-LANG_ENGLISH        "Bank Vault"
-
-REFERENCE           ST_HUD_ZONE_BELOW_BANK
-LANG_ENGLISH        "Below Bank"
-
-REFERENCE           ST_HUD_ZONE_FOG_AFTER_TOWN
-LANG_ENGLISH        "Fog After Town"
-
-REFERENCE           ST_HUD_ZONE_BRIDGE
-LANG_ENGLISH        "Bridge"
-
-REFERENCE           ST_HUD_ZONE_FOG_BEFORE_BUS_DEPOT
-LANG_ENGLISH        "Fog Before Bus Depot"
-
-REFERENCE           ST_HUD_ZONE_TANK_STATION
-LANG_ENGLISH        "Tank Station"
-
-REFERENCE           ST_HUD_ZONE_ABOVE_TANK_STATION
-LANG_ENGLISH        "Above Tank Station"
-
 REFERENCE           ST_RESTART_WARNING_NUKETOWN
-LANG_ENGLISH        "^3AUTO RESTARTING FOR PAP LOCATION, THIS MAY TAKE A FEW SECONDS"
+LANG_ENGLISH        "^3REINICIANDO AUTOMATICAMENTE PARA O PAP, ISTO PODE TARDAR UNS SEGUNDOS"
 
 ENDMARKER

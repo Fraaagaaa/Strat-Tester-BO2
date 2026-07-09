@@ -1,0 +1,736 @@
+FILENOTES           "TRANSLATED BY BONECRUSHER"
+
+// TRANZIT
+
+REFERENCE           ZONE_BUS_DEPOT
+LANG_ENGLISH        "^3Estación de Autobuses"
+
+REFERENCE           ZONE_BUS_DEPOT_HALLWAY
+LANG_ENGLISH        "^3Pasillo de la Estación de Autobuses"
+
+REFERENCE           ZONE_OUTSIDE_BUS_DEPOT
+LANG_ENGLISH        "^3Exterior de la Estación de Autobuses"
+
+REFERENCE           ZONE_FOG_AFTER_BUS_DEPOT
+LANG_ENGLISH        "^3Niebla después de la Estación de Autobuses"
+
+REFERENCE           ZONE_TUNNEL_ENTRANCE
+LANG_ENGLISH        "^3Entrada del Túnel"
+
+REFERENCE           ZONE_TUNNEL
+LANG_ENGLISH        "^3Túnel"
+
+REFERENCE           ZONE_TUNNEL_EXIT
+LANG_ENGLISH        "^3Salida del Túnel"
+
+REFERENCE           ZONE_OUTSIDE_DINER
+LANG_ENGLISH        "^3Exterior del Restaurante"
+
+REFERENCE           ZONE_GAS_STATION
+LANG_ENGLISH        "^3Gasolinera"
+
+REFERENCE           ZONE_OUTSIDE_GARAGE
+LANG_ENGLISH        "^3Exterior del Garaje"
+
+REFERENCE           ZONE_FOG_OUTSIDE_DINER
+LANG_ENGLISH        "^3Niebla en el Exterior del Restaurante"
+
+REFERENCE           ZONE_FOG_OUTSIDE_GARAGE
+LANG_ENGLISH        "^3Niebla en el Exterior del Garaje"
+
+REFERENCE           ZONE_GARAGE
+LANG_ENGLISH        "^3Garaje"
+
+REFERENCE           ZONE_DINER
+LANG_ENGLISH        "^3Restaurante"
+
+REFERENCE           ZONE_DINER_ROOF
+LANG_ENGLISH        "^3Techo del Restaurante"
+
+REFERENCE           ZONE_FOG_AFTER_DINER
+LANG_ENGLISH        "^3Niebla después del Restaurante"
+
+REFERENCE           ZONE_FOREST
+LANG_ENGLISH        "^3Bosque"
+
+REFERENCE           ZONE_OUTSIDE_CHURCH
+LANG_ENGLISH        "^3Exterior de la Iglesia"
+
+REFERENCE           ZONE_FOG_BEFORE_FARM
+LANG_ENGLISH        "^3Niebla antes de la Granja"
+
+REFERENCE           ZONE_OUTSIDE_FARM
+LANG_ENGLISH        "^3Exterior de la Granja"
+
+REFERENCE           ZONE_FARM
+LANG_ENGLISH        "^3Granja"
+
+REFERENCE           ZONE_BARN
+LANG_ENGLISH        "^3Granero"
+
+REFERENCE           ZONE_FARMHOUSE
+LANG_ENGLISH        "^3Casa de la Granja"
+
+REFERENCE           ZONE_FOG_AFTER_FARM
+LANG_ENGLISH        "^3Niebla después de la Granja"
+
+REFERENCE           ZONE_CORNFIELD
+LANG_ENGLISH        "^3Maizal"
+
+REFERENCE           ZONE_NACHT
+LANG_ENGLISH        "^3Nacht"
+
+REFERENCE           ZONE_UPPER_FOG_BEFORE_POWER
+LANG_ENGLISH        "^3Niebla Superior antes de Electricidad"
+
+REFERENCE           ZONE_ZONE_POW_EXT1
+LANG_ENGLISH        "^3zone_pow_ext1"
+
+REFERENCE           ZONE_FOG_BEFORE_POWER
+LANG_ENGLISH        "^3Niebla antes de Electricidad"
+
+REFERENCE           ZONE_OUTSIDE_POWER_STATION
+LANG_ENGLISH        "^3Exterior de la Estación Eléctrica"
+
+REFERENCE           ZONE_POWER_STATION
+LANG_ENGLISH        "^3Estación Eléctrica"
+
+REFERENCE           ZONE_POWER_CONTROL_ROOM
+LANG_ENGLISH        "^3Sala de Control Eléctrico"
+
+REFERENCE           ZONE_WAREHOUSE
+LANG_ENGLISH        "^3Almacén"
+
+REFERENCE           ZONE_FOG_AFTER_POWER
+LANG_ENGLISH        "^3Niebla después de Electricidad"
+
+REFERENCE           ZONE_CABIN
+LANG_ENGLISH        "^3Cabaña"
+
+REFERENCE           ZONE_FOG_BEFORE_TOWN
+LANG_ENGLISH        "^3Niebla antes del Pueblo"
+
+REFERENCE           ZONE_NORTH_TOWN
+LANG_ENGLISH        "^3Norte del Pueblo"
+
+REFERENCE           ZONE_CENTER_TOWN
+LANG_ENGLISH        "^3Centro del Pueblo"
+
+REFERENCE           ZONE_EAST_TOWN
+LANG_ENGLISH        "^3Este del Pueblo"
+
+REFERENCE           ZONE_WEST_TOWN
+LANG_ENGLISH        "^3Oeste del Pueblo"
+
+REFERENCE           ZONE_WEST_TOWN2
+LANG_ENGLISH        "^3Oeste del Pueblo 2"
+
+REFERENCE           ZONE_SOUTH_TOWN
+LANG_ENGLISH        "^3Sur del Pueblo"
+
+REFERENCE           ZONE_BAR
+LANG_ENGLISH        "^3Bar"
+
+REFERENCE           ZONE_BOOKSTORE
+LANG_ENGLISH        "^3Librería"
+
+REFERENCE           ZONE_BANK_VAULT
+LANG_ENGLISH        "^3Cámara Acorazada del Banco"
+
+REFERENCE           ZONE_BELOW_BANK
+LANG_ENGLISH        "^3Debajo del Banco"
+
+REFERENCE           ZONE_FOG_AFTER_TOWN
+LANG_ENGLISH        "^3Niebla después del Pueblo"
+
+REFERENCE           ZONE_BRIDGE
+LANG_ENGLISH        "^3Puente"
+
+REFERENCE           ZONE_FOG_BEFORE_BUS_DEPOT
+LANG_ENGLISH        "^3Niebla antes de la Estación de Autobuses"
+
+// NUKETOWN
+
+REFERENCE           ZONE_YELLOW_HOUSE_MIDDLE
+LANG_ENGLISH        "^3Medio, Casa Amarilla"
+
+REFERENCE           ZONE_GREEN_HOUSE_MIDDLE
+LANG_ENGLISH        "^3Medio, Casa Verde"
+
+REFERENCE           ZONE_TRUCK
+LANG_ENGLISH        "^3Camión"
+
+REFERENCE           ZONE_GREEN_HOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Casa Verde Planta Baja"
+
+REFERENCE           ZONE_GREEN_HOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Casa Verde Planta Alta"
+
+REFERENCE           ZONE_GREEN_HOUSE_BACKYARD
+LANG_ENGLISH        "^3Patio Trasero de la Casa Verde"
+
+REFERENCE           ZONE_YELLOW_HOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Casa Amarilla Planta Baja"
+
+REFERENCE           ZONE_YELLOW_HOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Casa Amarilla Planta Alta"
+
+REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD
+LANG_ENGLISH        "^3Patio Trasero de la Casa Amarilla"
+
+REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD_DOOR
+LANG_ENGLISH        "^3Puerta del Patio Trasero de la Casa Amarilla"
+
+// MOB
+
+REFERENCE           ZONE_DBLOCK
+LANG_ENGLISH        "^3Bloque D"
+
+REFERENCE           ZONE_LIBRARY
+LANG_ENGLISH        "^3Biblioteca"
+
+REFERENCE           ZONE_CELLBLOCK_2ND_FLOOR
+LANG_ENGLISH        "^3Bloque de Celdas 2º Piso"
+
+REFERENCE           ZONE_CELLBLOCK_3RD_FLOOR
+LANG_ENGLISH        "^3Bloque de Celdas 3º Piso"
+
+REFERENCE           ZONE_CELLBLOCK_GONDOLA
+LANG_ENGLISH        "^3Bloque de Celdas hacia la Góndola"
+
+REFERENCE           ZONE_MICHIGAN_AVENUE
+LANG_ENGLISH        "^3Avenida Michigan"
+
+REFERENCE           ZONE_TIMES_SQUARE
+LANG_ENGLISH        "^3Times Square"
+
+REFERENCE           ZONE_CAFETERIA
+LANG_ENGLISH        "^3Cafetería"
+
+REFERENCE           ZONE_CAFETERIA_END
+LANG_ENGLISH        "^3Fondo de la Cafetería"
+
+REFERENCE           ZONE_INFIRMARY_1
+LANG_ENGLISH        "^3Enfermería 1"
+
+REFERENCE           ZONE_INFIRMARY_2
+LANG_ENGLISH        "^3Enfermería 2"
+
+REFERENCE           ZONE_ROOF_1
+LANG_ENGLISH        "^3Azotea 1"
+
+REFERENCE           ZONE_ROOF_2
+LANG_ENGLISH        "^3Azotea 2"
+
+REFERENCE           ZONE_SALLY_PORT
+LANG_ENGLISH        "^3Sally Port"
+
+REFERENCE           ZONE_WARDENS_OFFICE
+LANG_ENGLISH        "^3Oficina del Alcaide"
+
+REFERENCE           ZONE_SHOWERS
+LANG_ENGLISH        "^3Duchas"
+
+REFERENCE           ZONE_CITADEL_TO_SHOWERS
+LANG_ENGLISH        "^3Camino de la Ciudadela a las Duchas"
+
+REFERENCE           ZONE_CITADEL
+LANG_ENGLISH        "^3Ciudadela"
+
+REFERENCE           ZONE_CITADEL_TO_WARDENS_OFFICE
+LANG_ENGLISH        "^3Camino de la Ciudadela a la Oficina del Alcaide"
+
+REFERENCE           ZONE_CITADEL_TUNNELS
+LANG_ENGLISH        "^3Túneles"
+
+REFERENCE           ZONE_CITADEL_BASEMENT
+LANG_ENGLISH        "^3Sótano"
+
+REFERENCE           ZONE_CHINA_ALLEY
+LANG_ENGLISH        "^3Callejón"
+
+REFERENCE           ZONE_BUILDING_64
+LANG_ENGLISH        "^3Edificio 64"
+
+REFERENCE           ZONE_DOCKS
+LANG_ENGLISH        "^3Muelle"
+
+REFERENCE           ZONE_DOCKS_GATES
+LANG_ENGLISH        "^3Puertas del Muelle"
+
+REFERENCE           ZONE_UPPER_DOCKS
+LANG_ENGLISH        "^3Parte Superior del Muelle"
+
+REFERENCE           ZONE_GOLDEN_GATE_BRIDGE
+LANG_ENGLISH        "^3Puente Golden Gate"
+
+REFERENCE           ZONE_GONDOLA
+LANG_ENGLISH        "^3Góndola"
+
+// BURIED
+
+REFERENCE           ZONE_PROCESSING
+LANG_ENGLISH        "^3Procesamiento"
+
+REFERENCE           ZONE_LOWER_PROCESSING
+LANG_ENGLISH        "^3Procesamiento Inferior"
+
+REFERENCE           ZONE_CENTER_TUNNELS
+LANG_ENGLISH        "^3Túneles Centrales"
+
+REFERENCE           ZONE_COURTHOUSE_TUNNELS_2
+LANG_ENGLISH        "^3Túneles del Juzgado 2"
+
+REFERENCE           ZONE_COURTHOUSE_TUNNELS_1
+LANG_ENGLISH        "^3Túneles del Juzgado 1"
+
+REFERENCE           ZONE_SALOON_TUNNELS_3
+LANG_ENGLISH        "^3Túneles del Salón 3"
+
+REFERENCE           ZONE_SALOON_TUNNELS_2
+LANG_ENGLISH        "^3Túneles del Salón 2"
+
+REFERENCE           ZONE_SALOON_TUNNELS_1
+LANG_ENGLISH        "^3Túneles del Salón 1"
+
+REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK
+LANG_ENGLISH        "^3Exterior de la Tienda General y el Banco"
+
+REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK_ALLEY
+LANG_ENGLISH        "^3Callejón Exterior de la Tienda General y el Banco"
+
+REFERENCE           ZONE_MORGUE
+LANG_ENGLISH        "^3Morgue"
+
+REFERENCE           ZONE_JAIL_DOWNSTAIRS
+LANG_ENGLISH        "^3Cárcel Planta Baja"
+
+REFERENCE           ZONE_JAIL_UPSTAIRS
+LANG_ENGLISH        "^3Cárcel Planta Alta"
+
+REFERENCE           ZONE_GENERAL_STORE
+LANG_ENGLISH        "^3Tienda General"
+
+REFERENCE           ZONE_STABLES
+LANG_ENGLISH        "^3Establos"
+
+REFERENCE           ZONE_OUTSIDE_GUNSMITH
+LANG_ENGLISH        "^3Exterior de la Armería"
+
+REFERENCE           ZONE_OUTSIDE_GUNSMITH_NOOK
+LANG_ENGLISH        "^3Rincón Exterior de la Armería"
+
+REFERENCE           ZONE_GUNSMITH
+LANG_ENGLISH        "^3Armería"
+
+REFERENCE           ZONE_BANK
+LANG_ENGLISH        "^3Banco"
+
+REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL_2
+LANG_ENGLISH        "^3Túnel de los Establos a la Armería 2"
+
+REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL
+LANG_ENGLISH        "^3Túnel de los Establos a la Armería"
+
+REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE
+LANG_ENGLISH        "^3Exterior del Salón y la Juguetería"
+
+REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE_NOOK
+LANG_ENGLISH        "^3Rincón Exterior del Salón y la Juguetería"
+
+REFERENCE           ZONE_SALOON
+LANG_ENGLISH        "^3Salón"
+
+REFERENCE           ZONE_SALOON_TO_GUNSMITH_TUNNEL
+LANG_ENGLISH        "^3Túnel del Salón a la Armería"
+
+REFERENCE           ZONE_TOY_STORE_DOWNSTAIRS
+LANG_ENGLISH        "^3Juguetería Planta Baja"
+
+REFERENCE           ZONE_TOY_STORE_UPSTAIRS
+LANG_ENGLISH        "^3Juguetería Planta Alta"
+
+REFERENCE           ZONE_TOY_STORE_TUNNEL
+LANG_ENGLISH        "^3Túnel de la Juguetería"
+
+REFERENCE           ZONE_CANDY_STORE_DOWNSTAIRS
+LANG_ENGLISH        "^3Tienda de Cuches Planta Baja"
+
+REFERENCE           ZONE_CANDY_STORE_UPSTAIRS
+LANG_ENGLISH        "^3Tienda de Cuches Planta Alta"
+
+REFERENCE           ZONE_OUTSIDE_COURTHOUSE_CANDY_STORE
+LANG_ENGLISH        "^3Exterior del Juzgado y la Tienda de Cuches"
+
+REFERENCE           ZONE_COURTHOUSE_DOWNSTAIRS
+LANG_ENGLISH        "^3Juzgado Planta Baja"
+
+REFERENCE           ZONE_COURTHOUSE_UPSTAIRS
+LANG_ENGLISH        "^3Juzgado Planta Alta"
+
+REFERENCE           ZONE_FOUNTAIN
+LANG_ENGLISH        "^3Fuente"
+
+REFERENCE           ZONE_GRAVEYARD
+LANG_ENGLISH        "^3Cementerio"
+
+REFERENCE           ZONE_CHURCH_DOWNSTAIRS
+LANG_ENGLISH        "^3Iglesia Planta Baja"
+
+REFERENCE           ZONE_CHURCH_UPSTAIRS
+LANG_ENGLISH        "^3Iglesia Planta Alta"
+
+REFERENCE           ZONE_MANSION_LAWN
+LANG_ENGLISH        "^3Jardín de la Mansión"
+
+REFERENCE           ZONE_MANSION
+LANG_ENGLISH        "^3Mansión"
+
+REFERENCE           ZONE_MANSION_BACKYARD
+LANG_ENGLISH        "^3Patio Trasero de la Mansión"
+
+REFERENCE           ZONE_MAZE
+LANG_ENGLISH        "^3Laberinto"
+
+REFERENCE           ZONE_MAZE_STAIRCASE
+LANG_ENGLISH        "^3Escaleras del Laberinto"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3B
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 3b"
+
+REFERENCE           ZONE_ESCAPE_POD
+LANG_ENGLISH        "^3Cápsula de Escape"
+
+REFERENCE           ZONE_ESCAPE_POD_SHAFT
+LANG_ENGLISH        "^3Hueco de la Cápsula de Escape"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3A
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 3a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 2a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 2b"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_RESTAURANT
+LANG_ENGLISH        "^3Restaurante"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 1a"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Rascacielos Verde Nivel 1b"
+
+REFERENCE           ZONE_GREEN_HIGHRISE_BEHIND_RESTAURANT
+LANG_ENGLISH        "^3Detrás del Restaurante"
+
+REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_2
+LANG_ENGLISH        "^3Rascacielos Naranja Superior Nivel 2"
+
+REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_1
+LANG_ENGLISH        "^3Rascacielos Naranja Superior Nivel 1"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_3
+LANG_ENGLISH        "^3Hueco del Ascensor Nivel 3"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_2
+LANG_ENGLISH        "^3Hueco del Ascensor Nivel 2"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_1
+LANG_ENGLISH        "^3Hueco del Ascensor Nivel 1"
+
+REFERENCE           ZONE_ELEVATOR_SHAFT_BOTTOM
+LANG_ENGLISH        "^3Fondo del Hueco del Ascensor"
+
+REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Rascacielos Naranja Inferior Nivel 1a"
+
+REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Rascacielos Naranja Inferior Nivel 1b"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_1
+LANG_ENGLISH        "^3Rascacielos Azul Inferior Nivel 1"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Rascacielos Azul Inferior Nivel 2a"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Rascacielos Azul Inferior Nivel 2b"
+
+REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2C
+LANG_ENGLISH        "^3Rascacielos Azul Inferior Nivel 2c"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1A
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 1a"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1B
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 1b"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1C
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 1c"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1D
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 1d"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2A
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 2a"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2B
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 2b"
+
+REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2C
+LANG_ENGLISH        "^3Rascacielos Azul Superior Nivel 2c"
+
+// ORIGINS
+
+REFERENCE           ZONE_LOWER_LABORATORY
+LANG_ENGLISH        "^3Laboratorio Inferior"
+
+REFERENCE           ZONE_UPPER_LABORATORY
+LANG_ENGLISH        "^3Laboratorio Superior"
+
+REFERENCE           ZONE_GENERATOR_1
+LANG_ENGLISH        "^3Generador 1"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_1
+LANG_ENGLISH        "^3Generador 3 Búnker 1"
+
+REFERENCE           ZONE_FIRE_TUNNEL
+LANG_ENGLISH        "^3Túnel de Fuego"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_2
+LANG_ENGLISH        "^3Generador 3 Búnker 2"
+
+REFERENCE           ZONE_GENERATOR_3
+LANG_ENGLISH        "^3Generador 3"
+
+REFERENCE           ZONE_GENERATOR_3_BUNKER_3
+LANG_ENGLISH        "^3Generador 3 Búnker 3"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_1
+LANG_ENGLISH        "^3Generador 2 Búnker 1"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_2
+LANG_ENGLISH        "^3Generador 2 Búnker 2"
+
+REFERENCE           ZONE_GENERATOR_2
+LANG_ENGLISH        "^3Generador 2"
+
+REFERENCE           ZONE_GENERATOR_2_BUNKER_3
+LANG_ENGLISH        "^3Generador 2 Búnker 3"
+
+REFERENCE           ZONE_TANK_STATION
+LANG_ENGLISH        "^3Estación del Tanque"
+
+REFERENCE           ZONE_ABOVE_TANK_STATION
+LANG_ENGLISH        "^3Sobre la Estación del Tanque"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 1"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 2"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 3"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 4"
+
+REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 5"
+
+REFERENCE           ZONE_ZONE_BUNKER_4F
+LANG_ENGLISH        "^3zone_bunker_4f"
+
+REFERENCE           ZONE_WORKSHOP_DOWNSTAIRS
+LANG_ENGLISH        "^3Taller Planta Baja"
+
+REFERENCE           ZONE_WORKSHOP_UPSTAIRS
+LANG_ENGLISH        "^3Taller Planta Alta"
+
+REFERENCE           ZONE_NO_MANS_LAND_WALKWAY
+LANG_ENGLISH        "^3Pasarela de Tierra de Nadie"
+
+REFERENCE           ZONE_NO_MANS_LAND_ENTRANCE
+LANG_ENGLISH        "^3Entrada a Tierra de Nadie"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 1"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 2"
+
+REFERENCE           ZONE_ZONE_BUNKER_TANK_E2
+LANG_ENGLISH        "^3zone_bunker_tank_e2"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 3"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 4"
+
+REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 5"
+
+REFERENCE           ZONE_GENERATOR_5_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generador 5 Huella Izquierda"
+
+REFERENCE           ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY
+LANG_ENGLISH        "^3Pasarela Huella Derecha del Generador 5"
+
+REFERENCE           ZONE_GENERATOR_5
+LANG_ENGLISH        "^3Generador 5"
+
+REFERENCE           ZONE_GENERATOR_5_CELLAR
+LANG_ENGLISH        "^3Sótano del Generador 5"
+
+REFERENCE           ZONE_LIGHTNING_TUNNEL
+LANG_ENGLISH        "^3Túnel de Rayo"
+
+REFERENCE           ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Tierra de Nadie Primera Huella Derecha"
+
+REFERENCE           ZONE_NO_MANS_LAND_STAIRS
+LANG_ENGLISH        "^3Escaleras de Tierra de Nadie"
+
+REFERENCE           ZONE_NO_MANS_LAND_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Tierra de Nadie Huella Izquierda"
+
+REFERENCE           ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Tierra de Nadie Segunda Huella Derecha"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 1"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 2"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 3"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 4"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 5"
+
+REFERENCE           ZONE_ZONE_BUNKER_TANK_A2
+LANG_ENGLISH        "^3zone_bunker_tank_a2"
+
+REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_6
+LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 6"
+
+REFERENCE           ZONE_GENERATOR_4_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generador 4 Huella Izquierda"
+
+REFERENCE           ZONE_WIND_TUNNEL
+LANG_ENGLISH        "^3Túnel de Viento"
+
+REFERENCE           ZONE_GENERATOR_4
+LANG_ENGLISH        "^3Generador 4"
+
+REFERENCE           ZONE_GENERATOR_4_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Generador 4 Huella Derecha"
+
+REFERENCE           ZONE_EXCAVATION_SITE_FRONT_PATH
+LANG_ENGLISH        "^3Camino Frontal del Sitio de Excavación"
+
+REFERENCE           ZONE_EXCAVATION_SITE_BACK_PATH
+LANG_ENGLISH        "^3Camino Trasero del Sitio de Excavación"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_3
+LANG_ENGLISH        "^3Sitio de Excavación Nivel 3"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_2
+LANG_ENGLISH        "^3Sitio de Excavación Nivel 2"
+
+REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_1
+LANG_ENGLISH        "^3Sitio de Excavación Nivel 1"
+
+REFERENCE           ZONE_GENERATOR_5_TO_GENERATOR_6_PATH
+LANG_ENGLISH        "^3Camino del Generador 5 al Generador 6"
+
+REFERENCE           ZONE_GENERATOR_4_TO_GENERATOR_6_PATH
+LANG_ENGLISH        "^3Camino del Generador 4 al Generador 6"
+
+REFERENCE           ZONE_GENERATOR_6_ENTRANCE
+LANG_ENGLISH        "^3Entrada al Generador 6"
+
+REFERENCE           ZONE_GENERATOR_6_LEFT_FOOTSTEP
+LANG_ENGLISH        "^3Generador 6 Huella Izquierda"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_1
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 1"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_2
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 2"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_3
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 3"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_4
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 4"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_5
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 5"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_6
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 6"
+
+REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_7
+LANG_ENGLISH        "^3Generador 6 Ruta del Tanque 7"
+
+REFERENCE           ZONE_CHURCH
+LANG_ENGLISH        "^3Iglesia"
+
+REFERENCE           ZONE_GENERATOR_6_RIGHT_FOOTSTEP
+LANG_ENGLISH        "^3Generador 6 Huella Derecha"
+
+REFERENCE           ZONE_GENERATOR_6
+LANG_ENGLISH        "^3Generador 6"
+
+REFERENCE           ZONE_ICE_TUNNEL
+LANG_ENGLISH        "^3Túnel de Hielo"
+
+REFERENCE           ZONE_ABOVE_GENERATOR_3_BUNKER
+LANG_ENGLISH        "^3Sobre el Búnker del Generador 3"
+
+REFERENCE           ZONE_ABOVE_NO_MANS_LAND
+LANG_ENGLISH        "^3Sobre Tierra de Nadie"
+
+REFERENCE           ZONE_BEHIND_CHURCH
+LANG_ENGLISH        "^3Detrás de la Iglesia"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER
+LANG_ENGLISH        "^3Cámara de Rayo del Agartha"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE
+LANG_ENGLISH        "^3Agartha Rayo y Hielo"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_CHAMBER
+LANG_ENGLISH        "^3Cámara de Hielo del Agartha"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING
+LANG_ENGLISH        "^3Agartha Fuego y Rayo"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_CENTER
+LANG_ENGLISH        "^3Agartha Centro"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_WIND
+LANG_ENGLISH        "^3Agartha Hielo y Viento"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER
+LANG_ENGLISH        "^3Cámara de Fuego del Agartha"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_FIRE
+LANG_ENGLISH        "^3Agartha Viento y Fuego"
+
+REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_CHAMBER
+LANG_ENGLISH        "^3Cámara de Viento del Agartha"
+
+REFERENCE           ZONE_ROBOTS_HEAD
+LANG_ENGLISH        "^3Cabeza del Robot"
+
+ENDMARKER
