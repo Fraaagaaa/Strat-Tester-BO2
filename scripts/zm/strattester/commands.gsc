@@ -73,7 +73,7 @@ infpoints()
 	self endon("disconnect");
     while(self.infpoints)
     {
-        self.score = 131005;
+        self.score = 99999;
         wait 0.1;
     }
 }

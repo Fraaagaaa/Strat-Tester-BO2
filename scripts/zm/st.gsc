@@ -62,7 +62,7 @@ connected_st()
 		{
 			if(self == level.players[0])
 			{
-				self strattesterprint("Wellcome to Strat Tester!", "Bienvenido a Strat Tester!");
+				self strattesterprint("Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
 			 	self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 			}
 			self thread health_bar_hud();

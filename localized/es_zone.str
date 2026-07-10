@@ -83,9 +83,6 @@ LANG_ENGLISH        "^3Nacht"
 REFERENCE           ZONE_UPPER_FOG_BEFORE_POWER
 LANG_ENGLISH        "^3Niebla Superior antes de Electricidad"
 
-REFERENCE           ZONE_ZONE_POW_EXT1
-LANG_ENGLISH        "^3zone_pow_ext1"
-
 REFERENCE           ZONE_FOG_BEFORE_POWER
 LANG_ENGLISH        "^3Niebla antes de Electricidad"
 
@@ -223,7 +220,7 @@ REFERENCE           ZONE_ROOF_2
 LANG_ENGLISH        "^3Azotea 2"
 
 REFERENCE           ZONE_SALLY_PORT
-LANG_ENGLISH        "^3Sally Port"
+LANG_ENGLISH        "^3Esclusa de Seguridad"
 
 REFERENCE           ZONE_WARDENS_OFFICE
 LANG_ENGLISH        "^3Oficina del Alcaide"
@@ -541,9 +538,6 @@ LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 4"
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_5
 LANG_ENGLISH        "^3Generador 2 Ruta del Tanque 5"
 
-REFERENCE           ZONE_ZONE_BUNKER_4F
-LANG_ENGLISH        "^3zone_bunker_4f"
-
 REFERENCE           ZONE_WORKSHOP_DOWNSTAIRS
 LANG_ENGLISH        "^3Taller Planta Baja"
 
@@ -561,9 +555,6 @@ LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 1"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_2
 LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 2"
-
-REFERENCE           ZONE_ZONE_BUNKER_TANK_E2
-LANG_ENGLISH        "^3zone_bunker_tank_e2"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_3
 LANG_ENGLISH        "^3Generador 5 Ruta del Tanque 3"
@@ -615,9 +606,6 @@ LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_5
 LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 5"
-
-REFERENCE           ZONE_ZONE_BUNKER_TANK_A2
-LANG_ENGLISH        "^3zone_bunker_tank_a2"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_6
 LANG_ENGLISH        "^3Generador 4 Ruta del Tanque 6"

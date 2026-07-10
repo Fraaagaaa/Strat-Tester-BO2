@@ -86,9 +86,6 @@ LANG_ENGLISH        "^3Nacht"
 REFERENCE           ZONE_UPPER_FOG_BEFORE_POWER
 LANG_ENGLISH        "^3Upper Fog Before Power"
 
-REFERENCE           ZONE_ZONE_POW_EXT1
-LANG_ENGLISH        "^3zone_pow_ext1"
-
 REFERENCE           ZONE_FOG_BEFORE_POWER
 LANG_ENGLISH        "^3Fog Before Power"
 

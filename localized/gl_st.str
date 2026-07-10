@@ -522,6 +522,42 @@ REFERENCE           ST_DENIZEN_SPAWNS_DESC
 LANG_ENGLISH        "Coloca un maniquí nas zonas de aparición dos denizens."
 
 REFERENCE           ST_RESTART_WARNING_NUKETOWN
-LANG_ENGLISH        "REINICIANDO AUTOMATICAMENTE PARA O PAP, ISTO PODE TARDAR UNS SEGUNDOS"
+LANG_ENGLISH        "^3REINICIANDO AUTOMATICAMENTE PARA O PAP, ISTO PODE TARDAR UNS SEGUNDOS"
+
+REFERENCE           ST_BOX_HITS
+LANG_ENGLISH        "^3Tiradas de caixa: ^5"
+
+REFERENCE           ST_AVG_MK2
+LANG_ENGLISH        "^3Arma de raios MK2 AVG: ^5"
+
+REFERENCE           ST_AVG_RAY
+LANG_ENGLISH        "^3Arma de raios AVG: ^5"
+
+REFERENCE           ST_TOTAL_RAY
+LANG_ENGLISH        "^3Armas de raios: ^5"
+
+REFERENCE           ST_TOTAL_MK2
+LANG_ENGLISH        "^3Armas de raios MK2: ^5"
+
+REFERENCE           ST_SUBWOOFER_KILLS_HUD
+LANG_ENGLISH        "^3Baixas por Resonador: ^5"
+
+REFERENCE           ST_ELEVATOR_KILLS_HUD
+LANG_ENGLISH        "^3Baixas por ascensor: ^5"
+
+REFERENCE           ST_ZOMBIES_DESPAWNED
+LANG_ENGLISH        "^3Zombis Despawneados: ^5"
+
+REFERENCE           ST_ANCHOR_LEAKS
+LANG_ENGLISH        "^3Fugas de anclaxes: ^5"
+
+REFERENCE           ST_DENIZENS_HUD
+LANG_ENGLISH        "^3Denizens: ^5"
+
+REFERENCE           ST_REMAINING_HUD
+LANG_ENGLISH        "^3Zombis: ^5"
+
+REFERENCE           ST_SPH_HUD
+LANG_ENGLISH        "^3SPH: ^5"
 
 ENDMARKER

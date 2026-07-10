@@ -3,724 +3,724 @@ FILENOTES           "TRANSLATED BY NOMOLEMAN"
 // TRANZIT
 
 REFERENCE           ZONE_BUS_DEPOT
-LANG_ENGLISH        "Estação de Ônibus"
+LANG_ENGLISH        "^3Estação de Ônibus"
 
 REFERENCE           ZONE_BUS_DEPOT_HALLWAY
-LANG_ENGLISH        "Corredor da Estação de Ônibus"
+LANG_ENGLISH        "^3Corredor da Estação de Ônibus"
 
 REFERENCE           ZONE_OUTSIDE_BUS_DEPOT
-LANG_ENGLISH        "Lado de Fora da Estação de Ônibus"
+LANG_ENGLISH        "^3Lado de Fora da Estação de Ônibus"
 
 REFERENCE           ZONE_FOG_AFTER_BUS_DEPOT
-LANG_ENGLISH        "Nevoeiro após a Estação de Ônibus"
+LANG_ENGLISH        "^3Nevoeiro após a Estação de Ônibus"
 
 REFERENCE           ZONE_TUNNEL_ENTRANCE
-LANG_ENGLISH        "Entrada do Túnel"
+LANG_ENGLISH        "^3Entrada do Túnel"
 
 REFERENCE           ZONE_TUNNEL
-LANG_ENGLISH        "Túnel"
+LANG_ENGLISH        "^3Túnel"
 
 REFERENCE           ZONE_TUNNEL_EXIT
-LANG_ENGLISH        "Saída do Túnel"
+LANG_ENGLISH        "^3Saída do Túnel"
 
 REFERENCE           ZONE_OUTSIDE_DINER
-LANG_ENGLISH        "Lado de Fora da Lanchonete"
+LANG_ENGLISH        "^3Lado de Fora da Lanchonete"
 
 REFERENCE           ZONE_GAS_STATION
-LANG_ENGLISH        "Posto de Gasolina"
+LANG_ENGLISH        "^3Posto de Gasolina"
 
 REFERENCE           ZONE_OUTSIDE_GARAGE
-LANG_ENGLISH        "Lado de Fora da Garagem"
+LANG_ENGLISH        "^3Lado de Fora da Garagem"
 
 REFERENCE           ZONE_FOG_OUTSIDE_DINER
-LANG_ENGLISH        "Nevoeiro fora da Lanchonete"
+LANG_ENGLISH        "^3Nevoeiro fora da Lanchonete"
 
 REFERENCE           ZONE_FOG_OUTSIDE_GARAGE
-LANG_ENGLISH        "Nevoeiro fora da Garagem"
+LANG_ENGLISH        "^3Nevoeiro fora da Garagem"
 
 REFERENCE           ZONE_GARAGE
-LANG_ENGLISH        "Garagem"
+LANG_ENGLISH        "^3Garagem"
 
 REFERENCE           ZONE_DINER
-LANG_ENGLISH        "Lanchonete"
+LANG_ENGLISH        "^3Lanchonete"
 
 REFERENCE           ZONE_DINER_ROOF
-LANG_ENGLISH        "Telhado da Lanchonete"
+LANG_ENGLISH        "^3Telhado da Lanchonete"
 
 REFERENCE           ZONE_FOG_AFTER_DINER
-LANG_ENGLISH        "Nevoeiro após a Lanchonete"
+LANG_ENGLISH        "^3Nevoeiro após a Lanchonete"
 
 REFERENCE           ZONE_FOREST
-LANG_ENGLISH        "Floresta"
+LANG_ENGLISH        "^3Floresta"
 
 REFERENCE           ZONE_OUTSIDE_CHURCH
-LANG_ENGLISH        "Lado de Fora da Igreja"
+LANG_ENGLISH        "^3Lado de Fora da Igreja"
 
 REFERENCE           ZONE_CHURCH
-LANG_ENGLISH        "Igreja"
+LANG_ENGLISH        "^3Igreja"
 
 REFERENCE           ZONE_FOG_BEFORE_FARM
-LANG_ENGLISH        "Nevoeiro antes da Fazenda"
+LANG_ENGLISH        "^3Nevoeiro antes da Fazenda"
 
 REFERENCE           ZONE_OUTSIDE_FARM
-LANG_ENGLISH        "Lado de Fora da Fazenda"
+LANG_ENGLISH        "^3Lado de Fora da Fazenda"
 
 REFERENCE           ZONE_FARM
-LANG_ENGLISH        "Fazenda"
+LANG_ENGLISH        "^3Fazenda"
 
 REFERENCE           ZONE_BARN
-LANG_ENGLISH        "Celeiro"
+LANG_ENGLISH        "^3Celeiro"
 
 REFERENCE           ZONE_FARMHOUSE
-LANG_ENGLISH        "Casa da Fazenda"
+LANG_ENGLISH        "^3Casa da Fazenda"
 
 REFERENCE           ZONE_FOG_AFTER_FARM
-LANG_ENGLISH        "Nevoeiro depois da Fazenda"
+LANG_ENGLISH        "^3Nevoeiro depois da Fazenda"
 
 REFERENCE           ZONE_CORNFIELD
-LANG_ENGLISH        "Milharal"
+LANG_ENGLISH        "^3Milharal"
 
 REFERENCE           ZONE_NACHT
-LANG_ENGLISH        "Nacht"
+LANG_ENGLISH        "^3Nacht"
 
 REFERENCE           ZONE_UPPER_FOG_BEFORE_POWER
-LANG_ENGLISH        "Nevoeiro superior antes da Energia"
+LANG_ENGLISH        "^3Nevoeiro superior antes da Energia"
 
 REFERENCE           ZONE_FOG_BEFORE_POWER
-LANG_ENGLISH        "Nevoeiro antes da Energia"
+LANG_ENGLISH        "^3Nevoeiro antes da Energia"
 
 REFERENCE           ZONE_OUTSIDE_POWER_STATION
-LANG_ENGLISH        "Lado de Fora da Estação de Energia"
+LANG_ENGLISH        "^3Lado de Fora da Estação de Energia"
 
 REFERENCE           ZONE_POWER_STATION
-LANG_ENGLISH        "Estação de Energia"
+LANG_ENGLISH        "^3Estação de Energia"
 
 REFERENCE           ZONE_POWER_CONTROL_ROOM
-LANG_ENGLISH        "Sala de Controle de Energia"
+LANG_ENGLISH        "^3Sala de Controle de Energia"
 
 REFERENCE           ZONE_WAREHOUSE
-LANG_ENGLISH        "Armazém"
+LANG_ENGLISH        "^3Armazém"
 
 REFERENCE           ZONE_FOG_AFTER_POWER
-LANG_ENGLISH        "Nevoeiro após Energia"
+LANG_ENGLISH        "^3Nevoeiro após Energia"
 
 REFERENCE           ZONE_CABIN
-LANG_ENGLISH        "Cabana"
+LANG_ENGLISH        "^3Cabana"
 
 REFERENCE           ZONE_FOG_BEFORE_TOWN
-LANG_ENGLISH        "Nevoeiro antes da Cidade"
+LANG_ENGLISH        "^3Nevoeiro antes da Cidade"
 
 REFERENCE           ZONE_NORTH_TOWN
-LANG_ENGLISH        "Norte da Cidade"
+LANG_ENGLISH        "^3Norte da Cidade"
 
 REFERENCE           ZONE_CENTER_TOWN
-LANG_ENGLISH        "Centro da Cidade"
+LANG_ENGLISH        "^3Centro da Cidade"
 
 REFERENCE           ZONE_EAST_TOWN
-LANG_ENGLISH        "Leste da Cidade"
+LANG_ENGLISH        "^3Leste da Cidade"
 
 REFERENCE           ZONE_WEST_TOWN
-LANG_ENGLISH        "Oeste da Cidade"
+LANG_ENGLISH        "^3Oeste da Cidade"
 
 REFERENCE           ZONE_WEST_TOWN2
-LANG_ENGLISH        "Oeste 2 da Cidade"
+LANG_ENGLISH        "^3Oeste 2 da Cidade"
 
 REFERENCE           ZONE_SOUTH_TOWN
-LANG_ENGLISH        "Sul da Cidade"
+LANG_ENGLISH        "^3Sul da Cidade"
 
 REFERENCE           ZONE_BAR
-LANG_ENGLISH        "Bar"
+LANG_ENGLISH        "^3Bar"
 
 REFERENCE           ZONE_BOOKSTORE
-LANG_ENGLISH        "Livraria"
+LANG_ENGLISH        "^3Livraria"
 
 REFERENCE           ZONE_BANK
-LANG_ENGLISH        "Banco"
+LANG_ENGLISH        "^3Banco"
 
 REFERENCE           ZONE_BANK_VAULT
-LANG_ENGLISH        "Cofre do Banco"
+LANG_ENGLISH        "^3Cofre do Banco"
 
 REFERENCE           ZONE_BELOW_BANK
-LANG_ENGLISH        "Abaixo do Banco"
+LANG_ENGLISH        "^3Abaixo do Banco"
 
 REFERENCE           ZONE_FOG_AFTER_TOWN
-LANG_ENGLISH        "Nevoeiro depois da Cidade"
+LANG_ENGLISH        "^3Nevoeiro depois da Cidade"
 
 REFERENCE           ZONE_BRIDGE
-LANG_ENGLISH        "Ponte"
+LANG_ENGLISH        "^3Ponte"
 
 REFERENCE           ZONE_FOG_BEFORE_BUS_DEPOT
-LANG_ENGLISH        "Nevoeiro antes da Estação de Ônibus"
+LANG_ENGLISH        "^3Nevoeiro antes da Estação de Ônibus"
 
 // NUKETOWN
 
 REFERENCE           ZONE_YELLOW_HOUSE_MIDDLE
-LANG_ENGLISH        "Meio da Casa Amarela"
+LANG_ENGLISH        "^3Arredores da Casa Amarela"
 
 REFERENCE           ZONE_GREEN_HOUSE_MIDDLE
-LANG_ENGLISH        "Meio da Casa Verde"
+LANG_ENGLISH        "^3Arredores da Casa Verde"
 
 REFERENCE           ZONE_TRUCK
-LANG_ENGLISH        "Caminhão"
+LANG_ENGLISH        "^3Caminhão"
 
 REFERENCE           ZONE_GREEN_HOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Andar de Baixo da Casa Verde"
+LANG_ENGLISH        "^3Andar de Baixo da Casa Verde"
 
 REFERENCE           ZONE_GREEN_HOUSE_UPSTAIRS
-LANG_ENGLISH        "Andar de Cima da Casa Verde"
+LANG_ENGLISH        "^3Andar de Cima da Casa Verde"
 
 REFERENCE           ZONE_GREEN_HOUSE_BACKYARD
-LANG_ENGLISH        "Quintal da Casa Verde"
+LANG_ENGLISH        "^3Quintal da Casa Verde"
 
 REFERENCE           ZONE_YELLOW_HOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Andar de Baixo da Casa Amarela"
+LANG_ENGLISH        "^3Andar de Baixo da Casa Amarela"
 
 REFERENCE           ZONE_YELLOW_HOUSE_UPSTAIRS
-LANG_ENGLISH        "Andar de Cima da Casa Amarela"
+LANG_ENGLISH        "^3Andar de Cima da Casa Amarela"
 
 REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD
-LANG_ENGLISH        "Quintal da Casa Amarela"
+LANG_ENGLISH        "^3Quintal da Casa Amarela"
 
 REFERENCE           ZONE_YELLOW_HOUSE_BACKYARD_DOOR
-LANG_ENGLISH        "Porta do quintal da casa amarela"
+LANG_ENGLISH        "^3Porta do quintal da casa amarela"
 
 // DIE RISE
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3B
-LANG_ENGLISH        "Highrise Verde Nível 3b"
+LANG_ENGLISH        "^3Highrise Verde Nível 3b"
 
 REFERENCE           ZONE_ESCAPE_POD
-LANG_ENGLISH        "Cápsula de Fuga"
+LANG_ENGLISH        "^3Cápsula de Fuga"
 
 REFERENCE           ZONE_ESCAPE_POD_SHAFT
-LANG_ENGLISH        "Duto da Cápsula de Fuga"
+LANG_ENGLISH        "^3Duto da Cápsula de Fuga"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_3A
-LANG_ENGLISH        "Highrise Verde Nível 3a"
+LANG_ENGLISH        "^3Highrise Verde Nível 3a"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Highrise Verde Nível 2a"
+LANG_ENGLISH        "^3Highrise Verde Nível 2a"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Highrise Verde Nível 2b"
+LANG_ENGLISH        "^3Highrise Verde Nível 2b"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_RESTAURANT
-LANG_ENGLISH        "Restaurante do Highrise Verde"
+LANG_ENGLISH        "^3Restaurante do Highrise Verde"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Highrise Verde Nível 1a"
+LANG_ENGLISH        "^3Highrise Verde Nível 1a"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Highrise Verde Nível 1b"
+LANG_ENGLISH        "^3Highrise Verde Nível 1b"
 
 REFERENCE           ZONE_GREEN_HIGHRISE_BEHIND_RESTAURANT
-LANG_ENGLISH        "Atrás do restaurante do Highrise Verde"
+LANG_ENGLISH        "^3Atrás do restaurante do Highrise Verde"
 
 REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_2
-LANG_ENGLISH        "Highrise Laranja Superior Nível 2"
+LANG_ENGLISH        "^3Highrise Laranja Superior Nível 2"
 
 REFERENCE           ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_1
-LANG_ENGLISH        "Highrise Laranja Superior Nível 1"
+LANG_ENGLISH        "^3Highrise Laranja Superior Nível 1"
 
 REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_3
-LANG_ENGLISH        "Duto do Elevador Nível 3"
+LANG_ENGLISH        "^3Duto do Elevador Nível 3"
 
 REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_2
-LANG_ENGLISH        "Duto do Elevador Nível 2"
+LANG_ENGLISH        "^3Duto do Elevador Nível 2"
 
 REFERENCE           ZONE_ELEVATOR_SHAFT_LEVEL_1
-LANG_ENGLISH        "Duto do Elevador Nível 1"
+LANG_ENGLISH        "^3Duto do Elevador Nível 1"
 
 REFERENCE           ZONE_ELEVATOR_SHAFT_BOTTOM
-LANG_ENGLISH        "Parte Inferior do Duto do Elevador"
+LANG_ENGLISH        "^3Parte Inferior do Duto do Elevador"
 
 REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Highrise Laranja Inferior Nível 1a"
+LANG_ENGLISH        "^3Highrise Laranja Inferior Nível 1a"
 
 REFERENCE           ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Highrise Laranja Inferior Nível 1b"
+LANG_ENGLISH        "^3Highrise Laranja Inferior Nível 1b"
 
 REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_1
-LANG_ENGLISH        "Highrise Azul Inferior Nível 1"
+LANG_ENGLISH        "^3Highrise Azul Inferior Nível 1"
 
 REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Highrise Azul Inferior Nível 2a"
+LANG_ENGLISH        "^3Highrise Azul Inferior Nível 2a"
 
 REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Highrise Azul Inferior Nível 2b"
+LANG_ENGLISH        "^3Highrise Azul Inferior Nível 2b"
 
 REFERENCE           ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2C
-LANG_ENGLISH        "Highrise Azul Inferior Nível 2c"
+LANG_ENGLISH        "^3Highrise Azul Inferior Nível 2c"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1A
-LANG_ENGLISH        "Highrise Azul Superior Nível 1a"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 1a"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1B
-LANG_ENGLISH        "Highrise Azul Superior Nível 1b"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 1b"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1C
-LANG_ENGLISH        "Highrise Azul Superior Nível 1c"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 1c"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1D
-LANG_ENGLISH        "Highrise Azul Superior Nível 1d"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 1d"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2A
-LANG_ENGLISH        "Highrise Azul Superior Nível 1a"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 1a"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2B
-LANG_ENGLISH        "Highrise Azul Superior Nível 2b"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 2b"
 
 REFERENCE           ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2C
-LANG_ENGLISH        "Highrise Azul Superior Nível 2c"
+LANG_ENGLISH        "^3Highrise Azul Superior Nível 2c"
 
 // MOB
 
 REFERENCE           ZONE_DBLOCK
-LANG_ENGLISH        "Bloco D"
+LANG_ENGLISH        "^3Bloco D"
 
 REFERENCE           ZONE_LIBRARY
-LANG_ENGLISH        "Biblioteca"
+LANG_ENGLISH        "^3Biblioteca"
 
 REFERENCE           ZONE_CELLBLOCK_2ND_FLOOR
-LANG_ENGLISH        "Bloco de celas 2º andar"
+LANG_ENGLISH        "^3Bloco de celas 2º andar"
 
 REFERENCE           ZONE_CELLBLOCK_3RD_FLOOR
-LANG_ENGLISH        "Bloco de celas 3º andar"
+LANG_ENGLISH        "^3Bloco de celas 3º andar"
 
 REFERENCE           ZONE_CELLBLOCK_GONDOLA
-LANG_ENGLISH        "Gôndola do Bloco de celas"
+LANG_ENGLISH        "^3Gôndola do Bloco de celas"
 
 REFERENCE           ZONE_MICHIGAN_AVENUE
-LANG_ENGLISH        "Avenida Michigan"
+LANG_ENGLISH        "^3Avenida Michigan"
 
 REFERENCE           ZONE_TIMES_SQUARE
-LANG_ENGLISH        "Times Square"
+LANG_ENGLISH        "^3Times Square"
 
 REFERENCE           ZONE_CAFETERIA
-LANG_ENGLISH        "Cafeteria"
+LANG_ENGLISH        "^3Cafeteria"
 
 REFERENCE           ZONE_CAFETERIA_END
-LANG_ENGLISH        "Fim da cafeteria"
+LANG_ENGLISH        "^3Fim da cafeteria"
 
 REFERENCE           ZONE_INFIRMARY_1
-LANG_ENGLISH        "Enfermaria 1"
+LANG_ENGLISH        "^3Enfermaria 1"
 
 REFERENCE           ZONE_INFIRMARY_2
-LANG_ENGLISH        "Enfermaria 2"
+LANG_ENGLISH        "^3Enfermaria 2"
 
 REFERENCE           ZONE_ROOF_1
-LANG_ENGLISH        "Telhado 1"
+LANG_ENGLISH        "^3Telhado 1"
 
 REFERENCE           ZONE_ROOF_2
-LANG_ENGLISH        "Telhado 2"
+LANG_ENGLISH        "^3Telhado 2"
 
 REFERENCE           ZONE_SALLY_PORT
-LANG_ENGLISH        "Porto Sally"
+LANG_ENGLISH        "^3Eclusa de Segurança"
 
 REFERENCE           ZONE_WARDENS_OFFICE
-LANG_ENGLISH        "Escritório do Diretor"
+LANG_ENGLISH        "^3Escritório do Diretor"
 
 REFERENCE           ZONE_SHOWERS
-LANG_ENGLISH        "Chuveiros"
+LANG_ENGLISH        "^3Chuveiros"
 
 REFERENCE           ZONE_CITADEL_TO_SHOWERS
-LANG_ENGLISH        "Cidadela para chuveiros"
+LANG_ENGLISH        "^3Cidadela para chuveiros"
 
 REFERENCE           ZONE_CITADEL
-LANG_ENGLISH        "Cidadela"
+LANG_ENGLISH        "^3Cidadela"
 
 REFERENCE           ZONE_CITADEL_TO_WARDENS_OFFICE
-LANG_ENGLISH        "Cidadela para o Escritório do Diretor"
+LANG_ENGLISH        "^3Cidadela para o Escritório do Diretor"
 
 REFERENCE           ZONE_CITADEL_TUNNELS
-LANG_ENGLISH        "Túneis da Cidadela"
+LANG_ENGLISH        "^3Túneis da Cidadela"
 
 REFERENCE           ZONE_CITADEL_BASEMENT
-LANG_ENGLISH        "Porão da Cidadela"
+LANG_ENGLISH        "^3Porão da Cidadela"
 
 REFERENCE           ZONE_CHINA_ALLEY
-LANG_ENGLISH        "Beco da China"
+LANG_ENGLISH        "^3Beco da China"
 
 REFERENCE           ZONE_BUILDING_64
-LANG_ENGLISH        "Edifício 64"
+LANG_ENGLISH        "^3Edifício 64"
 
 REFERENCE           ZONE_DOCKS
-LANG_ENGLISH        "Docas"
+LANG_ENGLISH        "^3Docas"
 
 REFERENCE           ZONE_DOCKS_GATES
-LANG_ENGLISH        "Portões das Docas"
+LANG_ENGLISH        "^3Portões das Docas"
 
 REFERENCE           ZONE_UPPER_DOCKS
-LANG_ENGLISH        "Docas - Superiores"
+LANG_ENGLISH        "^3Docas - Superiores"
 
 REFERENCE           ZONE_GOLDEN_GATE_BRIDGE
-LANG_ENGLISH        "Ponte Golden Gate"
+LANG_ENGLISH        "^3Ponte Golden Gate"
 
 REFERENCE           ZONE_GONDOLA
-LANG_ENGLISH        "Gôndola"
+LANG_ENGLISH        "^3Gôndola"
 
 // BURIED
 
 REFERENCE           ZONE_PROCESSING
-LANG_ENGLISH        "Processamento"
+LANG_ENGLISH        "^3Processamento"
 
 REFERENCE           ZONE_LOWER_PROCESSING
-LANG_ENGLISH        "Processamento inferior"
+LANG_ENGLISH        "^3Processamento inferior"
 
 REFERENCE           ZONE_CENTER_TUNNELS
-LANG_ENGLISH        "Túneis Centrais"
+LANG_ENGLISH        "^3Túneis Centrais"
 
 REFERENCE           ZONE_COURTHOUSE_TUNNELS_2
-LANG_ENGLISH        "Túneis 2 do Tribunal"
+LANG_ENGLISH        "^3Túneis 2 do Tribunal"
 
 REFERENCE           ZONE_COURTHOUSE_TUNNELS_1
-LANG_ENGLISH        "Túneis 1 do Tribunal"
+LANG_ENGLISH        "^3Túneis 1 do Tribunal"
 
 REFERENCE           ZONE_SALOON_TUNNELS_3
-LANG_ENGLISH        "Túneis 3 do Salão"
+LANG_ENGLISH        "^3Túneis 3 do Salão"
 
 REFERENCE           ZONE_SALOON_TUNNELS_2
-LANG_ENGLISH        "Túneis 2 do Salão"
+LANG_ENGLISH        "^3Túneis 2 do Salão"
 
 REFERENCE           ZONE_SALOON_TUNNELS_1
-LANG_ENGLISH        "Túneis 1 do Salão"
+LANG_ENGLISH        "^3Túneis 1 do Salão"
 
 REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK
-LANG_ENGLISH        "Lado de Fora do armazém geral e banco"
+LANG_ENGLISH        "^3Lado de Fora do armazém geral e banco"
 
 REFERENCE           ZONE_OUTSIDE_GENERAL_STORE_BANK_ALLEY
-LANG_ENGLISH        "Lado de Fora da loja geral e do beco do banco"
+LANG_ENGLISH        "^3Lado de Fora da armazém geral e do beco do banco"
 
 REFERENCE           ZONE_MORGUE
-LANG_ENGLISH        "Necrotério"
+LANG_ENGLISH        "^3Necrotério"
 
 REFERENCE           ZONE_JAIL_DOWNSTAIRS
-LANG_ENGLISH        "Andar Inferior da Prisão"
+LANG_ENGLISH        "^3Andar Inferior da Prisão"
 
 REFERENCE           ZONE_JAIL_UPSTAIRS
-LANG_ENGLISH        "Andar Superior da Prisão"
+LANG_ENGLISH        "^3Andar Superior da Prisão"
 
 REFERENCE           ZONE_GENERAL_STORE
-LANG_ENGLISH        "Armazém Geral"
+LANG_ENGLISH        "^3Armazém Geral"
 
 REFERENCE           ZONE_STABLES
-LANG_ENGLISH        "Estábulos"
+LANG_ENGLISH        "^3Estábulos"
 
 REFERENCE           ZONE_OUTSIDE_GUNSMITH
-LANG_ENGLISH        "Lado de Fora do Armeiro"
+LANG_ENGLISH        "^3Lado de Fora do Armeiro"
 
 REFERENCE           ZONE_OUTSIDE_GUNSMITH_NOOK
-LANG_ENGLISH        "Lado de Fora do Recanto do Armeiro"
+LANG_ENGLISH        "^3Lado de Fora do Recanto do Armeiro"
 
 REFERENCE           ZONE_GUNSMITH
-LANG_ENGLISH        "Armeiro"
+LANG_ENGLISH        "^3Armeiro"
 
 REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL_2
-LANG_ENGLISH        "Estábulos para o túnel 2 do armeiro"
+LANG_ENGLISH        "^3Estábulos para o túnel 2 do armeiro"
 
 REFERENCE           ZONE_STABLES_TO_GUNSMITH_TUNNEL
-LANG_ENGLISH        "Estábulos para o túnel do Armeiro"
+LANG_ENGLISH        "^3Estábulos para o túnel do Armeiro"
 
 REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE
-LANG_ENGLISH        "Lado de Fora do Salão e da Loja de Brinquedos"
+LANG_ENGLISH        "^3Lado de Fora do Salão e da Loja de Brinquedos"
 
 REFERENCE           ZONE_OUTSIDE_SALOON_TOY_STORE_NOOK
-LANG_ENGLISH        "Lado de Fora do Salão e do recanto da Loja de Brinquedos"
+LANG_ENGLISH        "^3Lado de Fora do Salão e do recanto da Loja de Brinquedos"
 
 REFERENCE           ZONE_SALOON
-LANG_ENGLISH        "Salão"
+LANG_ENGLISH        "^3Salão"
 
 REFERENCE           ZONE_SALOON_TO_GUNSMITH_TUNNEL
-LANG_ENGLISH        "Salão para o túnel do Armeiro"
+LANG_ENGLISH        "^3Salão para o túnel do Armeiro"
 
 REFERENCE           ZONE_TOY_STORE_DOWNSTAIRS
-LANG_ENGLISH        "Andar Inferior da Loja de Brinquedos"
+LANG_ENGLISH        "^3Andar Inferior da Loja de Brinquedos"
 
 REFERENCE           ZONE_TOY_STORE_UPSTAIRS
-LANG_ENGLISH        "Andar Superior da Loja de Brinquedos"
+LANG_ENGLISH        "^3Andar Superior da Loja de Brinquedos"
 
 REFERENCE           ZONE_TOY_STORE_TUNNEL
-LANG_ENGLISH        "Túnel da Loja de Brinquedos"
+LANG_ENGLISH        "^3Túnel da Loja de Brinquedos"
 
 REFERENCE           ZONE_CANDY_STORE_DOWNSTAIRS
-LANG_ENGLISH        "Andar Inferior da Loja de Doces"
+LANG_ENGLISH        "^3Andar Inferior da Loja de Doces"
 
 REFERENCE           ZONE_CANDY_STORE_UPSTAIRS
-LANG_ENGLISH        "Andar Superior da Loja de Doces"
+LANG_ENGLISH        "^3Andar Superior da Loja de Doces"
 
 REFERENCE           ZONE_OUTSIDE_COURTHOUSE_CANDY_STORE
-LANG_ENGLISH        "Lado de Fora do Tribunal e da Loja de Doces"
+LANG_ENGLISH        "^3Lado de Fora do Tribunal e da Loja de Doces"
 
 REFERENCE           ZONE_COURTHOUSE_DOWNSTAIRS
-LANG_ENGLISH        "Andar Inferior do Tribunal"
+LANG_ENGLISH        "^3Andar Inferior do Tribunal"
 
 REFERENCE           ZONE_COURTHOUSE_UPSTAIRS
-LANG_ENGLISH        "Andar Superior do Tribunal"
+LANG_ENGLISH        "^3Andar Superior do Tribunal"
 
 REFERENCE           ZONE_FOUNTAIN
-LANG_ENGLISH        "Fonte"
+LANG_ENGLISH        "^3Fonte"
 
 REFERENCE           ZONE_GRAVEYARD
-LANG_ENGLISH        "Cemitério"
+LANG_ENGLISH        "^3Cemitério"
 
 REFERENCE           ZONE_CHURCH_DOWNSTAIRS
-LANG_ENGLISH        "Andar Inferior da Igreja"
+LANG_ENGLISH        "^3Andar Inferior da Igreja"
 
 REFERENCE           ZONE_CHURCH_UPSTAIRS
-LANG_ENGLISH        "Andar Superior da Igreja"
+LANG_ENGLISH        "^3Andar Superior da Igreja"
 
 REFERENCE           ZONE_MANSION_LAWN
-LANG_ENGLISH        "Gramado da Mansão"
+LANG_ENGLISH        "^3Gramado da Mansão"
 
 REFERENCE           ZONE_MANSION
-LANG_ENGLISH        "Mansão"
+LANG_ENGLISH        "^3Mansão"
 
 REFERENCE           ZONE_MANSION_BACKYARD
-LANG_ENGLISH        "Quintal da Mansão"
+LANG_ENGLISH        "^3Quintal da Mansão"
 
 REFERENCE           ZONE_MAZE
-LANG_ENGLISH        "Labirinto"
+LANG_ENGLISH        "^3Labirinto"
 
 REFERENCE           ZONE_MAZE_STAIRCASE
-LANG_ENGLISH        "Escada do Labirinto"
+LANG_ENGLISH        "^3Escada do Labirinto"
 
 // ORIGINS
 
 REFERENCE           ZONE_LOWER_LABORATORY
-LANG_ENGLISH        "Laboratório Inferior"
+LANG_ENGLISH        "^3Laboratório Inferior"
 
 REFERENCE           ZONE_UPPER_LABORATORY
-LANG_ENGLISH        "Laboratório Superior"
+LANG_ENGLISH        "^3Laboratório Superior"
 
 REFERENCE           ZONE_GENERATOR_1
-LANG_ENGLISH        "Gerador 1"
+LANG_ENGLISH        "^3Gerador 1"
 
 REFERENCE           ZONE_GENERATOR_3_BUNKER_1
-LANG_ENGLISH        "Gerador 3 Bunker 1"
+LANG_ENGLISH        "^3Gerador 3 Bunker 1"
 
 REFERENCE           ZONE_FIRE_TUNNEL
-LANG_ENGLISH        "Túnel do Fogo"
+LANG_ENGLISH        "^3Túnel do Fogo"
 
 REFERENCE           ZONE_GENERATOR_3_BUNKER_2
-LANG_ENGLISH        "Gerador 3 Bunker 2"
+LANG_ENGLISH        "^3Gerador 3 Bunker 2"
 
 REFERENCE           ZONE_GENERATOR_3
-LANG_ENGLISH        "Gerador 3"
+LANG_ENGLISH        "^3Gerador 3"
 
 REFERENCE           ZONE_GENERATOR_3_BUNKER_3
-LANG_ENGLISH        "Gerador 3 Bunker 3"
+LANG_ENGLISH        "^3Gerador 3 Bunker 3"
 
 REFERENCE           ZONE_GENERATOR_2_BUNKER_1
-LANG_ENGLISH        "Gerador 2 Bunker 1"
+LANG_ENGLISH        "^3Gerador 2 Bunker 1"
 
 REFERENCE           ZONE_GENERATOR_2_BUNKER_2
-LANG_ENGLISH        "Gerador 2 Bunker 2"
+LANG_ENGLISH        "^3Gerador 2 Bunker 2"
 
 REFERENCE           ZONE_GENERATOR_2
-LANG_ENGLISH        "Gerador 2"
+LANG_ENGLISH        "^3Gerador 2"
 
 REFERENCE           ZONE_GENERATOR_2_BUNKER_3
-LANG_ENGLISH        "Gerador 2 Bunker 3"
+LANG_ENGLISH        "^3Gerador 2 Bunker 3"
 
 REFERENCE           ZONE_TANK_STATION
-LANG_ENGLISH        "Estação do Tanque"
+LANG_ENGLISH        "^3Estação do Tanque"
 
 REFERENCE           ZONE_ABOVE_TANK_STATION
-LANG_ENGLISH        "Acima da Estação do Tanque"
+LANG_ENGLISH        "^3Acima da Estação do Tanque"
 
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_1
-LANG_ENGLISH        "Rota do Tanque 1 - Gerador 2"
+LANG_ENGLISH        "^3Rota do Tanque 1 - Gerador 2"
 
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_2
-LANG_ENGLISH        "Rota do Tanque 2 - Gerador 2"
+LANG_ENGLISH        "^3Rota do Tanque 2 - Gerador 2"
 
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_3
-LANG_ENGLISH        "Rota do Tanque 3 - Gerador 2"
+LANG_ENGLISH        "^3Rota do Tanque 3 - Gerador 2"
 
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_4
-LANG_ENGLISH        "Rota do Tanque 4 - Gerador 2"
+LANG_ENGLISH        "^3Rota do Tanque 4 - Gerador 2"
 
 REFERENCE           ZONE_GENERATOR_2_TANK_ROUTE_5
-LANG_ENGLISH        "Rota do Tanque 5 - Gerador 2"
+LANG_ENGLISH        "^3Rota do Tanque 5 - Gerador 2"
 
 REFERENCE           ZONE_WORKSHOP_DOWNSTAIRS
-LANG_ENGLISH        "Parte de Baixo da Oficina"
+LANG_ENGLISH        "^3Parte de Baixo da Oficina"
 
 REFERENCE           ZONE_WORKSHOP_UPSTAIRS
-LANG_ENGLISH        "Parte de cima da Oficina"
+LANG_ENGLISH        "^3Parte de cima da Oficina"
 
 REFERENCE           ZONE_NO_MANS_LAND_WALKWAY
-LANG_ENGLISH        "Passarela da No Man's Land"
+LANG_ENGLISH        "^3Passarela da No Man's Land"
 
 REFERENCE           ZONE_NO_MANS_LAND_ENTRANCE
-LANG_ENGLISH        "Entrada da No Man's Land"
+LANG_ENGLISH        "^3Entrada da No Man's Land"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_1
-LANG_ENGLISH        "Rota do Tanque 1 - Gerador 5"
+LANG_ENGLISH        "^3Rota do Tanque 1 - Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_2
-LANG_ENGLISH        "Rota do Tanque 2 - Gerador 5"
+LANG_ENGLISH        "^3Rota do Tanque 2 - Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_3
-LANG_ENGLISH        "Rota do Tanque 3 - Gerador 5"
+LANG_ENGLISH        "^3Rota do Tanque 3 - Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_4
-LANG_ENGLISH        "Rota do Tanque 4 - Gerador 5"
+LANG_ENGLISH        "^3Rota do Tanque 4 - Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_TANK_ROUTE_5
-LANG_ENGLISH        "Rota do Tanque 4 - Gerador 5"
+LANG_ENGLISH        "^3Rota do Tanque 4 - Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_LEFT_FOOTSTEP
-LANG_ENGLISH        "Pegada Esquerda do Gerador 5"
+LANG_ENGLISH        "^3Pegada Esquerda do Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY
-LANG_ENGLISH        "Passarela da Pegada Direita do Gerador 5"
+LANG_ENGLISH        "^3Passarela da Pegada Direita do Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5
-LANG_ENGLISH        "Gerador 5"
+LANG_ENGLISH        "^3Gerador 5"
 
 REFERENCE           ZONE_GENERATOR_5_CELLAR
-LANG_ENGLISH        "Porão do Gerador 5"
+LANG_ENGLISH        "^3Porão do Gerador 5"
 
 REFERENCE           ZONE_LIGHTNING_TUNNEL
-LANG_ENGLISH        "Túnel do Raio"
+LANG_ENGLISH        "^3Túnel do Raio"
 
 REFERENCE           ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP
-LANG_ENGLISH        "1º Pegada Direita da No Man's Land"
+LANG_ENGLISH        "^31º Pegada Direita da No Man's Land"
 
 REFERENCE           ZONE_NO_MANS_LAND_STAIRS
-LANG_ENGLISH        "Escadas da No Man's Land"
+LANG_ENGLISH        "^3Escadas da No Man's Land"
 
 REFERENCE           ZONE_NO_MANS_LAND_LEFT_FOOTSTEP
-LANG_ENGLISH        "Pegada Esquerda da No Man's Land"
+LANG_ENGLISH        "^3Pegada Esquerda da No Man's Land"
 
 REFERENCE           ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP
-LANG_ENGLISH        "2º Pegada Direita da No Man's Land"
+LANG_ENGLISH        "^32º Pegada Direita da No Man's Land"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_1
-LANG_ENGLISH        "Rota do Tanque 1 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 1 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_2
-LANG_ENGLISH        "Rota do Tanque 2 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 2 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_3
-LANG_ENGLISH        "Rota do Tanque 3 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 3 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_4
-LANG_ENGLISH        "Rota do Tanque 4 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 4 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_5
-LANG_ENGLISH        "Rota do Tanque 5 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 5 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_TANK_ROUTE_6
-LANG_ENGLISH        "Rota do Tanque 6 - Gerador 4"
+LANG_ENGLISH        "^3Rota do Tanque 6 - Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_LEFT_FOOTSTEP
-LANG_ENGLISH        "Pegada Esquerda do Gerador 4"
+LANG_ENGLISH        "^3Pegada Esquerda do Gerador 4"
 
 REFERENCE           ZONE_WIND_TUNNEL
-LANG_ENGLISH        "Túnel do vento"
+LANG_ENGLISH        "^3Túnel do vento"
 
 REFERENCE           ZONE_GENERATOR_4
-LANG_ENGLISH        "Gerador 4"
+LANG_ENGLISH        "^3Gerador 4"
 
 REFERENCE           ZONE_GENERATOR_4_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Pegada Direita do Gerador 4"
+LANG_ENGLISH        "^3Pegada Direita do Gerador 4"
 
 REFERENCE           ZONE_EXCAVATION_SITE_FRONT_PATH
-LANG_ENGLISH        "Caminho frontal do Campo de Escavação"
+LANG_ENGLISH        "^3Caminho frontal do Campo de Escavação"
 
 REFERENCE           ZONE_EXCAVATION_SITE_BACK_PATH
-LANG_ENGLISH        "Caminho traseiro do Campo de Escavação"
+LANG_ENGLISH        "^3Caminho traseiro do Campo de Escavação"
 
 REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_3
-LANG_ENGLISH        "Campo de Escavação Nível 3"
+LANG_ENGLISH        "^3Campo de Escavação Nível 3"
 
 REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_2
-LANG_ENGLISH        "Campo de Escavação Nível 2"
+LANG_ENGLISH        "^3Campo de Escavação Nível 2"
 
 REFERENCE           ZONE_EXCAVATION_SITE_LEVEL_1
-LANG_ENGLISH        "Campo de Escavação Nível 1"
+LANG_ENGLISH        "^3Campo de Escavação Nível 1"
 
 REFERENCE           ZONE_GENERATOR_5_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Caminho do Gerador 5 para o Gerador 6"
+LANG_ENGLISH        "^3Caminho do Gerador 5 para o Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_4_TO_GENERATOR_6_PATH
-LANG_ENGLISH        "Caminho do Gerador 4 para o Gerador 6"
+LANG_ENGLISH        "^3Caminho do Gerador 4 para o Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_ENTRANCE
-LANG_ENGLISH        "Entrada do Gerador 6"
+LANG_ENGLISH        "^3Entrada do Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_LEFT_FOOTSTEP
-LANG_ENGLISH        "Pegada Esquerda do Gerador 6"
+LANG_ENGLISH        "^3Pegada Esquerda do Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_1
-LANG_ENGLISH        "Rota do Tanque 1 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 1 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_2
-LANG_ENGLISH        "Rota do Tanque 2 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 2 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_3
-LANG_ENGLISH        "Rota do Tanque 3 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 3 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_4
-LANG_ENGLISH        "Rota do Tanque 4 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 4 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_5
-LANG_ENGLISH        "Rota do Tanque 5 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 5 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_6
-LANG_ENGLISH        "Rota do Tanque 6 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 6 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_TANK_ROUTE_7
-LANG_ENGLISH        "Rota do Tanque 7 - Gerador 6"
+LANG_ENGLISH        "^3Rota do Tanque 7 - Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6_RIGHT_FOOTSTEP
-LANG_ENGLISH        "Pegada Direita do Gerador 6"
+LANG_ENGLISH        "^3Pegada Direita do Gerador 6"
 
 REFERENCE           ZONE_GENERATOR_6
-LANG_ENGLISH        "Gerador 6"
+LANG_ENGLISH        "^3Gerador 6"
 
 REFERENCE           ZONE_ICE_TUNNEL
-LANG_ENGLISH        "Túnel do Gelo"
+LANG_ENGLISH        "^3Túnel do Gelo"
 
 REFERENCE           ZONE_ABOVE_GENERATOR_3_BUNKER
-LANG_ENGLISH        "Acima do Bunker do Gerador 3"
+LANG_ENGLISH        "^3Acima do Bunker do Gerador 3"
 
 REFERENCE           ZONE_ABOVE_NO_MANS_LAND
-LANG_ENGLISH        "Acima da No Man's Land"
+LANG_ENGLISH        "^3Acima da No Man's Land"
 
 REFERENCE           ZONE_BEHIND_CHURCH
-LANG_ENGLISH        "Atrás da Igreja"
+LANG_ENGLISH        "^3Atrás da Igreja"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER
-LANG_ENGLISH        "The Crazy Place - Câmara do Raio"
+LANG_ENGLISH        "^3The Crazy Place - Câmara do Raio"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE
-LANG_ENGLISH        "The Crazy Place - Raio & Gelo"
+LANG_ENGLISH        "^3The Crazy Place - Raio & Gelo"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_CHAMBER
-LANG_ENGLISH        "The Crazy Place - Câmara do Gelo"
+LANG_ENGLISH        "^3The Crazy Place - Câmara do Gelo"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING
-LANG_ENGLISH        "The Crazy Place - Fogo & Raio"
+LANG_ENGLISH        "^3The Crazy Place - Fogo & Raio"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_CENTER
-LANG_ENGLISH        "The Crazy Place - Centro"
+LANG_ENGLISH        "^3The Crazy Place - Centro"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_ICE_WIND
-LANG_ENGLISH        "The Crazy Place - Gelo & Vento"
+LANG_ENGLISH        "^3The Crazy Place - Gelo & Vento"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER
-LANG_ENGLISH        "The Crazy Place - Câmara do Fogo"
+LANG_ENGLISH        "^3The Crazy Place - Câmara do Fogo"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_FIRE
-LANG_ENGLISH        "The Crazy Place - Vento & Fogo"
+LANG_ENGLISH        "^3The Crazy Place - Vento & Fogo"
 
 REFERENCE           ZONE_THE_CRAZY_PLACE_WIND_CHAMBER
-LANG_ENGLISH        "The Crazy Place - Câmara do Vento"
+LANG_ENGLISH        "^3The Crazy Place - Câmara do Vento"
 
 REFERENCE           ZONE_ROBOTS_HEAD
-LANG_ENGLISH        "Cabeça do Robô"
+LANG_ENGLISH        "^3Cabeça do Robô"
 
 ENDMARKER
