@@ -21,6 +21,7 @@ init()
 	replacefunc(getfunction("maps/mp/zm_tomb_utility", "watch_staff_usage"), ::watch_staff_usage);
     replaceFunc(getfunction("maps/mp/zm_tomb_tank", "tank_push_player_off_edge"), ::fixed_tank_push_player_off_edge);
 	replacefunc(getfunction("maps/mp/zm_tomb_capture_zones", "recapture_round_tracker"), ::recapture_round_tracker);
+	replacefunc(getfunction("maps/mp/zm_tomb_chamber", "move_wall_down"), ::move_wall_down);
 
 	level thread pack_a_punch_enable();
 	level thread enable_all_teleporters();
@@ -460,4 +461,8 @@ fixPanzerRounds()
 			}
 		}
 	}
+}
+
+move_wall_down()
+{
 }
