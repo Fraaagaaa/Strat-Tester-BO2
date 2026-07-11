@@ -21,7 +21,7 @@
 #define WHOISWHO_PERK "specialty_finalstand"
 #define VULTURE_PERK "specialty_nomotionsensor"
 
-settings_init()
+init_settings()
 {
     thread createDvars();
 }

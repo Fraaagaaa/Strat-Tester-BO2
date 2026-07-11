@@ -16,7 +16,6 @@ init()
 	flag_wait("initial_blackscreen_passed");
 	level thread displaysubwooferkills();
     deleteBarricades();
-    buildables_buried(getDvarInt("st_setupBuried"), getDvarInt("st_power"));
 }
 
 deleteBarricades()

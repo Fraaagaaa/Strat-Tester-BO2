@@ -33,7 +33,6 @@ init()
 	flag_wait("initial_blackscreen_passed");
     
     give_max_ammo_reward();
-	buildables_origins(getDvarInt("st_shield"));
     turn_gens_on();
 	takecraftableparts("");
     placeStaffsInChargers();

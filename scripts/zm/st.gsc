@@ -1,21 +1,22 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
+#include maps\mp\gametypes_zm\_hud_util;
 #include maps\mp\zombies\_zm;
 #include maps\mp\zombies\_zm_equipment;
 #include maps\mp\zombies\_zm_magicbox;
 #include maps\mp\zombies\_zm_utility;
-#include maps\mp\gametypes_zm\_hud_util;
 
+#include scripts\zm\strattester\buildables;
 #include scripts\zm\strattester\bus;
-#include scripts\zm\strattester\fixes;
 #include scripts\zm\strattester\commands;
+#include scripts\zm\strattester\despawners;
+#include scripts\zm\strattester\fixes;
+#include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\perks;
+#include scripts\zm\strattester\settings;
 #include scripts\zm\strattester\start;
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\utility;
-#include scripts\zm\strattester\hud;
-#include scripts\zm\strattester\despawners;
-#include scripts\zm\strattester\settings;
-#include scripts\zm\strattester\perks;
 #include scripts\zm\strattester\weapons;
 
 main()
@@ -27,9 +28,10 @@ init()
 {
 	level.strat_tester = true;
 	level thread enable_cheats();
-	level thread settings_init();
-	level thread despawners_init();
-    level thread start_init();
+	level thread init_settings();
+	level thread init_despawners();
+    level thread init_start();
+	level thread init_buildables();
 	level thread readChat();
     level thread wait_for_players();
 	level thread watermark();

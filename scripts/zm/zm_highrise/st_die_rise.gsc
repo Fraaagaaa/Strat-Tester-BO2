@@ -11,8 +11,6 @@
 init()
 {
 	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
-    // replaceFunc(getfunction("maps/mp/zm_highrise_buildables", "springpadbuildable"), ::springpadbuildable);
-	level thread spawn_buildable_trigger((1879, 1354, 3034), "equip_springpad_zm", "^3Press &&1 for ^5Springpad", 0);
 	level.zombies_died_to_elevator = 0;
 	level thread displayElevatorKills();
 	level thread check_special_round();

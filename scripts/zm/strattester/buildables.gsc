@@ -143,13 +143,56 @@ equipment_buy( equipment )
     self equipment_give( equipment );
 }
 
+// spawn_buildable_trigger(origin, build, limit)
+// {
+// 	if(!isdefined(limit))
+// 		limit = undefined;
 
-spawn_buildable_trigger_shield(origin, build, string)
+// 	trigger = spawn("trigger_radius", origin, 40, 70, 140);
+// 	trigger.targetname = "shield_trigger";
+// 	if(issubstr(build, "shield"))
+// 		trigger SetCursorHint("ZOMBIE_WEAPON_RIOTSHIELD");
+// 	else if(issubstr(build, "subwoofer"))
+// 		trigger SetCursorHint("ZM_BURIED_EQ_SW_PHS");
+// 	else if(issubstr(build, "headchopper"))
+// 		trigger SetCursorHint("ZM_BURIED_EQ_HC_PHS");
+// 	else if(issubstr(build, "turbine"))
+// 		trigger SetCursorHint("ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING");
+// 	else if(issubstr(build, "trample") && isburied())
+// 		trigger SetCursorHint("ZM_BURIED_EQ_SP_PHS");
+// 	else if(issubstr(build, "trample") && isdierise())
+// 		trigger SetCursorHint("ZM_HIGHRISE_GRAB_SPRINGPAD");
+// 	else
+// 		trigger sethintstring("Press &&1 for buildable");
+
+// 	trigger.limit = limit;
+// 	trigger.build = build;
+// 	trigger._origin = origin;
+// 	trigger thread watch_buildable_trigger();
+// }
+
+
+spawn_buildable_trigger(origin, build)
 {
 	trigger = spawn("trigger_radius", origin, 40, 70, 140);
 	trigger.targetname = "shield_trigger";
 	trigger SetCursorHint("HINT_NOICON");
-	trigger SetHintString(string);
+
+	if(issubstr(build, "shield"))
+		trigger sethintstring(&"ZOMBIE_WEAPON_RIOTSHIELD");
+	else if(issubstr(build, "subwoofer"))
+		trigger sethintstring(&"ZM_BURIED_EQ_SW_PHS");
+	else if(issubstr(build, "headchopper"))
+		trigger sethintstring(&"ZM_BURIED_EQ_HC_PHS");
+	else if(issubstr(build, "turbine"))
+		trigger sethintstring(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING");
+	else if(issubstr(build, "trample") && isburied())
+		trigger sethintstring(&"ZM_BURIED_EQ_SP_PHS");
+	else if(issubstr(build, "trample") && isdierise())
+		trigger sethintstring(&"ZM_HIGHRISE_GRAB_SPRINGPAD");
+	else
+		trigger sethintstring("Press &&1 for buildable");
+
 	while(true)
 	{
 		trigger waittill( "trigger", player );
@@ -157,71 +200,81 @@ spawn_buildable_trigger_shield(origin, build, string)
 			if( !player hasWeapon( build ) )
 				player equipment_buy( build );
 
-		if(!level.shield)
-			trigger.origin = (0, -10000, 0);
 		wait 0.1;
 	}
 }
 
-spawn_buildable_trigger(origin, build, string, limit)
+// watch_buildable_trigger()
+// {
+// 	level endon("end_game");
+// 	while(true)
+// 	{
+// 		self waittill( "trigger", player);
+// 		if(player UseButtonPressed())
+// 		{
+// 			if(!isdefined(self.limit))
+// 			{
+// 				if( !player hasWeapon( self.build ) )
+// 					player equipment_buy( self.build );
+// 			}
+// 			else
+// 			{
+// 				if(player.origin[self.limit] > self._origin[self.limit])
+// 				{
+// 					if( !player hasWeapon( self.build ) )
+// 						player equipment_buy( self.build );
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+init_buildables()
 {
-	trigger = spawn("trigger_radius", origin, 40, 70, 140);
-	trigger.targetname = "shield_trigger";
-	trigger SetCursorHint("HINT_NOICON");
-	trigger SetHintString(string);
-	while(true)
+	flag_wait( "initial_blackscreen_passed" );
+	if(isburied())
 	{
-		trigger waittill( "trigger", player);
-		if( player UseButtonPressed() )
-			if(!isdefined(limit))
-			{
-				if( !player hasWeapon( build ) )
-					player equipment_buy( build );
-			}
-			else
-				if(player.origin[limit] > origin[limit])
-				{
-					if( !player hasWeapon( build ) )
-						player equipment_buy( build );
-				}
-
-
-		wait 0.1;
-	}
-}
-
-buildables_buried(setup, power)
-{
-    if(setup == -1)
-		return;
+		setup = getDvarInt("st_setupBuried");
+		power = getDvarInt("st_power");
+    	if(setup == -1)
+			return;
 		
-	if(power)
-	{
-		if(setup == 0)
+		if(power)
 		{
-			level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // jug
-			level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // saloon
-			level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
+			if(setup == 0)
+			{
+				level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm"); // jug
+				level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm"); // saloon
+				level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm"); // church
+			}
+			if(setup == 1)
+			{
+				level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm"); // jug
+				level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm"); // jug
+				level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm"); // saloon
+				level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm"); // church
+			}
 		}
-		if(setup == 1)
+		else
 		{
-			level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // jug
-			level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm", "^3Press &&1 for ^5Subwoofer"); // saloon
-			level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm", "^3Press &&1 for ^5Turbine"); // church
+			level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm"); // jug
+			level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm"); // saloon
 		}
+		return;
 	}
-	else
+	if(isorigins())
 	{
-		level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // jug
-		level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm", "^3Press &&1 for ^5Springpad"); // saloon
+		level thread spawn_buildable_trigger((110, -3000, 60), "tomb_shield_zm");
+	    level thread spawn_buildable_trigger((2308, 689, -23), "tomb_shield_zm");
+		return;
 	}
-}
-
-buildables_origins(condition)
-{
-	if(condition)
+	if(ismob())
 	{
-		spawn_buildable_trigger_shield((110, -3000, 60), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
-	    spawn_buildable_trigger_shield((2308, 689, -23), "tomb_shield_zm", "^3Press &&1 for ^5Shield");
+		level thread spawn_buildable_trigger((3366, 9406, 1336), "alcatraz_shield_zm");
+		return;
+	}
+	if(isdierise())
+	{
+		level thread spawn_buildable_trigger((1879, 1354, 3034), "equip_springpad_zm");
 	}
 }

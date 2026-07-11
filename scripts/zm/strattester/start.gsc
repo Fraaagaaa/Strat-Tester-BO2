@@ -17,7 +17,7 @@
 
 #include scripts\zm\strattester\utility;
 
-start_init()
+init_start()
 {
     level thread turn_on_power();
     level thread remove_boards_from_windows();

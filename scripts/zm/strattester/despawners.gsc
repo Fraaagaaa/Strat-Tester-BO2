@@ -14,7 +14,7 @@ replacefuncs()
 	replacefunc( getfunction( "maps/mp/zm_transit_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_tranzit );
 }
 
-despawners_init()
+init_despawners()
 {
 	level thread despawner_counter();
 	level thread anchorLeak_counter();
