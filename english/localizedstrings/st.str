@@ -1,7 +1,7 @@
-FILENOTES           "TRANSLATED BY NOMOLEMAN"
+FILENOTES           "TRANSLATED BY BONECRUSHER"
 
 // ==========================================
-// TÍTULOS Y PESTAÑAS
+// TÍTULOS E PESTAÑAS
 // ==========================================
 REFERENCE           ST_MENU_TITLE
 LANG_ENGLISH        "STRAT TESTER"
@@ -10,85 +10,85 @@ REFERENCE           ST_WATERMARK
 LANG_ENGLISH        "STRAT TESTER 2.5"
 
 REFERENCE           ST_TAB_GAME
-LANG_ENGLISH        "JOGO"
+LANG_ENGLISH        "PARTIDA"
 
 REFERENCE           ST_TAB_HUD
-LANG_ENGLISH        "HUD"
+LANG_ENGLISH        "INTERFAZ"
 
 REFERENCE           ST_TAB_MAP
 LANG_ENGLISH        "MAPA"
 
 REFERENCE           ST_TAB_START
-LANG_ENGLISH        "INÍCIO"
+LANG_ENGLISH        "INICIO"
 
 REFERENCE           ST_TAB_BOX
 LANG_ENGLISH        "CAIXA"
 
 REFERENCE           ST_MENU_OFF
-LANG_ENGLISH        "DESLIGADO"
+LANG_ENGLISH        "NON"
 
 REFERENCE           ST_MENU_ON
-LANG_ENGLISH        "LIGADO"
+LANG_ENGLISH        "SI"
 
 REFERENCE           ST_MENU_NONE
-LANG_ENGLISH        "NENHUM"
+LANG_ENGLISH        "NINGÚN"
 
 // ==========================================
 // PESTAÑA GAME
 // ==========================================
 REFERENCE           ST_CHANGE_ROUND
-LANG_ENGLISH        "ALTERAR O ROUND"
+LANG_ENGLISH        "CAMBIAR RONDA"
 
 REFERENCE           ST_CHANGE_ROUND_DESC
-LANG_ENGLISH        "Define o round atual."
+LANG_ENGLISH        "Cambia a ronda actual."
 
 REFERENCE           ST_KILL_HORDE
 LANG_ENGLISH        "MATAR HORDA"
 
 REFERENCE           ST_KILL_HORDE_DESC
-LANG_ENGLISH        "Instantaneamente mata a horda atual de zumbis."
+LANG_ENGLISH        "Mata a horda actual instantaneamente."
 
 REFERENCE           ST_END_ROUND
-LANG_ENGLISH        "TERMINAR O ROUND"
+LANG_ENGLISH        "REMATAR RONDA"
 
 REFERENCE           ST_END_ROUND_DESC
-LANG_ENGLISH        "Instantaneamente termina o round atual."
+LANG_ENGLISH        "Remata a ronda actual instantaneamente."
 
 REFERENCE           ST_DESPAWNERS
-LANG_ENGLISH        "DESPAWNERS"
+LANG_ENGLISH        "REAPARICIÓN DE ZOMBIS"
 
 REFERENCE           ST_DESPAWNERS_DESC
-LANG_ENGLISH        "Ativa ou desativa os zumbis darem respawn."
+LANG_ENGLISH        "Engade información sobre a reaparición dos zombis."
 
 REFERENCE           ST_NOTARGET
-LANG_ENGLISH        "SEM ALVO"
+LANG_ENGLISH        "IGNORAR XOGADOR"
 
 REFERENCE           ST_NOTARGET_DESC
-LANG_ENGLISH        "Zumbis irão ignorar o jogador."
+LANG_ENGLISH        "Os zombis ignorarán o xogador."
 
 REFERENCE           ST_DROPS
-LANG_ENGLISH        "DROPS"
+LANG_ENGLISH        "POWER-UPS"
 
 REFERENCE           ST_DROPS_DESC
-LANG_ENGLISH        "Ativa ou desativa os drops power-ups."
+LANG_ENGLISH        "Activa ou desactiva os power-ups soltados polos zombis."
 
 REFERENCE           ST_FOG
-LANG_ENGLISH        "NEBLINA"
+LANG_ENGLISH        "NÉBOA"
 
 REFERENCE           ST_FOG_DESC
-LANG_ENGLISH        "Ativa ou desativa a neblina no mapa."
+LANG_ENGLISH        "Activa ou desactiva a néboa do mapa. (modo okla)"
 
 REFERENCE           ST_TP_DESTINATION
-LANG_ENGLISH        "DESTINO DE TELEPORTE"
+LANG_ENGLISH        "DESTINO DO TELETRANSPORTE"
 
 REFERENCE           ST_TP_DESTINATION_DESC
-LANG_ENGLISH        "Escolha uma localização para ser teleportado."
+LANG_ENGLISH        "Elixe unha zona á que teletransportarte."
 
 REFERENCE           ST_EXECUTE_TELEPORT
-LANG_ENGLISH        "EXECUTAR TELEPORTE"
+LANG_ENGLISH        "EXECUTAR TELETRANSPORTE"
 
 REFERENCE           ST_EXECUTE_TELEPORT_DESC
-LANG_ENGLISH        "Teleporta para a localização selecionada."
+LANG_ENGLISH        "Teletranspórtate á zona seleccionada."
 
 // ==========================================
 // PESTAÑA HUD
@@ -97,221 +97,224 @@ REFERENCE           ST_HEALTHBAR
 LANG_ENGLISH        "BARRA DE VIDA"
 
 REFERENCE           ST_HEALTHBAR_DESC
-LANG_ENGLISH        "Mostra a barra de vida."
+LANG_ENGLISH        "Mostra a túa barra de vida."
 
 REFERENCE           ST_ZOMBIE_COUNTER
-LANG_ENGLISH        "CONTADOR DE ZUMBIS"
+LANG_ENGLISH        "CONTADOR DE ZOMBIS"
 
 REFERENCE           ST_ZOMBIE_COUNTER_DESC
-LANG_ENGLISH        "Mostra a quantidade de zumbis restante no round atual."
+LANG_ENGLISH        "Mostra os zombis restantes na ronda."
 
 REFERENCE           ST_SPH_METER
 LANG_ENGLISH        "MEDIDOR DE SPH"
 
 REFERENCE           ST_SPH_METER_DESC
-LANG_ENGLISH        "Mostra o SPH (Segundos Por Horda)."
+LANG_ENGLISH        "Mostra o medidor de Segundos Por Horda (SPH)."
 
 REFERENCE           ST_ZONE_NAME
-LANG_ENGLISH        "NOME DA ZONA"
+LANG_ENGLISH        "NOME DE ZONA"
 
 REFERENCE           ST_ZONE_NAME_DESC
-LANG_ENGLISH        "Mostra a zona atual do mapa."
+LANG_ENGLISH        "Mostra o nome da túa zona actual."
 
 REFERENCE           ST_TIMER_POSITION
-LANG_ENGLISH        "POSIÇÃO DO TIMER"
+LANG_ENGLISH        "POSICIÓN DO CRONÓMETRO"
 
 REFERENCE           ST_TIMER_POSITION_DESC
-LANG_ENGLISH        "Muda a posição do timer de speedrun."
+LANG_ENGLISH        "Cambia a posición do cronómetro na pantalla."
 
 REFERENCE           ST_TRAP_TIMER
-LANG_ENGLISH        "TRAP TIMER"
+LANG_ENGLISH        "CRONÓMETRO DE TRAMPA"
 
 REFERENCE           ST_TRAT_TIMER_DESC
-LANG_ENGLISH        "Mostra a duração das armadilhas (traps) que estão ativas."
+LANG_ENGLISH        "Mostra o tempo de actividade restante das trampas."
 
 // Opciones de posición del HUD
 REFERENCE           ST_HIDDEN
 LANG_ENGLISH        "OCULTO"
 
 REFERENCE           ST_TOP_LEFT
-LANG_ENGLISH        "SUPERIOR ESQUERDO"
+LANG_ENGLISH        "ARRIBA ESQUERDA"
 
 REFERENCE           ST_TOP_RIGHT
-LANG_ENGLISH        "SUPERIOR DIREITO"
+LANG_ENGLISH        "ARRIBA DEREITA"
 
 REFERENCE           ST_MIDDLE_LEFT
-LANG_ENGLISH        "MEIO ESQUERDO"
+LANG_ENGLISH        "CENTRO ESQUERDA"
 
 REFERENCE           ST_BOTTOM
-LANG_ENGLISH        "EMBAIXO"
+LANG_ENGLISH        "ABAIXO"
 
 // ==========================================
 // PESTAÑA MAP SETTINGS
 // ==========================================
 REFERENCE           ST_FARM_DEPART
-LANG_ENGLISH        "PARADA NA FAZENDA"
+LANG_ENGLISH        "PARADA NA GRANXA"
 
 REFERENCE           ST_FARM_DEPART_DESC
-LANG_ENGLISH        "Ajusta o tempo que o ônibus vai ficar estacionado na fazenda."
+LANG_ENGLISH        "Axusta o tempo de parada do autobús na Granxa."
 
 REFERENCE           ST_DENIZENS
 LANG_ENGLISH        "DENIZENS"
 
 REFERENCE           ST_DENIZENS_DESC
-LANG_ENGLISH        "Ativa ou desativa os denizens na neblina."
+LANG_ENGLISH        "Activa ou desactiva os denizens."
 
 REFERENCE           ST_BUS_TIMER
-LANG_ENGLISH        "TIMER DO ÔNIBUS"
+LANG_ENGLISH        "CRONÓMETRO DO AUTOBÚS"
 
 REFERENCE           ST_BUS_TIMER_DESC
-LANG_ENGLISH        "Mostra a contagem regressiva da saída do ônibus."
+LANG_ENGLISH        "Mostra a conta atrás para a saída do autobús."
 
 REFERENCE           ST_BUS_LOCATION
-LANG_ENGLISH        "LOCALIZAÇÃO DO ÔNIBUS"
+LANG_ENGLISH        "UBICACIÓN DO AUTOBÚS"
 
 REFERENCE           ST_BUS_LOCATION_DESC
-LANG_ENGLISH        "Mostra a atual localização do ônibus."
+LANG_ENGLISH        "Mostra a localización actual do autobús."
 
 REFERENCE           ST_BUS_STATUS
-LANG_ENGLISH        "ÔNIBUS MOVENDO"
+LANG_ENGLISH        "AUTOBÚS EN MOVEMENTO"
 
 REFERENCE           ST_BUS_STATUS_DESC
-LANG_ENGLISH        "Mostra quando o ônibus está em movimento ou estacionado."
+LANG_ENGLISH        "Mostra se o autobús está en movemento ou estacionado."
 
 REFERENCE           ST_FORCE_PAP
-LANG_ENGLISH        "FORÇAR PACK-A-PUNCH"
+LANG_ENGLISH        "FORZAR PAP (PACK-A-PUNCH)"
 
 REFERENCE           ST_FORCE_PAP_DESC
-LANG_ENGLISH        "Força a maquina do Pack-A-Punch dar spawn."
+LANG_ENGLISH        "Forza a aparición da máquina Pack-A-Punch."
 
 REFERENCE           ST_ELEVATOR_KILLS
-LANG_ENGLISH        "KILLS DO ELEVADOR"
+LANG_ENGLISH        "BAIXAS DE ASCENSOR"
 
 REFERENCE           ST_ELEVATOR_KILLS_DESC
-LANG_ENGLISH        "Conta as kills feitas pelo elevador."
+LANG_ENGLISH        "Rexistra as baixas polos ascensores."
 
 REFERENCE           ST_BUILDABLES
-LANG_ENGLISH        "RESSONADOR"
+LANG_ENGLISH        "RESONADOR"
 
 REFERENCE           ST_BUILDABLES_DESC
-LANG_ENGLISH        "Seleciona onde o Ressonador vai estar montado."
+LANG_ENGLISH        "Selecciona onde aparecerá o resonador."
 
 REFERENCE           ST_RESONATOR_JUG
-LANG_ENGLISH        "JUG"
+LANG_ENGLISH        "TITÁN"
 
 REFERENCE           ST_RESONATOR_SALOON
 LANG_ENGLISH        "SALOON"
 
 REFERENCE           ST_SUBWOOFER
-LANG_ENGLISH        "KILLS DO RESSONADOR"
+LANG_ENGLISH        "BAIXAS DO RESONADOR"
 
 REFERENCE           ST_SUBWOOFER_DESC
-LANG_ENGLISH        "Mostra as eliminações de cada disparo do ressonador."
+LANG_ENGLISH        "Mostra as baixas de cada disparo do resonador."
 
 REFERENCE           ST_INFINITE_LIVES
 LANG_ENGLISH        "AFTERLIFE INFINITO"
 
 REFERENCE           ST_INFINITE_LIVES_DESC
-LANG_ENGLISH        "Ativa ou desativa o modo de Afterlife Infinito."
+LANG_ENGLISH        "Recarga as vidas de afterlife cando se perden."
 
 REFERENCE           ST_SHIELD
-LANG_ENGLISH        "ESCUDO ZUMBI"
+LANG_ENGLISH        "ESCUDO ZOMBI"
 
 REFERENCE           ST_SHIELD_DESC
-LANG_ENGLISH        "Concede ao jogador um Escudo Zumbi."
+LANG_ENGLISH        "Outorga un Escudo Zombi ao xogador."
 
 REFERENCE           ST_SOLO_STAFF
-LANG_ENGLISH        "BASTÃO SOLO"
+LANG_ENGLISH        "BASTÓN NUN XOGADOR"
 
 REFERENCE           ST_SOLO_STAFF_DESC
-LANG_ENGLISH        "Seleciona qual bastão será equipado ao dar spawn."
+LANG_ENGLISH        "Selecciona que bastón equipar ao aparecer xogando só."
 
 REFERENCE           ST_ICE_STAFF
-LANG_ENGLISH        "BASTÃO DE GELO"
+LANG_ENGLISH        "BASTÓN DE XEO"
 
 REFERENCE           ST_WIND_STAFF
-LANG_ENGLISH        "BASTÃO DE VENTO"
+LANG_ENGLISH        "BASTÓN DE VENTO"
 
 REFERENCE           ST_FIRE_STAFF
-LANG_ENGLISH        "BASTÃO DE FOGO"
+LANG_ENGLISH        "BASTÓN DE LUME"
 
 REFERENCE           ST_LIGHTNING_STAFF
-LANG_ENGLISH        "BASTÃO DE RAIO"
+LANG_ENGLISH        "BASTÓN DE LÓSTREGOS"
 
 REFERENCE           ST_ELECTRIC_CHERRY
 LANG_ENGLISH        "ELECTRIC CHERRY"
 
 REFERENCE           ST_ELECTRIC_CHERRY_DESC
-LANG_ENGLISH        "Concede ao jogador o Perk Electric Cherry ao dar spawn."
+LANG_ENGLISH        "Outorga Electric Cherry ao aparecer."
 
 REFERENCE           ST_WAR_MACHINE
-LANG_ENGLISH        "WAR MACHINE"
+LANG_ENGLISH        "MÁQUINA DE GUERRA"
 
 REFERENCE           ST_WAR_MACHINE_DESC
-LANG_ENGLISH        "Concede ao jogador a War Machine (Máquina de Guerra) ao dar spawn."
+LANG_ENGLISH        "Outorga a Máquina de Guerra ao aparecer."
 
 REFERENCE           ST_TANK_KILLS
-LANG_ENGLISH        "KILLS DO TANK"
+LANG_ENGLISH        "BAIXAS DO TANQUE"
 
 REFERENCE           ST_TANK_KILLS_DESC
-LANG_ENGLISH        "Conta as kills feitas pelo Tank."
+LANG_ENGLISH        "Rexistra as baixas realizadas polo tanque."
 
 REFERENCE           ST_STOMP_KILLS
-LANG_ENGLISH        "KILLS DO ROBO"
+LANG_ENGLISH        "BAIXAS POR PISOTÓN"
 
 REFERENCE           ST_STOMP_KILLS_DESC
-LANG_ENGLISH        "Conta as eliminações feitas pelo pé dos Robôs."
+LANG_ENGLISH        "Rexistra as baixas por pisotóns dos robots xigantes."
 
 REFERENCE           ST_TUMBLE_ANIM
-LANG_ENGLISH        "ANIMAÇÃO DE QUEDA"
+LANG_ENGLISH        "ANIMACIÓNS DE TROPEZO"
 
 REFERENCE           ST_TUMBLE_ANIM_DESC
-LANG_ENGLISH        "Ativa ou desativa o contador de queda dos zumbis."
+LANG_ENGLISH        "Rexistra as animacións dos zombis tropezando."
 
 REFERENCE           ST_UNLOCK_GENERATORS
-LANG_ENGLISH        "LIGAR GERADORES"
+LANG_ENGLISH        "DESBLOQUEAR XERADORES"
 
 REFERENCE           ST_UNLOCK_GENERATORS_DESC
-LANG_ENGLISH        "Instantaneamente ativa todos os geradores."
+LANG_ENGLISH        "Arranxa todos os xeradores."
 
 // ==========================================
 // PESTAÑA START SETTINGS
 // ==========================================
 REFERENCE           ST_INITIAL_ROUND
-LANG_ENGLISH        "ROUND INICIAL"
+LANG_ENGLISH        "RONDA INICIAL"
 
 REFERENCE           ST_INITIAL_ROUND_DESC
-LANG_ENGLISH        "Define o round que o jogo irá começar."
+LANG_ENGLISH        "Configura en que ronda empezará a partida."
 
 REFERENCE           ST_INITIAL_DELAY
-LANG_ENGLISH        "DELAY INICIAL"
+LANG_ENGLISH        "RETRASO INICIAL"
 
 REFERENCE           ST_INITIAL_DELAY_DESC
-LANG_ENGLISH        "Define o delay em segundos antes do primeiro round iniciar."
+LANG_ENGLISH        "Configura o tempo de espera antes de que empece a primeira ronda."
 
 REFERENCE           ST_BOARDS
-LANG_ENGLISH        "BARREIRAS DAS JANELAS"
+LANG_ENGLISH        "BARREIRAS NAS VENTÁS"
 
 REFERENCE           ST_BOARDS_DESC
-LANG_ENGLISH        "Remove as barreiras de todas as janelas no início da partida."
+LANG_ENGLISH        "Quita as barreiras das ventás ao empezar."
+
+REFERENCE           ST_POWER_STATION
+LANG_ENGLISH        "ESTACIÓN DE ENERXÍA"
 
 REFERENCE           ST_POWER
-LANG_ENGLISH        "ENERGIA"
+LANG_ENGLISH        "ENERXÍA"
 
 REFERENCE           ST_POWER_DESC
-LANG_ENGLISH        "Liga a energia do mapa automaticamente."
+LANG_ENGLISH        "Activa a enerxía automaticamente ao empezar."
 
 REFERENCE           ST_OPEN_DOORS
 LANG_ENGLISH        "ABRIR PORTAS"
 
 REFERENCE           ST_OPEN_DOORS_DESC
-LANG_ENGLISH        "Abre todas as portas automaticamente."
+LANG_ENGLISH        "Abre todas as portas automaticamente ao empezar."
 
 REFERENCE           ST_WEAPONS
 LANG_ENGLISH        "DAR ARMAS"
 
 REFERENCE           ST_WEAPONS_DESC
-LANG_ENGLISH        "Concede as armas do setup automaticamente no spawn."
+LANG_ENGLISH        "Outorga as armas necesarias automaticamente ao empezar."
 
 // ==========================================
 // PESTAÑA BOX & ZONAS GENÉRICAS
@@ -320,59 +323,56 @@ REFERENCE           ST_BOX_DESTINATION
 LANG_ENGLISH        "DESTINO DA CAIXA"
 
 REFERENCE           ST_BOX_DESTINATION_DESC
-LANG_ENGLISH        "Escolhe para onde a caixa irá ser movida."
+LANG_ENGLISH        "Elixe a onde se moverá a caixa misteriosa."
 
 REFERENCE           ST_MOVE_BOX
 LANG_ENGLISH        "MOVER CAIXA"
 
 REFERENCE           ST_MOVE_BOX_DEC
-LANG_ENGLISH        "Move a caixa para a localização selecionada."
+LANG_ENGLISH        "Move a caixa misteriosa á zona seleccionada."
 
 REFERENCE           ST_NOT_SUPPORTED
-LANG_ENGLISH        "SEM SUPORTE"
+LANG_ENGLISH        "NON DISPOÑIBLE"
 
 REFERENCE           ST_NOT_SUPPORTED_DESC
-LANG_ENGLISH        "Essa mecânica não funciona nesse mapa."
+LANG_ENGLISH        "Esta función non está dispoñible neste mapa."
 
-// Nombres de zonas de los mapas
+// Nomes de zonas dos mapas
 REFERENCE           ST_FARM
-LANG_ENGLISH        "FAZENDA"
+LANG_ENGLISH        "GRANXA"
 
 REFERENCE           ST_TOWN
-LANG_ENGLISH        "CIDADE"
+LANG_ENGLISH        "POBO"
 
 REFERENCE           ST_DINER
-LANG_ENGLISH        "DINER"
+LANG_ENGLISH        "CAFETARÍA"
 
 REFERENCE           ST_TUNEL
 LANG_ENGLISH        "TÚNEL"
 
 REFERENCE           ST_DEPOT
-LANG_ENGLISH        "BUS DEPOT"
-
-REFERENCE           ST_POWER_STATION
-LANG_ENGLISH        "ENERGIA"
+LANG_ENGLISH        "ESTACIÓN"
 
 REFERENCE           ST_BUS
-LANG_ENGLISH        "ÔNIBUS"
+LANG_ENGLISH        "AUTOBÚS"
 
 REFERENCE           ST_NACHT
 LANG_ENGLISH        "NACHT DER UNTOTEN"
 
 REFERENCE           ST_AK74U
-LANG_ENGLISH        "AK74U"
+LANG_ENGLISH        "PAREDE DA AK74U"
 
 REFERENCE           ST_WAREHOUSE
-LANG_ENGLISH        "ARMAZÉM"
+LANG_ENGLISH        "ALMACÉN"
 
 REFERENCE           ST_SHAFT
-LANG_ENGLISH        "HASTE"
+LANG_ENGLISH        "ZONA DE CAMPEO"
 
 REFERENCE           ST_TRAMPLESTEAM
-LANG_ENGLISH        "TRAMPLE STEAM"
+LANG_ENGLISH        "VAPOR ARROIADOR"
 
 REFERENCE           ST_JUG
-LANG_ENGLISH        "JUGGERNOG"
+LANG_ENGLISH        "TITÁN"
 
 REFERENCE           ST_SPEED
 LANG_ENGLISH        "SPEED COLA"
@@ -381,64 +381,64 @@ REFERENCE           ST_SALOON
 LANG_ENGLISH        "SALOON"
 
 REFERENCE           ST_CAFETERIA
-LANG_ENGLISH        "CAFETERIA"
+LANG_ENGLISH        "CAFETARÍA"
 
 REFERENCE           ST_WARDENS_OFFICE
-LANG_ENGLISH        "WARDEN'S OFFICE"
+LANG_ENGLISH        "OFICINA DO ALCAIDE"
 
 REFERENCE           ST_DOUBLE_TAP
-LANG_ENGLISH        "DOUBLE TAP"
+LANG_ENGLISH        "DOBRE TIRO"
 
 REFERENCE           ST_CAGE
-LANG_ENGLISH        "JAULA"
+LANG_ENGLISH        "GAIOLA"
 
 REFERENCE           ST_CHURCH
-LANG_ENGLISH        "IGREJA"
+LANG_ENGLISH        "IGREXA"
 
 REFERENCE           ST_GENERATOR_1
-LANG_ENGLISH        "GERADOR 1"
+LANG_ENGLISH        "XERADOR 1"
 
 REFERENCE           ST_GENERATOR_2
-LANG_ENGLISH        "GERADOR 2"
+LANG_ENGLISH        "XERADOR 2"
 
 REFERENCE           ST_GENERATOR_3
-LANG_ENGLISH        "GERADOR 3"
+LANG_ENGLISH        "XERADOR 3"
 
 REFERENCE           ST_GENERATOR_4
-LANG_ENGLISH        "GERADOR 4"
+LANG_ENGLISH        "XERADOR 4"
 
 REFERENCE           ST_GENERATOR_5
-LANG_ENGLISH        "GERADOR 5"
+LANG_ENGLISH        "XERADOR 5"
 
 REFERENCE           ST_GENERATOR_6
-LANG_ENGLISH        "GERADOR 6"
+LANG_ENGLISH        "XERADOR 6"
 
 REFERENCE           ST_THE_CRAZY_PLACE
 LANG_ENGLISH        "THE CRAZY PLACE"
 
 REFERENCE           ST_TANK
-LANG_ENGLISH        "TANK STATION"
+LANG_ENGLISH        "TANQUE"
 
 REFERENCE           ST_QUICK_REVIVE
-LANG_ENGLISH        "QUICK REVIVE"
+LANG_ENGLISH        "REANIMACIÓN RÁPIDA"
 
 REFERENCE           ST_BUNKER
-LANG_ENGLISH        "BUNKER"
+LANG_ENGLISH        "BÚNKER"
 
 REFERENCE           ST_YELLOW_HOUSE
 LANG_ENGLISH        "CASA AMARELA"
 
 REFERENCE           ST_GARDEN
-LANG_ENGLISH        "JARDIM"
+LANG_ENGLISH        "XARDÍN"
 
 REFERENCE           ST_GREEN_HOUSE
 LANG_ENGLISH        "CASA VERDE"
 
 REFERENCE           ST_GARAGE
-LANG_ENGLISH        "GARAGEM"
+LANG_ENGLISH        "GARAXE"
 
 REFERENCE           ST_ROOF
-LANG_ENGLISH        "TELHADO"
+LANG_ENGLISH        "TELLADO"
 
 REFERENCE           ST_M16
 LANG_ENGLISH        "M16"
@@ -447,117 +447,117 @@ REFERENCE           ST_BAR
 LANG_ENGLISH        "BAR"
 
 REFERENCE           ST_DOCK
-LANG_ENGLISH        "DOCAS"
+LANG_ENGLISH        "PEIRAO"
 
 REFERENCE           ST_TAB_PERKS
-LANG_ENGLISH        "PERKS"
+LANG_ENGLISH        "VANTAXES"
 
 REFERENCE          ST_PERK_JUG
-LANG_ENGLISH       "JUGGERNOG"
+LANG_ENGLISH       "TITÁN"
 
 REFERENCE          ST_PERK_DOUBLETAP
-LANG_ENGLISH       "DOUBLE TAP"
+LANG_ENGLISH       "DOBRE TIRO"
 
 REFERENCE          ST_PERK_STAMINUP
-LANG_ENGLISH       "STAMIN-UP"
+LANG_ENGLISH       "RESISTENCIA+"
 
 REFERENCE          ST_PERK_SPEED
-LANG_ENGLISH       "SPEED COLA"
+LANG_ENGLISH       "PRESTIDIXITACIÓN"
 
 REFERENCE          ST_PERK_MULEKICK
-LANG_ENGLISH       "MULE KICK"
+LANG_ENGLISH       "COZ"
 
 REFERENCE          ST_PERK_REVIVE
-LANG_ENGLISH       "QUICK REVIVE"
+LANG_ENGLISH       "REANIMACIÓN RÁPIDA"
 
 REFERENCE          ST_PERK_CHERRY
-LANG_ENGLISH       "ELECTRIC CHERRY"
+LANG_ENGLISH       "CEREIXA ELÉCTRICA"
 
 REFERENCE          ST_PERK_PHD
-LANG_ENGLISH       "PHD FLOPPER"
+LANG_ENGLISH       "DR. CHUNGO"
 
 REFERENCE          ST_PERK_DEADSHOT
-LANG_ENGLISH       "DEADSHOT DAIQUIRI"
+LANG_ENGLISH       "DAIQUIRI LETAL"
 
 REFERENCE          ST_PERK_WHOISWHO
-LANG_ENGLISH       "WHO'S WHO"
+LANG_ENGLISH       "QUEN É QUEN"
 
 REFERENCE          ST_PERK_VULTURE
-LANG_ENGLISH       "VULTURE AID"
+LANG_ENGLISH       "AUXILIO DO VOITRE"
 
 REFERENCE          ST_BARRICADES_BURIED
-LANG_ENGLISH       "MANTER BARRICADAS"
+LANG_ENGLISH       "MANTER BARREIRAS"
 
 REFERENCE          ST_BARRICADES_BURIED_DESC
-LANG_ENGLISH       "Se desligado, removerá as barricadas no Juggernog, na mansão e a que fica ao lado da loja de doces."
+LANG_ENGLISH       "Destrúe as barreiras de Leroy situadas no titán, a mansión e diante da tenda de caramelos."
 
 REFERENCE          ST_BUILD_BUS
-LANG_ENGLISH       "CONSTRUIR ÔNIBUS"
+LANG_ENGLISH       "CONSTRUÍR O BUS"
 
 REFERENCE          ST_BUILD_BUS_DESC
-LANG_ENGLISH       "Isso adicionará todas as peças ao ônibus no início do jogo."
+LANG_ENGLISH       "Engadirá todas as pezas do bus."
 
 REFERENCE          ST_BUILD_BUILDABLES_TRANZIT
-LANG_ENGLISH       "CONSTRUIR EQUIPAMENTOS"
+LANG_ENGLISH       "CONSTRUÍR TRAMPAS"
 
-REFERENCE          ST_BUILD_BUILDABLES_TRANZIT_DESC
-LANG_ENGLISH       "No início do jogo, serão construídos a turbina, a torreta, o escudo, a armadilha elétrica e a JetGun."
+REFERENCE          ST_BUILD_BUILDABLES_DESC_TRANZIT
+LANG_ENGLISH       "Construirá a turbina, a torreta, o escudo, a trampa eléctrica e a jetgun ao comezo da partida."
 
 REFERENCE           ST_TOWN_DOORS
-LANG_ENGLISH        "ESCOLHER QUAL PORTA ABRIR"
+LANG_ENGLISH        "PORTA ABERTA"
 
 REFERENCE           ST_TOWN_DOORS_DESC
-LANG_ENGLISH        "Selecione qual porta você abrirá no mapa Town."
+LANG_ENGLISH        "Selecciona a porta que vai estar aberta."
 
 REFERENCE           ST_DENIZEN_COUNTER
-LANG_ENGLISH        "CONTADOR DE DENIZEN"
+LANG_ENGLISH        "CONTADOR DE DENIZENS"
 
 REFERENCE           ST_DENIZEN_COUNTER_DESC
-LANG_ENGLISH        "Mostre a quantidade de Denizens que estão vivos."
+LANG_ENGLISH        "Mostra os denizens que están vivos."
 
 REFERENCE           ST_DENIZEN_SPAWNS
-LANG_ENGLISH        "LOCAIS DE APARIÇÃO DOS DENIZENS"
+LANG_ENGLISH        "SPAWNERS DOS DENIZENS"
 
 REFERENCE           ST_DENIZEN_SPAWNS_DESC
-LANG_ENGLISH        "Coloca um manequim nas áreas de aparição dos denizens."
+LANG_ENGLISH        "Coloca un maniquí nas zonas de aparición dos denizens."
+
+REFERENCE           ST_RESTART_WARNING_NUKETOWN
+LANG_ENGLISH        "^3REINICIANDO AUTOMATICAMENTE PARA O PAP, ISTO PODE TARDAR UNS SEGUNDOS"
 
 REFERENCE           ST_BOX_HITS
-LANG_ENGLISH        "^3Box Hits: ^5"
+LANG_ENGLISH        "^3Tiradas de caixa: ^5"
 
 REFERENCE           ST_AVG_MK2
-LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
+LANG_ENGLISH        "^3Arma de raios MK2 AVG: ^5"
 
 REFERENCE           ST_AVG_RAY
-LANG_ENGLISH        "^3Raygun AVG: ^5"
+LANG_ENGLISH        "^3Arma de raios AVG: ^5"
 
 REFERENCE           ST_TOTAL_RAY
-LANG_ENGLISH        "^3Total Raygun: ^5"
+LANG_ENGLISH        "^3Armas de raios: ^5"
 
 REFERENCE           ST_TOTAL_MK2
-LANG_ENGLISH        "^3Total Raygun MK2: ^5"
+LANG_ENGLISH        "^3Armas de raios MK2: ^5"
 
 REFERENCE           ST_SUBWOOFER_KILLS_HUD
-LANG_ENGLISH        "^3Eliminações de Ressonador: ^5"
+LANG_ENGLISH        "^3Baixas por Resonador: ^5"
 
 REFERENCE           ST_ELEVATOR_KILLS_HUD
-LANG_ENGLISH        "^3Eliminações de Elevador: ^5"
+LANG_ENGLISH        "^3Baixas por ascensor: ^5"
 
 REFERENCE           ST_ZOMBIES_DESPAWNED
-LANG_ENGLISH        "^3Zumbis Despawnados: ^5"
+LANG_ENGLISH        "^3Zombis Despawneados: ^5"
 
 REFERENCE           ST_ANCHOR_LEAKS
-LANG_ENGLISH        "^3Vazamentos de âncora: ^5"
+LANG_ENGLISH        "^3Fugas de anclaxes: ^5"
 
 REFERENCE           ST_DENIZENS_HUD
 LANG_ENGLISH        "^3Denizens: ^5"
 
 REFERENCE           ST_REMAINING_HUD
-LANG_ENGLISH        "^3Zumbis: ^5"
+LANG_ENGLISH        "^3Zombis: ^5"
 
 REFERENCE           ST_SPH_HUD
 LANG_ENGLISH        "^3SPH: ^5"
-
-REFERENCE           ST_RESTART_WARNING_NUKETOWN
-LANG_ENGLISH        "REINICIALIZAÇÃO AUTOMÁTICA PARA LOCALIZAÇÃO DO PAP (Pack-A-Punch), ISSO PODE DEMORAR ALGUNS SEGUNDOS"
 
 ENDMARKER

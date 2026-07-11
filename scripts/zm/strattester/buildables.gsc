@@ -157,9 +157,9 @@ spawn_buildable_trigger(origin, build)
 		trigger sethintstring(&"ZM_BURIED_EQ_HC_PHS");
 	else if(issubstr(build, "turbine"))
 		trigger sethintstring(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING");
-	else if(issubstr(build, "trample") && isburied())
+	else if(issubstr(build, "spring") && isburied())
 		trigger sethintstring(&"ZM_BURIED_EQ_SP_PHS");
-	else if(issubstr(build, "trample") && isdierise())
+	else if(issubstr(build, "spring") && isdierise())
 		trigger sethintstring(&"ZM_HIGHRISE_GRAB_SPRINGPAD");
 	else
 		trigger sethintstring("Press &&1 for buildable");
