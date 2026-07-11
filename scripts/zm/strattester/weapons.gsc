@@ -139,7 +139,10 @@ mulekick_wepaon()
 	level endon("end_game");
 
 	self waitformulekick();
+    gun = self getcurrentweapon();
 	self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
+	if(!isorigins())
+		self switchtoweapon( gun );
 }
 
 remove_starting_pistol()

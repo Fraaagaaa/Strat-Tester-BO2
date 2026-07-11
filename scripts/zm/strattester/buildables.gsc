@@ -143,35 +143,6 @@ equipment_buy( equipment )
     self equipment_give( equipment );
 }
 
-// spawn_buildable_trigger(origin, build, limit)
-// {
-// 	if(!isdefined(limit))
-// 		limit = undefined;
-
-// 	trigger = spawn("trigger_radius", origin, 40, 70, 140);
-// 	trigger.targetname = "shield_trigger";
-// 	if(issubstr(build, "shield"))
-// 		trigger SetCursorHint("ZOMBIE_WEAPON_RIOTSHIELD");
-// 	else if(issubstr(build, "subwoofer"))
-// 		trigger SetCursorHint("ZM_BURIED_EQ_SW_PHS");
-// 	else if(issubstr(build, "headchopper"))
-// 		trigger SetCursorHint("ZM_BURIED_EQ_HC_PHS");
-// 	else if(issubstr(build, "turbine"))
-// 		trigger SetCursorHint("ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING");
-// 	else if(issubstr(build, "trample") && isburied())
-// 		trigger SetCursorHint("ZM_BURIED_EQ_SP_PHS");
-// 	else if(issubstr(build, "trample") && isdierise())
-// 		trigger SetCursorHint("ZM_HIGHRISE_GRAB_SPRINGPAD");
-// 	else
-// 		trigger sethintstring("Press &&1 for buildable");
-
-// 	trigger.limit = limit;
-// 	trigger.build = build;
-// 	trigger._origin = origin;
-// 	trigger thread watch_buildable_trigger();
-// }
-
-
 spawn_buildable_trigger(origin, build)
 {
 	trigger = spawn("trigger_radius", origin, 40, 70, 140);
@@ -203,31 +174,6 @@ spawn_buildable_trigger(origin, build)
 		wait 0.1;
 	}
 }
-
-// watch_buildable_trigger()
-// {
-// 	level endon("end_game");
-// 	while(true)
-// 	{
-// 		self waittill( "trigger", player);
-// 		if(player UseButtonPressed())
-// 		{
-// 			if(!isdefined(self.limit))
-// 			{
-// 				if( !player hasWeapon( self.build ) )
-// 					player equipment_buy( self.build );
-// 			}
-// 			else
-// 			{
-// 				if(player.origin[self.limit] > self._origin[self.limit])
-// 				{
-// 					if( !player hasWeapon( self.build ) )
-// 						player equipment_buy( self.build );
-// 				}
-// 			}
-// 		}
-// 	}
-// }
 
 init_buildables()
 {
