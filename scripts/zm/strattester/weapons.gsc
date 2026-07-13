@@ -355,7 +355,7 @@ give_mule_weapon_on_revive()
 	while(true)
 	{
 		self waittill( "player_revived", reviver );
-        if(player_wants_mulekick(self))
+        if(isdefined(self.saved_mule_weapon))
 		{
 			self waitformulekick();
 			self maps\mp\zombies\_zm_weapons::weapondata_give(self.saved_mule_weapon);
