@@ -549,7 +549,7 @@ REFERENCE           ST_ANCHOR_LEAKS
 LANG_ENGLISH        "^3Anchor Leaks: ^5"
 
 REFERENCE           ST_DENIZENS_HUD
-LANG_ENGLISH        "SUBNORMALES"
+LANG_ENGLISH        "^3Denizens: ^5"
 
 REFERENCE           ST_REMAINING_HUD
 LANG_ENGLISH        "^3Zombies: ^5"
