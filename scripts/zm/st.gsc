@@ -35,6 +35,8 @@ init()
 	level thread readChat();
     level thread wait_for_players();
 	level thread watermark();
+	setDvar("player_reviveTriggerRadius", 64);
+	setDvar("revive_trigger_radius", 75);
     
     if(!isDefined(level.total_chest_accessed))
         level.total_chest_accessed = 0;
