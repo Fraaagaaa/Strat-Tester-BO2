@@ -28,9 +28,6 @@ init()
     level thread waitSpawn();
 	flag_wait("initial_blackscreen_passed");
 
-    if(!istranzit())
-        level thread raygun_counter();
-
     if(istranzit())
     {
         level thread buildtranzitstuff();

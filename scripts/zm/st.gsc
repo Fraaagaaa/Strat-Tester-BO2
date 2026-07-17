@@ -6,6 +6,7 @@
 #include maps\mp\zombies\_zm_magicbox;
 #include maps\mp\zombies\_zm_utility;
 
+#include scripts\zm\strattester\box;
 #include scripts\zm\strattester\buildables;
 #include scripts\zm\strattester\bus;
 #include scripts\zm\strattester\commands;
@@ -18,10 +19,33 @@
 #include scripts\zm\strattester\timers;
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\weapons;
-
 main()
 {
 	replaceFunc(getfunction("maps/mp/zombies/_zm_spawner", "zombie_can_drop_powerups"), ::zombie_can_drop_powerups);
+	replaceFunc(getfunction("maps/mp/zombies/_zm_magicbox", "clean_up_hacked_box"), ::clean_up_hacked_box);
+}
+
+clean_up_hacked_box()
+{
+    self endon( "box_spin_done" );
+    self waittill( "box_hacked_respin" );
+
+    if ( isdefined( self.weapon_model ) )
+    {
+        self.weapon_model delete();
+        self.weapon_model = undefined;
+    }
+
+    if ( isdefined( self.weapon_model_dw ) )
+    {
+        self.weapon_model_dw delete();
+        self.weapon_model_dw = undefined;
+    }
+
+    self hidezbarrierpiece( 3 );
+    self hidezbarrierpiece( 4 );
+    self setzbarrierpiecestate( 3, "closed" );
+    self setzbarrierpiecestate( 4, "closed" );
 }
 
 init()
@@ -32,6 +56,7 @@ init()
 	level thread init_despawners();
     level thread init_start();
 	level thread init_buildables();
+	level thread init_box();
 	level thread readChat();
     level thread wait_for_players();
 	level thread watermark();

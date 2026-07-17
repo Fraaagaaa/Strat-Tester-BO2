@@ -11,8 +11,6 @@ init()
 	replacefunc(getfunction("maps/mp/zm_nuked_perks", "perks_from_the_sky"), ::perks_from_the_sky);
     level.total_chest_accessed = 0;
     level thread checkpaplocation();
-    level thread boxhits();
-	level thread raygun_counter();
     level thread fast_restart_warning();
 }
 
