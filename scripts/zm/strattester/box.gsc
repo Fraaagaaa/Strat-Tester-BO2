@@ -53,6 +53,7 @@ displayBoxHits()
     {
         while(true)
         {
+            level waittill( "box_spin_done" );
             if(counter != level.chest_accessed)
             {
                 counter = level.chest_accessed;
@@ -60,7 +61,6 @@ displayBoxHits()
                 level.total_chest_accessed++;
                 level.boxhits setvalue(level.total_chest_accessed);
             }
-            wait 0.1;
         }
     }
     else
@@ -68,6 +68,7 @@ displayBoxHits()
         level.boxhits.y = 20;
         while(true)
         {
+            level waittill( "box_spin_done" );
             if(counter != level.chest_accessed)
             {
                 counter = level.chest_accessed;
@@ -81,7 +82,6 @@ displayBoxHits()
                 }
                 level.boxhits.alpha = 0;
             }
-            wait 0.1;
         }
     }
 }
@@ -117,8 +117,20 @@ raygun_counter()
     level.total_ray_display setvalue(0);
     level.total_mk2_display setvalue(0);
 
+    if(getDvarInt("st_avg"))
+    {
+        level.total_mk2_display.label = &"ST_AVG_MK2";
+        level.total_ray_display.label = &"ST_AVG_RAY";
+    }
+    else
+    {
+        level.total_mk2_display.label = &"ST_TOTAL_MK2";
+        level.total_ray_display.label = &"ST_TOTAL_RAY";
+    }
+
     while(true)
     {
+        level waittill( "box_spin_done" );
         if(getDvarInt("st_avg"))
         {
             level.total_mk2_display.label = &"ST_AVG_MK2";
@@ -133,7 +145,6 @@ raygun_counter()
             level.total_ray_display setvalue(level.total_ray);
             level.total_mk2_display setvalue(level.total_mk2);
         }
-        wait 1;
     }
 }
 
@@ -410,6 +421,7 @@ treasure_chest_weapon_spawn( chest, player, respin )
 
     self.weapon_string = undefined;
     self notify( "box_spin_done" );
+    level notify("box_spin_done");
 }
 
 treasure_chest_canplayerreceiveweapon_mk2( player, pap_triggers )
