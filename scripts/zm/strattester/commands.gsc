@@ -21,7 +21,7 @@ readchat()
 {
     self endon("end_game");
 	level.StratTesterCommands = [];
-    addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points"));
+    addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining"));
 
     while (true) 
     {
@@ -36,6 +36,7 @@ readchat()
 		}
         switch(msg[0])
         {
+            case "!remaining": remainingcase(msg[1]); break;
             case "!points": pointscase(player, msg[1]); break;
             case "!perma": permacase(player); break;
             case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
@@ -477,4 +478,10 @@ commandmenulistener()
             continue;
         }
     }
+}
+
+remainingcase(rem)
+{
+    rem = string_to_float(rem);
+    level.zombie_total = rem;
 }
