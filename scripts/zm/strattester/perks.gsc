@@ -183,12 +183,6 @@ delete_perk( perk )
 
 on_perks_menu( action, args )
 {
-    println( "on_perks_menu -> " + action );
-    foreach(arg in args)
-    {
-        println( "on_perks_menu -> " + arg );
-        wait 0.1;
-    }
     switch(action)
     {
         case "sync": perks_menu_sync(args); break;
