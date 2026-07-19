@@ -620,7 +620,7 @@ local Container = LUI.UIContainer.new()
         selector:setChoice( currentVal )
     end
 
-    local isDepot    = (mapname == "zm_transit" and gametype == "zsurvival" and startlocation == "transit")
+    local isDepot    = (mapname == "zm_transit" and gametype == "zstandard" and startlocation == "transit")
     local isFarm     =  startlocation == "farm"
     local isTown     =  startlocation == "town"
     local isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
