@@ -13,6 +13,7 @@
 #include scripts\zm\strattester\despawners;
 #include scripts\zm\strattester\fixes;
 #include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\menu; 
 #include scripts\zm\strattester\perks;
 #include scripts\zm\strattester\settings;
 #include scripts\zm\strattester\start;
@@ -52,11 +53,13 @@ init()
 {
 	level.strat_tester = true;
 	level thread enable_cheats();
-	level thread init_settings();
-	level thread init_despawners();
-    level thread init_start();
-	level thread init_buildables();
 	level thread init_box();
+	level thread init_buildables();
+	level thread init_despawners();
+	level thread init_settings();
+    level thread init_perks();
+    level thread init_start();
+	level thread init_menu_system();
 	level thread readChat();
     level thread wait_for_players();
 	level thread watermark();
@@ -107,7 +110,7 @@ connected_st()
 				self.has_hud = true;
 		}
 		self.score = 1000000;
-        self thread perk_init();
+        self thread perk_apply_loop();
 		self thread loadouts_init();
 	    self thread timer();
 	    self thread timerlocation();

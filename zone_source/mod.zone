@@ -19,13 +19,11 @@ script,scripts/zm/strattester/bus.gsc
 script,scripts/zm/strattester/commands.gsc
 script,scripts/zm/strattester/despawners.gsc
 script,scripts/zm/strattester/hud.gsc
+script,scripts/zm/strattester/menu.gsc
+script,scripts/zm/strattester/nopower.gsc
 script,scripts/zm/strattester/perks.gsc
 script,scripts/zm/strattester/settings.gsc
 script,scripts/zm/strattester/start.gsc
 script,scripts/zm/strattester/timers.gsc
 script,scripts/zm/strattester/utility.gsc
 script,scripts/zm/strattester/weapons.gsc
-script,scripts/zm/strattester/nopower.gsc
-
-rawfile,ui/t6/options.lua
-rawfile,ui/t6/menus/optionsstrattester.lua

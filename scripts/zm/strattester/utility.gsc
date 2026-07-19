@@ -229,3 +229,11 @@ build_buildable( buildable )
         }
     }
 }
+
+register_menu_handler( module_name, callback )
+{
+    if(!isdefined(level.st_menu_handlers))
+		level.st_menu_handlers = [];
+
+    level.st_menu_handlers[ module_name ] = callback;
+}

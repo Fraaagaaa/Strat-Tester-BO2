@@ -20,44 +20,32 @@
 #define WHOISWHO_PERK "specialty_finalstand"
 #define VULTURE_PERK  "specialty_nomotionsensor"
 
-perk_init()
+init_perks()
 {
-    if ( isdepot() )
-        level.st_perks = QR_PERK;
-    else if ( isfarm() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( istown() || istranzit() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( isnuketown() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
-    else if ( isdierise() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK;
-    else if ( ismob() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + CHERRY_PERK + " " + DEADSHOT_PERK;
-    else if ( isburied() )
-        level.st_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK;
-    else if ( isorigins() )
-        level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
-    if ( self == gethostplayer() )
+    register_menu_handler( "perks", ::on_perks_menu );
+
+    if(!isdefined(level.st_perks))
     {
-        increase_perk_limit();
+        if ( isdepot() )
+            level.st_perks = QR_PERK;
+        else if ( isfarm() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
+        else if ( istown() || istranzit() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + QR_PERK;
+        else if ( isnuketown() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + QR_PERK;
+        else if ( isdierise() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + WHOISWHO_PERK;
+        else if ( ismob() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + SPEED_PERK + " " + CHERRY_PERK + " " + DEADSHOT_PERK;
+        else if ( isburied() )
+            level.st_perks = VULTURE_PERK + " " + JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK;
+        else if ( isorigins() )
+            level.st_perks = JUG_PERK + " " + DT_PERK + " " + STAMIN_PERK + " " + SPEED_PERK + " " + MULE_PERK + " " + QR_PERK + " " + CHERRY_PERK + " " + PHD_PERK + " " + DEADSHOT_PERK;
     }
 
-    self.menu_perk_jugg     = getDvarInt( "st_perk_" + JUG_PERK );
-    self.menu_perk_dtap     = getDvarInt( "st_perk_" + DT_PERK );
-    self.menu_perk_speed    = getDvarInt( "st_perk_" + SPEED_PERK );
-    self.menu_perk_staminup = getDvarInt( "st_perk_" + STAMIN_PERK );
-    self.menu_perk_revive   = getDvarInt( "st_perk_" + QR_PERK );
-    self.menu_perk_mule     = getDvarInt( "st_perk_" + MULE_PERK );
-    self.menu_perk_whoswho  = getDvarInt( "st_perk_" + WHOISWHO_PERK );
-    self.menu_perk_cherry   = getDvarInt( "st_perk_" + CHERRY_PERK );
-    self.menu_perk_phd      = getDvarInt( "st_perk_" + PHD_PERK );
-    self.menu_perk_deadshot = getDvarInt( "st_perk_" + DEADSHOT_PERK );
-    self.menu_perk_vulture  = getDvarInt( "st_perk_" + VULTURE_PERK );
-
-
-    self thread perk_apply_loop();
-    self thread perk_menu_listener();
+    if ( self == gethostplayer() )
+        increase_perk_limit();
 }
 
 increase_perk_limit()
@@ -67,52 +55,27 @@ increase_perk_limit()
 
 perk_apply_loop()
 {
-    self endon( "disconnect" );
-    level endon( "end_game" );
+    self endon("disconnect");
+    level endon("end_game");
 
-    level waittill( "initial_blackscreen_passed" );
+    self.st_watching_perks = true;
 
-    if ( ismob() )
-        flag_wait( "afterlife_start_over" );
+    level waittill("initial_blackscreen_passed");
+
+    if (ismob())
+        flag_wait("afterlife_start_over");
 
     wait 1;
 
     perk_array = strtok( level.st_perks , " " );
 
+    self load_persisted_perks();
     self give_configured_perks( perk_array );
 
-    self thread perk_apply_timer();
-    self thread perk_reapply_on_revive( perk_array );
-
     while ( true )
     {
-        self waittill_any( "perk_config_changed", "perk_fake_timer" );
-        self give_configured_perks( perk_array );
-    }
-}
-
-perk_apply_timer()
-{
-    self endon( "disconnect" );
-    level endon( "end_game" );
-
-    while ( true )
-    {
-        wait 0.5;
-        self notify( "perk_fake_timer" );
-    }
-}
-
-perk_reapply_on_revive( perk_array )
-{
-    self endon( "disconnect" );
-    level endon( "end_game" );
-
-    while ( true )
-    {
-        self waittill( "spawned" );
-        wait 0.5;
-        self give_configured_perks( perk_array );
+        self waittill_any("perk_config_changed", "perk_acquired", "perk_lost", "player_revived");
+        self thread give_configured_perks( perk_array );
     }
 }
 
@@ -132,79 +95,6 @@ give_configured_perks( perk_array )
             self delete_perk(perk);
 
         wait 0.01;
-    }
-}
-
-perk_menu_listener()
-{
-    self endon( "disconnect" );
-    self notify( "perk_menu_listener" );
-    self endon( "perk_menu_listener" );
-    level endon( "game_ended" );
-
-    while ( true )
-    {
-        self waittill( "menuresponse", menu, response );
-
-        if ( !isdefined( menu ) || !isdefined( response ) )
-            continue;
-
-        if ( menu != "restartgamepopup" )
-            continue;
-
-        if ( !issubstr( response, "stperk+" ) )
-            continue;
-
-        self start_perk_menu_response( response );
-    }
-}
-
-start_perk_menu_response( response )
-{
-    parts = strtok( response, "+" );
-
-    if ( !isdefined( parts ) || parts.size < 2 )
-        return;
-
-    if ( parts[0] != "stperk" )
-        return;
-
-    if ( parts[1] == "sync" )
-    {
-        for ( i = 2; i < parts.size; i++ )
-        {
-            wait 0.05;
-            entry = strtok( parts[i], ":" );
-            if ( !isdefined( entry ) || entry.size < 2 )
-                continue;
-            perk = entry[0];
-
-            if(!in_array(perk, strtok( level.st_perks , " " )))
-                continue;
-
-            value = perk_response_value( entry[1] );
-
-            if(perk == MULE_PERK)
-                self.wants_mule = value;
-
-            self set_menu_perk( perk, value );
-        }
-        self notify( "perk_config_changed" );
-        return;
-    }
-
-    if ( parts[1] == "set" && parts.size >= 4 )
-    {
-        value = perk_response_value( parts[3] );
-        perk = parts[2];
-
-        if(perk == MULE_PERK)
-            self.wants_mule = value;
-
-        self set_menu_perk( perk, value );
-
-        self notify( "perk_config_changed" );
-        return;
     }
 }
 
@@ -289,4 +179,74 @@ delete_perk( perk )
         arrayremovevalue( self.perks_active, perk, 0 );
 
     self notify( "perk_lost" );
+}
+
+on_perks_menu( action, args )
+{
+    println( "on_perks_menu -> " + action );
+    foreach(arg in args)
+    {
+        println( "on_perks_menu -> " + arg );
+        wait 0.1;
+    }
+    switch(action)
+    {
+        case "sync": perks_menu_sync(args); break;
+        case "set": if(args.size >= 1) perks_menu_set(args); break;
+        default: break;
+    }
+}
+
+perks_menu_set(args)
+{
+    entry = strtok( args[0], ":" );
+    if ( !isdefined( entry ) || entry.size < 2 )
+        return;
+
+    perk = entry[0];
+    value = perk_response_value( entry[1] );
+
+    if ( perk == MULE_PERK )
+        self.wants_mule = value;
+
+    self set_menu_perk( perk, value );
+    self notify( "perk_config_changed" );
+}
+
+perks_menu_sync(args)
+{
+    foreach ( arg in args )
+    {
+        entry = strtok( arg, ":" );
+        if ( !isdefined( entry ) || entry.size < 2 )
+            continue;
+
+        perk = entry[0];
+        if ( !in_array( perk, strtok( level.st_perks, " " ) ) )
+            continue;
+
+        value = perk_response_value( entry[1] );
+        if ( perk == MULE_PERK )
+            self.wants_mule = value;
+
+        self set_menu_perk( perk, value );
+        wait 0.05;
+    }
+
+    self notify( "perk_config_changed" );
+}
+
+load_persisted_perks()
+{
+    self set_menu_perk( JUG_PERK,      getDvarInt( "st_perk_" + JUG_PERK ) );
+    self set_menu_perk( DT_PERK,       getDvarInt( "st_perk_" + DT_PERK ) );
+    self set_menu_perk( SPEED_PERK,    getDvarInt( "st_perk_" + SPEED_PERK ) );
+    self set_menu_perk( STAMIN_PERK,   getDvarInt( "st_perk_" + STAMIN_PERK ) );
+    self set_menu_perk( QR_PERK,       getDvarInt( "st_perk_" + QR_PERK ) );
+    self set_menu_perk( MULE_PERK,     getDvarInt( "st_perk_" + MULE_PERK ) );
+    self set_menu_perk( WHOISWHO_PERK, getDvarInt( "st_perk_" + WHOISWHO_PERK ) );
+    self set_menu_perk( CHERRY_PERK,   getDvarInt( "st_perk_" + CHERRY_PERK ) );
+    self set_menu_perk( PHD_PERK,      getDvarInt( "st_perk_" + PHD_PERK ) );
+    self set_menu_perk( DEADSHOT_PERK, getDvarInt( "st_perk_" + DEADSHOT_PERK ) );
+    self set_menu_perk( VULTURE_PERK,  getDvarInt( "st_perk_" + VULTURE_PERK ) );
 }

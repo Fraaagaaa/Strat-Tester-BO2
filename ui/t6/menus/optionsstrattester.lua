@@ -72,29 +72,6 @@ CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
     Engine.SetDvar( choice.parentSelectorButton.m_profileVarName, choice.value )
 end
 
-CoD.StratTester.send_perk_response = function ( controller, payload )
-    if Engine.SendMenuResponse ~= nil then
-        Engine.SendMenuResponse( controller, "restartgamepopup", payload )
-    end
-end
-
-CoD.StratTester.sync_perk_menu = function ( controller )
-    local payload = "stperk+sync"
-
-    for index, perk in ipairs( CoD.StratTester.StartPerkList ) do
-        local dvarName = "st_perk_" .. perk
-        local value = UIExpression.DvarInt( nil, dvarName )
-
-        if UIExpression.DvarString( nil, dvarName ) == "" then
-            value = 0
-        end
-
-        payload = payload .. "+" .. perk .. ":" .. tostring( value )
-    end
-
-    CoD.StratTester.send_perk_response( controller, payload )
-end
-
 
 CoD.StratTester.SetPerkDvarPersistent = function ( controller, dvarName, value )
     Engine.SetDvar( dvarName, value )
@@ -106,19 +83,41 @@ CoD.StratTester.SetPerkDvarPersistent = function ( controller, dvarName, value )
     Engine.Exec( controller, "seta " .. dvarName .. " " .. tostring( value ) )
 end
 
-CoD.StratTester.OnPerkChanged = function ( choice, isUserRequest )
-	if isUserRequest ~= true then
-		return 
-	end
+CoD.StratTester.send_response = function ( controller, module, action, args )
+    if Engine.SendMenuResponse == nil then return end
 
-	local controller = choice.parentSelectorButton.m_currentController
-	local perkInternal = choice.parentSelectorButton.m_perkInternal
-	local dvarName = choice.parentSelectorButton.m_profileVarName
+    local payload = "st+" .. module .. "+" .. action
 
-	CoD.StratTester.SetPerkDvarPersistent( controller, dvarName, choice.value )
-	CoD.StratTester.send_perk_response( controller, "stperk+set+" .. perkInternal .. "+" .. tostring( choice.value ) )
+    if args ~= nil then
+        for _, a in ipairs( args ) do
+            payload = payload .. "+" .. tostring( a )
+        end
+    end
+
+    Engine.SendMenuResponse( controller, "restartgamepopup", payload )
 end
 
+CoD.StratTester.sync_perk_menu = function ( controller )
+    local args = {}
+    for _, perk in ipairs( CoD.StratTester.StartPerkList ) do
+        local dvarName = "st_perk_" .. perk
+        local value = UIExpression.DvarInt( nil, dvarName )
+        if UIExpression.DvarString( nil, dvarName ) == "" then value = 0 end
+        table.insert( args, perk .. ":" .. tostring(value) )
+    end
+    CoD.StratTester.send_response( controller, "perks", "sync", args )
+end
+
+CoD.StratTester.OnPerkChanged = function ( choice, isUserRequest )
+    if isUserRequest ~= true then return end
+
+    local controller = choice.parentSelectorButton.m_currentController
+    local perkInternal = choice.parentSelectorButton.m_perkInternal
+    local dvarName = choice.parentSelectorButton.m_profileVarName
+
+    CoD.StratTester.SetPerkDvarPersistent( controller, dvarName, choice.value )
+    CoD.StratTester.send_response( controller, "perks", "set", { perkInternal .. ":" .. tostring(choice.value) } )
+end
 -- ==========================================================
 -- PESTAÑA 1: GAME (Mecánicas de Partida)
 -- ==========================================================
