@@ -1,12 +1,13 @@
-#include maps\mp\gametypes_zm\_hud_util;
-#include maps\mp\zombies\_zm_utility;
 #include common_scripts\utility;
 #include maps\mp\_utility;
+#include maps\mp\gametypes_zm\_hud_util;
 #include maps\mp\zm_highrise_buildables;
 #include maps\mp\zombies\_zm_ai_leaper;
+#include maps\mp\zombies\_zm_utility;
 
-#include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
+#include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\utility;
 
 init()
 {
@@ -60,41 +61,6 @@ watch_for_elevator_during_faller_spawn()
     }
 }
 
-
-displayElevatorKills()
-{
-	level thread displayWatcher();
-	level.elevatorkills.hidewheninmenu = true;
-    level.elevatorkills = createserverfontstring( "objective", 1.3 );
-    level.elevatorkills.y = 0;
-    level.elevatorkills.x = 0;
-    level.elevatorkills.fontscale = 1.4;
-    level.elevatorkills.alignx = "center";
-    level.elevatorkills.horzalign = "user_center";
-    level.elevatorkills.vertalign = "user_top";
-    level.elevatorkills.aligny = "top";
-    level.elevatorkills.label = &"ST_ELEVATOR_KILLS_HUD";
-    level.elevatorkills.alignx = "left";
-    level.elevatorkills.horzalign = "user_left";
-    level.elevatorkills.alpha = 1;
-    level.elevatorkills setvalue(0);
-
-    while(true)
-    {
-    	level.elevatorkills setvalue(level.zombies_died_to_elevator);
-        wait 0.1;
-    }
-}
-
-displayWatcher()
-{
-    while(true)
-    {
-        wait 0.1;
-        level.elevatorkills.alpha = getDvarInt("st_elevatorkills");
-        level.elevatorkills.y = 15 * getDvarInt("st_despawners");
-    }
-}
 
 check_special_round()
 {

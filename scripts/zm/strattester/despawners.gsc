@@ -4,6 +4,7 @@
 #include maps\mp\gametypes_zm\_hud_util;
 
 #include scripts\zm\strattester\utility;
+#include scripts\zm\strattester\hud;
 
 replacefuncs()
 {
@@ -16,8 +17,8 @@ replacefuncs()
 
 init_despawners()
 {
-	level thread despawner_counter();
-	level thread anchorLeak_counter();
+	level thread despawnerCounter();
+	level thread anchorLeakCounter();
 	
 	thread replacefuncs();
 	thread zombie_tracking_init();
@@ -108,20 +109,16 @@ zombie_tracking_init()
 	}
 	
 	// WE DONT TIME ON BURIED BC ITS EVERY 0.1 SECONDS AND IT GET ANOYING
-	// text = createserverfontstring( "Objective", 1 );
-	// text setpoint( "CENTER", "CENTER", 320, 230 );
-	// text settimer( level.zombie_tracking_wait );
-	// text thread checkalpha();
 	
-	for ( ;; )
-	{
-		wait level.zombie_tracking_wait;
-		
+	// for ( ;; )
+	// {
+	// 	wait level.zombie_tracking_wait;
+		// 
 		// WE DONT PRINT ON BURIED BC ITS EVERY 0.1 SECONDS AND IT GET ANOYING
 		// if(getDvarInt("st_despawners"))
 		// 	strattesterprint( "Distance checking zombies...", "Comprobando distancia con los zombis...");
 		// text settimer( level.zombie_tracking_wait );
-	}
+	// }
 }
 
 checkalpha()
@@ -765,54 +762,4 @@ delete_zombie_noone_looking_tranzit( how_close )
 		self delete ();
 		recalc_zombie_array();
 	}
-}
-
-despawner_counter()
-{
-	level.despawners = 0;
-
-	level.despawnersCounter.hidewheninmenu = true;
-    level.despawnersCounter = createserverfontstring( "objective", 1.3 );
-    level.despawnersCounter.y = 0;
-    level.despawnersCounter.x = 0;
-    level.despawnersCounter.fontscale = 1.4;
-    level.despawnersCounter.aligny = "top";
-    level.despawnersCounter.alignx = "left";
-    level.despawnersCounter.label = &"ST_ZOMBIES_DESPAWNED";
-    level.despawnersCounter.horzalign = "user_left";
-    level.despawnersCounter.vertalign = "user_top";
-    level.despawnersCounter.alpha = 0;
-    level.despawnersCounter setvalue(0);
-
-    while(true)
-    {
-    	level.despawnersCounter setvalue(level.despawners);
-        level.despawnersCounter.alpha = getDvarInt("st_despawners");
-        wait 0.1;
-    }
-}
-
-anchorLeak_counter()
-{
-	level.anchorLeaks = 0;
-
-	level.anchorLeakCounter.hidewheninmenu = true;
-    level.anchorLeakCounter = createserverfontstring( "objective", 1.3 );
-    level.anchorLeakCounter.y = 20;
-    level.anchorLeakCounter.x = 0;
-    level.anchorLeakCounter.fontscale = 1.4;
-    level.anchorLeakCounter.alignx = "center";
-    level.anchorLeakCounter.aligny = "top";
-    level.anchorLeakCounter.horzalign = "user_center";
-    level.anchorLeakCounter.vertalign = "user_top";
-    level.anchorLeakCounter.label = &"ST_ANCHOR_LEAKS";
-    level.anchorLeakCounter.alpha = 0;
-    level.anchorLeakCounter setvalue(0);
-
-    while(true)
-    {
-    	level.anchorLeakCounter setvalue(level.anchorLeaks);
-        level.anchorLeakCounter.alpha = getDvarInt("st_despawners");
-        wait 0.1;
-    }
 }

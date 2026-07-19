@@ -485,3 +485,65 @@ remainingcase(rem)
     rem = string_to_float(rem);
     level.zombie_total = rem;
 }
+
+tpcase(player, location)
+{
+	if(istranzit())
+		switch(location)
+		{
+			case "farm": pos = (6908, -5750, -62); ang = (0, 173, 0); break;
+			case "town": pos = (1152, -717, -55); ang = (0, 45, 0); break;
+			case "depot": pos = (-7384, 4693, -63); ang = (0, 18, 0); break;
+			case "tunel": pos = (-11814, -1903, 228); ang = (0, -60, 0); break;
+			case "diner": pos = (-5012, -6694, -60); ang = (0, -127, 0); break;
+			case "nacht": pos = (13840, -261, -188); ang = (0, -108, 0); break;
+			case "power": pos = (12195, 8266, -751); ang = (0, -90, 0); break;
+			case "ak": pos = (11200, 7745, -564); ang = (0, -108, 0); break;
+			case "ware": pos = (10600, 8272, -400); ang = (0, -108, 0); break;
+			case "bus": pos = level.the_bus.origin; ang = level.the_bus.angles; break;
+			default: return;
+		}
+	if(ismob())
+		switch(location)
+		{
+			case "cafe": pos = (3309, 9329, 1336); ang = (0, 131, 0); break;
+			case "cage": pos = (-1771, 5401, -71); ang = (0, 0, 0); break;
+			case "fans": pos = (-1042, 9489, 1350); ang = (0, -43, 0); break;
+			case "dt":   pos = (25, 8762, 1128); ang = (0, 0, 0); break;
+			default: return;
+		}
+	if(isdierise())
+		switch(location)
+		{
+			case "shaft": pos = (3805, 1920, 2197); ang = (0, -161, 0); break;
+			case "tramp": pos = (2159, 1161, 3070); ang = (0, 135, 0); break;
+			case "trample": pos = (2159, 1161, 3070); ang = (0, 135, 0); break;
+			default: return;
+		}
+	if(isburied())
+		switch(location)
+		{
+			case "saloon": pos = (553, -1214, 56); ang = (0, -50, 0); break;
+			case "jug": pos = (-660, 1030, 8); ang = (0, -90, 0); break;
+			case "tunel": pos = (-483, 293, 423); ang = (0, -40, 0); break;
+			default: return;
+		}
+	if(isorigins())
+		switch(location)
+		{
+			case "church": pos = (1878, -1358, 150); ang = (0, 140, 0); break;
+			case "tcp": pos = (10335, -7902, -411); ang = (0, 140, 0); break;
+			case "gen1": pos = (2340, 4978, -303); ang = (0, -132, 0); break;
+			case "gen2": pos = (469, 4788, -285); ang = (0, -134, 0); break;
+			case "gen3": pos = (740, 2123, -125); ang = (0, 135, 0); break;
+			case "gen4": pos = (2337, -170, 140); ang = (0, 90, 0); break;
+			case "gen5": pos = (-2830, -21, 238); ang = (0, 40, 0); break;
+			case "gen6": pos = (732, -3923, 300); ang = (0, 50, 0); break;
+			case "tank": pos = level.vh_tank.origin + (0, 0, 50); ang = level.vh_tank.angles; break;
+			default: return;
+		}
+
+	strattesterprint("Teleporting " + player.name + " to " + location, "Teletransportando " + player.name + " a " + location);
+    player setOrigin(pos);
+    player setPlayerAngles(ang);
+}

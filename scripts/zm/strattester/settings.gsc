@@ -92,3 +92,15 @@ createDvars()
 	flag_wait("initial_blackscreen_passed");
     level.start_time = int(gettime() / 1000);
 }
+
+
+zombie_can_drop_powerups(zombie)
+{
+    if ( is_tactical_grenade( zombie.damageweapon ) || !flag( "zombie_drop_powerups" ) )
+        return false;
+
+    if ( isdefined( zombie.no_powerups ) && zombie.no_powerups )
+        return false;
+
+    return getDvarInt("st_enable_drops");
+}

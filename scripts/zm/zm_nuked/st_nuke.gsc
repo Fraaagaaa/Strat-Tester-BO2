@@ -78,21 +78,3 @@ checkpaplocation()
 	if(pap.origin[0] > -1700 || jug.origin[0] > -1700)
 		cmdexec("fast_restart");
 }
-
-fast_restart_warning()
-{
-    level.fast_restart_warning = createserverfontstring( "objective", 1.3 );
-    level.fast_restart_warning.y = 100;
-    level.fast_restart_warning.x = 2;
-    level.fast_restart_warning.fontscale = 2;
-    level.fast_restart_warning.alignx = "center";
-    level.fast_restart_warning.horzalign = "user_center";
-    level.fast_restart_warning.vertalign = "user_top";
-    level.fast_restart_warning.aligny = "top";
-    level.fast_restart_warning.alpha = 1;
-	level.fast_restart_warning.hidewheninmenu = true;
-    level.fast_restart_warning.label = &"ST_RESTART_WARNING_NUKETOWN";
-
-	flag_wait("initial_blackscreen_passed");
-    level.fast_restart_warning destroy();
-}

@@ -33,7 +33,7 @@ init()
         level thread buildtranzitstuff();
         level thread busstatus();
         level thread denizens();
-        level thread busloc();
+        level thread bushud();
         level thread showDenizenLocation();
     }
 

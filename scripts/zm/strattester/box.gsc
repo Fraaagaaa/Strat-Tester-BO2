@@ -5,6 +5,7 @@
 #include maps\mp\zombies\_zm_weapons;
 #include maps\mp\zombies\_zm_magicbox;
 
+#include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\utility;
 
 init_box()
@@ -15,136 +16,7 @@ init_box()
         level thread displayBoxHits();
     if(issurvivalmap() && !isdefined(level.total_mk2))
     {
-        level thread raygun_counter();
-    }
-}
-
-displayBoxHits()
-{
-	level endon("end_game");
-
-    level.boxhits = createserverfontstring( "objective", 1.3 );
-	level.boxhits.hidewheninmenu = true;
-    level.boxhits.y = 0;
-    level.boxhits.x = 0;
-    level.boxhits.fontscale = 1.4;
-    level.boxhits.alignx = "center";
-    level.boxhits.horzalign = "user_center";
-    level.boxhits.vertalign = "user_top";
-    level.boxhits.aligny = "top";
-    level.boxhits.alpha = 0;
-    level.boxhits.label = &"ST_BOX_HITS";
-    level.boxhits setvalue(0);
-    if(issurvivalmap())
-    {
-        level.total_chest_accessed_mk2 = 0;
-        level.total_chest_accessed_ray = 0;
-        level.boxhits.alignx = "left";
-        level.boxhits.horzalign = "user_left";
-        level.boxhits.x = 2;
-        level.boxhits.alpha = 1;
-    }
-
-    while(!isdefined(level.total_chest_accessed) || !isdefined(level.chest_accessed))
-        wait 0.1;
-
-    counter = 0;
-    if(issurvivalmap())
-    {
-        while(true)
-        {
-            level waittill( "box_spin_done" );
-            if(counter != level.chest_accessed)
-            {
-                counter = level.chest_accessed;
-                if(counter == 0) continue;
-                level.total_chest_accessed++;
-                level.boxhits setvalue(level.total_chest_accessed);
-            }
-        }
-    }
-    else
-    {
-        level.boxhits.y = 20;
-        while(true)
-        {
-            level waittill( "box_spin_done" );
-            if(counter != level.chest_accessed)
-            {
-                counter = level.chest_accessed;
-                if(counter == 0) continue;
-                level.total_chest_accessed++;
-                level.boxhits setvalue(level.total_chest_accessed);
-                for(i = 1; i > 0.1; i -= 0.02)
-                {
-                    level.boxhits.alpha = i;
-                    wait 0.1;
-                }
-                level.boxhits.alpha = 0;
-            }
-        }
-    }
-}
-
-raygun_counter()
-{
-    self endon("disconnect");
-
-    if(!isDefined(level.total_mk2)) level.total_mk2 = 0;
-    if(!isDefined(level.total_ray)) level.total_ray = 0;
-
-    level.total_ray_display = createserverfontstring( "objective", 1.3 );
-	level.total_ray_display.hidewheninmenu = true;
-    level.total_ray_display.y = 26;
-    level.total_ray_display.x = 2;
-    level.total_ray_display.fontscale = 1.3;
-    level.total_ray_display.alignx = "left";
-    level.total_ray_display.horzalign = "user_left";
-    level.total_ray_display.vertalign = "user_top";
-    level.total_ray_display.aligny = "top";
-    level.total_ray_display.alpha = 1;
-    level.total_mk2_display = createserverfontstring( "objective", 1.3 );
-	level.total_mk2_display.hidewheninmenu = true;
-    level.total_mk2_display.y = 14;
-    level.total_mk2_display.x = 2;
-    level.total_mk2_display.fontscale = 1.3;
-    level.total_mk2_display.alignx = "left";
-    level.total_mk2_display.horzalign = "user_left";
-    level.total_mk2_display.vertalign = "user_top";
-    level.total_mk2_display.aligny = "top";
-    level.total_mk2_display.alpha = 1;
-    
-    level.total_ray_display setvalue(0);
-    level.total_mk2_display setvalue(0);
-
-    if(getDvarInt("st_avg"))
-    {
-        level.total_mk2_display.label = &"ST_AVG_MK2";
-        level.total_ray_display.label = &"ST_AVG_RAY";
-    }
-    else
-    {
-        level.total_mk2_display.label = &"ST_TOTAL_MK2";
-        level.total_ray_display.label = &"ST_TOTAL_RAY";
-    }
-
-    while(true)
-    {
-        level waittill( "box_spin_done" );
-        if(getDvarInt("st_avg"))
-        {
-            level.total_mk2_display.label = &"ST_AVG_MK2";
-            level.total_ray_display.label = &"ST_AVG_RAY";
-            if(level.total_ray != 0) level.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
-            if(level.total_mk2 != 0) level.total_mk2_display setvalue(level.total_chest_accessed_mk2 / level.total_mk2);
-        }
-        else
-        {
-            level.total_mk2_display.label = &"ST_TOTAL_MK2";
-            level.total_ray_display.label = &"ST_TOTAL_RAY";
-            level.total_ray_display setvalue(level.total_ray);
-            level.total_mk2_display setvalue(level.total_mk2);
-        }
+        level thread raygunCounter();
     }
 }
 

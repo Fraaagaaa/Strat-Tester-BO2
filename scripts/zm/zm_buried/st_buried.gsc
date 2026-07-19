@@ -172,42 +172,6 @@ subwooferthink( weapon, armed )
     }
 }
 
-displaysubwooferkills()
-{
-	level thread displayWatcher();
-	level.subwooferkills.hidewheninmenu = true;
-    level.subwooferkills = createserverfontstring( "objective", 1.3 );
-    level.subwooferkills.y = 0;
-    level.subwooferkills.x = 0;
-    level.subwooferkills.fontscale = 1.4;
-    level.subwooferkills.alignx = "center";
-    level.subwooferkills.horzalign = "user_center";
-    level.subwooferkills.vertalign = "user_top";
-    level.subwooferkills.aligny = "top";
-    level.subwooferkills.label = &"ST_SUBWOOFER_KILLS_HUD";
-    level.subwooferkills.alignx = "left";
-    level.subwooferkills.horzalign = "user_left";
-    level.subwooferkills.alpha = 0;
-    level.subwooferkills setvalue(0);
-
-    while(true)
-    {
-    	level.subwooferkills setvalue(level.subwooferkills_count);
-        wait 0.1;
-    }
-}
-
-displayWatcher()
-{
-    while(true)
-    {
-        wait 0.1;
-        level.subwooferkills.alpha = getDvarInt("st_subwooferkills");
-        level.subwooferkills.y = 15 * getDvarInt("st_despawners");
-    }
-}
-
-
 deleteSlothbarricades()
 {
 
