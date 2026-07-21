@@ -55,6 +55,7 @@ createDvars()
 		createDvar("st_shield", OFF);
 	if(isorigins())
 	{
+		createDvar("st_origins_walls_mooving", OFF); 
 		createDvar("st_staff", 0); 
 		createDvar("st_wm", OFF);
 		createDvar("st_stomp", OFF);

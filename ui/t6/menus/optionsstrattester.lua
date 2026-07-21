@@ -486,6 +486,9 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
             StaffChoice:setChoice( currentStaffVal )
         end
 
+        local OriginsWallChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MOOVING_WALLS"), "st_origins_walls_mooving", Engine.Localize("ST_MOOVING_WALLS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff( OriginsWallChoice, 0 )
+
         local OriginsShieldChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SHIELD"), "st_shield", Engine.Localize("ST_SHIELD_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( OriginsShieldChoice , 1 )
 

@@ -1,12 +1,13 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
-#include maps\mp\zombies\_zm_utility;
-#include maps\mp\zm_tomb_main_quest;
-#include maps\mp\zombies\_zm_weapons;
-#include maps\mp\zm_tomb_utility;
-#include maps\mp\zm_tomb_challenges;
 #include maps\mp\zm_tomb_capture_zones;
+#include maps\mp\zm_tomb_challenges;
+#include maps\mp\zm_tomb_chamber;
+#include maps\mp\zm_tomb_main_quest;
 #include maps\mp\zm_tomb_tank;
+#include maps\mp\zm_tomb_utility;
+#include maps\mp\zombies\_zm_utility;
+#include maps\mp\zombies\_zm_weapons;
 
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
@@ -425,4 +426,12 @@ fixPanzerRounds()
 
 move_wall_down()
 {
+	if(getDvarInt("st_origins_walls_mooving") == 0)
+		return;
+
+    self moveto( self.down_origin, 1 );
+    self waittill( "movedone" );
+    rumble_players_in_chamber( 2, 0.1 );
+    self thread chamber_wall_dust();
+    self disconnectpaths();
 }
