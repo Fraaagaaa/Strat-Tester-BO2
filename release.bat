@@ -4,8 +4,8 @@ SET MOD_FOLDER="%LOCALAPPDATA%\plutonium\storage\t6\mods\zm_strattester"
 
 echo Compiling english version...
 
-XCOPY ".\localized\en_st.str" ".\english\localizedstrings\st.str" /Y
-XCOPY ".\localized\en_zone.str" ".\english\localizedstrings\zone.str" /Y
+XCOPY ".\localized\en\st.str" ".\english\localizedstrings\st.str" /Y
+XCOPY ".\localized\en\zone.str" ".\english\localizedstrings\zone.str" /Y
 
 call builder
 
@@ -13,8 +13,8 @@ call builder
 
 echo Compiling spanish version...
 
-XCOPY ".\localized\es_st.str" ".\english\localizedstrings\st.str" /Y
-XCOPY ".\localized\es_zone.str" ".\english\localizedstrings\zone.str" /Y
+XCOPY ".\localized\es\st.str" ".\english\localizedstrings\st.str" /Y
+XCOPY ".\localized\es\zone.str" ".\english\localizedstrings\zone.str" /Y
 
 call builder
 
@@ -22,8 +22,8 @@ call builder
 
 echo Compiling portuguese version...
 
-XCOPY ".\localized\pt_st.str" ".\english\localizedstrings\st.str" /Y
-XCOPY ".\localized\pt_zone.str" ".\english\localizedstrings\zone.str" /Y
+XCOPY ".\localized\pt\st.str" ".\english\localizedstrings\st.str" /Y
+XCOPY ".\localized\pt\zone.str" ".\english\localizedstrings\zone.str" /Y
 
 call builder
 
@@ -31,8 +31,8 @@ call builder
 
 echo Compiling galician version...
 
-XCOPY ".\localized\gl_st.str" ".\english\localizedstrings\st.str" /Y
-XCOPY ".\localized\gl_zone.str" ".\english\localizedstrings\zone.str" /Y
+XCOPY ".\localized\gl\st.str" ".\english\localizedstrings\st.str" /Y
+XCOPY ".\localized\gl\zone.str" ".\english\localizedstrings\zone.str" /Y
 
 call builder
 

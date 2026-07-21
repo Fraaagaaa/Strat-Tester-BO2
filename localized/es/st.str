@@ -7,7 +7,7 @@ REFERENCE           ST_MENU_TITLE
 LANG_ENGLISH        "STRAT TESTER"
 
 REFERENCE           ST_WATERMARK
-LANG_ENGLISH        "STRAT TESTER 2.5"
+LANG_ENGLISH        "STRAT TESTER 2.6"
 
 REFERENCE           ST_TAB_GAME
 LANG_ENGLISH        "PARTIDA"
@@ -243,6 +243,12 @@ LANG_ENGLISH        "ELECTRIC CHERRY"
 
 REFERENCE           ST_ELECTRIC_CHERRY_DESC
 LANG_ENGLISH        "Otorga Electric Cherry al aparecer."
+
+REFERENCE           ST_MOOVING_WALLS
+LANG_ENGLISH        "PAREDES MOVEDIZAS"
+
+REFERENCE           ST_MOOVING_WALLS_DESC
+LANG_ENGLISH        "Cambia si las paredes de Agartha se mueven o no."
 
 REFERENCE           ST_WAR_MACHINE
 LANG_ENGLISH        "MÁQUINA DE GUERRA"
@@ -523,6 +529,12 @@ LANG_ENGLISH        "Coloca un maniquí en las zonas de aparición de los denize
 
 REFERENCE           ST_BOX_HITS
 LANG_ENGLISH        "^3Tiradas de caja: ^5"
+
+REFERENCE           ST_BOX_HITS_HUD
+LANG_ENGLISH        "INFORMACIÓN DE LA CAJA"
+
+REFERENCE           ST_BOX_HITS_HUD_DESC
+LANG_ENGLISH        "Muestra el número de tiradas de caja asi como la media de rayguns."
 
 REFERENCE           ST_AVG_MK2
 LANG_ENGLISH        "^3Arma de rayos MK2 AVG: ^5"
