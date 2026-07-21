@@ -193,6 +193,8 @@ watermark()
 
 sph()
 {
+	level endon("end_game");
+	self endon("disconnect");
 	self.sph = newclienthudelem(self);
 	self.sph.fontscale = 1.7;
 	self.sph.color = (0.8, 0.8, 0.8);
@@ -207,30 +209,37 @@ sph()
 	self.sph.vertalign = "user_top";
 	self.sph setvalue(0);
 
-	level waittill("start_of_round");
-	while(isdefined(level.countdown_hud))
-		wait 0.1;
+	while(true)
+	{
+		level waittill("start_of_round");
+		self thread sph_round_tracker();
+	}
+}
+
+sph_round_tracker()
+{
+	self endon("disconnect");
+	self notify("sph_round_tracker");
+	self endon("sph_round_tracker");
+
 	self.sph.time_start = gettime() / 1000;
 	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
 	self.sph.kills = 0;
 
-    while (true) 
+	while(true)
 	{
-        wait 0.1;
+		wait 0.1;
 		self.sph.alpha = self get_menu_hud("st_sph");
-
-        time = gettime() / 1000;
-        time_elapsed = int(time - self.sph.time_start);
+		time = gettime() / 1000;
+		time_elapsed = int(time - self.sph.time_start);
 		kills = self.sph.zombies_total_start - (get_round_enemy_array().size + level.zombie_total);
-        hordas_fraction = kills / 24.0;
-
-        if (hordas_fraction > 0)
-            value = time_elapsed / hordas_fraction;
-        else
-            value = 0;
-
-        self.sph setvalue(value);
-    }
+		hordas_fraction = kills / 24.0;
+		if (hordas_fraction > 0)
+			value = time_elapsed / hordas_fraction;
+		else
+			value = 0;
+		self.sph setvalue(value);
+	}
 }
 
 healthbar()

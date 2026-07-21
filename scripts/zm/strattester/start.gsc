@@ -133,6 +133,7 @@ round_pause_st()
 	level.countdown_hud.aligny = "center";
 	level.countdown_hud.horzalign = "user_center";
 	level.countdown_hud.vertalign = "user_center";
+
 	wait 2;
 	level thread zombie_spawn_wait();
 
@@ -141,6 +142,7 @@ round_pause_st()
 		wait 1;
 		level.countdown_hud SetValue(delay);
 	}
+	level notify("start_of_round");
 
 	level.countdown_hud FadeOverTime( 1.0 );
 	level.countdown_hud.color = (1,1,1);
@@ -148,7 +150,10 @@ round_pause_st()
 	wait( 1.0 );
 	
 	foreach(player in level.players)
-		player.round_timer settimerup(0);
+	{
+		player.roundtimer settimerup(0);
+		player.timer settimerup(0);
+	}
 	level.countdown_hud destroy_hud();
 }
 

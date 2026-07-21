@@ -247,7 +247,7 @@ main_loadouts()
 			self.st_loadout_weapons = array(UZI, SALLYS, CLAYMORE);
 			self.st_loadout_main = SALLYS;
 		}
-		self thread givetomahawk();
+		self givetomahawk();
 		self setclientfieldtoplayer( "upgraded_tomahawk_in_use", 1 );
 	}
 	if(isburied())

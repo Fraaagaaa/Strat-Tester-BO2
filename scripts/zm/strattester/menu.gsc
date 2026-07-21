@@ -26,7 +26,7 @@ menu_dispatcher()
     self notify( "st_menu_dispatcher" );
     self endon( "st_menu_dispatcher" );
 
-	define(self.st_menu_settings, []); // por el momento está sin usar
+	define(self.st_menu_settings, []);
 
     while ( true )
     {
