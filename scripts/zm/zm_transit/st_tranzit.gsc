@@ -1,23 +1,23 @@
-#include maps\mp\_utility;
 #include common_scripts\utility;
-#include maps\mp\gametypes_zm\_hud_util;
+#include maps\mp\_utility;
 #include maps\mp\gametypes_zm\_hud;
-#include maps\mp\zombies\_zm_stats;
-#include maps\mp\zombies\_zm_utility; 
-#include maps\mp\zombies\_zm_melee_weapon;
-#include maps\mp\zombies\_zm_audio;
-#include maps\mp\zombies\_zm_unitrigger;
-#include maps\mp\zombies\_zm_weap_claymore;
-#include maps\mp\zombies\_zm;
-#include maps\mp\zombies\_zm_weapons;
+#include maps\mp\gametypes_zm\_hud_util;
 #include maps\mp\zm_transit_bus;
+#include maps\mp\zombies\_zm;
 #include maps\mp\zombies\_zm_ai_screecher;
+#include maps\mp\zombies\_zm_audio;
+#include maps\mp\zombies\_zm_melee_weapon;
+#include maps\mp\zombies\_zm_stats;
+#include maps\mp\zombies\_zm_unitrigger;
+#include maps\mp\zombies\_zm_utility; 
+#include maps\mp\zombies\_zm_weap_claymore;
+#include maps\mp\zombies\_zm_weapons;
 
 #include scripts\zm\strattester\box;
 #include scripts\zm\strattester\bus;
-#include scripts\zm\strattester\utility;
-#include scripts\zm\strattester\schreecher;
 #include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\schreecher;
+#include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\weapons;
 
 init()
@@ -33,10 +33,8 @@ init()
         level thread buildtranzitstuff();
         level thread busstatus();
         level thread denizens();
-        level thread bushud();
         level thread showDenizenLocation();
     }
-
 }
 
 waitSpawn()

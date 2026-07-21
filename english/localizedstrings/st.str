@@ -527,6 +527,12 @@ LANG_ENGLISH        "^3REINICIANDO AUTOMATICAMENTE PARA O PAP, ISTO PODE TARDAR 
 REFERENCE           ST_BOX_HITS
 LANG_ENGLISH        "^3Tiradas de caixa: ^5"
 
+REFERENCE           ST_BOX_HITS_HUD
+LANG_ENGLISH        "INFORMACIÓN DA CAIXA"
+
+REFERENCE           ST_BOX_HITS_HUD_DESC
+LANG_ENGLISH        "Mostra o numero de veces que se usou a caixa máxica."
+
 REFERENCE           ST_AVG_MK2
 LANG_ENGLISH        "^3Arma de raios MK2 AVG: ^5"
 

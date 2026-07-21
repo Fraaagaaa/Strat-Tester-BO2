@@ -98,13 +98,6 @@ give_configured_perks( perk_array )
     }
 }
 
-perk_response_value( value_string )
-{
-    if ( !isdefined( value_string ) ) return 0;
-    if ( value_string == "1" ) return 1;
-    return 0;
-}
-
 set_menu_perk( perk, value )
 {
     if ( perk == JUG_PERK )           self.menu_perk_jugg     = value;
@@ -198,7 +191,7 @@ perks_menu_set(args)
         return;
 
     perk = entry[0];
-    value = perk_response_value( entry[1] );
+    value = response_value( entry[1] );
 
     if ( perk == MULE_PERK )
         self.wants_mule = value;
@@ -219,7 +212,7 @@ perks_menu_sync(args)
         if ( !in_array( perk, strtok( level.st_perks, " " ) ) )
             continue;
 
-        value = perk_response_value( entry[1] );
+        value = response_value( entry[1] );
         if ( perk == MULE_PERK )
             self.wants_mule = value;
 

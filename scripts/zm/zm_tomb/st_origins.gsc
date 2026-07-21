@@ -54,37 +54,9 @@ connected_st()
     while(true)
     {
         self waittill( "spawned_player" );
-		self thread origins_trackers();
-
 		if(iswhite(self))
 			self tomb_give_equipment();
-        
-        wait 0.05;
     }
-}
-
-origins_trackers()
-{
-	self endon("disconnect");
-
-    self.stomp_hud   = self createHudElem(&"^3Stomp: ^5", 0, -220, 1.6, 0, "left", "bottom");
-    self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
-    self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");
-
-	if(!isdefined(level.tumbles)) level.tumbles = 0;
-	if(!isdefined(level.tankkills)) level.tankkills = 0;
-	if(!isdefined(level.stompkills)) level.stompkills = 0;
-
-	self thread alphatrackers();
-
-	flag_wait("initial_blackscreen_passed");
-	while(true)
-	{
-		self.stomp_hud setvalue(level.stompkills);
-		self.tank_hud setvalue(level.tankkills);
-		self.tumble_hud setvalue(level.tumbles);
-		wait(0.05);
-	}
 }
 
 pack_a_punch_think()
@@ -399,17 +371,6 @@ turn_gens_on()
 		gen players_capture_zone();
 		level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
     	level setclientfield( "state_" + gen.script_noteworthy, 2 );
-	}
-}
-
-alphatrackers()
-{
-	while(true)
-	{
-		wait 0.1;
-		self.stomp_hud.alpha = getDvarInt("st_stomp");
-		self.tumble_hud.alpha = getDvarInt("st_tumble");
-		self.tank_hud.alpha = getDvarInt("st_tank");
 	}
 }
 

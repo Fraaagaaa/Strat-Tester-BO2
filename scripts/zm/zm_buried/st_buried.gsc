@@ -14,7 +14,6 @@ init()
 {
     replaceFunc(getfunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink"), ::subwooferthink);
 	flag_wait("initial_blackscreen_passed");
-	level thread displaysubwooferkills();
     deleteBarricades();
 }
 

@@ -5,13 +5,13 @@
 #include maps\mp\zm_nuked_perks;
 
 #include scripts\zm\strattester\box;
+#include scripts\zm\strattester\hud;
 
 init()
 {
 	replacefunc(getfunction("maps/mp/zm_nuked_perks", "perks_from_the_sky"), ::perks_from_the_sky);
     level.total_chest_accessed = 0;
     level thread checkpaplocation();
-    level thread fast_restart_warning();
 }
 
 perks_from_the_sky()

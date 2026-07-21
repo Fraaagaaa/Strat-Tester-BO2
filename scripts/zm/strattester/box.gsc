@@ -8,28 +8,14 @@
 #include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\utility;
 
+/*
+Lógica para forzar el cambio de posición de la caja
+Contador de tiradas de caja y rayguns en la función original para mayor precisión
+*/
+
 init_box()
 {
 	replaceFunc(getfunction("maps/mp/zombies/_zm_magicbox", "treasure_chest_weapon_spawn"), ::treasure_chest_weapon_spawn);
-
-    if(!isdefined(level.boxhits))
-        level thread displayBoxHits();
-    if(issurvivalmap() && !isdefined(level.total_mk2))
-    {
-        level thread raygunCounter();
-    }
-}
-
-displayWatcher()
-{
-    while(true)
-    {
-        wait 0.1;
-        alpha = getDvarInt("st_boxhits");
-        level.total_mk2_display.alpha = alpha;
-        level.total_ray_display.alpha = alpha;
-        level.boxhitsst.alpha = alpha;
-    }
 }
 
 fast_chest_move()

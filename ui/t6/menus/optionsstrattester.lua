@@ -49,20 +49,35 @@ CoD.StratTester.OnDvarChanged = function ( choice, isUserRequest )
 	Engine.SetDvar( dvarName, value )
 end
 
-CoD.StratTester.AddChoices_OnOrOff = function ( selector, defaultVal )
-	selector:addChoice(Engine.Localize("ST_MENU_OFF"), 0, nil, CoD.StratTester.OnDvarChanged )
-	selector:addChoice(Engine.Localize("ST_MENU_ON"), 1, nil, CoD.StratTester.OnDvarChanged )
-	
-	local dvarName = selector.m_profileVarName
-	
-	local currentVal = UIExpression.DvarInt( nil, dvarName )
-	
-	if currentVal == nil or UIExpression.DvarString( nil, dvarName ) == "" then
-		currentVal = defaultVal
-		Engine.SetDvar( dvarName, currentVal )
-	end
-	
-	selector:setChoice( currentVal )
+CoD.StratTester.OnToggleChanged = function ( choice, isUserRequest )
+    if isUserRequest ~= true then return end
+
+    local controller = choice.parentSelectorButton.m_currentController
+    local dvarName = choice.parentSelectorButton.m_profileVarName
+    local moduleName = choice.parentSelectorButton.m_stModule
+
+    Engine.SetDvar( dvarName, choice.value )
+
+    if moduleName ~= nil then
+        CoD.StratTester.send_response( controller, moduleName, "set", { dvarName .. ":" .. tostring(choice.value) } )
+    end
+end
+
+CoD.StratTester.AddChoices_OnOrOff = function ( selector, defaultVal, module )
+    selector.m_stModule = module
+
+    selector:addChoice(Engine.Localize("ST_MENU_OFF"), 0, nil, CoD.StratTester.OnToggleChanged )
+    selector:addChoice(Engine.Localize("ST_MENU_ON"), 1, nil, CoD.StratTester.OnToggleChanged )
+
+    local dvarName = selector.m_profileVarName
+    local currentVal = UIExpression.DvarInt( nil, dvarName )
+
+    if currentVal == nil or UIExpression.DvarString( nil, dvarName ) == "" then
+        currentVal = defaultVal
+        Engine.SetDvar( dvarName, currentVal )
+    end
+
+    selector:setChoice( currentVal )
 end
 
 CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
@@ -268,30 +283,25 @@ end
 CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     local Container = LUI.UIContainer.new()
     local ButtonList = CoD.Options.CreateButtonList()
-    local mapname = UIExpression.DvarString( nil, "ui_mapname")
+
     Tab.buttonList = ButtonList
     Container:addElement( ButtonList )
 
-    -- HEALTHBAR
-    local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_HEALTHBAR"), "st_healthbar", Engine.Localize("ST_HEALTHBAR_DESC"))
-    CoD.StratTester.AddChoices_OnOrOff( HealthbarChoice, 0)
+    local mapname = UIExpression.DvarString( nil, "ui_mapname")
+    local gametype = UIExpression.DvarString( nil, "ui_gametype")
+    local startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
 
-    -- ZOMBIE COUNTER
-    local RemainingChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZOMBIE_COUNTER"), "st_remaining", Engine.Localize("ST_ZOMBIE_COUNTER_DESC"))
-    CoD.StratTester.AddChoices_OnOrOff( RemainingChoice, 1 )
 
-    if mapname == "zm_transit" then
-        local DenizenCounterCoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZEN_COUNTER"), "st_remaining_denizens", Engine.Localize("ST_DENIZEN_COUNTER_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( DenizenCounterCoice , 1 )
-    end
-
-    -- SPH METER
-    local SPHChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SPH_METER"), "st_sph", Engine.Localize("ST_SPH_METER_DESC"))
-    CoD.StratTester.AddChoices_OnOrOff( SPHChoice, 1 )
-
-    -- ZONE NAME
-    local ZoneChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZONE_NAME"), "st_zone", Engine.Localize("ST_ZONE_NAME_DESC"))
-    CoD.StratTester.AddChoices_OnOrOff( ZoneChoice, 1 )
+    local isDepot    = (mapname == "zm_transit" and gametype == "zstandard" and startlocation == "transit")
+    local isFarm     =  startlocation == "farm"
+    local isTown     =  startlocation == "town"
+    local isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
+    local isNuketown = (mapname == "zm_nuked")
+    local isDieRise  = (mapname == "zm_highrise")
+    local isMob      = (mapname == "zm_prison")
+    local isBuried   = (mapname == "zm_buried")
+    local isOrigins  = (mapname == "zm_tomb")
+    local isSurvival = (isDepot or isFarm or isTown or isNuketown)
 
     -- TIMER POSITION (Selector Múltiple)
     local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "st_timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
@@ -309,9 +319,73 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 
     TimerChoice:setChoice( currentTimerVal )
 
-    if mapname == "zm_prison" then
+    if isMob then
         local TrapTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TRAP_TIMER"), "st_traptimer", Engine.Localize("ST_TRAT_TIMER_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( TrapTimerChoice , 1 )
+        CoD.StratTester.AddChoices_OnOrOff(TrapTimerChoice , 1 )
+    end
+
+    -- HEALTHBAR
+    local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_HEALTHBAR"), "st_healthbar", Engine.Localize("ST_HEALTHBAR_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff(HealthbarChoice, 0, "hud")
+
+    -- ZOMBIE COUNTER
+    local RemainingChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZOMBIE_COUNTER"), "st_remaining", Engine.Localize("ST_ZOMBIE_COUNTER_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff(RemainingChoice, 1, "hud")
+
+    -- DENIZENS
+    if isTranzit then
+        local DenizenCounterCoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZEN_COUNTER"), "st_remaining_denizens", Engine.Localize("ST_DENIZEN_COUNTER_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(DenizenCounterCoice, 1, "hud")
+    end
+
+    -- SPH METER
+    local SPHChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SPH_METER"), "st_sph", Engine.Localize("ST_SPH_METER_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff( SPHChoice, 1, "hud")
+
+    -- ZONE NAME
+    local ZoneChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ZONE_NAME"), "st_zone", Engine.Localize("ST_ZONE_NAME_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff( ZoneChoice, 1, "hud")
+
+     -- BOX HITS
+    if isSurvival then
+        local BoxHitsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BOX_HITS_HUD"), "st_boxhits", Engine.Localize("ST_BOX_HITS_HUD_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(BoxHitsChoice, 1, "hud")
+    end
+
+    if isTranzit then
+        -- BUS TIMER
+        local BusTimerChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "st_bustimer", Engine.Localize("ST_BUS_TIMER_HUD_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(BusTimerChoice, 0, "hud")
+
+        -- BUS LOC
+        local BusLocChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOC"), "st_busloc", Engine.Localize("ST_BUS_LOC_HUD_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(BusLocChoice, 0, "hud")
+    end
+
+    if isDieRise then
+        -- ELEVATOR KILLS
+        local ElevatorChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(ElevatorChoice, 0, "hud")
+    end
+
+    if isBuried then
+        -- SUBWOOFER KILLS
+        local SubwooferChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER_KILLS"), "st_subwooferkills", Engine.Localize("ST_SUBWOOFER_KILLS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(SubwooferChoice, 0, "hud")
+    end
+
+    if isOrigins then
+        -- TANK
+        local TankChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TANK_KILLS"), "st_tank", Engine.Localize("ST_TANK_KILLS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(TankChoice, 0, "hud")
+
+        -- TUMBLE
+        local TumbleChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE"), "st_tumble", Engine.Localize("ST_TUMBLE_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(TumbleChoice, 0, "hud")
+
+        -- STOMP
+        local StompChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP"), "st_stomp", Engine.Localize("ST_STOMP_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(StompChoice, 0, "hud")
     end
 
     return Container
@@ -780,6 +854,64 @@ LUI.createMenu.StratTesterMenu = function ( LocalClientIndex )
             SettingsTabs:refreshTab( LocalClientIndex )
         end
     end
+
+    return menu
+end
+
+CoD.StratTester.sync_hud_menu = function ( controller )
+    local elements = {
+        { "st_healthbar",          0 },
+        { "st_remaining",          1 },
+        { "st_remaining_denizens", 1 },
+        { "st_sph",                1 },
+        { "st_zone",               1 },
+        { "st_boxhits",            1 },
+        { "st_bustimer",           0 },
+        { "st_busloc",             0 },
+        { "st_elevatorkills",      0 },
+        { "st_subwooferkills",     0 },
+        { "st_stomp",              0 },
+        { "st_tumble",             0 },
+        { "st_tank",               0 },
+    }
+
+    local args = {}
+    for _, e in ipairs( elements ) do
+        local dvarName = e[1]
+        local value = e[2]
+        if UIExpression.DvarString( nil, dvarName ) ~= "" then
+            value = UIExpression.DvarInt( nil, dvarName )
+        end
+        table.insert( args, e[1] .. ":" .. tostring(value) )
+    end
+
+    CoD.StratTester.send_response( controller, "hud", "sync", args )
+end
+
+CoD.StratTester.PerkSyncPulse = function ( menu, event )
+    if menu.syncCount == nil then
+        menu.syncCount = 0
+    end
+
+    menu.syncCount = menu.syncCount + 1
+    CoD.StratTester.sync_perk_menu( event.controller or menu.controller or 0 )
+    CoD.StratTester.sync_hud_menu( event.controller or menu.controller or 0 )
+
+    if menu.syncCount >= 5 then
+        menu:close()
+    end
+end
+
+LUI.createMenu.StratTesterPerkSync = function ( LocalClientIndex )
+    local menu = CoD.Menu.New( "StratTesterPerkSync" )
+    menu.controller = LocalClientIndex
+    menu:setAlpha( 0 )
+
+    CoD.StratTester.sync_perk_menu( LocalClientIndex )
+    CoD.StratTester.sync_hud_menu( LocalClientIndex )
+
+    menu:registerEventHandler( "perk_sync_pulse", CoD.StratTester.PerkSyncPulse )
+    menu:addElement( LUI.UITimer.new( 100, "perk_sync_pulse", false, menu ) )
 
     return menu
 end

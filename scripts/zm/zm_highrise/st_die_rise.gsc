@@ -13,7 +13,6 @@ init()
 {
 	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
 	level.zombies_died_to_elevator = 0;
-	level thread displayElevatorKills();
 	level thread check_special_round();
 }
 

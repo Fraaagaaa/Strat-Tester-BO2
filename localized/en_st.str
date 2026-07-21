@@ -524,6 +524,12 @@ LANG_ENGLISH        "Place a manequin in every denizen spawner."
 REFERENCE           ST_BOX_HITS
 LANG_ENGLISH        "^3Box Hits: ^5"
 
+REFERENCE           ST_BOX_HITS_HUD
+LANG_ENGLISH        "BOX INFO"
+
+REFERENCE           ST_BOX_HITS_HUD_DESC
+LANG_ENGLISH        "Display the ammount of box hits and raygun average."
+
 REFERENCE           ST_AVG_MK2
 LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
 

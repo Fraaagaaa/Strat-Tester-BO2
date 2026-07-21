@@ -33,10 +33,11 @@ init()
 	level thread init_box();
 	level thread init_buildables();
 	level thread init_despawners();
+	level thread init_hud();
+	level thread init_menu_system();
 	level thread init_settings();
     level thread init_perks();
     level thread init_start();
-	level thread init_menu_system();
 	level thread readChat();
     level thread wait_for_players();
 	level thread watermark();
@@ -66,33 +67,12 @@ connected_st()
 
     while(true)
     {
-		if(!isdefined(self.has_hud))
-		{
-			if(self == level.players[0])
-			{
-				self strattesterprint("Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
-			 	self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
-			}
-			self thread health_bar_hud();
-			self thread zone_hud();
-			self thread zombies_remaining();
-			self thread st_sph();
-            if(istranzit())
-            {
-			    self thread denizens_alive();
-                self thread busloc();
-            }
-			if(!isdefined(self.has_hud))
-				self.has_hud = true;
-		}
+		self strattesterprint("Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
+		self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 		self.score = 1000000;
         self thread perk_apply_loop();
 		self thread loadouts_init();
-	    self thread timer();
-	    self thread timerlocation();
-	    self thread trap_timer();
         self thread specialcommands();
-        wait 0.05;
 		self waittill("spawned_player");
     }
 }

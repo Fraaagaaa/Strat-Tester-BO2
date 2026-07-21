@@ -3,6 +3,8 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
+#include scripts\zm\strattester\utility;
+
 init_menu_system()
 {
     level endon ("end_game");
@@ -23,6 +25,8 @@ menu_dispatcher()
     self endon( "disconnect" );
     self notify( "st_menu_dispatcher" );
     self endon( "st_menu_dispatcher" );
+
+	define(self.st_menu_settings, []); // por el momento está sin usar
 
     while ( true )
     {
@@ -56,4 +60,13 @@ handle_menu_response(response)
         return;
 
     self thread [[level.st_menu_handlers[module]]](action, args);
+}
+
+menu_set(arg)
+{
+	entry = strtok( arg, ":" );
+	if (!isdefined(entry) || entry.size < 2)
+		return;
+
+    self.st_menu_settings[entry[0]] = entry[1];
 }

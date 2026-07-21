@@ -4,513 +4,144 @@
 #include maps\mp\_utility;
 
 #include scripts\zm\strattester\utility;
+#include scripts\zm\strattester\menu;
+#include scripts\zm\strattester\timers;
 
-st_sph()
+/*
+En este archivo sólo se inicializa la interfaz y se controlan las modificaciones de visibilidad.
+UNA FUNCIÓN POR ELEMENTO DE LA INTERFAZ
+*/
+
+
+init_hud()
 {
-	self.sph = newclienthudelem(self);
-	self.sph.fontscale = 1.7;
-	self.sph.color = (0.8, 0.8, 0.8);
-	self.sph.hidewheninmenu = 1;
-	self.sph.x = 2;
-	self.sph.y = 75;
-	self.sph.alpha = getDvarInt("st_sph");
-	self.sph.label = &"ST_SPH_HUD";
-	self.sph.alignx = "left";
-	self.sph.aligny = "top";
-	self.sph.horzalign = "user_left";
-	self.sph.vertalign = "user_top";
-	self.sph setvalue(0);
+	register_menu_handler( "hud", ::on_hud_menu );
 
-	level waittill("start_of_round");
-	while(isdefined(level.countdown_hud))
-		wait 0.1;
-	self.sph.time_start = gettime() / 1000;
-	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
-	self.sph.kills = 0;
-	foreach(player in level.players)
-		player.last_kills_check = 0;
-    self thread updateSPH();
+	foreach (player in getplayers())
+		player load_persisted_hud();
 
-	while (true) 
-	{
-		level waittill("start_of_round");
-		self.sph.time_start = gettime() / 1000;
-    	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
-	}
+	level thread watch_new_players_hud();
 }
 
-updateSPH()
+watch_new_players_hud()
 {
-    while (true) 
+	level endon( "end_game" );
+
+	while ( true )
 	{
-        wait 0.1;
-        time = gettime() / 1000;
-        self.sph.time_elapsed = int(time - self.sph.time_start);
-		self.sph.kills = self.sph.zombies_total_start - (maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total);
-        self.sph.hordas_fraction = self.sph.kills / 24.0;
-        if (self.sph.hordas_fraction > 0)
-            self.sph.sph_value = self.sph.time_elapsed / self.sph.hordas_fraction;
-        else
-            self.sph.sph_value = 0;
-        self.sph setvalue(self.sph.sph_value);
-		self.sph.alpha = getDvarInt("st_sph");
-    }
-}
-
-health_bar_hud()
-{
-	level endon("end_game");
-	self endon("disconnect");
-	flag_wait("initial_blackscreen_passed");
-
-	self.health_bar = self createprimaryprogressbar();
-	self.health_bar.hidewheninmenu = 1;
-	self.health_bar.bar.hidewheninmenu = 1;
-	self.health_bar.barframe.hidewheninmenu = 1;
-	self.health_bar_text = self createprimaryprogressbartext();
-	self.health_bar_text.hidewheninmenu = 1;
-	
-	self.health_bar setpoint(undefined, "BOTTOM", 0, 15);
-	self.health_bar_text setpoint(undefined, "BOTTOM", 75, 15);
-
-	while(true)
-	{
-		if(!getDvarInt("st_healthbar"))
-		{
-			self.health_bar.alpha = 0;
-			self.health_bar.bar.alpha = 0;
-			self.health_bar.barframe.alpha = 0;
-			self.health_bar_text.alpha = 0;
-			while(!getDvarInt("st_healthbar"))
-				wait 0.1;
-		}
-		if (isDefined(self.e_afterlife_corpse))
-		{
-			if (self.health_bar.alpha != 0)
-			{
-				self.health_bar.alpha = 0;
-				self.health_bar.bar.alpha = 0;
-				self.health_bar.barframe.alpha = 0;
-				self.health_bar_text.alpha = 0;
-			}
-			
-			wait 0.05;
+		level waittill( "connected", player );
+		if(isdefined(player.has_hud) && player.has_hud)
 			continue;
-		}
 
-		if (self.health_bar.alpha != 1)
+		player load_persisted_hud();
+		player thread healthbar();
+		player thread sph();
+		player thread timer();
+		player thread remaining();
+		player thread zone();
+		if(istranzit())
 		{
-			self.health_bar.alpha = 1;
-			self.health_bar.bar.alpha = 1;
-			self.health_bar.barframe.alpha = 1;
-			self.health_bar_text.alpha = 1;
+			player thread denizensAlive();
+			player thread buslocation();
+			player thread bustimer();
+		}
+		else if(isnuketown())
+    		level thread fast_restart_warning();
+		else if(isdierise())
+			player thread displayElevatorKills();
+		else if(ismob())
+			player thread traptimer();
+		else if(isburied())
+			player thread displaysubwooferkills();
+		else if(isorigins())
+			player thread origins_hud();
+
+		if(issurvivalmap())
+		{
+			player thread displayBoxHits();
 		}
 
-		self.health_bar updatebar (self.health / self.maxhealth);
-		self.health_bar_text setvalue(self.health);
-		self.health_bar.bar.color = (1 - self.health / self.maxhealth, self.health / self.maxhealth, 0);
-		wait 0.05;
+		player.has_hud = true;
 	}
 }
 
-
-denizens_alive()
+load_persisted_hud()
 {
-	self endon( "disconnect" );
-	level endon( "end_game" );
-
-    self.denizen_counter = createFontString( "hudsmall" , 1.4 );
-    self.denizen_counter setPoint( "CENTER", "CENTER", "CENTER", 205);
-	self.denizen_counter.hidewheninmenu = 1;
-    self.denizen_counter.alpha = 0;
-    self.denizen_counter.label = &"ST_DENIZENS_HUD";
-
-    while(true)
-    {
-        self.denizen_counter setValue(level.zombie_screecher_count);
-		self.denizen_counter.alpha = getDvarInt("st_remaining_denizens");
-        wait 0.05; 
-    }
+	self set_menu_hud( "st_healthbar",          getDvarInt( "st_healthbar" ) );
+	self set_menu_hud( "st_remaining",          getDvarInt( "st_remaining" ) );
+	self set_menu_hud( "st_remaining_denizens", getDvarInt( "st_remaining_denizens" ) );
+	self set_menu_hud( "st_sph",                getDvarInt( "st_sph" ) );
+	self set_menu_hud( "st_zone",               getDvarInt( "st_zone" ) );
+	self set_menu_hud( "st_boxhits",            getDvarInt( "st_boxhits" ) );
+	self set_menu_hud( "st_bustimer",           getDvarInt( "st_bustimer" ) );
+	self set_menu_hud( "st_busloc",             getDvarInt( "st_busloc" ) );
+	self set_menu_hud( "st_elevatorkills",      getDvarInt( "st_elevatorkills" ) );
+	self set_menu_hud( "st_subwooferkills",     getDvarInt( "st_subwooferkills" ) );
+	self set_menu_hud( "st_stomp",     			getDvarInt( "st_stomp" ) );
+	self set_menu_hud( "st_tumble",     		getDvarInt( "st_tumble" ) );
+	self set_menu_hud( "st_tank",     			getDvarInt( "st_tank" ) );
 }
 
-zombies_remaining()
+get_menu_hud( element )
 {
-	self endon( "disconnect" );
-	level endon( "end_game" );
+	if ( isdefined( self.st_hud ) && isdefined( self.st_hud[ element ] ) )
+		return self.st_hud[ element ];
 
-    self.zombie_counter_hud = createFontString( "hudsmall" , 1.4 );
-    self.zombie_counter_hud setPoint( "CENTER", "CENTER", "CENTER", 190 );
-	self.zombie_counter_hud.hidewheninmenu = 1;
-    self.zombie_counter_hud.alpha = 0;
-    self.zombie_counter_hud.label = &"ST_REMAINING_HUD";
-
-    while(true)
-    {
-        self.zombie_counter_hud setValue((maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total));
-		self.zombie_counter_hud.alpha = getDvarInt("st_remaining");
-        wait 0.05; 
-    }
-}
-
-zone_hud()
-{
-	level endon("end_game");
-	self endon("disconnect");
-
-    self.st_zone_hud = createFontString( "hudsmall", 1.3 );
-    self.st_zone_hud.x = 8;
-    self.st_zone_hud.y = -95;
-	if(isburied()) self.st_zone_hud.y += 15;
-	if(isorigins()) self.st_zone_hud.y += 10;
-    self.st_zone_hud.fontscale = 1.3;
-    self.st_zone_hud.alignx = "left";
-    self.st_zone_hud.horzalign = "user_left";
-    self.st_zone_hud.vertalign = "user_bottom";
-    self.st_zone_hud.aligny = "bottom";
-    self.st_zone_hud.alpha = 1;
-	self.st_zone_hud.hidewheninmenu = true;
-    self.st_zone_hud.label = &"";
-
-	flag_wait( "initial_blackscreen_passed" );
-
-	self thread zone_hud_watcher();
-}
-
-zone_hud_watcher()
-{	
-	level endon( "end_game" );
-	self endon("disconnect");
-
-	prev_zone = "";
-	while(true)
+	switch ( element )
 	{
-		wait 0.05;
-
-		while( getDvarInt("st_zone") )
-		{
-			self.st_zone_hud.alpha = 1;
-
-			zone = self get_zone_name();
-			if(prev_zone != zone)
-			{
-				prev_zone = zone;
-
-				self.st_zone_hud fadeovertime(0.2);
-				self.st_zone_hud.alpha = 0;
-				wait 0.2;
-
-				self.st_zone_hud  settext(zone);
-
-				self.st_zone_hud fadeovertime(0.2);
-				self.st_zone_hud.alpha = 1;
-				wait 0.15;
-			}
-
-			wait 0.05;
-		}
-		self.st_zone_hud.alpha = 0;
+		case "st_healthbar":     return 0;
+		case "st_bustimer":      return 0;
+		case "st_busloc":        return 0;
+		case "st_elevatorkills": return 0;
+		case "st_subwooferkills": return 0;
 	}
+	return 1; // st_remaining, st_remaining_denizens, st_sph, st_zone, st_boxhits, st_subwooferkills -> ON
 }
 
-get_zone_name()
+on_hud_menu( action, args )
 {
-	zone = self get_current_zone();
-	if (!isDefined(zone))
-		return "";
-
-	name = "^3";
-	if(isorigins())
-		switch (zone)
-		{
-			case "zone_start": self.st_zone_hud.label = &"ZONE_LOWER_LABORATORY"; break;
-			case "zone_start_a": self.st_zone_hud.label = &"ZONE_UPPER_LABORATORY"; break;
-			case "zone_start_b": self.st_zone_hud.label = &"ZONE_GENERATOR_1"; break;
-			case "zone_bunker_1a": self.st_zone_hud.label = &"ZONE_GENERATOR_3_BUNKER_1"; break;
-			case "zone_fire_stairs": self.st_zone_hud.label = &"ZONE_FIRE_TUNNEL"; break;
-			case "zone_bunker_1": self.st_zone_hud.label = &"ZONE_GENERATOR_3_BUNKER_2"; break;
-			case "zone_bunker_3a": self.st_zone_hud.label = &"ZONE_GENERATOR_3"; break;
-			case "zone_bunker_3b": self.st_zone_hud.label = &"ZONE_GENERATOR_3_BUNKER_3"; break;
-			case "zone_bunker_2a": self.st_zone_hud.label = &"ZONE_GENERATOR_2_BUNKER_1"; break;
-			case "zone_bunker_2": self.st_zone_hud.label = &"ZONE_GENERATOR_2_BUNKER_2"; break;
-			case "zone_bunker_4a": self.st_zone_hud.label = &"ZONE_GENERATOR_2"; break;
-			case "zone_bunker_4b": self.st_zone_hud.label = &"ZONE_GENERATOR_2_BUNKER_3"; break;
-			case "zone_bunker_4c": self.st_zone_hud.label = &"ZONE_TANK_STATION"; break;
-			case "zone_bunker_4d": self.st_zone_hud.label = &"ZONE_ABOVE_TANK_STATION"; break;
-			case "zone_bunker_tank_c": self.st_zone_hud.label = &"ZONE_GENERATOR_2_TANK_ROUTE_1"; break;
-			case "zone_bunker_tank_c1": self.st_zone_hud.label = &"ZONE_GENERATOR_2_TANK_ROUTE_2"; break;
-			case "zone_bunker_4e": self.st_zone_hud.label = &"ZONE_GENERATOR_2_TANK_ROUTE_3"; break;
-			case "zone_bunker_tank_d": self.st_zone_hud.label = &"ZONE_GENERATOR_2_TANK_ROUTE_4"; break;
-			case "zone_bunker_tank_d1": self.st_zone_hud.label = &"ZONE_GENERATOR_2_TANK_ROUTE_5"; break;
-			case "zone_bunker_4f": self.st_zone_hud.label = &"ZONE_ZONE_BUNKER_4F"; break;
-			case "zone_bunker_5a": self.st_zone_hud.label = &"ZONE_WORKSHOP_DOWNSTAIRS"; break;
-			case "zone_bunker_5b": self.st_zone_hud.label = &"ZONE_WORKSHOP_UPSTAIRS"; break;
-			case "zone_nml_2a": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_WALKWAY"; break;
-			case "zone_nml_2": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_ENTRANCE"; break;
-			case "zone_bunker_tank_e": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TANK_ROUTE_1"; break;
-			case "zone_bunker_tank_e1": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TANK_ROUTE_2"; break;
-			case "zone_bunker_tank_e2": self.st_zone_hud.label = &"ZONE_ZONE_BUNKER_TANK_E2"; break;
-			case "zone_bunker_tank_f": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TANK_ROUTE_3"; break;
-			case "zone_nml_1": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TANK_ROUTE_4"; break;
-			case "zone_nml_4": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TANK_ROUTE_5"; break;
-			case "zone_nml_0": self.st_zone_hud.label = &"ZONE_GENERATOR_5_LEFT_FOOTSTEP"; break;
-			case "zone_nml_5": self.st_zone_hud.label = &"ZONE_GENERATOR_5_RIGHT_FOOTSTEP_WALKWAY"; break;
-			case "zone_nml_farm": self.st_zone_hud.label = &"ZONE_GENERATOR_5"; break;
-			case "zone_nml_celllar": self.st_zone_hud.label = &"ZONE_GENERATOR_5_CELLAR"; break;
-			case "zone_bolt_stairs": self.st_zone_hud.label = &"ZONE_LIGHTNING_TUNNEL"; break;
-			case "zone_nml_3": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_1ST_RIGHT_FOOTSTEP"; break;
-			case "zone_nml_2b": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_STAIRS"; break;
-			case "zone_nml_6": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_LEFT_FOOTSTEP"; break;
-			case "zone_nml_8": self.st_zone_hud.label = &"ZONE_NO_MANS_LAND_2ND_RIGHT_FOOTSTEP"; break;
-			case "zone_nml_10a": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_1"; break;
-			case "zone_nml_10": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_2"; break;
-			case "zone_nml_7": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_3"; break;
-			case "zone_bunker_tank_a": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_4"; break;
-			case "zone_bunker_tank_a1": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_5"; break;
-			case "zone_bunker_tank_a2": self.st_zone_hud.label = &"ZONE_ZONE_BUNKER_TANK_A2"; break;
-			case "zone_bunker_tank_b": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TANK_ROUTE_6"; break;
-			case "zone_nml_9": self.st_zone_hud.label = &"ZONE_GENERATOR_4_LEFT_FOOTSTEP"; break;
-			case "zone_air_stairs": self.st_zone_hud.label = &"ZONE_WIND_TUNNEL"; break;
-			case "zone_nml_11": self.st_zone_hud.label = &"ZONE_GENERATOR_4"; break;
-			case "zone_nml_12": self.st_zone_hud.label = &"ZONE_GENERATOR_4_RIGHT_FOOTSTEP"; break;
-			case "zone_nml_16": self.st_zone_hud.label = &"ZONE_EXCAVATION_SITE_FRONT_PATH"; break;
-			case "zone_nml_17": self.st_zone_hud.label = &"ZONE_EXCAVATION_SITE_BACK_PATH"; break;
-			case "zone_nml_18": self.st_zone_hud.label = &"ZONE_EXCAVATION_SITE_LEVEL_3"; break;
-			case "zone_nml_19": self.st_zone_hud.label = &"ZONE_EXCAVATION_SITE_LEVEL_2"; break;
-			case "ug_bottom_zone": self.st_zone_hud.label = &"ZONE_EXCAVATION_SITE_LEVEL_1"; break;
-			case "zone_nml_13": self.st_zone_hud.label = &"ZONE_GENERATOR_5_TO_GENERATOR_6_PATH"; break;
-			case "zone_nml_14": self.st_zone_hud.label = &"ZONE_GENERATOR_4_TO_GENERATOR_6_PATH"; break;
-			case "zone_nml_15": self.st_zone_hud.label = &"ZONE_GENERATOR_6_ENTRANCE"; break;
-			case "zone_village_0": self.st_zone_hud.label = &"ZONE_GENERATOR_6_LEFT_FOOTSTEP"; break;
-			case "zone_village_5": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_1"; break;
-			case "zone_village_5a": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_2"; break;
-			case "zone_village_5b": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_3"; break;
-			case "zone_village_1": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_4"; break;
-			case "zone_village_4b": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_5"; break;
-			case "zone_village_4a": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_6"; break;
-			case "zone_village_4": self.st_zone_hud.label = &"ZONE_GENERATOR_6_TANK_ROUTE_7"; break;
-			case "zone_village_2": self.st_zone_hud.label = &"ZONE_CHURCH"; break;
-			case "zone_village_3": self.st_zone_hud.label = &"ZONE_GENERATOR_6_RIGHT_FOOTSTEP"; break;
-			case "zone_village_3a": self.st_zone_hud.label = &"ZONE_GENERATOR_6"; break;
-			case "zone_ice_stairs": self.st_zone_hud.label = &"ZONE_ICE_TUNNEL"; break;
-			case "zone_bunker_6": self.st_zone_hud.label = &"ZONE_ABOVE_GENERATOR_3_BUNKER"; break;
-			case "zone_nml_20": self.st_zone_hud.label = &"ZONE_ABOVE_NO_MANS_LAND"; break;
-			case "zone_village_6": self.st_zone_hud.label = &"ZONE_BEHIND_CHURCH"; break;
-			case "zone_chamber_0": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_LIGHTNING_CHAMBER"; break;
-			case "zone_chamber_1": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_LIGHTNING_ICE"; break;
-			case "zone_chamber_2": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_ICE_CHAMBER"; break;
-			case "zone_chamber_3": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_FIRE_LIGHTNING"; break;
-			case "zone_chamber_4": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_CENTER"; break;
-			case "zone_chamber_5": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_ICE_WIND"; break;
-			case "zone_chamber_6": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_FIRE_CHAMBER"; break;
-			case "zone_chamber_7": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_WIND_FIRE"; break;
-			case "zone_chamber_8": self.st_zone_hud.label = &"ZONE_THE_CRAZY_PLACE_WIND_CHAMBER"; break;
-			case "zone_robot_head": self.st_zone_hud.label = &"ZONE_ROBOTS_HEAD"; break;
-		}
-	if(name != "^3")
-		return name;
-	if(isburied())
-		switch (zone)
-		{
-			case "zone_start": self.st_zone_hud.label = &"ZONE_PROCESSING"; break;
-			case "zone_start_lower": self.st_zone_hud.label = &"ZONE_LOWER_PROCESSING"; break;
-			case "zone_tunnels_center": self.st_zone_hud.label = &"ZONE_CENTER_TUNNELS"; break;
-			case "zone_tunnels_north": self.st_zone_hud.label = &"ZONE_COURTHOUSE_TUNNELS_2"; break;
-			case "zone_tunnels_north2": self.st_zone_hud.label = &"ZONE_COURTHOUSE_TUNNELS_1"; break;
-			case "zone_tunnels_south": self.st_zone_hud.label = &"ZONE_SALOON_TUNNELS_3"; break;
-			case "zone_tunnels_south2": self.st_zone_hud.label = &"ZONE_SALOON_TUNNELS_2"; break;
-			case "zone_tunnels_south3": self.st_zone_hud.label = &"ZONE_SALOON_TUNNELS_1"; break;
-			case "zone_street_lightwest": self.st_zone_hud.label = &"ZONE_OUTSIDE_GENERAL_STORE_BANK"; break;
-			case "zone_street_lightwest_alley": self.st_zone_hud.label = &"ZONE_OUTSIDE_GENERAL_STORE_BANK_ALLEY"; break;
-			case "zone_morgue_upstairs": self.st_zone_hud.label = &"ZONE_MORGUE"; break;
-			case "zone_underground_jail": self.st_zone_hud.label = &"ZONE_JAIL_DOWNSTAIRS"; break;
-			case "zone_underground_jail2": self.st_zone_hud.label = &"ZONE_JAIL_UPSTAIRS"; break;
-			case "zone_general_store": self.st_zone_hud.label = &"ZONE_GENERAL_STORE"; break;
-			case "zone_stables": self.st_zone_hud.label = &"ZONE_STABLES"; break;
-			case "zone_street_darkwest": self.st_zone_hud.label = &"ZONE_OUTSIDE_GUNSMITH"; break;
-			case "zone_street_darkwest_nook": self.st_zone_hud.label = &"ZONE_OUTSIDE_GUNSMITH_NOOK"; break;
-			case "zone_gun_store": self.st_zone_hud.label = &"ZONE_GUNSMITH"; break;
-			case "zone_bank": self.st_zone_hud.label = &"ZONE_BANK"; break;
-			case "zone_tunnel_gun2stables": self.st_zone_hud.label = &"ZONE_STABLES_TO_GUNSMITH_TUNNEL_2"; break;
-			case "zone_tunnel_gun2stables2": self.st_zone_hud.label = &"ZONE_STABLES_TO_GUNSMITH_TUNNEL"; break;
-			case "zone_street_darkeast": self.st_zone_hud.label = &"ZONE_OUTSIDE_SALOON_TOY_STORE"; break;
-			case "zone_street_darkeast_nook": self.st_zone_hud.label = &"ZONE_OUTSIDE_SALOON_TOY_STORE_NOOK"; break;
-			case "zone_underground_bar": self.st_zone_hud.label = &"ZONE_SALOON"; break;
-			case "zone_tunnel_gun2saloon": self.st_zone_hud.label = &"ZONE_SALOON_TO_GUNSMITH_TUNNEL"; break;
-			case "zone_toy_store": self.st_zone_hud.label = &"ZONE_TOY_STORE_DOWNSTAIRS"; break;
-			case "zone_toy_store_floor2": self.st_zone_hud.label = &"ZONE_TOY_STORE_UPSTAIRS"; break;
-			case "zone_toy_store_tunnel": self.st_zone_hud.label = &"ZONE_TOY_STORE_TUNNEL"; break;
-			case "zone_candy_store": self.st_zone_hud.label = &"ZONE_CANDY_STORE_DOWNSTAIRS"; break;
-			case "zone_candy_store_floor2": self.st_zone_hud.label = &"ZONE_CANDY_STORE_UPSTAIRS"; break;
-			case "zone_street_lighteast": self.st_zone_hud.label = &"ZONE_OUTSIDE_COURTHOUSE_CANDY_STORE"; break;
-			case "zone_underground_courthouse": self.st_zone_hud.label = &"ZONE_COURTHOUSE_DOWNSTAIRS"; break;
-			case "zone_underground_courthouse2": self.st_zone_hud.label = &"ZONE_COURTHOUSE_UPSTAIRS"; break;
-			case "zone_street_fountain": self.st_zone_hud.label = &"ZONE_FOUNTAIN"; break;
-			case "zone_church_graveyard": self.st_zone_hud.label = &"ZONE_GRAVEYARD"; break;
-			case "zone_church_main": self.st_zone_hud.label = &"ZONE_CHURCH_DOWNSTAIRS"; break;
-			case "zone_church_upstairs": self.st_zone_hud.label = &"ZONE_CHURCH_UPSTAIRS"; break;
-			case "zone_mansion_lawn": self.st_zone_hud.label = &"ZONE_MANSION_LAWN"; break;
-			case "zone_mansion": self.st_zone_hud.label = &"ZONE_MANSION"; break;
-			case "zone_mansion_backyard": self.st_zone_hud.label = &"ZONE_MANSION_BACKYARD"; break;
-			case "zone_maze": self.st_zone_hud.label = &"ZONE_MAZE"; break;
-			case "zone_maze_staircase": self.st_zone_hud.label = &"ZONE_MAZE_STAIRCASE"; break;
-		}
-	if(name != "^3")
-		return name;
-	if(isdierise())
-	switch (zone)
-		{
-			case "zone_green_start": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_3B"; break;
-			case "zone_green_escape_pod": self.st_zone_hud.label = &"ZONE_ESCAPE_POD"; break;
-			case "zone_green_escape_pod_ground": self.st_zone_hud.label = &"ZONE_ESCAPE_POD_SHAFT"; break;
-			case "zone_green_level1": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_3A"; break;
-			case "zone_green_level2a": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_2A"; break;
-			case "zone_green_level2b": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_2B"; break;
-			case "zone_green_level3a": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_RESTAURANT"; break;
-			case "zone_green_level3b": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_1A"; break;
-			case "zone_green_level3c": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_LEVEL_1B"; break;
-			case "zone_green_level3d": self.st_zone_hud.label = &"ZONE_GREEN_HIGHRISE_BEHIND_RESTAURANT"; break;
-			case "zone_orange_level1": self.st_zone_hud.label = &"ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_2"; break;
-			case "zone_orange_level2": self.st_zone_hud.label = &"ZONE_UPPER_ORANGE_HIGHRISE_LEVEL_1"; break;
-			case "zone_orange_elevator_shaft_top": self.st_zone_hud.label = &"ZONE_ELEVATOR_SHAFT_LEVEL_3"; break;
-			case "zone_orange_elevator_shaft_middle_1": self.st_zone_hud.label = &"ZONE_ELEVATOR_SHAFT_LEVEL_2"; break;
-			case "zone_orange_elevator_shaft_middle_2": self.st_zone_hud.label = &"ZONE_ELEVATOR_SHAFT_LEVEL_1"; break;
-			case "zone_orange_elevator_shaft_bottom": self.st_zone_hud.label = &"ZONE_ELEVATOR_SHAFT_BOTTOM"; break;
-			case "zone_orange_level3a": self.st_zone_hud.label = &"ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1A"; break;
-			case "zone_orange_level3b": self.st_zone_hud.label = &"ZONE_LOWER_ORANGE_HIGHRISE_LEVEL_1B"; break;
-			case "zone_blue_level5": self.st_zone_hud.label = &"ZONE_LOWER_BLUE_HIGHRISE_LEVEL_1"; break;
-			case "zone_blue_level4a": self.st_zone_hud.label = &"ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2A"; break;
-			case "zone_blue_level4b": self.st_zone_hud.label = &"ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2B"; break;
-			case "zone_blue_level4c": self.st_zone_hud.label = &"ZONE_LOWER_BLUE_HIGHRISE_LEVEL_2C"; break;
-			case "zone_blue_level2a": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1A"; break;
-			case "zone_blue_level2b": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1B"; break;
-			case "zone_blue_level2c": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1C"; break;
-			case "zone_blue_level2d": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_1D"; break;
-			case "zone_blue_level1a": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2A"; break;
-			case "zone_blue_level1b": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2B"; break;
-			case "zone_blue_level1c": self.st_zone_hud.label = &"ZONE_UPPER_BLUE_HIGHRISE_LEVEL_2C"; break;
-		}
-	if(name != "^3")
-		return name;
-	if(isnuketown())
+	switch ( action )
 	{
-		switch (zone)
-		{
-			case "culdesac_yellow_zone": self.st_zone_hud.label = &"ZONE_YELLOW_HOUSE_MIDDLE"; break;
-			case "culdesac_green_zone": self.st_zone_hud.label = &"ZONE_GREEN_HOUSE_MIDDLE"; break;
-			case "truck_zone": self.st_zone_hud.label = &"ZONE_TRUCK"; break;
-			case "openhouse1_f1_zone": self.st_zone_hud.label = &"ZONE_GREEN_HOUSE_DOWNSTAIRS"; break;
-			case "openhouse1_f2_zone": self.st_zone_hud.label = &"ZONE_GREEN_HOUSE_UPSTAIRS"; break;
-			case "openhouse1_backyard_zone": self.st_zone_hud.label = &"ZONE_GREEN_HOUSE_BACKYARD"; break;
-			case "openhouse2_f1_zone": self.st_zone_hud.label = &"ZONE_YELLOW_HOUSE_DOWNSTAIRS"; break;
-			case "openhouse2_f2_zone": self.st_zone_hud.label = &"ZONE_YELLOW_HOUSE_UPSTAIRS"; break;
-			case "openhouse2_backyard_zone": self.st_zone_hud.label = &"ZONE_YELLOW_HOUSE_BACKYARD"; break;
-			case "ammo_door_zone": self.st_zone_hud.label = &"ZONE_YELLOW_HOUSE_BACKYARD_DOOR"; break;
-		}
+		case "sync":
+			foreach ( arg in args )
+				self hud_menu_set( arg );
+			break;
+
+		case "set":
+			if ( args.size > 0 )
+				self hud_menu_set( args[0] );
+			break;
 	}
-	if(name != "^3")
-		return name;
-	if(ismob())
-		switch (zone)
-		{
-			case "zone_start": self.st_zone_hud.label = &"ZONE_DBLOCK"; break;
-			case "zone_library": self.st_zone_hud.label = &"ZONE_LIBRARY"; break;
-			case "zone_cellblock_west": self.st_zone_hud.label = &"ZONE_CELLBLOCK_2ND_FLOOR"; break;
-			case "zone_cellblock_west_gondola": self.st_zone_hud.label = &"ZONE_CELLBLOCK_3RD_FLOOR"; break;
-			case "zone_cellblock_west_gondola_dock": self.st_zone_hud.label = &"ZONE_CELLBLOCK_GONDOLA"; break;
-			case "zone_cellblock_west_barber": self.st_zone_hud.label = &"ZONE_MICHIGAN_AVENUE"; break;
-			case "zone_cellblock_east": self.st_zone_hud.label = &"ZONE_TIMES_SQUARE"; break;
-			case "zone_cafeteria": self.st_zone_hud.label = &"ZONE_CAFETERIA"; break;
-			case "zone_cafeteria_end": self.st_zone_hud.label = &"ZONE_CAFETERIA_END"; break;
-			case "zone_infirmary": self.st_zone_hud.label = &"ZONE_INFIRMARY_1"; break;
-			case "zone_infirmary_roof": self.st_zone_hud.label = &"ZONE_INFIRMARY_2"; break;
-			case "zone_roof_infirmary": self.st_zone_hud.label = &"ZONE_ROOF_1"; break;
-			case "zone_roof": self.st_zone_hud.label = &"ZONE_ROOF_2"; break;
-			case "zone_cellblock_west_warden": self.st_zone_hud.label = &"ZONE_SALLY_PORT"; break;
-			case "zone_warden_office": self.st_zone_hud.label = &"ZONE_WARDENS_OFFICE"; break;
-			case "cellblock_shower": self.st_zone_hud.label = &"ZONE_SHOWERS"; break;
-			case "zone_citadel_shower": self.st_zone_hud.label = &"ZONE_CITADEL_TO_SHOWERS"; break;
-			case "zone_citadel": self.st_zone_hud.label = &"ZONE_CITADEL"; break;
-			case "zone_citadel_warden": self.st_zone_hud.label = &"ZONE_CITADEL_TO_WARDENS_OFFICE"; break;
-			case "zone_citadel_stairs": self.st_zone_hud.label = &"ZONE_CITADEL_TUNNELS"; break;
-			case "zone_citadel_basement": self.st_zone_hud.label = &"ZONE_CITADEL_BASEMENT"; break;
-			case "zone_citadel_basement_building": self.st_zone_hud.label = &"ZONE_CHINA_ALLEY"; break;
-			case "zone_studio": self.st_zone_hud.label = &"ZONE_BUILDING_64"; break;
-			case "zone_dock": self.st_zone_hud.label = &"ZONE_DOCKS"; break;
-			case "zone_dock_puzzle": self.st_zone_hud.label = &"ZONE_DOCKS_GATES"; break;
-			case "zone_dock_gondola": self.st_zone_hud.label = &"ZONE_UPPER_DOCKS"; break;
-			case "zone_golden_gate_bridge": self.st_zone_hud.label = &"ZONE_GOLDEN_GATE_BRIDGE"; break;
-			case "zone_gondola_ride": self.st_zone_hud.label = &"ZONE_GONDOLA"; break;
-			default: self.st_zone_hud.label = &"ZONE_UNKNOWN_ZONE"; break;
-		}
-	if(name != "^3")
-		return name;
-	if(istranzit() || isdepot() || istown() || isfarm())
-		switch (zone)
-		{
-			case "zone_pri": self.st_zone_hud.label = &"ZONE_BUS_DEPOT"; break;
-			case "zone_pri2": self.st_zone_hud.label = &"ZONE_BUS_DEPOT_HALLWAY"; break;
-			case "zone_station_ext": self.st_zone_hud.label = &"ZONE_OUTSIDE_BUS_DEPOT"; break;
-			case "zone_trans_2b": self.st_zone_hud.label = &"ZONE_FOG_AFTER_BUS_DEPOT"; break;
-			case "zone_trans_2": self.st_zone_hud.label = &"ZONE_TUNNEL_ENTRANCE"; break;
-			case "zone_amb_tunnel": self.st_zone_hud.label = &"ZONE_TUNNEL"; break;
-			case "zone_trans_3": self.st_zone_hud.label = &"ZONE_TUNNEL_EXIT"; break;
-			case "zone_roadside_west": self.st_zone_hud.label = &"ZONE_OUTSIDE_DINER"; break;
-			case "zone_gas": self.st_zone_hud.label = &"ZONE_GAS_STATION"; break;
-			case "zone_roadside_east": self.st_zone_hud.label = &"ZONE_OUTSIDE_GARAGE"; break;
-			case "zone_trans_diner": self.st_zone_hud.label = &"ZONE_FOG_OUTSIDE_DINER"; break;
-			case "zone_trans_diner2": self.st_zone_hud.label = &"ZONE_FOG_OUTSIDE_GARAGE"; break;
-			case "zone_gar": self.st_zone_hud.label = &"ZONE_GARAGE"; break;
-			case "zone_din": self.st_zone_hud.label = &"ZONE_DINER"; break;
-			case "zone_diner_roof": self.st_zone_hud.label = &"ZONE_DINER_ROOF"; break;
-			case "zone_trans_4": self.st_zone_hud.label = &"ZONE_FOG_AFTER_DINER"; break;
-			case "zone_amb_forest": self.st_zone_hud.label = &"ZONE_FOREST"; break;
-			case "zone_trans_10": self.st_zone_hud.label = &"ZONE_OUTSIDE_CHURCH"; break;
-			case "zone_town_church": self.st_zone_hud.label = &"ZONE_CHURCH"; break;
-			case "zone_trans_5": self.st_zone_hud.label = &"ZONE_FOG_BEFORE_FARM"; break;
-			case "zone_far": self.st_zone_hud.label = &"ZONE_OUTSIDE_FARM"; break;
-			case "zone_far_ext": self.st_zone_hud.label = &"ZONE_FARM"; break;
-			case "zone_brn": self.st_zone_hud.label = &"ZONE_BARN"; break;
-			case "zone_farm_house": self.st_zone_hud.label = &"ZONE_FARMHOUSE"; break;
-			case "zone_trans_6": self.st_zone_hud.label = &"ZONE_FOG_AFTER_FARM"; break;
-			case "zone_amb_cornfield": self.st_zone_hud.label = &"ZONE_CORNFIELD"; break;
-			case "zone_cornfield_prototype": self.st_zone_hud.label = &"ZONE_NACHT"; break;
-			case "zone_trans_7": self.st_zone_hud.label = &"ZONE_UPPER_FOG_BEFORE_POWER"; break;
-			case "zone_pow_ext1": self.st_zone_hud.label = &"ZONE_ZONE_POW_EXT1"; break;
-			case "zone_trans_pow_ext1": self.st_zone_hud.label = &"ZONE_FOG_BEFORE_POWER"; break;
-			case "zone_pow": self.st_zone_hud.label = &"ZONE_OUTSIDE_POWER_STATION"; break;
-			case "zone_prr": self.st_zone_hud.label = &"ZONE_POWER_STATION"; break;
-			case "zone_pcr": self.st_zone_hud.label = &"ZONE_POWER_CONTROL_ROOM"; break;
-			case "zone_pow_warehouse": self.st_zone_hud.label = &"ZONE_WAREHOUSE"; break;
-			case "zone_trans_8": self.st_zone_hud.label = &"ZONE_FOG_AFTER_POWER"; break;
-			case "zone_amb_power2town": self.st_zone_hud.label = &"ZONE_CABIN"; break;
-			case "zone_trans_9": self.st_zone_hud.label = &"ZONE_FOG_BEFORE_TOWN"; break;
-			case "zone_town_north": self.st_zone_hud.label = &"ZONE_NORTH_TOWN"; break;
-			case "zone_tow": self.st_zone_hud.label = &"ZONE_CENTER_TOWN"; break;
-			case "zone_town_east": self.st_zone_hud.label = &"ZONE_EAST_TOWN"; break;
-			case "zone_town_west": self.st_zone_hud.label = &"ZONE_WEST_TOWN"; break;
-			case "zone_town_west2": self.st_zone_hud.label = &"ZONE_WEST_TOWN2"; break;
-			case "zone_town_south": self.st_zone_hud.label = &"ZONE_SOUTH_TOWN"; break;
-			case "zone_bar": self.st_zone_hud.label = &"ZONE_BAR"; break;
-			case "zone_town_barber": self.st_zone_hud.label = &"ZONE_BOOKSTORE"; break;
-			case "zone_ban": self.st_zone_hud.label = &"ZONE_BANK"; break;
-			case "zone_ban_vault": self.st_zone_hud.label = &"ZONE_BANK_VAULT"; break;
-			case "zone_tbu": self.st_zone_hud.label = &"ZONE_BELOW_BANK"; break;
-			case "zone_trans_11": self.st_zone_hud.label = &"ZONE_FOG_AFTER_TOWN"; break;
-			case "zone_amb_bridge": self.st_zone_hud.label = &"ZONE_BRIDGE"; break;
-			case "zone_trans_1": self.st_zone_hud.label = &"ZONE_FOG_BEFORE_BUS_DEPOT"; break;
-			case "zone_bunker_4c": self.st_zone_hud.label = &"ZONE_TANK_STATION"; break;
-			case "zone_bunker_4d": self.st_zone_hud.label = &"ZONE_ABOVE_TANK_STATION"; break;
-		}
-    return name;
 }
 
+hud_menu_set( arg )
+{
+	entry = strtok( arg, ":" );
+	if ( !isdefined( entry ) || entry.size < 2 )
+		return;
+
+	self set_menu_hud( entry[0], int( entry[1] ) );
+}
+
+set_menu_hud( element, value )
+{
+	if ( !isdefined( self.st_hud ) )
+		self.st_hud = [];
+
+	self.st_hud[ element ] = value;
+}
+
+// GENERAL
 watermark()
 {
+	level endon("end_game");
+	self endon("disconnect");
+
 	if(isdefined(level.watermark))
 		return;
 
 	level.watermark.hidewheninmenu = true;
-    level.watermark = createserverfontstring( "objective", 1.4 );
+    level.watermark = createfontstring( "objective", 1.4 );
     level.watermark.alignx = "center";
     level.watermark.horzalign = "user_center";
     level.watermark.vertalign = "user_top";
@@ -560,78 +191,201 @@ watermark()
     }
 }
 
-displayElevatorKills()
+sph()
 {
-	level.elevatorkills.hidewheninmenu = true;
-    level.elevatorkills = createFontString( "objective", 1.3 );
-    level.elevatorkills.y = 0;
-    level.elevatorkills.x = 0;
-    level.elevatorkills.fontscale = 1.4;
-    level.elevatorkills.alignx = "center";
-    level.elevatorkills.horzalign = "user_center";
-    level.elevatorkills.vertalign = "user_top";
-    level.elevatorkills.aligny = "top";
-    level.elevatorkills.label = &"ST_ELEVATOR_KILLS_HUD";
-    level.elevatorkills.alignx = "left";
-    level.elevatorkills.horzalign = "user_left";
-    level.elevatorkills.alpha = 1;
-    level.elevatorkills setvalue(0);
+	self.sph = newclienthudelem(self);
+	self.sph.fontscale = 1.7;
+	self.sph.color = (0.8, 0.8, 0.8);
+	self.sph.hidewheninmenu = true;
+	self.sph.x = 2;
+	self.sph.y = 75;
+	self.sph.alpha = self get_menu_hud("st_sph");
+	self.sph.label = &"ST_SPH_HUD";
+	self.sph.alignx = "left";
+	self.sph.aligny = "top";
+	self.sph.horzalign = "user_left";
+	self.sph.vertalign = "user_top";
+	self.sph setvalue(0);
 
-    while(true)
-    {
-    	level.elevatorkills setvalue(level.zombies_died_to_elevator);
-        level.elevatorkills.alpha = getDvarInt("st_elevatorkills");
-        level.elevatorkills.y = 15 * getDvarInt("st_despawners");
+	level waittill("start_of_round");
+	while(isdefined(level.countdown_hud))
+		wait 0.1;
+	self.sph.time_start = gettime() / 1000;
+	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
+	self.sph.kills = 0;
+
+    while (true) 
+	{
         wait 0.1;
+		self.sph.alpha = self get_menu_hud("st_sph");
+
+        time = gettime() / 1000;
+        time_elapsed = int(time - self.sph.time_start);
+		kills = self.sph.zombies_total_start - (get_round_enemy_array().size + level.zombie_total);
+        hordas_fraction = kills / 24.0;
+
+        if (hordas_fraction > 0)
+            value = time_elapsed / hordas_fraction;
+        else
+            value = 0;
+
+        self.sph setvalue(value);
     }
 }
 
-despawnerCounter()
+healthbar()
 {
-	level.despawners = 0;
+	level endon("end_game");
+	self endon("disconnect");
+	flag_wait("initial_blackscreen_passed");
 
-	level.despawnersCounter.hidewheninmenu = true;
-    level.despawnersCounter = createfontstring( "objective", 1.3 );
-    level.despawnersCounter.y = 0;
-    level.despawnersCounter.x = 0;
-    level.despawnersCounter.fontscale = 1.4;
-    level.despawnersCounter.aligny = "top";
-    level.despawnersCounter.alignx = "left";
-    level.despawnersCounter.label = &"ST_ZOMBIES_DESPAWNED";
-    level.despawnersCounter.horzalign = "user_left";
-    level.despawnersCounter.vertalign = "user_top";
-    level.despawnersCounter.alpha = 0;
-    level.despawnersCounter setvalue(0);
+	self.healthbar = self createprimaryprogressbar();
+	self.healthbar.hidewheninmenu = true;
+	self.healthbar.bar.hidewheninmenu = true;
+	self.healthbar.barframe.hidewheninmenu = true;
+	self.healthbar_text.hidewheninmenu = true;
+
+	self.healthbar_text = self createprimaryprogressbartext();
+	
+	self.healthbar setpoint(undefined, "BOTTOM", 0, 15);
+	self.healthbar_text setpoint(undefined, "BOTTOM", 75, 15);
+
+	self.healthbar.alpha = 0;
+	self.healthbar.bar.alpha = 0;
+	self.healthbar.barframe.alpha = 0;
+	self.healthbar_text.alpha = 0;
+	while(true)
+	{
+		alpha = get_menu_hud("st_healthbar");
+		self.healthbar.alpha = alpha;
+		self.healthbar.bar.alpha = alpha;
+		self.healthbar.barframe.alpha = alpha;
+		self.healthbar_text.alpha = alpha;
+
+		self.healthbar updatebar (self.health / self.maxhealth);
+		self.healthbar_text setvalue(self.health);
+		self.healthbar.bar.color = (1 - self.health / self.maxhealth, self.health / self.maxhealth, 0);
+		wait 0.05;
+	}
+}
+
+remaining()
+{
+	level endon("end_game");
+	self endon("disconnect");
+
+    self.zombie_counter_hud = createFontString( "hudsmall" , 1.4 );
+    self.zombie_counter_hud setPoint( "CENTER", "CENTER", "CENTER", 190 );
+	self.zombie_counter_hud.hidewheninmenu = true;
+    self.zombie_counter_hud.alpha = 0;
+    self.zombie_counter_hud.label = &"ST_REMAINING_HUD";
 
     while(true)
     {
-    	level.despawnersCounter setvalue(level.despawners);
-        level.despawnersCounter.alpha = getDvarInt("st_despawners");
+        self.zombie_counter_hud setValue((maps\mp\zombies\_zm_utility::get_round_enemy_array().size + level.zombie_total));
+		self.zombie_counter_hud.alpha = get_menu_hud("st_remaining");
+        wait 0.05; 
+    }
+}
+
+
+zone()
+{
+	level endon("end_game");
+	self endon("disconnect");
+
+    self.st_zone_hud = createFontString( "hudsmall", 1.3 );
+    self.st_zone_hud.x = 8;
+    self.st_zone_hud.y = -95;
+	if(isburied()) self.st_zone_hud.y += 15;
+	if(isorigins()) self.st_zone_hud.y += 10;
+    self.st_zone_hud.fontscale = 1.3;
+    self.st_zone_hud.alignx = "left";
+    self.st_zone_hud.horzalign = "user_left";
+    self.st_zone_hud.vertalign = "user_bottom";
+    self.st_zone_hud.aligny = "bottom";
+    self.st_zone_hud.alpha = get_menu_hud("st_zone");
+	self.st_zone_hud.hidewheninmenu = true;
+    self.st_zone_hud.label = &"";
+
+	flag_wait( "initial_blackscreen_passed" );
+
+	prev_zone = "";
+	while(true)
+	{
+		// Esto se podría simplificar bastante
+		self.st_zone_hud.alpha = get_menu_hud("st_zone");
+
+		zone = localize_zone(self get_current_zone());
+
+		if(prev_zone != zone)
+		{
+			prev_zone = zone;
+
+			self.st_zone_hud fadeovertime(0.2);
+			self.st_zone_hud.alpha = 0;
+			wait 0.2;
+
+			self.st_zone_hud  settext(zone);
+
+			self.st_zone_hud fadeovertime(0.2);
+			self.st_zone_hud.alpha = 1;
+			wait 0.15;
+		}
+
+		wait 0.05;
+	}
+}
+
+// Obligado a tenerlos todos igual por culpa de developer 2
+despawnerCounter()
+{
+	level endon("end_game");
+	self endon("disconnect");
+	define(level.despawners, 0);
+
+	self.despawnersCounter.hidewheninmenu = true;
+    self.despawnersCounter = createfontstring( "objective", 1.3 );
+    self.despawnersCounter.y = 0;
+    self.despawnersCounter.x = 0;
+    self.despawnersCounter.fontscale = 1.4;
+    self.despawnersCounter.aligny = "top";
+    self.despawnersCounter.alignx = "left";
+    self.despawnersCounter.label = &"ST_ZOMBIES_DESPAWNED";
+    self.despawnersCounter.horzalign = "user_left";
+    self.despawnersCounter.vertalign = "user_top";
+    self.despawnersCounter.alpha = 0;
+    self.despawnersCounter setvalue(0);
+
+    while(true)
+    {
+    	self.despawnersCounter setvalue(level.despawners);
+        self.despawnersCounter.alpha = getDvarInt("st_despawners");
         wait 0.1;
     }
 }
 
 anchorLeakCounter()
 {
-	level.anchorLeaks = 0;
+	define(level.anchorLeaks, 0);
 
-	level.anchorLeakCounter.hidewheninmenu = true;
-    level.anchorLeakCounter = createfontstring( "objective", 1.3 );
-    level.anchorLeakCounter.y = 20;
-    level.anchorLeakCounter.x = 0;
-    level.anchorLeakCounter.fontscale = 1.4;
-    level.anchorLeakCounter.alignx = "center";
-    level.anchorLeakCounter.aligny = "top";
-    level.anchorLeakCounter.horzalign = "user_center";
-    level.anchorLeakCounter.vertalign = "user_top";
-    level.anchorLeakCounter.label = &"ST_ANCHOR_LEAKS";
-    level.anchorLeakCounter.alpha = 0;
-    level.anchorLeakCounter setvalue(0);
+	self.anchorLeakCounter.hidewheninmenu = true;
+    self.anchorLeakCounter = createfontstring( "objective", 1.3 );
+    self.anchorLeakCounter.y = 20;
+    self.anchorLeakCounter.x = 0;
+    self.anchorLeakCounter.fontscale = 1.4;
+    self.anchorLeakCounter.alignx = "center";
+    self.anchorLeakCounter.aligny = "top";
+    self.anchorLeakCounter.horzalign = "user_center";
+    self.anchorLeakCounter.vertalign = "user_top";
+    self.anchorLeakCounter.label = &"ST_ANCHOR_LEAKS";
+    self.anchorLeakCounter.alpha = 0;
+    self.anchorLeakCounter setvalue(0);
 
     while(true)
     {
-    	level.anchorLeakCounter setvalue(level.anchorLeaks);
-        level.anchorLeakCounter.alpha = getDvarInt("st_despawners");
+    	self.anchorLeakCounter setvalue(level.anchorLeaks);
+        self.anchorLeakCounter.alpha = get_menu_hud("st_despawners");
         wait 0.1;
     }
 }
@@ -639,150 +393,132 @@ anchorLeakCounter()
 displayBoxHits()
 {
 	level endon("end_game");
+	self endon("disconnect");
 
-    level.boxhits = createserverfontstring( "objective", 1.3 );
-	level.boxhits.hidewheninmenu = true;
-    level.boxhits.y = 0;
-    level.boxhits.x = 0;
-    level.boxhits.fontscale = 1.4;
-    level.boxhits.alignx = "center";
-    level.boxhits.horzalign = "user_center";
-    level.boxhits.vertalign = "user_top";
-    level.boxhits.aligny = "top";
-    level.boxhits.alpha = 0;
-    level.boxhits.label = &"ST_BOX_HITS";
-    level.boxhits setvalue(0);
-    if(issurvivalmap())
-    {
-        level.total_chest_accessed_mk2 = 0;
-        level.total_chest_accessed_ray = 0;
-        level.boxhits.alignx = "left";
-        level.boxhits.horzalign = "user_left";
-        level.boxhits.x = 2;
-        level.boxhits.alpha = 1;
-    }
+	define(level.total_chest_accessed, 0);
+	define(level.total_chest_accessed_ray, 0);
+	define(level.total_chest_accessed_mk2, 0);
+	define(level.total_mk2, 0);
+	define(level.total_ray, 0);
 
-    while(!isdefined(level.total_chest_accessed) || !isdefined(level.chest_accessed))
-        wait 0.1;
+    self.boxhits = createfontstring( "objective", 1.3 );
+	self.boxhits.hidewheninmenu = true;
+    self.boxhits.y = 0;
+    self.boxhits.x = 0;
+    self.boxhits.fontscale = 1.4;
+    self.boxhits.alignx = "center";
+    self.boxhits.horzalign = "user_center";
+    self.boxhits.vertalign = "user_top";
+    self.boxhits.aligny = "top";
+    self.boxhits.alpha = 0;
+    self.boxhits.label = &"ST_BOX_HITS";
+    self.boxhits setvalue(0);
 
-    counter = 0;
-    if(issurvivalmap())
-    {
-        while(true)
-        {
-            level waittill( "box_spin_done" );
-            if(counter != level.chest_accessed)
-            {
-                counter = level.chest_accessed;
-                if(counter == 0) continue;
-                level.total_chest_accessed++;
-                level.boxhits setvalue(level.total_chest_accessed);
-            }
-        }
-    }
-    else
-    {
-        level.boxhits.y = 20;
-        while(true)
-        {
-            level waittill( "box_spin_done" );
-            if(counter != level.chest_accessed)
-            {
-                counter = level.chest_accessed;
-                if(counter == 0) continue;
-                level.total_chest_accessed++;
-                level.boxhits setvalue(level.total_chest_accessed);
-                for(i = 1; i > 0.1; i -= 0.02)
-                {
-                    level.boxhits.alpha = i;
-                    wait 0.1;
-                }
-                level.boxhits.alpha = 0;
-            }
-        }
-    }
+	if(issurvivalmap())
+	{
+    	self.boxhits.alignx = "left";
+    	self.boxhits.horzalign = "user_left";
+
+		self.total_ray_display = createfontstring( "objective", 1.3 );
+		self.total_ray_display .hidewheninmenu = true;
+		self.total_ray_display.y = 26;
+		self.total_ray_display.x = 2;
+		self.total_ray_display.fontscale = 1.3;
+		self.total_ray_display.alignx = "left";
+		self.total_ray_display.horzalign = "user_left";
+		self.total_ray_display.vertalign = "user_top";
+		self.total_ray_display.aligny = "top";
+		self.total_ray_display.alpha = 1;
+
+		self.total_mk2_display = createfontstring( "objective", 1.3 );
+		self.total_mk2_display.hidewheninmenu = true;
+		self.total_mk2_display.y = 14;
+		self.total_mk2_display.x = 2;
+		self.total_mk2_display.fontscale = 1.3;
+		self.total_mk2_display.alignx = "left";
+		self.total_mk2_display.horzalign = "user_left";
+		self.total_mk2_display.vertalign = "user_top";
+		self.total_mk2_display.aligny = "top";
+		self.total_mk2_display.alpha = 1;
+		
+		self.total_ray_display setvalue(0);
+		self.total_mk2_display setvalue(0);
+
+    	if(getDvarInt("st_avg"))
+    	{
+        	self.total_mk2_display.label = &"ST_AVG_MK2";
+        	self.total_ray_display.label = &"ST_AVG_RAY";
+    	}
+    	else
+    	{
+        	self.total_mk2_display.label = &"ST_TOTAL_MK2";
+        	self.total_ray_display.label = &"ST_TOTAL_RAY";
+    	}
+		self thread box_hits_alpha_watcher();
+		while(true)
+		{
+			self waittill( "box_spin_done" );
+			if(getDvarInt("st_avg"))
+			{
+				self.total_mk2_display.label = &"ST_AVG_MK2";
+				self.total_ray_display.label = &"ST_AVG_RAY";
+				if(self.total_mk2 != 0) level.total_mk2_display setvalue(level.total_chest_accessed_mk2 / level.total_mk2);
+				if(self.total_ray != 0) level.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
+			}
+			else
+			{
+				self.total_mk2_display.label = &"ST_TOTAL_MK2";
+				self.total_ray_display.label = &"ST_TOTAL_RAY";
+				self.total_mk2_display setvalue(level.total_mk2);
+				self.total_ray_display setvalue(level.total_ray);
+			}
+		}
+	}
 }
 
-raygunCounter()
+box_hits_alpha_watcher()
 {
-    self endon("disconnect");
+	level endon("end_game");
+	self endon("disconnect");
 
-    if(!isDefined(level.total_mk2)) level.total_mk2 = 0;
-    if(!isDefined(level.total_ray)) level.total_ray = 0;
+	while(true)
+	{
+		alpha = get_menu_hud("st_boxhits");
+		self.boxhits.alpha = alpha;
+        self.total_mk2_display.alpha = alpha;
+        self.total_ray_display.alpha = alpha;
+		wait 0.1;
+	}
+}
+// TRANZIT
+denizensAlive()
+{
+	level endon( "end_game" );
+	self endon( "disconnect" );
 
-    level.total_ray_display = createserverfontstring( "objective", 1.3 );
-	level.total_ray_display.hidewheninmenu = true;
-    level.total_ray_display.y = 26;
-    level.total_ray_display.x = 2;
-    level.total_ray_display.fontscale = 1.3;
-    level.total_ray_display.alignx = "left";
-    level.total_ray_display.horzalign = "user_left";
-    level.total_ray_display.vertalign = "user_top";
-    level.total_ray_display.aligny = "top";
-    level.total_ray_display.alpha = 1;
-    level.total_mk2_display = createserverfontstring( "objective", 1.3 );
-	level.total_mk2_display.hidewheninmenu = true;
-    level.total_mk2_display.y = 14;
-    level.total_mk2_display.x = 2;
-    level.total_mk2_display.fontscale = 1.3;
-    level.total_mk2_display.alignx = "left";
-    level.total_mk2_display.horzalign = "user_left";
-    level.total_mk2_display.vertalign = "user_top";
-    level.total_mk2_display.aligny = "top";
-    level.total_mk2_display.alpha = 1;
-    
-    level.total_ray_display setvalue(0);
-    level.total_mk2_display setvalue(0);
-
-    if(getDvarInt("st_avg"))
-    {
-        level.total_mk2_display.label = &"ST_AVG_MK2";
-        level.total_ray_display.label = &"ST_AVG_RAY";
-    }
-    else
-    {
-        level.total_mk2_display.label = &"ST_TOTAL_MK2";
-        level.total_ray_display.label = &"ST_TOTAL_RAY";
-    }
+    self.denizen_counter = createFontString( "hudsmall" , 1.4 );
+    self.denizen_counter setPoint( "CENTER", "CENTER", "CENTER", 205);
+	self.denizen_counter.hidewheninmenu = true;
+    self.denizen_counter.alpha = 0;
+    self.denizen_counter.label = &"ST_DENIZENS_HUD";
 
     while(true)
     {
-        level waittill( "box_spin_done" );
-        if(getDvarInt("st_avg"))
-        {
-            level.total_mk2_display.label = &"ST_AVG_MK2";
-            level.total_ray_display.label = &"ST_AVG_RAY";
-            if(level.total_mk2 != 0) level.total_mk2_display setvalue(level.total_chest_accessed_mk2 / level.total_mk2);
-            if(level.total_ray != 0) level.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
-        }
-        else
-        {
-            level.total_mk2_display.label = &"ST_TOTAL_MK2";
-            level.total_ray_display.label = &"ST_TOTAL_RAY";
-            level.total_mk2_display setvalue(level.total_mk2);
-            level.total_ray_display setvalue(level.total_ray);
-        }
+        self.denizen_counter setValue(level.zombie_screecher_count);
+		self.denizen_counter.alpha = get_menu_hud("st_remaining_denizens");
+        wait 0.05; 
     }
 }
 
-bushud()
+bustimer()
 {
-	level.busloc.hidewheninmenu = true;
-    level.busloc = createfontstring( "objective", 1.3 );
-    level.busloc.y = 20;
-    level.busloc.x = 0;
-    level.busloc.fontscale = 1;
-    level.busloc.alignx = "center";
-    level.busloc.horzalign = "user_center";
-    level.busloc.vertalign = "user_top";
-    level.busloc.aligny = "top";
-    level.busloc.alpha = 1;
-    level.busloc.label = " ";
-    
+	level endon( "end_game" );
+	self endon( "disconnect" );
+
 	self.bustimer = newclienthudelem(self);
 	self.bustimer.alpha = 1;
 	self.bustimer.color = (0.505, 0.478, 0.721);
-	self.bustimer.hidewheninmenu = 1;
+	self.bustimer.hidewheninmenu = true;
 	self.bustimer.fontscale = 1.7;
 	self.bustimer settimerup(0);
     self.bustimer.alignx = "right";
@@ -790,10 +526,11 @@ bushud()
     self.bustimer.horzalign = "user_right";
     self.bustimer.vertalign = "user_top";
     self.bustimer.x = -1;
+
     while(!isdefined(self.timer))
         wait 0.1;
     self.bustimer.y = self.timer + 30;
-	
+
     while(true)
     {
         wait 0.1;
@@ -803,107 +540,52 @@ bushud()
 		self.bustimer.aligny = self.timer.aligny;
 		self.bustimer.horzalign = self.timer.horzalign;
 		self.bustimer.vertalign = self.timer.vertalign;
-        self.bustimer.alpha = getDvarInt("st_bustimer");
-        level.busloc.alpha = getDvarInt("st_busloc");
-        zone = level.the_bus get_current_zone();
-        if(!isdefined(zone))
-            continue;
-        switch (zone)
-		{
-			case "zone_pri": name = &"ZONE_BUS_DEPOT"; break;
-			case "zone_pri2": name = &"ZONE_BUS_DEPOT_HALLWAY"; break;
-			case "zone_station_ext": name = &"ZONE_OUTSIDE_BUS_DEPOT"; break;
-			case "zone_trans_2b": name = &"ZONE_FOG_AFTER_BUS_DEPOT"; break;
-			case "zone_trans_2": name = &"ZONE_TUNNEL_ENTRANCE"; break;
-			case "zone_amb_tunnel": name = &"ZONE_TUNNEL"; break;
-			case "zone_trans_3": name = &"ZONE_TUNNEL_EXIT"; break;
-			case "zone_roadside_west": name = &"ZONE_OUTSIDE_DINER"; break;
-			case "zone_gas": name = &"ZONE_GAS_STATION"; break;
-			case "zone_roadside_east": name = &"ZONE_OUTSIDE_GARAGE"; break;
-			case "zone_trans_diner": name = &"ZONE_FOG_OUTSIDE_DINER"; break;
-			case "zone_trans_diner2": name = &"ZONE_FOG_OUTSIDE_GARAGE"; break;
-			case "zone_gar": name = &"ZONE_GARAGE"; break;
-			case "zone_din": name = &"ZONE_DINER"; break;
-			case "zone_diner_roof": name = &"ZONE_DINER_ROOF"; break;
-			case "zone_trans_4": name = &"ZONE_FOG_AFTER_DINER"; break;
-			case "zone_amb_forest": name = &"ZONE_FOREST"; break;
-			case "zone_trans_10": name = &"ZONE_OUTSIDE_CHURCH"; break;
-			case "zone_town_church": name = &"ZONE_CHURCH"; break;
-			case "zone_trans_5": name = &"ZONE_FOG_BEFORE_FARM"; break;
-			case "zone_far": name = &"ZONE_OUTSIDE_FARM"; break;
-			case "zone_far_ext": name = &"ZONE_FARM"; break;
-			case "zone_brn": name = &"ZONE_BARN"; break;
-			case "zone_farm_house": name = &"ZONE_FARMHOUSE"; break;
-			case "zone_trans_6": name = &"ZONE_FOG_AFTER_FARM"; break;
-			case "zone_amb_cornfield": name = &"ZONE_CORNFIELD"; break;
-			case "zone_cornfield_prototype": name = &"ZONE_NACHT"; break;
-			case "zone_trans_7": name = &"ZONE_UPPER_FOG_BEFORE_POWER"; break;
-			case "zone_pow_ext1": name = &"ZONE_ZONE_POW_EXT1"; break;
-			case "zone_trans_pow_ext1": name = &"ZONE_FOG_BEFORE_POWER"; break;
-			case "zone_pow": name = &"ZONE_OUTSIDE_POWER_STATION"; break;
-			case "zone_prr": name = &"ZONE_POWER_STATION"; break;
-			case "zone_pcr": name = &"ZONE_POWER_CONTROL_ROOM"; break;
-			case "zone_pow_warehouse": name = &"ZONE_WAREHOUSE"; break;
-			case "zone_trans_8": name = &"ZONE_FOG_AFTER_POWER"; break;
-			case "zone_amb_power2town": name = &"ZONE_CABIN"; break;
-			case "zone_trans_9": name = &"ZONE_FOG_BEFORE_TOWN"; break;
-			case "zone_town_north": name = &"ZONE_NORTH_TOWN"; break;
-			case "zone_tow": name = &"ZONE_CENTER_TOWN"; break;
-			case "zone_town_east": name = &"ZONE_EAST_TOWN"; break;
-			case "zone_town_west": name = &"ZONE_WEST_TOWN"; break;
-			case "zone_town_west2": name = &"ZONE_WEST_TOWN2"; break;
-			case "zone_town_south": name = &"ZONE_SOUTH_TOWN"; break;
-			case "zone_bar": name = &"ZONE_BAR"; break;
-			case "zone_town_barber": name = &"ZONE_BOOKSTORE"; break;
-			case "zone_ban": name = &"ZONE_BANK"; break;
-			case "zone_ban_vault": name = &"ZONE_BANK_VAULT"; break;
-			case "zone_tbu": name = &"ZONE_BELOW_BANK"; break;
-			case "zone_trans_11": name = &"ZONE_FOG_AFTER_TOWN"; break;
-			case "zone_amb_bridge": name = &"ZONE_BRIDGE"; break;
-			case "zone_trans_1": name = &"ZONE_FOG_BEFORE_BUS_DEPOT"; break;
-			case "zone_bunker_4c": name = &"ZONE_TANK_STATION"; break;
-			case "zone_bunker_4d": name = &"ZONE_ABOVE_TANK_STATION"; break;
-		}
-        if(isdefined(name))
-        	level.busloc settext(name);
+        self.bustimer.alpha = get_menu_hud("st_bustimer");
     }
 }
 
-displaysubwooferkills()
+// Este aún no funciona
+buslocation()
 {
-	if(isdefined(level.subwooferkills))
-		return;
+	level endon( "end_game" );
+	self endon( "disconnect" );
 
-	level thread displayWatcher();
-	level.subwooferkills.hidewheninmenu = true;
-    level.subwooferkills = createserverfontstring( "objective", 1.3 );
-    level.subwooferkills.y = 0;
-    level.subwooferkills.x = 0;
-    level.subwooferkills.fontscale = 1.4;
-    level.subwooferkills.alignx = "center";
-    level.subwooferkills.horzalign = "user_center";
-    level.subwooferkills.vertalign = "user_top";
-    level.subwooferkills.aligny = "top";
-    level.subwooferkills.label = &"ST_SUBWOOFER_KILLS_HUD";
-    level.subwooferkills.alignx = "left";
-    level.subwooferkills.horzalign = "user_left";
-    level.subwooferkills.alpha = 0;
-    level.subwooferkills setvalue(0);
+    self.busloc = createfontstring( "objective", 1.3 );
+	self.busloc.hidewheninmenu = true;
+    self.busloc.x = 0;
+    self.busloc.y = 20;
+    self.busloc.fontscale = 1;
+    self.busloc.alignx = "center";
+    self.busloc.horzalign = "user_center";
+    self.busloc.vertalign = "user_top";
+    self.busloc.aligny = "top";
+    self.busloc.alpha = 1;
 
-    while(true)
-    {
-    	level.subwooferkills setvalue(level.subwooferkills_count);
-        level.subwooferkills.alpha = getDvarInt("st_subwooferkills");
-        level.subwooferkills.y = 15 * getDvarInt("st_despawners");
-        wait 0.1;
-    }
+	while (!isdefined(level.the_bus))
+		wait 0.1;
+
+	prev_zone = "";
+	while(true)
+	{
+		self.busloc.alpha = get_menu_hud("st_busloc");
+		zone = localize_zone(level.the_bus get_current_zone());
+
+		if(prev_zone != zone)
+		{
+			prev_zone = zone;
+			self.busloc settext(zone);
+			self.busloc.alpha = get_menu_hud("st_busloc");
+		}
+		wait 0.05;
+	}
 }
 
+// NUKETOWN
 fast_restart_warning()
 {
     level.fast_restart_warning = createserverfontstring( "objective", 1.3 );
     level.fast_restart_warning.y = 100;
-    level.fast_restart_warning.x = 2;
+    level.fast_restart_warning.x = 0;
     level.fast_restart_warning.fontscale = 2;
     level.fast_restart_warning.alignx = "center";
     level.fast_restart_warning.horzalign = "user_center";
@@ -916,3 +598,101 @@ fast_restart_warning()
 	flag_wait("initial_blackscreen_passed");
     level.fast_restart_warning destroy();
 }
+
+// DIE RISE
+displayElevatorKills()
+{
+	level endon("end_game");
+	self endon("disconnect");
+
+	define(level.zombies_died_to_elevator , 0);
+
+	self.elevatorkills.hidewheninmenu = true;
+    self.elevatorkills = createFontString( "objective", 1.3 );
+    self.elevatorkills.y = 0;
+    self.elevatorkills.x = 0;
+    self.elevatorkills.fontscale = 1.4;
+    self.elevatorkills.alignx = "center";
+    self.elevatorkills.horzalign = "user_center";
+    self.elevatorkills.vertalign = "user_top";
+    self.elevatorkills.aligny = "top";
+    self.elevatorkills.label = &"ST_ELEVATOR_KILLS_HUD";
+    self.elevatorkills.alignx = "left";
+    self.elevatorkills.horzalign = "user_left";
+    self.elevatorkills.alpha = 1;
+    self.elevatorkills setvalue(0);
+
+    while(true)
+    {
+    	self.elevatorkills setvalue(level.zombies_died_to_elevator);
+        self.elevatorkills.alpha = get_menu_hud("st_elevatorkills");
+        self.elevatorkills.y = 15 * getDvarInt("st_despawners");
+        wait 0.1;
+    }
+}
+
+//BURIED
+displaysubwooferkills()
+{
+	level endon( "end_game" );
+	self endon( "disconnect" );
+
+	if(isdefined(level.subwooferkills))
+		return;
+
+	define(level.subwooferkills, 0);
+
+	self.subwooferkills.hidewheninmenu = true;
+    self.subwooferkills = createfontstring( "objective", 1.3 );
+    self.subwooferkills.y = 0;
+    self.subwooferkills.x = 0;
+    self.subwooferkills.fontscale = 1.4;
+    self.subwooferkills.alignx = "center";
+    self.subwooferkills.horzalign = "user_center";
+    self.subwooferkills.vertalign = "user_top";
+    self.subwooferkills.aligny = "top";
+    self.subwooferkills.label = &"ST_SUBWOOFER_KILLS_HUD";
+    self.subwooferkills.alignx = "left";
+    self.subwooferkills.horzalign = "user_left";
+    self.subwooferkills.alpha = 0;
+    self.subwooferkills setvalue(0);
+
+    while(true)
+    {
+    	self.subwooferkills setvalue(level.subwooferkills_count);
+        self.subwooferkills.alpha = get_menu_hud("st_subwooferkills");
+        self.subwooferkills.y = 15 * getDvarInt("st_despawners");
+        wait 0.1;
+    }
+}
+
+// ORIGINS
+origins_hud()
+{
+	level endon( "end_game" );
+	self endon( "disconnect" );
+
+    self.stomp_hud   = self createHudElem(&"^3Stomp: ^5", 0, -220, 1.6, 0, "left", "bottom");
+    self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
+    self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");
+
+	if(!isdefined(level.tumbles)) level.tumbles = 0;
+	if(!isdefined(level.tankkills)) level.tankkills = 0;
+	if(!isdefined(level.stompkills)) level.stompkills = 0;
+
+	flag_wait("initial_blackscreen_passed");
+	while(true)
+	{
+		self.stomp_hud setvalue(level.stompkills);
+		self.tank_hud setvalue(level.tankkills);
+		self.tumble_hud setvalue(level.tumbles);
+
+		self.stomp_hud.alpha = get_menu_hud("st_stomp");
+		self.tumble_hud.alpha = get_menu_hud("st_tumble");
+		self.tank_hud.alpha = get_menu_hud("st_tank");
+
+		wait 0.05;
+	}
+}
+
+// UTILITY

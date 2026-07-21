@@ -17,8 +17,17 @@
 
 #include scripts\zm\strattester\utility;
 
+/*
+Abrir las puertas
+Activar la electricidad
+Quitar las barreras de las ventanas
+Cambiar la ronda inical
+Bloquear la caja en buried, desbloquearla si se cambia de mapa
+*/
+
 init_start()
 {
+	level thread track_rounds();
     level thread turn_on_power();
     level thread remove_boards_from_windows();
 	if(isburied())
@@ -27,6 +36,16 @@ init_start()
     	level thread changeRound(getDvarInt("st_round"));
 
 	setDvar("magic_chest_movable", !isburied());
+}
+
+track_rounds()
+{
+	while (true) 
+	{
+		level waittill("start_of_round");
+		self.sph.time_start = gettime() / 1000;
+    	self.sph.zombies_total_start = level.zombie_total + get_round_enemy_array().size;
+	}
 }
 
 openAllDoors()
