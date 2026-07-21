@@ -565,7 +565,7 @@ buslocation()
     self.busloc = createfontstring( "objective", 1.3 );
 	self.busloc.hidewheninmenu = true;
     self.busloc.x = 0;
-    self.busloc.y = 20;
+    self.busloc.y = 40;
     self.busloc.fontscale = 1;
     self.busloc.alignx = "center";
     self.busloc.horzalign = "user_center";
