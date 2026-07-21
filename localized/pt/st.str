@@ -524,6 +524,18 @@ LANG_ENGLISH        "Coloca um manequim nas áreas de aparição dos denizens."
 REFERENCE           ST_BOX_HITS
 LANG_ENGLISH        "^3Box Hits: ^5"
 
+REFERENCE           ST_BOX_HITS_HUD
+LANG_ENGLISH        "INFORMAÇÃO DA CAIXA"
+
+REFERENCE           ST_BOX_HITS_HUD_DESC
+LANG_ENGLISH        "Exibe a quantidade de usos da caixa e média por ray gun."
+
+REFERENCE           ST_MOOVING_WALLS
+LANG_ENGLISH        "PAREDES MÓVEIS"
+
+REFERENCE           ST_MOOVING_WALLS_DESC
+LANG_ENGLISH        "Altera as paredes móveis no Crazy Place."
+
 REFERENCE           ST_AVG_MK2
 LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
 
