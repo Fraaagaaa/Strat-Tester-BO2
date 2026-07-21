@@ -150,7 +150,7 @@ spawn_buildable_trigger(origin, build)
 	trigger SetCursorHint("HINT_NOICON");
 
 	if(issubstr(build, "shield"))
-		trigger sethintstring(&"ZOMBIE_WEAPON_RIOTSHIELD");
+		trigger sethintstring(&"ZOMBIE_GRAB_RIOTSHIELD");
 	else if(issubstr(build, "subwoofer"))
 		trigger sethintstring(&"ZM_BURIED_EQ_SW_PHS");
 	else if(issubstr(build, "headchopper"))
@@ -162,7 +162,7 @@ spawn_buildable_trigger(origin, build)
 	else if(issubstr(build, "spring") && isdierise())
 		trigger sethintstring(&"ZM_HIGHRISE_GRAB_SPRINGPAD");
 	else
-		trigger sethintstring("Press &&1 for buildable");
+		trigger sethintstring("Press^3 &&1 ^7for buildable");
 
 	while(true)
 	{
