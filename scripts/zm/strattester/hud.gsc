@@ -416,7 +416,7 @@ displayBoxHits()
     self.boxhits = createfontstring( "objective", 1.3 );
 	self.boxhits.hidewheninmenu = true;
     self.boxhits.y = 0;
-    self.boxhits.x = 0;
+    self.boxhits.x = 2;
     self.boxhits.fontscale = 1.4;
     self.boxhits.alignx = "center";
     self.boxhits.horzalign = "user_center";
