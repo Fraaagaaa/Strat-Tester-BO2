@@ -11,6 +11,9 @@
 
 - Extraia o arquivo em `%localappdata%\Plutonium\storage\t6\mods`.
 
+> [!WARNING]
+> Todos os usuários precisam ter o mod instalado. Jogadores que não tiverem o mod instalado não conseguirão usar o menu do jogo e, portanto, não poderão alterar seus perks ou o HUD.
+
 ## Mudanças gerais 
 - Perks são concedidos ao spawnar 
 - Armas são concedidas ao spawnar 

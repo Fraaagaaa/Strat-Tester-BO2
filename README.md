@@ -15,6 +15,9 @@
 
 - Unzip the download in `%localappdata%\Plutonium\storage\t6\mods`.
 
+> [!WARNING]
+> All users need to have the mod installed. Players who do not have the mod installed will be unable to use the in-game menu and, therefore, will be unable to change their perks or HUD.
+
 ## General changes
 - Perks are given on spawn
 - Weapons are given on spawn

@@ -11,6 +11,9 @@
 
 - Descomprime a descarga en `%localappdata%\Plutonium\storage\t6\mods`.
 
+> [!WARNING]
+> Todos os xogadores precisan ter o mod instalado. Os xogadores que non teñan o mod instalado non poderán usar o menu do xogo e, polo tanto, non poderán cambiar as suas perks ou o HUD.
+
 ## Cambios xerais
 - Vantaxes outorgadas ao aparecer
 - Armas outorgadas ao aparecer
