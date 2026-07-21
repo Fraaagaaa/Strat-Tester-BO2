@@ -71,7 +71,7 @@ connected_st()
 		self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 		self.score = 1000000;
         self thread perk_apply_loop();
-		self thread loadouts_init();
+		self thread init_loadouts();
         self thread specialcommands();
 		self waittill("spawned_player");
     }

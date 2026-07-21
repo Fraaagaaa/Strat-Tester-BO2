@@ -91,7 +91,7 @@ waitformulekick()
 	}
 }
 
-loadouts_init()
+init_loadouts()
 {
 	if(!getDvarInt("st_weapons"))
 		return;
@@ -202,10 +202,11 @@ main_loadouts()
 	if(isnuketown())
 	{
 		if(iswhite(self))
-			self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS);
+			self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS, CLAYMORE);
 		else
-			self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS);
+			self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS, CLAYMORE);
 		self.st_loadout_main = SALLYS;
+		self.st_loadout_melee = GALVA;
 	}
 	if(isdierise())
 	{
