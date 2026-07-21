@@ -1,1 +1,0 @@
-- Give knifes on start
