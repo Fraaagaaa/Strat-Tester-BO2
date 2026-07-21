@@ -252,12 +252,12 @@ healthbar()
 	flag_wait("initial_blackscreen_passed");
 
 	self.healthbar = self createprimaryprogressbar();
+	self.healthbar_text = self createprimaryprogressbartext();
 	self.healthbar.hidewheninmenu = true;
 	self.healthbar.bar.hidewheninmenu = true;
 	self.healthbar.barframe.hidewheninmenu = true;
 	self.healthbar_text.hidewheninmenu = true;
 
-	self.healthbar_text = self createprimaryprogressbartext();
 	
 	self.healthbar setpoint(undefined, "BOTTOM", 0, 15);
 	self.healthbar_text setpoint(undefined, "BOTTOM", 75, 15);
@@ -356,8 +356,8 @@ despawnerCounter()
 	self endon("disconnect");
 	define(level.despawners, 0);
 
-	self.despawnersCounter.hidewheninmenu = true;
     self.despawnersCounter = createfontstring( "objective", 1.3 );
+	self.despawnersCounter.hidewheninmenu = true;
     self.despawnersCounter.y = 0;
     self.despawnersCounter.x = 0;
     self.despawnersCounter.fontscale = 1.4;
@@ -381,8 +381,8 @@ anchorLeakCounter()
 {
 	define(level.anchorLeaks, 0);
 
-	self.anchorLeakCounter.hidewheninmenu = true;
     self.anchorLeakCounter = createfontstring( "objective", 1.3 );
+	self.anchorLeakCounter.hidewheninmenu = true;
     self.anchorLeakCounter.y = 20;
     self.anchorLeakCounter.x = 0;
     self.anchorLeakCounter.fontscale = 1.4;
@@ -619,8 +619,8 @@ displayElevatorKills()
 
 	define(level.zombies_died_to_elevator , 0);
 
-	self.elevatorkills.hidewheninmenu = true;
     self.elevatorkills = createFontString( "objective", 1.3 );
+	self.elevatorkills.hidewheninmenu = true;
     self.elevatorkills.y = 0;
     self.elevatorkills.x = 0;
     self.elevatorkills.fontscale = 1.4;
@@ -654,8 +654,8 @@ displaysubwooferkills()
 
 	define(level.subwooferkills, 0);
 
-	self.subwooferkills.hidewheninmenu = true;
     self.subwooferkills = createfontstring( "objective", 1.3 );
+	self.subwooferkills.hidewheninmenu = true;
     self.subwooferkills.y = 0;
     self.subwooferkills.x = 0;
     self.subwooferkills.fontscale = 1.4;
