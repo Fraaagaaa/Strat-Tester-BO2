@@ -15,6 +15,14 @@ strattesterprint(message, mensaje)
 	}
 }
 
+iprintln_loc(message, mensaje)
+{
+	if(getDvar("language") == "spanish")
+		self iprintln("^5[^6Strat Tester^5]^7 " + mensaje);
+	else
+		self iprintln("^5[^6Strat Tester^5]^7 " + message);
+}
+
 createDvar(dvar, set)
 {
 	if(getDvar(dvar) == "")

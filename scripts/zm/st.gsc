@@ -40,7 +40,6 @@ init()
     level thread init_start();
 	level thread readChat();
     level thread wait_for_players();
-	level thread watermark();
 	setDvar("player_reviveTriggerRadius", 64);
 	setDvar("revive_trigger_radius", 75);
     
@@ -65,10 +64,10 @@ connected_st()
     self endon( "disconnect" );
 	self waittill("spawned_player");
 
+	self iprintln_loc("^5[^6Strat Tester^5]^7 Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
+	self iprintln_loc("^5[^6Strat Tester^5]^7 Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
     while(true)
     {
-		self strattesterprint("Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
-		self strattesterprint("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
 		self.score = 1000000;
         self thread perk_apply_loop();
 		self thread init_loadouts();
