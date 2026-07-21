@@ -34,11 +34,14 @@ watch_new_players_hud()
 			continue;
 
 		player load_persisted_hud();
+		level thread watermark();
 		player thread healthbar();
 		player thread sph();
 		player thread timer();
 		player thread remaining();
 		player thread zone();
+		player thread despawnerCounter();
+		player thread anchorLeakCounter();
 		if(istranzit())
 		{
 			player thread denizensAlive();
@@ -140,8 +143,8 @@ watermark()
 	if(isdefined(level.watermark))
 		return;
 
-	level.watermark.hidewheninmenu = true;
-    level.watermark = createfontstring( "objective", 1.4 );
+    level.watermark = createserverfontstring( "objective", 1.4 );
+	level.watermark.hidewheninmenu = false;
     level.watermark.alignx = "center";
     level.watermark.horzalign = "user_center";
     level.watermark.vertalign = "user_top";
@@ -394,7 +397,7 @@ anchorLeakCounter()
     while(true)
     {
     	self.anchorLeakCounter setvalue(level.anchorLeaks);
-        self.anchorLeakCounter.alpha = get_menu_hud("st_despawners");
+        self.anchorLeakCounter.alpha = getDvarInt("st_despawners");
         wait 0.1;
     }
 }
