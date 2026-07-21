@@ -358,7 +358,7 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 
     if isTranzit then
         -- BUS TIMER
-        local BusTimerChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "st_bustimer", Engine.Localize("ST_BUS_TIMER_HUD_DESC"))
+        local BusTimerChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "st_bustimer", Engine.Localize("ST_BUS_TIMER_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(BusTimerChoice, 0, "hud")
 
         -- BUS LOC
