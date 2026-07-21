@@ -2,6 +2,9 @@
 -- STRAT TESTER BO2 - MENU PRINCIPAL
 -- ==========================================================
 
+local mapname, gametype, startlocation
+local isDepot, isFarm, isTown, isTranzit, isNuketown, isDieRise, isMob, isBuried, isOrigins, isSurvival
+
 CoD.StratTester = {}
 CoD.StratTester.CurrentTabIndex = 1
 CoD.StratTester.NeedVidRestart = false
@@ -21,6 +24,24 @@ CoD.StratTester.StartPerkList = {
     "specialty_deadshot",
     "specialty_nomotionsensor"
 }
+
+CoD.StratTester.RefreshMapFlags = function ()
+    mapname = UIExpression.DvarString( nil, "mapname" )
+	gametype = UIExpression.DvarString( nil, "ui_gametype")
+	startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
+
+    isDepot    = (mapname == "zm_transit" and gametype == "zstandard" and startlocation == "transit")
+    isFarm     =  startlocation == "farm"
+    isTown     =  startlocation == "town"
+    isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
+    isNuketown = (mapname == "zm_nuked")
+    isDieRise  = (mapname == "zm_highrise")
+    isMob      = (mapname == "zm_prison")
+    isBuried   = (mapname == "zm_buried")
+    isOrigins  = (mapname == "zm_tomb")
+    isSurvival = (isDepot or isFarm or isTown or isNuketown)
+end
+
 
 CoD.StratTester.Back = function ( element, event )
 	element:goBack( event.controller )
@@ -137,11 +158,9 @@ end
 -- PESTAÑA 1: GAME (Mecánicas de Partida)
 -- ==========================================================
 CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
+    CoD.StratTester.RefreshMapFlags()
 	local Container = LUI.UIContainer.new()
 	local ButtonList = CoD.Options.CreateButtonList()
-	local mapname = UIExpression.DvarString( nil, "ui_mapname")
-	local gametype = UIExpression.DvarString( nil, "ui_gametype")
-	local startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
 
 	Tab.buttonList = ButtonList
 	Container:addElement( ButtonList )
@@ -198,19 +217,19 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
     local isTpSupported = false
     local defaultTP = ""
 
-    if mapname == "zm_transit" and gametype == "zclassic" then
+    if isTranzit then
         isTpSupported = true
         defaultTP = "farm"
-    elseif mapname == "zm_highrise" then
+    elseif isDieRise then
         isTpSupported = true
         defaultTP = "shaft"
-    elseif mapname == "zm_buried" then
-        isTpSupported = true
-        defaultTP = "jug"
-    elseif mapname == "zm_prison" then
+    elseif isMob then
         isTpSupported = true
         defaultTP = "cafe"
-    elseif mapname == "zm_tomb" then
+    elseif isBuried then
+        isTpSupported = true
+        defaultTP = "jug"
+    elseif isOrigins then
         isTpSupported = true
         defaultTP = "church"
     end
@@ -220,7 +239,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 
         local TeleportChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TP_DESTINATION"), tpDvar, Engine.Localize("ST_TP_DESTINATION_DESC"))
 
-        if mapname == "zm_transit" then
+        if isTranzit then
             TeleportChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_TUNEL"), "tunel", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_DINER"), "diner", nil, CoD.StratTester.OnDvarChanged )
@@ -232,22 +251,22 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
             TeleportChoice:addChoice(Engine.Localize("ST_TOWN"), "town", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_BUS"), "bus", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_highrise" then
+        elseif isDieRise then
             TeleportChoice:addChoice(Engine.Localize("ST_SHAFT"), "shaft", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_TRAMPLESTEAM"), "tramp", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_buried" then
+        elseif isBuried then
             TeleportChoice:addChoice(Engine.Localize("ST_JUG"), "jug", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_SALOON"), "saloon", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_TUNEL"), "tunel", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_prison" then
+        elseif isMob then
             TeleportChoice:addChoice(Engine.Localize("ST_CAFETERIA"), "cafe", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_WARDENS_OFFICE"), "fans", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "dt", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_CAGE"), "cage", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_tomb" then
+        elseif isOrigins then
             TeleportChoice:addChoice(Engine.Localize("ST_CHURCH"), "church", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_GENERATOR_1"), "gen1", nil, CoD.StratTester.OnDvarChanged )
             TeleportChoice:addChoice(Engine.Localize("ST_GENERATOR_2"), "gen2", nil, CoD.StratTester.OnDvarChanged )
@@ -281,27 +300,12 @@ end
 -- PESTAÑA 2: HUD (Visuales y Contadores)
 -- ==========================================================
 CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
+    CoD.StratTester.RefreshMapFlags()
     local Container = LUI.UIContainer.new()
     local ButtonList = CoD.Options.CreateButtonList()
 
     Tab.buttonList = ButtonList
     Container:addElement( ButtonList )
-
-    local mapname = UIExpression.DvarString( nil, "ui_mapname")
-    local gametype = UIExpression.DvarString( nil, "ui_gametype")
-    local startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
-
-
-    local isDepot    = (mapname == "zm_transit" and gametype == "zstandard" and startlocation == "transit")
-    local isFarm     =  startlocation == "farm"
-    local isTown     =  startlocation == "town"
-    local isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
-    local isNuketown = (mapname == "zm_nuked")
-    local isDieRise  = (mapname == "zm_highrise")
-    local isMob      = (mapname == "zm_prison")
-    local isBuried   = (mapname == "zm_buried")
-    local isOrigins  = (mapname == "zm_tomb")
-    local isSurvival = (isDepot or isFarm or isTown or isNuketown)
 
     -- TIMER POSITION (Selector Múltiple)
     local TimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TIMER_POSITION"), "st_timer", Engine.Localize("ST_TIMER_POSITION_DESC"))
@@ -358,8 +362,9 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff(BusTimerChoice, 0, "hud")
 
         -- BUS LOC
-        local BusLocChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOC"), "st_busloc", Engine.Localize("ST_BUS_LOC_HUD_DESC"))
+        local BusLocChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOCATION"), "st_busloc", Engine.Localize("ST_BUS_LOCATION_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(BusLocChoice, 0, "hud")
+
     end
 
     if isDieRise then
@@ -370,7 +375,7 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
 
     if isBuried then
         -- SUBWOOFER KILLS
-        local SubwooferChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER_KILLS"), "st_subwooferkills", Engine.Localize("ST_SUBWOOFER_KILLS_DESC"))
+        local SubwooferChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER"), "st_subwooferkills", Engine.Localize("ST_SUBWOOFER_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(SubwooferChoice, 0, "hud")
     end
 
@@ -380,11 +385,11 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff(TankChoice, 0, "hud")
 
         -- TUMBLE
-        local TumbleChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE"), "st_tumble", Engine.Localize("ST_TUMBLE_DESC"))
+        local TumbleChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE_ANIM"), "st_tumble", Engine.Localize("ST_TUMBLE_ANIM_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(TumbleChoice, 0, "hud")
 
         -- STOMP
-        local StompChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP"), "st_stomp", Engine.Localize("ST_STOMP_DESC"))
+        local StompChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP_KILLS"), "st_stomp", Engine.Localize("ST_STOMP_KILLS_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(StompChoice, 0, "hud")
     end
 
@@ -395,17 +400,14 @@ end
 -- PESTAÑA 3: MAP SETTINGS (Ajustes Específicos + BOX)
 -- ==========================================================
 CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
+    CoD.StratTester.RefreshMapFlags()
     local Container = LUI.UIContainer.new()
     local ButtonList = CoD.Options.CreateButtonList()
     local PartyCount = UIExpression.DvarInt(nil, "party_playerCount")
     Tab.buttonList = ButtonList
     Container:addElement( ButtonList )
 
-    local mapname = UIExpression.DvarString( nil, "ui_mapname")
-    local gametype = UIExpression.DvarString( nil, "ui_gametype")
-    local startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
-
-    if mapname == "zm_transit" and gametype == "zclassic" then
+    if isTranzit then
 
         if UIExpression.DvarString( nil, "st_depart") == "" then
             Engine.SetDvar("st_depart", 40 )
@@ -420,12 +422,6 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         local DenizenSpawnersChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_DENIZEN_SPAWNS"), "st_showDenizenSpawners", Engine.Localize("ST_DENIZEN_SPAWNS_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( DenizenSpawnersChoice, 0 )
 
-        local BusTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_TIMER"), "st_bustimer", Engine.Localize("ST_BUS_TIMER_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( BusTimerChoice , 0 )
-
-        local BusLocChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_LOCATION"), "st_busloc", Engine.Localize("ST_BUS_LOCATION_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( BusLocChoice , 0 )
-
         local BusStatusChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUS_STATUS"), "st_busstatus", Engine.Localize("ST_BUS_STATUS_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( BusStatusChoice, 1 )
 
@@ -436,7 +432,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff( BuildBuildablesTranzitChoice, 1 )
     end
 
-    if mapname == "zm_transit" and startlocation == "town" then
+    if isTown then
         local TownSetUpChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TOWN_DOORS"), "st_jug_setup", Engine.Localize("ST_TOWN_DOORS_DESC"))
         TownSetUpChoice:addChoice(Engine.Localize("ST_JUG"), 1, nil, CoD.StratTester.OnDvarChanged )
         TownSetUpChoice:addChoice(Engine.Localize("ST_SPEED"), 0, nil, CoD.StratTester.OnDvarChanged )
@@ -449,12 +445,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         TownSetUpChoice:setChoice( currentJug )
     end
 
-    if mapname == "zm_highrise" then
-        local ElevatorKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_ELEVATOR_KILLS_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( ElevatorKillsChoice, 0 )
-    end
-
-    if mapname == "zm_buried" then
+    if isBuried then
         local BuriedChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BUILDABLES"), "st_setupBuried", Engine.Localize("ST_BUILDABLES_DESC"))
         BuriedChoice:addChoice(Engine.Localize("ST_RESONATOR_JUG"), 0, nil, CoD.StratTester.OnDvarChanged)
         BuriedChoice:addChoice(Engine.Localize("ST_RESONATOR_SALOON"), 1, nil, CoD.StratTester.OnDvarChanged)
@@ -467,14 +458,11 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         end
         BuriedChoice:setChoice( currentsetup )
 
-        local SubwooferKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SUBWOOFER"), "st_subwooferkills", Engine.Localize("ST_SUBWOOFER_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( SubwooferKillsChoice , 1 )
-
         local BarricadesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BARRICADES_BURIED"), "st_keepBarricades", Engine.Localize("ST_BARRICADES_BURIED_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( BarricadesChoice, 0)
     end
 
-    if mapname == "zm_prison" then
+    if isMob then
         local MotdLivesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_INFINITE_LIVES"), "st_lives", Engine.Localize("ST_INFINITE_LIVES_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( MotdLivesChoice, 1 )
 
@@ -482,7 +470,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff( MotdShieldChoice , 1 )
     end
 
-    if mapname == "zm_tomb" then
+    if isOrigins then
 
         if PartyCount == 1 then
             local StaffChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_SOLO_STAFF"), "st_staff", Engine.Localize("ST_SOLO_STAFF_DESC"))
@@ -506,47 +494,34 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
         ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
-        local OriginsTankKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TANK_KILLS"), "st_tank", Engine.Localize("ST_TANK_KILLS_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( OriginsTankKillsChoice, 0 )
-
-        local OriginsStompKillsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_STOMP_KILLS"), "st_stomp", Engine.Localize("ST_STOMP_KILLS_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( OriginsStompKillsChoice, 0 )
-
-        local OriginsTumbleTrackerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_TUMBLE_ANIM"), "st_tumble", Engine.Localize("ST_TUMBLE_ANIM_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( OriginsTumbleTrackerChoice, 0 )
-
-        ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
-
         local UnlockGensBtn = ButtonList:addButton(Engine.Localize("ST_UNLOCK_GENERATORS"), Engine.Localize("ST_UNLOCK_GENERATORS_DESC"))
         UnlockGensBtn:registerEventHandler("button_action", function ( element, event )
             Engine.SetDvar( "st_unlockgens", 1 )
         end )
     end
 
-    --========================================================
-    -- INTEGRACIÓN DE LA LÓGICA "BOX" DENTRO DE "MAP SETTINGS"
-    --========================================================
+    -- BOX MOOVING
     ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
     local isBoxMoveSupported = false
     local defaultBox = ""
 
-    if mapname == "zm_transit" and gametype == "zclassic" then
+    if isTranzit then
         isBoxMoveSupported = true
         defaultBox = "farm"
-    elseif mapname == "zm_transit" and startlocation == "town" then
+    elseif isTown then
         isBoxMoveSupported = true
         defaultBox = "cage"
-    elseif mapname == "zm_nuked" then
+    elseif isNuketown then
         isBoxMoveSupported = true
         defaultBox = "bunker"
-    elseif mapname == "zm_highrise" then
+    elseif isDieRise then
         isBoxMoveSupported = true
         defaultBox = "shaft"
-    elseif mapname == "zm_prison" then
+    elseif isMob then
         isBoxMoveSupported = true
         defaultBox = "cafe"
-    elseif mapname == "zm_tomb" then
+    elseif isOrigins then
         isBoxMoveSupported = true
         defaultBox = "gen2"
     end
@@ -557,7 +532,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
         local BoxChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_BOX_DESTINATION"), boxDvarUI, Engine.Localize("ST_BOX_DESTINATION_DESC"))
 
-        if mapname == "zm_transit" and gametype == "zclassic" then
+        if isTranzit then
             BoxChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "town_chest_2", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_QUICK_REVIVE"), "town_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_DINER"), "start_chest", nil, CoD.StratTester.OnDvarChanged )
@@ -565,30 +540,30 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
             BoxChoice:addChoice(Engine.Localize("ST_POWER_STATION"), "pow_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_DEPOT"), "depot_chest", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_transit" and startlocation == "town" then
+        elseif isTown then
             BoxChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "town_chest_2", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_QUICK_REVIVE"), "town_chest", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_nuked" then
+        elseif isNuketown then
             BoxChoice:addChoice(Engine.Localize("ST_BUNKER"), "start_chest1", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_YELLOW_HOUSE"), "start_chest2", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_GARDEN"), "culdesac_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_GREEN_HOUSE"), "oh1_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_GARAGE"), "oh2_chest", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_highrise" then
+        elseif isDieRise then
             BoxChoice:addChoice(Engine.Localize("ST_ROOF"), "ob6_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_M16"), "start_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_BAR"), "gb1_chest", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_prison" then
+        elseif isMob then
             BoxChoice:addChoice(Engine.Localize("ST_DOUBLE_TAP"), "citadel_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_CAFETERIA"), "cafe_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_WARDENS_OFFICE"), "start_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_DOCK"), "dock_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_ROOF"), "roof_chest", nil, CoD.StratTester.OnDvarChanged )
 
-        elseif mapname == "zm_tomb" then
+        elseif isOrigins then
             BoxChoice:addChoice(Engine.Localize("ST_GENERATOR_1"), "bunker_start_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_GENERATOR_2"), "bunker_tank_chest", nil, CoD.StratTester.OnDvarChanged )
             BoxChoice:addChoice(Engine.Localize("ST_GENERATOR_3"), "bunker_cp_chest", nil, CoD.StratTester.OnDvarChanged )
@@ -661,17 +636,14 @@ end
 -- PESTAÑA 5: PERKS
 -- ==========================================================
 CoD.StratTester.CreatePerksTab = function ( Tab, LocalClientIndex )
-local Container = LUI.UIContainer.new()
+    CoD.StratTester.RefreshMapFlags()
+    local Container = LUI.UIContainer.new()
     local ButtonList = CoD.Options.CreateButtonList()
     
     Tab.buttonList = ButtonList
     Container:addElement( ButtonList )
     CoD.StratTester.perk_choices = {}
 
-    local mapname = UIExpression.DvarString( nil, "ui_mapname")
-    local gametype = UIExpression.DvarString( nil, "ui_gametype")
-    local startlocation = UIExpression.DvarString( nil, "ui_zm_mapstartlocation")
-    
     local function add_perk(perk_internal, localized_name_key)
         local perkDvar = "st_perk_" .. perk_internal
 
@@ -693,16 +665,6 @@ local Container = LUI.UIContainer.new()
         table.insert( CoD.StratTester.perk_choices, { perk = perk_internal, dvar = perkDvar } )
         selector:setChoice( currentVal )
     end
-
-    local isDepot    = (mapname == "zm_transit" and gametype == "zstandard" and startlocation == "transit")
-    local isFarm     =  startlocation == "farm"
-    local isTown     =  startlocation == "town"
-    local isTranzit  = (mapname == "zm_transit" and gametype == "zclassic")
-    local isNuketown = (mapname == "zm_nuked")
-    local isDieRise  = (mapname == "zm_highrise")
-    local isMob      = (mapname == "zm_prison")
-    local isBuried   = (mapname == "zm_buried")
-    local isOrigins  = (mapname == "zm_tomb")
 
     if isDepot then
         add_perk("specialty_quickrevive", "ST_PERK_REVIVE")
