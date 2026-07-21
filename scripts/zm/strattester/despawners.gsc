@@ -121,15 +121,6 @@ zombie_tracking_init()
 	// }
 }
 
-checkalpha()
-{
-	while(true)
-	{
-		wait 0.1;
-		self.alpha = getDvarInt("st_despawners");
-	}
-}
-
 on_zombie_death()
 {
 	self waittill( "death" );
