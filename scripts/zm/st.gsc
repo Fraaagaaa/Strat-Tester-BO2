@@ -64,8 +64,8 @@ connected_st()
     self endon( "disconnect" );
 	self waittill("spawned_player");
 
-	self iprintln_loc("^5[^6Strat Tester^5]^7 Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
-	self iprintln_loc("^5[^6Strat Tester^5]^7 Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
+	self iprintln_loc("Welcome to Strat Tester!", "Bienvenido a Strat Tester!");
+	self iprintln_loc("Source: github.com/Fraaagaaa/Strat-Tester-BO2", "Fuente: github.com/Fraaagaaa/Strat-Tester-BO2");
     while(true)
     {
 		self.score = 1000000;

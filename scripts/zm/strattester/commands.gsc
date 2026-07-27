@@ -14,13 +14,13 @@
 addCommands(commands)
 {
     foreach(command in commands)
-        level.StratTesterCommands[level.StratTesterCommands.size] = command;
+        level.commands[level.commands.size] = command;
 }
 
 readchat() 
 {
     self endon("end_game");
-	level.StratTesterCommands = [];
+	level.commands = [];
     addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining"));
 
     while (true) 
@@ -29,7 +29,7 @@ readchat()
         msg = strtok(tolower(message), " ");
         if(msg[0][0] != "!")
             continue;
-		if(!in_array(msg[0], level.StratTesterCommands) && (!in_array(msg[0], level.FragaCommands)) && (!in_array(msg[0], level.FragaCommandsAliases)))
+		if(!in_array(msg[0], level.commands))
 		{
 			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
