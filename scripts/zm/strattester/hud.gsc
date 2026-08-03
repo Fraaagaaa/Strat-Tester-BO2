@@ -21,6 +21,8 @@ init_hud()
 		player load_persisted_hud();
 
 	level thread watch_new_players_hud();
+    // has to be here so its accurate
+    level thread despawnersTimer();
 }
 
 watch_new_players_hud()
@@ -707,4 +709,45 @@ origins_hud()
 	}
 }
 
-// UTILITY
+despawnersTimer()
+{
+	if ( !isdefined( level.zombie_tracking_wait ) )
+	{
+		c = 0;
+		waittillframeend;
+		
+		while ( !isdefined( level.zombie_tracking_wait ) )
+		{
+			c++;
+			
+			if ( c >= 100 )
+			{
+				iprintln( "map doesnt have distance tracking" );
+				return;
+			}
+			
+			wait 0.05;
+			waittillframeend;
+		}
+	}
+	
+	text = createserverfontstring( "Objective", 1 );
+	text setpoint( "CENTER", "CENTER", 320, 230 );
+	text settimer( level.zombie_tracking_wait );
+    text thread alpha_respawn_timer();
+	
+	for (;;)
+	{
+		wait level.zombie_tracking_wait;
+		text settimer( level.zombie_tracking_wait );
+	}
+}
+
+alpha_respawn_timer()
+{
+    while(true)
+    {
+        self.alpha = getDvarInt("st_despawners");
+        wait 0.5;
+    }
+}
