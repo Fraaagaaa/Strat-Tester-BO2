@@ -20,7 +20,8 @@ addCommands(commands)
 readchat() 
 {
     self endon("end_game");
-	level.commands = [];
+    if(!isdefined(level.commands))
+	    level.commands = [];
     addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining"));
 
     while (true) 

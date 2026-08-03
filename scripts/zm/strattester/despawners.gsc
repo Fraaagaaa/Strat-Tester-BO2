@@ -29,11 +29,9 @@ init_despawners()
 	while (true)
 	{
 		wait 0.1;
-		setdvar( "developer", 0 );
+
 		while(getDvarInt("st_despawners"))
 		{
-
-			setdvar( "developer", 2 );
 			array = getentarray( "zombie_spawner", "script_noteworthy" );
 		
 			for ( i = 0; i < array.size; i++ )

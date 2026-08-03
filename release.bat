@@ -40,5 +40,3 @@ call builder
 
 
 echo Release completed!
-
-timeout /t 3 /nobreak > nul
