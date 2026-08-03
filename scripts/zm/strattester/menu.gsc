@@ -26,7 +26,8 @@ menu_dispatcher()
     self notify( "st_menu_dispatcher" );
     self endon( "st_menu_dispatcher" );
 
-	define(self.st_menu_settings, []);
+    if(!isdefined(self.st_menu_settings))
+        self.st_menu_settings = [];
 
     while ( true )
     {

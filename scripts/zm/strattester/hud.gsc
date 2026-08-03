@@ -356,7 +356,9 @@ despawnerCounter()
 {
 	level endon("end_game");
 	self endon("disconnect");
-	define(level.despawners, 0);
+
+    if(!isdefined(level.despawners))
+	    level.despawners = 0;
 
     self.despawnersCounter = createfontstring( "objective", 1.3 );
 	self.despawnersCounter.hidewheninmenu = true;
@@ -381,7 +383,8 @@ despawnerCounter()
 
 anchorLeakCounter()
 {
-	define(level.anchorLeaks, 0);
+    if(!isdefined(level.anchorLeaks))
+        level.anchorLeaks = 0;
 
     self.anchorLeakCounter = createfontstring( "objective", 1.3 );
 	self.anchorLeakCounter.hidewheninmenu = true;
@@ -409,11 +412,14 @@ displayBoxHits()
 	level endon("end_game");
 	self endon("disconnect");
 
-	define(level.total_chest_accessed, 0);
-	define(level.total_chest_accessed_ray, 0);
-	define(level.total_chest_accessed_mk2, 0);
-	define(level.total_mk2, 0);
-	define(level.total_ray, 0);
+    if(isdefined(!level.total_chest_accessed))
+    {
+        level.total_chest_accessed = 0;
+        level.total_chest_accessed_ray = 0;
+        level.total_chest_accessed_mk2 = 0;
+        level.total_mk2 = 0;
+        level.total_ray = 0;
+    }
 
     self.boxhits = createfontstring( "objective", 1.3 );
 	self.boxhits.hidewheninmenu = true;
@@ -619,7 +625,8 @@ displayElevatorKills()
 	level endon("end_game");
 	self endon("disconnect");
 
-	define(level.zombies_died_to_elevator , 0);
+    if(!isdefined(level.zombies_died_to_elevator))
+        level.zombies_died_to_elevator = 0;
 
     self.elevatorkills = createFontString( "objective", 1.3 );
 	self.elevatorkills.hidewheninmenu = true;
@@ -654,7 +661,8 @@ displaysubwooferkills()
 	if(isdefined(level.subwooferkills))
 		return;
 
-	define(level.subwooferkills, 0);
+
+	level.subwooferkills = 0;
 
     self.subwooferkills = createfontstring( "objective", 1.3 );
 	self.subwooferkills.hidewheninmenu = true;

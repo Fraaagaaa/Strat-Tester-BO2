@@ -253,13 +253,6 @@ response_value( value_string )
     return 0;
 }
 
-
-define(element, init)
-{
-	if(!isdefined(element))
-		element = init;
-}
-
 localize_zone(zone)
 {
 	name = "^3";

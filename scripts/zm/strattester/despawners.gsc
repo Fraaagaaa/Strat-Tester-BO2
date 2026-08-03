@@ -133,7 +133,6 @@ on_zombie_death()
 	{
 		if(getDvarInt("st_despawners"))
 			strattesterprint( "Zombie at " + anchor.origin + " has died with an anchor",  "Zombi en " + anchor.origin + " ha muerto dejando una entidad suelta" );
-		debugstar( anchor.origin, 20 * 20, ( 1, 0, 0 ), ( 1, 0, 0 ), "ANCHOR", 10 );
 		
 		level.anchorLeaks++;
 	}
