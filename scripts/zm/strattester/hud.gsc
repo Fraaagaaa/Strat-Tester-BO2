@@ -740,7 +740,7 @@ despawnersTimer()
 	}
 	
 	text = createserverfontstring( "Objective", 1 );
-	text setpoint( "CENTER", "CENTER", 320, 230 );
+	text setpoint( "CENTER", "CENTER", 290, 230 );
 	text settimer( level.zombie_tracking_wait );
     text thread alpha_respawn_timer();
 	
