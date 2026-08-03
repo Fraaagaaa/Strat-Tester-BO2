@@ -7,12 +7,6 @@
 #include scripts\zm\strattester\menu;
 #include scripts\zm\strattester\timers;
 
-/*
-En este archivo sólo se inicializa la interfaz y se controlan las modificaciones de visibilidad.
-UNA FUNCIÓN POR ELEMENTO DE LA INTERFAZ
-*/
-
-
 init_hud()
 {
 	register_menu_handler( "hud", ::on_hud_menu );
@@ -44,6 +38,7 @@ watch_new_players_hud()
 		player thread zone();
 		player thread despawnerCounter();
 		player thread anchorLeakCounter();
+        player thread prevent_hud_overlapping();
 		if(istranzit())
 		{
 			player thread denizensAlive();
@@ -360,11 +355,10 @@ despawnerCounter()
     if(!isdefined(level.despawners))
 	    level.despawners = 0;
 
-    self.despawnersCounter = createfontstring( "objective", 1.3 );
+    self.despawnersCounter = createfontstring( "objective", 1.4);
 	self.despawnersCounter.hidewheninmenu = true;
     self.despawnersCounter.y = 0;
     self.despawnersCounter.x = 0;
-    self.despawnersCounter.fontscale = 1.4;
     self.despawnersCounter.aligny = "top";
     self.despawnersCounter.alignx = "left";
     self.despawnersCounter.label = &"ST_ZOMBIES_DESPAWNED";
@@ -386,14 +380,15 @@ anchorLeakCounter()
     if(!isdefined(level.anchorLeaks))
         level.anchorLeaks = 0;
 
-    self.anchorLeakCounter = createfontstring( "objective", 1.3 );
+    while(!isdefined(self.despawnersCounter))
+        wait 0.1;
+
+    self.anchorLeakCounter = createfontstring( "objective", 1.4);
 	self.anchorLeakCounter.hidewheninmenu = true;
-    self.anchorLeakCounter.y = 20;
     self.anchorLeakCounter.x = 0;
-    self.anchorLeakCounter.fontscale = 1.4;
-    self.anchorLeakCounter.alignx = "center";
     self.anchorLeakCounter.aligny = "top";
-    self.anchorLeakCounter.horzalign = "user_center";
+    self.anchorLeakCounter.alignx = "left";
+    self.anchorLeakCounter.horzalign = "user_left";
     self.anchorLeakCounter.vertalign = "user_top";
     self.anchorLeakCounter.label = &"ST_ANCHOR_LEAKS";
     self.anchorLeakCounter.alpha = 0;
@@ -647,7 +642,6 @@ displayElevatorKills()
     {
     	self.elevatorkills setvalue(level.zombies_died_to_elevator);
         self.elevatorkills.alpha = get_menu_hud("st_elevatorkills");
-        self.elevatorkills.y = 15 * getDvarInt("st_despawners");
         wait 0.1;
     }
 }
@@ -683,7 +677,6 @@ displaysubwooferkills()
     {
     	self.subwooferkills setvalue(level.subwooferkills_count);
         self.subwooferkills.alpha = get_menu_hud("st_subwooferkills");
-        self.subwooferkills.y = 15 * getDvarInt("st_despawners");
         wait 0.1;
     }
 }
@@ -757,5 +750,38 @@ alpha_respawn_timer()
     {
         self.alpha = getDvarInt("st_despawners");
         wait 0.5;
+    }
+}
+
+prevent_hud_overlapping()
+{
+    level endon("end_game");
+    self endon("disconnect");
+
+    while(true)
+    {
+        wait 0.1;
+
+        if ( !isdefined( self.despawnersCounter ) || !isdefined( self.anchorLeakCounter ) )
+        {
+            continue;
+        }
+        self.despawnersCounter.y = 45 * isorigins();
+        self.anchorLeakCounter.y = 15 + self.despawnersCounter.y;
+
+        if(isburied())
+        {
+            if ( isdefined( self.subwooferkills ) )
+            {
+                self.subwooferkills.y = (15 + self.anchorLeakCounter.y) * self.anchorLeakCounter.alpha;
+            }
+        }
+        else if(isdierise())
+        {
+            if ( isdefined( self.elevatorkills ) )
+            {
+                self.elevatorkills.y = (15 + self.anchorLeakCounter.y) * self.anchorLeakCounter.alpha;
+            }
+        }
     }
 }
