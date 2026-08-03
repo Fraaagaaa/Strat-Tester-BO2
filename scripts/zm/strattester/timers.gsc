@@ -24,46 +24,41 @@ timer()
 
 roundtimer()
 {
-	self endon("disconnect");
+	level endon("end_game");
+    self endon("disconnect");
 
 	self.roundtimer = newclienthudelem(self);
-	self.roundtimer.alpha = 0;
+	self.roundtimer.alpha = 1;
 	self.roundtimer.fontscale = 1.7;
 	self.roundtimer.color = (0.8, 0.8, 0.8);
-	self.roundtimer.hidewheninmenu = 1;
+	self.roundtimer.hidewheninmenu = true;
 	self.roundtimer.x = self.timer.x;
 	self.roundtimer.y = self.timer.y + 15;
 	flag_wait("initial_blackscreen_passed");
-	level.fade_time = 0.2;
-
+	if(ismob()) flag_wait("afterlife_start_over");
 	while(true)
 	{
-		zombies_this_round = level.zombie_total + get_round_enemy_array().size;
-		hordes = zombies_this_round / 24;
-		dog_round = flag("dog_round");
-		leaper_round = flag("leaper_round");
 		self.roundtimer settimerup(0);
-		start_time = int(GetTime() / 1000);
-		level waittill("end_of_round");
-		end_time = int(GetTime() / 1000);
-
-		time = end_time - start_time;
-		timer_for_hud = time - 0.1;
-
-		self.roundtimer.alpha = 1;
-		for(i = 0; i < 228; i++)
-		{
-			self.roundtimer settimer(timer_for_hud);
-			wait(0.05);
-		}
-
+        start_time = int(gettime() / 1000);
+        level waittill("end_of_round");
+        end_time = int(gettime() / 1000);
+        self.roundtimer thread display_round_time(end_time - start_time);
 		level waittill("start_of_round");
-		self.roundtimer.label = &"";
-		self.roundtimer fadeovertime(level.fade_time);
-		self.roundtimer.alpha = 1;
 	}
 }
 
+display_round_time(time)
+{
+    level endon("end_game");
+    level endon("start_of_round");
+
+    while (true)
+    {
+        // -0.1 avoids flickering
+        self settimer(time - 0.1);
+        wait 0.05;
+    }
+}
 
 #define HIDE_TIMER 0
 #define TOP_RIGHT_TIMER 1
@@ -73,6 +68,7 @@ roundtimer()
 
 timerlocation()
 {
+	level endon("end_game");
 	self endon("disconnect");
 
 	while(true)
@@ -136,19 +132,29 @@ timerlocation()
 
 			default: break;
 		}
-		self.roundtimer.x = self.timer.x;
-		self.roundtimer.y = self.timer.y + 15;
 		self.roundtimer.alignx = self.timer.alignx;
 		self.roundtimer.aligny = self.timer.aligny;
 		self.roundtimer.horzalign = self.timer.horzalign;
 		self.roundtimer.vertalign = self.timer.vertalign;
+		self.roundtimer.x = self.timer.x;
+		self.roundtimer.y = self.timer.y + 15;
+        if(isdefined(self.traptimer))
+        {
+            self.traptimer.alignx = self.timer.alignx;
+            self.traptimer.aligny = self.timer.aligny;
+            self.traptimer.horzalign = self.timer.horzalign;
+            self.traptimer.vertalign = self.timer.vertalign;
+            self.traptimer.x = self.timer.x;
+            self.traptimer.y = self.timer.y + 30;
+        }
 		
-		wait 0.1;
 		if(GetDvar("language") == "japanese")
 		{
 			self.timer.fontscale = 1.5;
 			self.roundtimer.fontscale = self.timer.fontscale;
 		}
+
+        wait 0.1;
 	}
 }
 
