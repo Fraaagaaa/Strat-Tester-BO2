@@ -687,6 +687,9 @@ origins_hud()
 	level endon( "end_game" );
 	self endon( "disconnect" );
 
+	self thread icestafftimer();
+	self thread windstafftimer();
+
     self.stomp_hud   = self createHudElem(&"^3Stomp: ^5", 0, -220, 1.6, 0, "left", "bottom");
     self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
     self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");

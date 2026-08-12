@@ -147,7 +147,25 @@ timerlocation()
             self.traptimer.x = self.timer.x;
             self.traptimer.y = self.timer.y + 30;
         }
-		
+		if(isdefined(self.icestafftimer))
+		{
+            self.icestafftimer.alignx = self.timer.alignx;
+            self.icestafftimer.aligny = self.timer.aligny;
+            self.icestafftimer.horzalign = self.timer.horzalign;
+            self.icestafftimer.vertalign = self.timer.vertalign;
+            self.icestafftimer.x = self.timer.x;
+            self.icestafftimer.y = self.timer.y + 30;
+		}
+		if(isdefined(self.windstafftimer))
+		{
+            self.windstafftimer.alignx = self.timer.alignx;
+            self.windstafftimer.aligny = self.timer.aligny;
+            self.windstafftimer.horzalign = self.timer.horzalign;
+            self.windstafftimer.vertalign = self.timer.vertalign;
+            self.windstafftimer.x = self.timer.x;
+            self.windstafftimer.y = self.timer.y + 45;
+		}
+
 		if(GetDvar("language") == "japanese")
 		{
 			self.timer.fontscale = 1.5;
@@ -191,5 +209,48 @@ traptimer()
 			self.traptimer.alpha = 0;
 		}
 		wait 0.1;
+	}
+}
+
+icestafftimer()
+{
+	self endon( "disconnect" );
+
+	self.icestafftimer = newclienthudelem( self );
+	self.icestafftimer.fontscale = 1.4;
+	self.icestafftimer.hidewheninmenu = 1;
+	self.icestafftimer.color = (0, 0.8, 0.8);
+	
+	while(true)
+	{
+		level waittill("blizzard_shot", time);
+        self.icestafftimer thread setstafftimer("ice", time + 1);
+	}
+}
+
+setstafftimer(end, time)
+{
+    self notify("end_timer_" + end);
+    self endon("end_timer_" + end);
+
+    self.alpha = 1;
+	self settimer(time);
+    wait time + 0.5;
+    self.alpha = 0;
+}
+
+windstafftimer()
+{
+	self endon( "disconnect" );
+
+	self.windstafftimer = newclienthudelem( self );
+	self.windstafftimer.fontscale = 1.4;
+	self.windstafftimer.hidewheninmenu = 1;
+	self.windstafftimer.color = (0.9, 0.9, 0.25);
+	
+	while(true)
+	{
+        level waittill("whirlwind_active", time);
+        self.windstafftimer setstafftimer("wind", time);
 	}
 }

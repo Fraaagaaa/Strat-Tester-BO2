@@ -8,21 +8,24 @@
 #include maps\mp\zm_tomb_utility;
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm_weapons;
+#include maps\mp\zombies\_zm_weap_staff_water;
+#include maps\mp\zombies\_zm_weap_staff_air;
 
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
 init()
 {
-	replacefunc(getfunction("maps/mp/zm_tomb_giant_robot", "zombie_stomp_death"), ::custom_zombie_stomp_death);
-	replacefunc(getfunction("maps/mp/zm_tomb_tank", "flamethrower_damage_zombies"), ::custom_flamethrower_damage_zombies);
-	replacefunc(getfunction("maps/mp/zombies/_zm_weap_one_inch_punch", "knockdown_zombie_animate_state"), ::custom_knockdown_zombie_animate_state);
-	replacefunc(getfunction("maps/mp/zm_tomb_tank", "tank_drop_powerups"), ::tank_drop_powerups);
 	replacefunc(getfunction("maps/mp/zm_tomb_capture_zones", "pack_a_punch_think"), ::pack_a_punch_think);
-	replacefunc(getfunction("maps/mp/zm_tomb_utility", "watch_staff_usage"), ::watch_staff_usage);
-    replaceFunc(getfunction("maps/mp/zm_tomb_tank", "tank_push_player_off_edge"), ::fixed_tank_push_player_off_edge);
 	replacefunc(getfunction("maps/mp/zm_tomb_capture_zones", "recapture_round_tracker"), ::recapture_round_tracker);
 	replacefunc(getfunction("maps/mp/zm_tomb_chamber", "move_wall_down"), ::move_wall_down);
+	replacefunc(getfunction("maps/mp/zm_tomb_giant_robot", "zombie_stomp_death"), ::custom_zombie_stomp_death);
+	replacefunc(getfunction("maps/mp/zm_tomb_tank", "flamethrower_damage_zombies"), ::custom_flamethrower_damage_zombies);
+	replacefunc(getfunction("maps/mp/zm_tomb_tank", "tank_drop_powerups"), ::tank_drop_powerups);
+	replacefunc(getfunction("maps/mp/zm_tomb_utility", "watch_staff_usage"), ::watch_staff_usage);
+	replacefunc(getfunction("maps/mp/zombies/_zm_weap_one_inch_punch", "knockdown_zombie_animate_state"), ::custom_knockdown_zombie_animate_state);
+	replacefunc(getfunction("maps/mp/zombies/_zm_weap_staff_water", "staff_water_position_source"), ::staff_water_position_source);
+	replacefunc(getfunction("maps/mp/zombies/_zm_weap_staff_air", "staff_air_position_source"), ::staff_air_position_source);
 
 	level thread pack_a_punch_enable();
 	level thread enable_all_teleporters();
@@ -434,4 +437,67 @@ move_wall_down()
     rumble_players_in_chamber( 2, 0.1 );
     self thread chamber_wall_dust();
     self disconnectpaths();
+}
+
+staff_water_position_source( v_detonate, n_lifetime_sec, str_weapon )
+{
+    self endon( "disconnect" );
+
+    if ( isdefined( v_detonate ) )
+    {
+        level notify( "blizzard_shot", n_lifetime_sec);
+        e_fx = spawn( "script_model", v_detonate + vectorscale( ( 0, 0, 1 ), 33.0 ) );
+        e_fx setmodel( "tag_origin" );
+        e_fx setclientfield( "staff_blizzard_fx", 1 );
+        e_fx thread puzzle_debug_position( "X", ( 0, 64, 255 ) );
+        wait 1;
+        flag_set( "blizzard_active" );
+        e_fx thread ice_staff_blizzard_do_kills( self, str_weapon );
+        e_fx thread whirlwind_rumble_nearby_players( "blizzard_active" );
+        e_fx thread ice_staff_blizzard_timeout( n_lifetime_sec );
+        e_fx thread ice_staff_blizzard_off();
+        e_fx waittill( "blizzard_off" );
+        flag_clear( "blizzard_active" );
+        e_fx notify( "stop_debug_position" );
+        wait 0.1;
+        e_fx setclientfield( "staff_blizzard_fx", 0 );
+        wait 0.1;
+        e_fx delete();
+    }
+}
+
+
+staff_air_position_source( v_detonate, str_weapon )
+{
+    self endon( "disconnect" );
+
+    if ( !isdefined( v_detonate ) )
+        return;
+
+    if ( flag( "whirlwind_active" ) )
+    {
+        level notify( "whirlwind_stopped" );
+
+        while ( flag( "whirlwind_active" ) )
+            wait_network_frame();
+
+        wait 0.3;
+    }
+
+    flag_set( "whirlwind_active" );
+    n_time = self.chargeshotlevel * 3.5;
+    e_whirlwind = spawn( "script_model", v_detonate + vectorscale( ( 0, 0, 1 ), 100.0 ) );
+    e_whirlwind setmodel( "tag_origin" );
+    e_whirlwind.angles = vectorscale( ( -1, 0, 0 ), 90.0 );
+    e_whirlwind thread puzzle_debug_position( "X", vectorscale( ( 1, 1, 0 ), 255.0 ) );
+    e_whirlwind moveto( groundpos_ignore_water_new( e_whirlwind.origin ), 0.05 );
+    e_whirlwind waittill( "movedone" );
+    e_whirlwind setclientfield( "whirlwind_play_fx", 1 );
+    e_whirlwind thread whirlwind_rumble_nearby_players( "whirlwind_active" );
+
+    level notify("whirlwind_active", n_time);
+    e_whirlwind thread whirlwind_timeout( n_time );
+    wait 0.5;
+    e_whirlwind.player_owner = self;
+    e_whirlwind thread whirlwind_seek_zombies( self.chargeshotlevel, str_weapon );
 }
