@@ -80,6 +80,7 @@ load_persisted_hud()
 	self set_menu_hud( "st_stomp",     			getDvarInt( "st_stomp" ) );
 	self set_menu_hud( "st_tumble",     		getDvarInt( "st_tumble" ) );
 	self set_menu_hud( "st_tank",     			getDvarInt( "st_tank" ) );
+	self set_menu_hud( "st_stafftimer",     	getDvarInt( "st_stafftimer" ) );
 }
 
 get_menu_hud( element )

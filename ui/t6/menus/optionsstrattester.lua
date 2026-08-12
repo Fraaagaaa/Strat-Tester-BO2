@@ -328,6 +328,11 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff(TrapTimerChoice , 1 )
     end
 
+    if isOrigins then
+        local StaffTimerChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_STAFF_TIMER"), "st_stafftimer", Engine.Localize("ST_MENU_HUD_STAFF_TIMER_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(StaffTimerChoice, 0, "hud")
+    end
+
     -- HEALTHBAR
     local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_HEALTHBAR"), "st_healthbar", Engine.Localize("ST_HEALTHBAR_DESC"))
     CoD.StratTester.AddChoices_OnOrOff(HealthbarChoice, 0, "hud")
@@ -838,6 +843,7 @@ CoD.StratTester.sync_hud_menu = function ( controller )
         { "st_stomp",              0 },
         { "st_tumble",             0 },
         { "st_tank",               0 },
+        { "st_stafftimer",         0 },
     }
 
     local args = {}

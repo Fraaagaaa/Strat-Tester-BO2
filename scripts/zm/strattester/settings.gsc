@@ -61,6 +61,7 @@ createDvars()
 		createDvar("st_stomp", OFF);
 		createDvar("st_tumble", OFF);
 		createDvar("st_tank", OFF);
+		createDvar("st_stafftimer", ON);
 	}
 	if(istown())
 		createDvar("st_jug_setup", OFF); 

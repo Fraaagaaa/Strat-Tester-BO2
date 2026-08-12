@@ -4,6 +4,7 @@
 #include maps\mp\_utility;
 
 #include scripts\zm\strattester\utility;
+#include scripts\zm\strattester\hud;
 
 timer()
 {
@@ -224,6 +225,8 @@ icestafftimer()
 	while(true)
 	{
 		level waittill("blizzard_shot", time);
+        if(self get_menu_hud("st_stafftimer") == 0)
+            continue;
         self.icestafftimer thread setstafftimer("ice", time + 1);
 	}
 }
