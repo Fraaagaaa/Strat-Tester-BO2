@@ -183,7 +183,7 @@ award_permaperks_safe()
     perks_to_process[perks_to_process.size] = permaperk_array("revive");
     perks_to_process[perks_to_process.size] = permaperk_array("multikill_headshots");
     perks_to_process[perks_to_process.size] = permaperk_array("perk_lose");
-    perks_to_process[perks_to_process.size] = permaperk_array("jugg", undefined, undefined, 15);
+    perks_to_process[perks_to_process.size] = permaperk_array("jugg");
     perks_to_process[perks_to_process.size] = permaperk_array("flopper", array("zm_buried"));
     perks_to_process[perks_to_process.size] = permaperk_array("box_weapon", array("zm_highrise", "zm_buried"), array("zm_transit"));
     perks_to_process[perks_to_process.size] = permaperk_array("cash_back");
