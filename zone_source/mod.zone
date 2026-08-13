@@ -2,6 +2,9 @@
 >name,mod
 
 localize,st
+localize,st_hud
+localize,st_menu
+localize,st_perks
 localize,zone
 
 script,scripts/zm/st.gsc
