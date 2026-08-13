@@ -181,7 +181,7 @@ delete_zombie_noone_looking_origins( how_close, how_high )
 	}
 	
 	self.inview = 0;
-	self.player_far = 0;
+	self.player_close = 0;
 	n_distance_squared = 0;
 	n_height_difference = 0;
 	players = get_players();
