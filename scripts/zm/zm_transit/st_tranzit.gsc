@@ -213,8 +213,11 @@ print_busschedule()
     farm = randomintrange( 40, 180 );
     power = randomintrange( 40, 180 );
     town = randomintrange( 40, 180 );
-	if(getDvarInt("st_depart") >= 40 && getDvarInt("st_depart") <= 180)
-    farm = getDvarInt("st_depart");
+
+	if(getDvarInt("st_depart_farm") >= 40 && getDvarInt("st_depart") <= 180)
+        farm = getDvarInt("st_depart_farm");
+	if(getDvarInt("st_depart_diner") >= 40 && getDvarInt("st_depart") <= 180)
+        diner = getDvarInt("st_depart_diner");
 
     level.busschedule = busschedulecreate();
     level.busschedule busscheduleadd( "depot", 0, depot, 19, 15 );

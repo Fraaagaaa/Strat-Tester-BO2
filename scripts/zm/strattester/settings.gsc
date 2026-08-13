@@ -82,7 +82,8 @@ createDvars()
 		createDvar("st_busstatus", ON);
 		createDvar("st_busloc", OFF);
 		createDvar("st_bustimer", OFF);
-		createDvar("st_depart", 1);
+		createDvar("st_depart_farm", 1);
+		createDvar("st_depart_diner", 1);
 		createDvar("st_denizens", ON);
 	}
 	if(ismob())
