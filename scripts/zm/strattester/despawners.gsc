@@ -96,10 +96,7 @@ zombie_tracking_init()
 			c++;
 			
 			if ( c >= 100 )
-			{
-				strattesterprint( "Map doesnt have distance tracking", "Este mapa no tiene lógica para reapariciones" );
 				return;
-			}
 			
 			wait 0.05;
 			waittillframeend;
