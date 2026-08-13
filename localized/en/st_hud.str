@@ -1,0 +1,45 @@
+FILENOTES           "TRANSLATED BY BONECRUSHER"
+
+REFERENCE           ST_HUD_BOX_HITS
+LANG_ENGLISH        "^3Box Hits: ^5"
+
+REFERENCE           ST_HUD_AVG_MK2
+LANG_ENGLISH        "^3Raygun MK2 AVG: ^5"
+
+REFERENCE           ST_HUD_AVG_RAY
+LANG_ENGLISH        "^3Raygun AVG: ^5"
+
+REFERENCE           ST_HUD_TOTAL_RAY
+LANG_ENGLISH        "^3Total Raygun: ^5"
+
+REFERENCE           ST_HUD_TOTAL_MK2
+LANG_ENGLISH        "^3Total Raygun MK2: ^5"
+
+REFERENCE           ST_HUD_SUBWOOFER_KILLS
+LANG_ENGLISH        "^3Subwoofer kills: ^5"
+
+REFERENCE           ST_HUD_ELEVATOR_KILLS
+LANG_ENGLISH        "^3Elevator kills: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_DESPAWNED
+LANG_ENGLISH        "^3Zombies Despawned: ^5"
+
+REFERENCE           ST_HUD_ANCHOR_LEAKS
+LANG_ENGLISH        "^3Anchor Leaks: ^5"
+
+REFERENCE           ST_HUD_DENIZENS
+LANG_ENGLISH        "^3Denizens: ^5"
+
+REFERENCE           ST_HUD_REMAINING
+LANG_ENGLISH        "^3Zombies: ^5"
+
+REFERENCE           ST_HUD_SPH_HUD
+LANG_ENGLISH        "^3SPH: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_IN_VIEW
+LANG_ENGLISH        "^3Zombies in sight: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_FAR
+LANG_ENGLISH        "^3Zombies too far: ^5"
+
+ENDMARKER

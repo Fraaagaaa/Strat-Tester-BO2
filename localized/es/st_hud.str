@@ -1,0 +1,45 @@
+FILENOTES           "TRANSLATED BY BONECRUSHER"
+
+REFERENCE           ST_HUD_BOX_HITS
+LANG_ENGLISH        "^3Tiradas de caja: ^5"
+
+REFERENCE           ST_HUD_AVG_MK2
+LANG_ENGLISH        "^3Arma de rayos MK2 AVG: ^5"
+
+REFERENCE           ST_HUD_AVG_RAY
+LANG_ENGLISH        "^3Arma de rayos AVG: ^5"
+
+REFERENCE           ST_HUD_TOTAL_RAY
+LANG_ENGLISH        "^3Armas de rayos: ^5"
+
+REFERENCE           ST_HUD_TOTAL_MK2
+LANG_ENGLISH        "^3Armas de rayos MK2: ^5"
+
+REFERENCE           ST_HUD_SUBWOOFER_KILLS
+LANG_ENGLISH        "^3Bajas por Resonador: ^5"
+
+REFERENCE           ST_HUD_ELEVATOR_KILLS
+LANG_ENGLISH        "^3Bajas por ascensor: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_DESPAWNED
+LANG_ENGLISH        "^3Zombis Despawneados: ^5"
+
+REFERENCE           ST_HUD_ANCHOR_LEAKS
+LANG_ENGLISH        "^3Fugas de anclajes: ^5"
+
+REFERENCE           ST_HUD_DENIZENS
+LANG_ENGLISH        "^3Denizens: ^5"
+
+REFERENCE           ST_HUD_REMAINING
+LANG_ENGLISH        "^3Zombis: ^5"
+
+REFERENCE           ST_HUD_SPH
+LANG_ENGLISH        "^3SPH: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_IN_VIEW
+LANG_ENGLISH        "^3Zombis a la vista: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_FAR
+LANG_ENGLISH        "^3Zombis demasiado lejos: ^5"
+
+ENDMARKER
