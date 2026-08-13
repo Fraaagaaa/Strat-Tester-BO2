@@ -38,6 +38,7 @@ watch_new_players_hud()
 		player thread zone();
 		player thread despawnerCounter();
 		player thread anchorLeakCounter();
+        player thread zombiesFarAway();
         player thread prevent_hud_overlapping();
 		if(istranzit())
 		{
@@ -762,6 +763,7 @@ prevent_hud_overlapping()
     level endon("end_game");
     self endon("disconnect");
 
+    offset = 15;
     while(true)
     {
         wait 0.1;
@@ -771,21 +773,121 @@ prevent_hud_overlapping()
             continue;
         }
         self.despawnersCounter.y = 45 * isorigins();
-        self.anchorLeakCounter.y = 15 + self.despawnersCounter.y;
-
+        self.anchorLeakCounter.y = offset + self.despawnersCounter.y;
+        self.zombiesInView.y = offset + self.anchorLeakCounter.y;
+        self.zombiesFar.y = offset + self.zombiesInView.y;
+        last = self.zombiesFar;
         if(isburied())
         {
             if ( isdefined( self.subwooferkills ) )
             {
-                self.subwooferkills.y = (15 + self.anchorLeakCounter.y) * self.anchorLeakCounter.alpha;
+                self.subwooferkills.y = (offset + last.y) * last.alpha;
+                last = self.subwooferkills;
             }
         }
         else if(isdierise())
         {
             if ( isdefined( self.elevatorkills ) )
             {
-                self.elevatorkills.y = (15 + self.anchorLeakCounter.y) * self.anchorLeakCounter.alpha;
+                self.elevatorkills.y = (offset + last.y) * last.alpha;
+                last = self.elevatorkills;
             }
         }
+    }
+}
+
+zombiesFarAway()
+{
+    self.zombiesInView = createfontstring( "objective", 1.4);
+	self.zombiesInView.hidewheninmenu = true;
+    self.zombiesInView.x = 0;
+    self.zombiesInView.aligny = "top";
+    self.zombiesInView.alignx = "left";
+    self.zombiesInView.label = &"ST_HUD_ZOMBIES_IN_VIEW";
+    self.zombiesInView.horzalign = "user_left";
+    self.zombiesInView.vertalign = "user_top";
+    self.zombiesInView.alpha = 0;
+    self.zombiesInView setvalue(0);
+
+    self.zombiesFar = createfontstring( "objective", 1.4);
+	self.zombiesFar.hidewheninmenu = true;
+    self.zombiesFar.x = 0;
+    self.zombiesFar.aligny = "top";
+    self.zombiesFar.alignx = "left";
+    self.zombiesFar.label = &"ST_HUD_ZOMBIES_FAR";
+    self.zombiesFar.horzalign = "user_left";
+    self.zombiesFar.vertalign = "user_top";
+    self.zombiesFar.alpha = 0;
+    self.zombiesFar setvalue(0);
+
+
+    if(isdefined(level.zombie_tracking_too_far_dist))
+    {
+        distance_squared_check = level.zombie_tracking_too_far_dist * level.zombie_tracking_too_far_dist;
+    }
+    else
+    {
+        if(istranzit() || isdierise())
+            how_close = 1000;
+        if(isburied() || isorigins() || ismob())
+            how_close = 1500;
+
+        distance_squared_check = how_close * how_close;
+    }
+
+    too_far_dist = distance_squared_check * 3;
+    
+    while(true)
+    {
+        self.zombiesFar.alpha = getDvarInt("st_despawners");
+        self.zombiesInView.alpha = getDvarInt("st_despawners");
+        foreach(zombie in getaiarray( "axis" ))
+        {
+            zombie._inview = false;
+            zombie._player_far = false;
+        }
+        player_far = 0;
+        inview = 0;
+
+        foreach(zombie in getaiarray( "axis" ))
+        {
+            foreach(player in level.players)
+            {
+                if ( player.sessionstate == "spectator" )
+                {
+                    continue;
+                }
+
+                if ( isdefined( level.only_track_targeted_players ) )
+                {
+                    if ( !isdefined( zombie.favoriteenemy ) || zombie.favoriteenemy != player )
+                    {
+                        continue;
+                    }
+                }
+
+                can_be_seen = zombie [[ getfunction( "maps/mp/zm_transit_distance_tracking", "player_can_see_me" ) ]]( player );
+
+                if(!zombie._inview)
+                {
+                    zombie._inview = can_be_seen && distancesquared( zombie.origin, player.origin ) < too_far_dist;
+                    if(zombie._inview) inview++;
+                }
+                if(!zombie._player_far)
+                {
+                    if(ismob())
+                    {
+                        zombie._player_far = (distancesquared( zombie.origin, player.origin ) < distance_squared_check && abs( zombie.origin[2] - player.origin[2] ) < 600);
+                        if(zombie._player_far) player_far++;
+                    }
+                    zombie._player_far = distancesquared( zombie.origin, player.origin ) >= distance_squared_check;
+                    if(zombie._player_far) player_far++;
+                }
+            }
+        }
+        wait 0.1;
+
+        self.zombiesInView setvalue(inview);
+        self.zombiesFar setvalue(player_far);
     }
 }
