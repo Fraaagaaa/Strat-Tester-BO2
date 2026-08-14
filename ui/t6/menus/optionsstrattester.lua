@@ -311,9 +311,9 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     TimerChoice:setChoice( currentTimerVal )
 
     -- DESPAWNERS
-    if UIExpression.IsInGame( LocalClientIndex ) == 1 and not isSurvival then
+    if not isSurvival then
         local DespawnChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_DESPAWNERS"), "st_despawners", Engine.Localize("ST_MENU_HUD_DESPAWNERS_DESC"))
-        CoD.StratTester.AddChoices_OnOrOff( DespawnChoice, 0 )
+        CoD.StratTester.AddChoices_OnOrOff(DespawnChoice, 0, "hud")
     end
 
     if isMob then

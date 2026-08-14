@@ -91,7 +91,6 @@ despawnersTimer()
     self.despawnersTimer.fontscale = 1.4;
     self.despawnersTimer.hidewheninmenu = 1;
     self.despawnersTimer.color = (0.7, 0.7, 0.7);
-    self.despawnersTimer.alpha = 0;
 
     while(true)
     {
@@ -118,22 +117,18 @@ traptimer()
 	self.traptimer.label = &"";
 
 	while(true)
-	{
-		if(getDvarInt("st_traptimer"))
-		{
-			level waittill( "trap_activated" );
-			wait 0.1;
-			self.traptimer.color = ( 0, 1, 0 );
-			self.traptimer.alpha = 1;
-			self.traptimer settimer( 25 );
-			wait 25;
-			self.traptimer settimer( 25 );
-			self.traptimer.color = ( 1, 0, 0 );
-			wait 25;
-			self.traptimer.alpha = 0;
-		}
-		wait 0.1;
-	}
+    {
+        level waittill( "trap_activated" );
+        wait 0.1;
+        self.traptimer.color = ( 0, 1, 0 );
+        self.traptimer.alpha = 1;
+        self.traptimer settimer( 25 );
+        wait 25;
+        self.traptimer settimer( 25 );
+        self.traptimer.color = ( 1, 0, 0 );
+        wait 25;
+        self.traptimer.alpha = 0;
+    }
 }
 
 icestafftimer()
@@ -182,6 +177,25 @@ setstafftimer(end, time)
     wait time + 0.5;
     self.alpha = 0;
 }
+
+bustimer()
+{
+    level endon( "end_game" );
+    self endon( "disconnect" );
+
+    self.bustimer = newclienthudelem(self);
+    self.bustimer.alpha = 1;
+    self.bustimer.color = (0.505, 0.478, 0.721);
+    self.bustimer.hidewheninmenu = true;
+    self.bustimer.fontscale = 1.7;
+    self.bustimer settimerup(0);
+    self.bustimer.alignx = "right";
+    self.bustimer.aligny = "top";
+    self.bustimer.horzalign = "user_right";
+    self.bustimer.vertalign = "user_top";
+    self.bustimer.x = -1;
+}
+
 
 timerlocation()
 {
@@ -259,74 +273,62 @@ timerlocation()
 
         current_y = self.roundtimer.y;
 
-        if(isdefined(self.despawnersTimer) && iswhite(self))
+        if(isdefined(self.despawnersTimer))
         {
-            self.despawnersTimer.alignx = self.timer.alignx;
-            self.despawnersTimer.aligny = self.timer.aligny;
-            self.despawnersTimer.horzalign = self.timer.horzalign;
-            self.despawnersTimer.vertalign = self.timer.vertalign;
-            self.despawnersTimer.x = self.timer.x;
-            self.despawnersTimer.alpha = getDvarInt("st_despawners");
-            
-            if (self.despawnersTimer.alpha > 0)
-                current_y += offset;
-                
-            self.despawnersTimer.y = current_y;
+            self.despawnersTimer.alpha = self get_menu_hud("st_despawners");
+            current_y = self.despawnersTimer setLocation(self.timer, current_y, offset);
         }
 
         if(isdefined(self.traptimer))
         {
-            self.traptimer.alignx = self.timer.alignx;
-            self.traptimer.aligny = self.timer.aligny;
-            self.traptimer.horzalign = self.timer.horzalign;
-            self.traptimer.vertalign = self.timer.vertalign;
-            self.traptimer.x = self.timer.x;
-            
-            if (self.traptimer.alpha > 0)
-                current_y += offset;
-                
-            self.traptimer.y = current_y;
+            current_y = self.traptimer setLocation(self.timer, current_y, offset);
         }
 
-		if(isdefined(self.icestafftimer))
-		{
-            self.icestafftimer.alignx = self.timer.alignx;
-            self.icestafftimer.aligny = self.timer.aligny;
-            self.icestafftimer.horzalign = self.timer.horzalign;
-            self.icestafftimer.vertalign = self.timer.vertalign;
-            self.icestafftimer.x = self.timer.x;
-            
-            if (self.icestafftimer.alpha > 0)
-                current_y += offset;
-                
-            self.icestafftimer.y = current_y;
-		}
+        if(isdefined(self.icestafftimer))
+        {
+            current_y = self.icestafftimer setLocation(self.timer, current_y, offset);
+        }
 
-		if(isdefined(self.windstafftimer))
-		{
-            self.windstafftimer.alignx = self.timer.alignx;
-            self.windstafftimer.aligny = self.timer.aligny;
-            self.windstafftimer.horzalign = self.timer.horzalign;
-            self.windstafftimer.vertalign = self.timer.vertalign;
-            self.windstafftimer.x = self.timer.x;
-            
-            if (self.windstafftimer.alpha > 0)
-                current_y += offset;
-                
-            self.windstafftimer.y = current_y;
-		}
+        if(isdefined(self.windstafftimer))
+        {
+            current_y = self.windstafftimer setLocation(self.timer, current_y, offset);
+        }
 
-		if(GetDvar("language") == "japanese")
-			self.timer.fontscale = 1.5;
+        if(isdefined(self.bustimer))
+        {
+            current_y = self.bustimer setLocation(self.timer, current_y, offset);
+        }
+
+        if(GetDvar("language") == "japanese")
+            self.timer.fontscale = 1.5;
         else
-			self.timer.fontscale = 1.7;
+            self.timer.fontscale = 1.7;
 
-		self.roundtimer.fontscale = self.timer.fontscale;
-		self.despawnersTimer.fontscale = self.timer.fontscale;
+        self.roundtimer.fontscale = self.timer.fontscale;
+        self.despawnersTimer.fontscale = self.timer.fontscale;
         if(isdefined(self.traptimer)) self.traptimer.fontscale = self.timer.fontscale;
         if(isdefined(self.icestafftimer)) self.icestafftimer.fontscale = self.timer.fontscale;
         if(isdefined(self.windstafftimer)) self.windstafftimer.fontscale = self.timer.fontscale;
 
         wait 0.1;
-	}
+    }
+}
+
+setLocation(ref, current_y, offset)
+{
+    if(!isdefined(offset))
+        offset = 15;
+
+    self.alignx = ref.alignx;
+    self.aligny = ref.aligny;
+    self.horzalign = ref.horzalign;
+    self.vertalign = ref.vertalign;
+    self.x = ref.x;
+
+    if (self.alpha > 0)
+        current_y += offset;
+
+    self.y = current_y;
+
+    return current_y; 
 }

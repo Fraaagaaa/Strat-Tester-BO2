@@ -15,15 +15,13 @@ init_hud()
         player load_persisted_hud();
 
     level thread watch_new_players_hud();
-    // has to be here so its accurate
-    level thread despawnersTimer();
 }
 
 watch_new_players_hud()
 {
-    level endon( "end_game" );
+    level endon("end_game");
 
-    while ( true )
+    while(true)
     {
         level waittill( "connected", player );
         if(isdefined(player.has_hud) && player.has_hud)
@@ -34,6 +32,7 @@ watch_new_players_hud()
         player thread healthbar();
         player thread sph();
         player thread timer();
+        player thread despawnersTimer();
         player thread remaining();
         player thread zone();
         if(!issurvivalmap())
@@ -71,20 +70,21 @@ watch_new_players_hud()
 
 load_persisted_hud()
 {
+    self set_menu_hud( "st_boxhits",            getDvarInt( "st_boxhits" ) );
+    self set_menu_hud( "st_busloc",             getDvarInt( "st_busloc" ) );
+    self set_menu_hud( "st_bustimer",           getDvarInt( "st_bustimer" ) );
+    self set_menu_hud( "st_despawners",     	getDvarInt( "st_despawners" ) );
+    self set_menu_hud( "st_elevatorkills",      getDvarInt( "st_elevatorkills" ) );
     self set_menu_hud( "st_healthbar",          getDvarInt( "st_healthbar" ) );
     self set_menu_hud( "st_remaining",          getDvarInt( "st_remaining" ) );
     self set_menu_hud( "st_remaining_denizens", getDvarInt( "st_remaining_denizens" ) );
     self set_menu_hud( "st_sph",                getDvarInt( "st_sph" ) );
-    self set_menu_hud( "st_zone",               getDvarInt( "st_zone" ) );
-    self set_menu_hud( "st_boxhits",            getDvarInt( "st_boxhits" ) );
-    self set_menu_hud( "st_bustimer",           getDvarInt( "st_bustimer" ) );
-    self set_menu_hud( "st_busloc",             getDvarInt( "st_busloc" ) );
-    self set_menu_hud( "st_elevatorkills",      getDvarInt( "st_elevatorkills" ) );
-    self set_menu_hud( "st_subwooferkills",     getDvarInt( "st_subwooferkills" ) );
-    self set_menu_hud( "st_stomp",     			getDvarInt( "st_stomp" ) );
-    self set_menu_hud( "st_tumble",     		getDvarInt( "st_tumble" ) );
-    self set_menu_hud( "st_tank",     			getDvarInt( "st_tank" ) );
     self set_menu_hud( "st_stafftimer",     	getDvarInt( "st_stafftimer" ) );
+    self set_menu_hud( "st_stomp",     			getDvarInt( "st_stomp" ) );
+    self set_menu_hud( "st_subwooferkills",     getDvarInt( "st_subwooferkills" ) );
+    self set_menu_hud( "st_tank",     			getDvarInt( "st_tank" ) );
+    self set_menu_hud( "st_tumble",     		getDvarInt( "st_tumble" ) );
+    self set_menu_hud( "st_zone",               getDvarInt( "st_zone" ) );
 }
 
 get_menu_hud( element )
@@ -94,16 +94,17 @@ get_menu_hud( element )
 
     switch ( element )
     {
-        case "st_healthbar":     return 0;
-        case "st_bustimer":      return 0;
-        case "st_busloc":        return 0;
-        case "st_elevatorkills": return 0;
+        case "st_healthbar":      return 0;
+        case "st_bustimer":       return 0;
+        case "st_busloc":         return 0;
+        case "st_elevatorkills":  return 0;
         case "st_subwooferkills": return 0;
+        case "st_despawners":     return 0;
     }
-    return 1; // st_remaining, st_remaining_denizens, st_sph, st_zone, st_boxhits, st_subwooferkills -> ON
+    return 1;
 }
 
-on_hud_menu( action, args )
+on_hud_menu( action, args)
 {
     switch ( action )
     {
@@ -204,8 +205,10 @@ sph()
     self.sph.fontscale = 1.7;
     self.sph.color = (0.8, 0.8, 0.8);
     self.sph.hidewheninmenu = true;
-    self.sph.x = 2;
+    self.sph.x = 0;
     self.sph.y = 75;
+    if(isorigins())
+        self.sph.y += 45;
     self.sph.alpha = self get_menu_hud("st_sph");
     self.sph.label = &"ST_HUD_SPH";
     self.sph.alignx = "left";
@@ -375,7 +378,7 @@ despawnerCounter()
     while(true)
     {
         self.despawnersCounter setvalue(level.despawners);
-        self.despawnersCounter.alpha = getDvarInt("st_despawners");
+        self.despawnersCounter.alpha = self get_menu_hud("st_despawners");
         wait 0.1;
     }
 }
@@ -402,7 +405,7 @@ anchorLeakCounter()
     while(true)
     {
         self.anchorLeakCounter setvalue(level.anchorLeaks);
-        self.anchorLeakCounter.alpha = getDvarInt("st_despawners");
+        self.anchorLeakCounter.alpha = self get_menu_hud("st_despawners");
         wait 0.1;
     }
 }
@@ -516,40 +519,6 @@ denizensAlive()
         self.denizen_counter setValue(level.zombie_screecher_count);
         self.denizen_counter.alpha = get_menu_hud("st_remaining_denizens");
         wait 0.05; 
-    }
-}
-
-bustimer()
-{
-    level endon( "end_game" );
-    self endon( "disconnect" );
-
-    self.bustimer = newclienthudelem(self);
-    self.bustimer.alpha = 1;
-    self.bustimer.color = (0.505, 0.478, 0.721);
-    self.bustimer.hidewheninmenu = true;
-    self.bustimer.fontscale = 1.7;
-    self.bustimer settimerup(0);
-    self.bustimer.alignx = "right";
-    self.bustimer.aligny = "top";
-    self.bustimer.horzalign = "user_right";
-    self.bustimer.vertalign = "user_top";
-    self.bustimer.x = -1;
-
-    while(!isdefined(self.timer))
-        wait 0.1;
-    self.bustimer.y = self.timer + 30;
-
-    while(true)
-    {
-        wait 0.1;
-        self.bustimer.x = self.timer.x;
-        self.bustimer.y = self.timer.y + 30;
-        self.bustimer.alignx = self.timer.alignx;
-        self.bustimer.aligny = self.timer.aligny;
-        self.bustimer.horzalign = self.timer.horzalign;
-        self.bustimer.vertalign = self.timer.vertalign;
-        self.bustimer.alpha = get_menu_hud("st_bustimer");
     }
 }
 
@@ -688,6 +657,10 @@ origins_hud()
     self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
     self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");
 
+    self.stomp_hud.fontscale = 1.4;
+    self.tank_hud.fontscale = 1.4;
+    self.tumble_hud.fontscale = 1.4;
+
     if(!isdefined(level.tumbles)) level.tumbles = 0;
     if(!isdefined(level.tankkills)) level.tankkills = 0;
     if(!isdefined(level.stompkills)) level.stompkills = 0;
@@ -703,47 +676,7 @@ origins_hud()
         self.tumble_hud.alpha = get_menu_hud("st_tumble");
         self.tank_hud.alpha = get_menu_hud("st_tank");
 
-        wait 0.05;
-    }
-}
-
-despawnersTimer()
-{
-    if ( !isdefined( level.zombie_tracking_wait ) )
-    {
-        c = 0;
-        waittillframeend;
-
-        while ( !isdefined( level.zombie_tracking_wait ) )
-        {
-            c++;
-
-            if ( c >= 100 )
-                return;
-
-            wait 0.05;
-            waittillframeend;
-        }
-    }
-
-    text = createserverfontstring( "Objective", 1 );
-    text setpoint( "CENTER", "CENTER", 290, 230 );
-    text settimer( level.zombie_tracking_wait );
-    text thread alpha_respawn_timer();
-
-    for (;;)
-    {
-        wait level.zombie_tracking_wait;
-        text settimer( level.zombie_tracking_wait );
-    }
-}
-
-alpha_respawn_timer()
-{
-    while(true)
-    {
-        self.alpha = getDvarInt("st_despawners");
-        wait 0.5;
+        wait 0.1;
     }
 }
 
@@ -757,15 +690,16 @@ prevent_hud_overlapping()
     {
         wait 0.1;
 
-        if ( !isdefined( self.despawnersCounter ) || !isdefined( self.anchorLeakCounter ) )
-        {
-            continue;
-        }
-        self.despawnersCounter.y = 45 * isorigins();
+        start = self.sph.y + offset + 10;
+
+        self.despawnersCounter.y = start;
         self.anchorLeakCounter.y = offset + self.despawnersCounter.y;
         self.zombiesInView.y = offset + self.anchorLeakCounter.y;
         self.zombiesFar.y = offset + self.zombiesInView.y;
-        last = self.zombiesFar;
+
+        if (self.zombiesFar.alpha > 0)
+            start = self.zombiesFar.y + offset;
+
         if(isburied())
         {
             if ( isdefined( self.subwooferkills ) )
@@ -781,6 +715,12 @@ prevent_hud_overlapping()
                 self.elevatorkills.y = (offset + last.y) * last.alpha;
                 last = self.elevatorkills;
             }
+        }
+        else if(isorigins())
+        {
+            self.stomp_hud.y = start;
+            self.tank_hud.y = self.stomp_hud.y + (offset * self.stomp_hud.alpha);
+            self.tumble_hud.y = self.tank_hud.y + (offset * self.tank_hud.alpha);
         }
     }
 }
@@ -830,21 +770,20 @@ zombiesFarAway()
     if(isdefined(level.zombie_tracking_too_far_dist))
         too_far_dist = level.zombie_tracking_too_far_dist * level.zombie_tracking_too_far_dist;
 
-    if(isorigins())
-        can_be_seen_func = getfunction("maps/mp/zm_tomb_distance_tracking", "player_can_see_me");
-    else if(isburied())
-        can_be_seen_func = getfunction("maps/mp/zm_buried_distance_tracking", "player_can_see_me");
-    else if(ismob())
-        can_be_seen_func = getfunction("maps/mp/zm_alcatraz_distance_tracking", "player_can_see_me");
-    else if(isdierise())
-        can_be_seen_func = getfunction("maps/mp/zm_highrise_distance_tracking", "player_can_see_me");
-    else
-        can_be_seen_func = getfunction("maps/mp/zm_transit_distance_tracking", "player_can_see_me");
+    can_be_seen_func  = undefined;
+    if(isorigins())      can_be_seen_func = getfunction("maps/mp/zm_tomb_distance_tracking", "player_can_see_me");
+    else if(isburied())  can_be_seen_func = getfunction("maps/mp/zm_buried_distance_tracking", "player_can_see_me");
+    else if(ismob())     can_be_seen_func = getfunction("maps/mp/zm_alcatraz_distance_tracking", "player_can_see_me");
+    else if(isdierise()) can_be_seen_func = getfunction("maps/mp/zm_highrise_distance_tracking", "player_can_see_me");
+    else if(istranzit()) can_be_seen_func = getfunction("maps/mp/zm_transit_distance_tracking", "player_can_see_me");
+
+    if(!isdefined(can_be_seen_func))
+        return;
 
     while(true)
     {
-        self.zombiesFar.alpha = getDvarInt("st_despawners");
-        self.zombiesInView.alpha = getDvarInt("st_despawners");
+        self.zombiesFar.alpha = self get_menu_hud("st_despawners");
+        self.zombiesInView.alpha = self get_menu_hud("st_despawners");;
 
         player_far = 0;
         inview = 0;
@@ -881,17 +820,17 @@ zombiesFarAway()
                 if(zombie._player_far)
                 {
                     if(isorigins() || ismob())
-					{
+                    {
                         if(distance_squared < distance_squared_check && abs(zombie.origin[2] - player.origin[2]) < 600)
                             zombie._player_far = false;
-					}
+                    }
                     else if(isburied() || isdierise())
                     {
                         if(distance_squared < distance_squared_check && abs(zombie.origin[2] - player.origin[2]) < 500)
                             zombie._player_far = false;
                     }
                     else if(distance_squared < distance_squared_check)
-                    	zombie._player_far = false;
+                        zombie._player_far = false;
                 }
             }
 
