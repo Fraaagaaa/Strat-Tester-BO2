@@ -55,12 +55,6 @@ LANG_ENGLISH        "TERMINAR O ROUND"
 REFERENCE           ST_MENU_GAME_END_ROUND_DESC
 LANG_ENGLISH        "Instantaneamente termina o round atual."
 
-REFERENCE           ST_MENU_GAME_DESPAWNERS
-LANG_ENGLISH        "DESPAWNERS"
-
-REFERENCE           ST_MENU_GAME_DESPAWNERS_DESC
-LANG_ENGLISH        "Ativa ou desativa os zumbis darem respawn."
-
 REFERENCE           ST_MENU_GAME_NOTARGET
 LANG_ENGLISH        "SEM ALVO"
 
@@ -91,7 +85,19 @@ LANG_ENGLISH        "EXECUTAR TELEPORTE"
 REFERENCE           ST_MENU_GAME_EXECUTE_TELEPORT_DESC
 LANG_ENGLISH        "Teleporta para a localização selecionada."
 
+REFERENCE           ST_MENU_GAME_DEVELOPER
+LANG_ENGLISH        "DESENVOLVEDOR"
+
+REFERENCE           ST_MENU_GAME_DEVELOPER_DESC
+LANG_ENGLISH        "Ativa o modo de Desenvolvedor para exibir informações adicionais sobre o desaparecimento de zumbis. AVISO: DESATIVE ISSO ANTES DE SAIR DO MAPA."
+
 // PESTAÑA HUD
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS
+LANG_ENGLISH        "DESPAWNERS"
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS_DESC
+LANG_ENGLISH        "Ativa ou desativa os zumbis darem respawn."
 
 REFERENCE           ST_MENU_HUD_STAFF_TIMER
 LANG_ENGLISH        "CRONÔMETRO DO BASTÃO"
@@ -498,6 +504,6 @@ REFERENCE           ST_MENU_LOCATION_DOCK
 LANG_ENGLISH        "DOCAS"
 
 REFERENCE           ST_MENU_LOCATION_JUG
-LANG_ENGLISH        "DOCAS"
+LANG_ENGLISH        "JUG"
 
 ENDMARKER

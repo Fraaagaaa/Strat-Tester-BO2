@@ -174,10 +174,22 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
-	if UIExpression.IsInGame( LocalClientIndex ) == 1 and not isSurvival == 0 then
-		local DespawnChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_GAME_DESPAWNERS"), "st_despawners", Engine.Localize("ST_MENU_GAME_DESPAWNERS_DESC"))
-		CoD.StratTester.AddChoices_OnOrOff( DespawnChoice, 0 )
-	end
+    if UIExpression.IsInGame( LocalClientIndex ) == 1 and not isSurvival then
+        local DeveloperChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_GAME_DEVELOPER"), "developer", Engine.Localize("ST_MENU_GAME_DEVELOPER_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff( DeveloperChoice, 0 )
+    end
+
+    -- NOTARGET
+    local NotargetChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_GAME_NOTARGET"), "dummy_notarget", Engine.Localize("ST_MENU_GAME_NOTARGET_DESC"))
+    NotargetChoice:addChoice(Engine.Localize("ST_MENU_OFF"), 0, nil, CoD.StratTester.OnNotargetChanged )
+    NotargetChoice:addChoice(Engine.Localize("ST_MENU_ON"), 1, nil, CoD.StratTester.OnNotargetChanged )
+
+    local currentNotarget = UIExpression.DvarInt( nil, "dummy_notarget")
+    if UIExpression.DvarString( nil, "dummy_notarget") == "" then
+        currentNotarget = 0
+        Engine.SetDvar("dummy_notarget", currentNotarget )
+    end
+    NotargetChoice:setChoice( currentNotarget )
 
     -- DROPS
     local DropsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_GAME_DROPS"), "st_enable_drops", Engine.Localize("ST_MENU_GAME_DROPS_DESC"))
@@ -297,6 +309,12 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     end
 
     TimerChoice:setChoice( currentTimerVal )
+
+    -- DESPAWNERS
+    if UIExpression.IsInGame( LocalClientIndex ) == 1 and not isSurvival then
+        local DespawnChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_DESPAWNERS"), "st_despawners", Engine.Localize("ST_MENU_HUD_DESPAWNERS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff( DespawnChoice, 0 )
+    end
 
     if isMob then
         local TrapTimerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_TRAP_TIMER"), "st_traptimer", Engine.Localize("ST_MENU_HUD_TRAT_TIMER_DESC"))
@@ -837,4 +855,11 @@ LUI.createMenu.StratTesterPerkSync = function ( LocalClientIndex )
     menu:addElement( LUI.UITimer.new( 100, "perk_sync_pulse", false, menu ) )
 
     return menu
+end
+
+CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
+    if isUserRequest ~= true then return end
+    local controller = choice.parentSelectorButton.m_currentController
+    Engine.SendMenuResponse( controller, "restartgamepopup", "stnotarget+" .. tostring( choice.value ) )
+    Engine.SetDvar( choice.parentSelectorButton.m_profileVarName, choice.value )
 end

@@ -55,12 +55,6 @@ LANG_ENGLISH        "END ROUND"
 REFERENCE           ST_MENU_GAME_END_ROUND_DESC
 LANG_ENGLISH        "Instantly ends the current round."
 
-REFERENCE           ST_MENU_GAME_DESPAWNERS
-LANG_ENGLISH        "DESPAWNERS"
-
-REFERENCE           ST_MENU_GAME_DESPAWNERS_DESC
-LANG_ENGLISH        "Enable or disable zombie respawns."
-
 REFERENCE           ST_MENU_GAME_NOTARGET
 LANG_ENGLISH        "NOTARGET"
 
@@ -91,7 +85,19 @@ LANG_ENGLISH        "EXECUTE TELEPORT"
 REFERENCE           ST_MENU_GAME_EXECUTE_TELEPORT_DESC
 LANG_ENGLISH        "Teleport to the selected destination."
 
+REFERENCE           ST_MENU_GAME_DEVELOPER
+LANG_ENGLISH        "DEVELOPER"
+
+REFERENCE           ST_MENU_GAME_DEVELOPER_DESC
+LANG_ENGLISH        "Activates developer mode to see extra information about zombie despawns. WARNING: DEACTIVATE THIS BEFORE EXITING THE MAP."
+
 // PESTAÑA HUD
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS
+LANG_ENGLISH        "DESPAWNERS"
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS_DESC
+LANG_ENGLISH        "Enable or disable zombie respawns."
 
 REFERENCE           ST_MENU_HUD_HEALTHBAR
 LANG_ENGLISH        "HEALTHBAR"
@@ -315,6 +321,9 @@ LANG_ENGLISH        "MOVE BOX"
 REFERENCE           ST_MENU_MAP_MOVE_BOX_DEC
 LANG_ENGLISH        "Move the mystery box to the selected location."
 
+REFERENCE          ST_MENU_MAP_BARRICADES_BURIED
+LANG_ENGLISH       "KEEP BARRICADES"
+
 REFERENCE          ST_MENU_MAP_BARRICADES_BURIED_DESC
 LANG_ENGLISH       "If off it will destroy the barricades at juggernog, the mansion and the one next to the candy shop."
 
@@ -496,7 +505,7 @@ LANG_ENGLISH        "BAR"
 REFERENCE           ST_MENU_LOCATION_DOCK
 LANG_ENGLISH        "DOCKS"
 
-REFERENCE          ST_MENU_MAP_BARRICADES_BURIED
-LANG_ENGLISH       "KEEP BARRICADES"
+REFERENCE           ST_MENU_LOCATION_JUG
+LANG_ENGLISH        "JUGGERNOG"
 
 ENDMARKER
