@@ -6,15 +6,21 @@
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\hud;
 
+#define HIDE_TIMER 0
+#define TOP_RIGHT_TIMER 1
+#define TOP_LEFT_TIMER 2
+#define MID_LEFT_TIMER 3
+#define AMMO_TIMER 4
+
 timer()
 {
 	self endon("disconnect");
 
 	self thread roundtimer();
-	self thread timerlocation();
 	self.timer = newclienthudelem(self);
 	self.timer.hidewheninmenu = 1;
 	self.timer.fontscale = 1.7;
+	self thread timerlocation();
 	flag_wait("initial_blackscreen_passed");
 	while(true)
 	{
@@ -55,128 +61,45 @@ display_round_time(time)
 
     while (true)
     {
-        // -0.1 avoids flickering
         self settimer(time - 0.1);
         wait 0.05;
     }
 }
 
-#define HIDE_TIMER 0
-#define TOP_RIGHT_TIMER 1
-#define TOP_LEFT_TIMER 2
-#define MID_LEFT_TIMER 3
-#define AMMO_TIMER 4
-
-timerlocation()
+despawnersTimer()
 {
-	level endon("end_game");
-	self endon("disconnect");
+    level endon("end_game");
+    self endon("disconnect");
 
-	while(true)
-	{
-		switch(getDvarInt("st_timer"))
-		{
-			case HIDE_TIMER:
-				self.timer.alpha = 0;
-				self.roundtimer.alpha = 0;
-				break;
-			case TOP_RIGHT_TIMER:
-				self.timer.alignx = "right";
-				self.timer.aligny = "top";
-				self.timer.horzalign = "user_right";
-				self.timer.vertalign = "user_top";
-				self.timer.x = -1;
-				self.timer.y = 13;
-				self.timer.alpha = 1;
-				self.roundtimer.alpha = 1;
-				if(getDvar("cg_drawFPS") != "Off")
-					self.timer.y += 6;
-				if(getDvar("cg_drawFPS") != "Off" && GetDvar("language") == "japanese")
-					self.timer.y += 10;
-				if(isdierise())
-					self.timer.y = 30;
-				break;
-			case TOP_LEFT_TIMER:
-				self.timer.alignx = "left";
-				self.timer.aligny = "top";
-				self.timer.horzalign = "user_left";
-				self.timer.vertalign = "user_top";
-				self.timer.x = 1;
-				self.timer.y = 0;
-				self.timer.alpha = 1;
-				self.roundtimer.alpha = 1;
-				if(isorigins()) self.timer.y = 45;
-				if(issurvivalmap()) self.timer.y = 40;
-				if(isdierise() && level.springpad_hud.alpha != 0) self.timer.y = 10;
-				if(isburied() && level.springpad_hud.alpha != 0) self.timer.y = 35;
-				break;
-			case MID_LEFT_TIMER:
-				self.timer.alignx = "left";
-				self.timer.aligny = "top";
-				self.timer.horzalign = "user_left";
-				self.timer.vertalign = "user_top";
-				self.timer.x = 1;
-				self.timer.y = 250;
-				self.timer.alpha = 1;
-				self.roundtimer.alpha = 1;
-				break;
-			case AMMO_TIMER:
-				self.timer.alignx = "right";
-				self.timer.aligny = "top";
-				self.timer.horzalign = "user_right";
-				self.timer.vertalign = "user_top";
-				self.timer.x = -170;
-				self.timer.y = 415;
-				self.timer.alpha = 1;
-				self.roundtimer.alpha = 1;
-				break;
+    if ( !isdefined( level.zombie_tracking_wait ) )
+    {
+        c = 0;
+        waittillframeend;
 
-			default: break;
-		}
-		self.roundtimer.alignx = self.timer.alignx;
-		self.roundtimer.aligny = self.timer.aligny;
-		self.roundtimer.horzalign = self.timer.horzalign;
-		self.roundtimer.vertalign = self.timer.vertalign;
-		self.roundtimer.x = self.timer.x;
-		self.roundtimer.y = self.timer.y + 15;
-        if(isdefined(self.traptimer))
+        while ( !isdefined( level.zombie_tracking_wait ) )
         {
-            self.traptimer.alignx = self.timer.alignx;
-            self.traptimer.aligny = self.timer.aligny;
-            self.traptimer.horzalign = self.timer.horzalign;
-            self.traptimer.vertalign = self.timer.vertalign;
-            self.traptimer.x = self.timer.x;
-            self.traptimer.y = self.timer.y + 30;
+            c++;
+            if ( c >= 100 )
+                return;
+            wait 0.05;
+            waittillframeend;
         }
-		if(isdefined(self.icestafftimer))
-		{
-            self.icestafftimer.alignx = self.timer.alignx;
-            self.icestafftimer.aligny = self.timer.aligny;
-            self.icestafftimer.horzalign = self.timer.horzalign;
-            self.icestafftimer.vertalign = self.timer.vertalign;
-            self.icestafftimer.x = self.timer.x;
-            self.icestafftimer.y = self.timer.y + 30;
-		}
-		if(isdefined(self.windstafftimer))
-		{
-            self.windstafftimer.alignx = self.timer.alignx;
-            self.windstafftimer.aligny = self.timer.aligny;
-            self.windstafftimer.horzalign = self.timer.horzalign;
-            self.windstafftimer.vertalign = self.timer.vertalign;
-            self.windstafftimer.x = self.timer.x;
-            self.windstafftimer.y = self.timer.y + 45;
-		}
+    }
 
-		if(GetDvar("language") == "japanese")
-		{
-			self.timer.fontscale = 1.5;
-			self.roundtimer.fontscale = self.timer.fontscale;
-		}
+    self.despawnersTimer = newclienthudelem(self);
+    self.despawnersTimer.font = "objective";
+    self.despawnersTimer.fontscale = 1.4;
+    self.despawnersTimer.hidewheninmenu = 1;
+    self.despawnersTimer.color = (0.7, 0.7, 0.7);
+    self.despawnersTimer.alpha = 0;
 
-        wait 0.1;
-	}
+    while(true)
+    {
+        self.despawnersTimer settimer( level.zombie_tracking_wait );
+        wait level.zombie_tracking_wait;
+    }
 }
-
+    
 
 traptimer()
 {
@@ -221,6 +144,7 @@ icestafftimer()
 	self.icestafftimer.fontscale = 1.4;
 	self.icestafftimer.hidewheninmenu = 1;
 	self.icestafftimer.color = (0, 0.8, 0.8);
+    self.icestafftimer.alpha = 0;
 	
 	while(true)
 	{
@@ -228,6 +152,23 @@ icestafftimer()
         if(self get_menu_hud("st_stafftimer") == 0)
             continue;
         self.icestafftimer thread setstafftimer("ice", time + 1);
+	}
+}
+
+windstafftimer()
+{
+	self endon( "disconnect" );
+
+	self.windstafftimer = newclienthudelem( self );
+	self.windstafftimer.fontscale = 1.4;
+	self.windstafftimer.hidewheninmenu = 1;
+	self.windstafftimer.color = (0.9, 0.9, 0.25);
+    self.windstafftimer.alpha = 0;
+	
+	while(true)
+	{
+        level waittill("whirlwind_active", time);
+        self.windstafftimer setstafftimer("wind", time);
 	}
 }
 
@@ -242,18 +183,150 @@ setstafftimer(end, time)
     self.alpha = 0;
 }
 
-windstafftimer()
+timerlocation()
 {
-	self endon( "disconnect" );
+	level endon("end_game");
+	self endon("disconnect");
 
-	self.windstafftimer = newclienthudelem( self );
-	self.windstafftimer.fontscale = 1.4;
-	self.windstafftimer.hidewheninmenu = 1;
-	self.windstafftimer.color = (0.9, 0.9, 0.25);
-	
+    offset = 15;
 	while(true)
 	{
-        level waittill("whirlwind_active", time);
-        self.windstafftimer setstafftimer("wind", time);
+		switch(getDvarInt("st_timer"))
+		{
+			case HIDE_TIMER:
+				self.timer.alpha = 0;
+				self.roundtimer.alpha = 0;
+				break;
+			case TOP_RIGHT_TIMER:
+				self.timer.alignx = "right";
+				self.timer.aligny = "top";
+				self.timer.horzalign = "user_right";
+				self.timer.vertalign = "user_top";
+				self.timer.x = -1;
+				self.timer.y = 13;
+				self.timer.alpha = 1;
+				self.roundtimer.alpha = 1;
+				if(getDvar("cg_drawFPS") != "Off") self.timer.y += 6;
+				if(getDvar("cg_drawFPS") != "Off" && GetDvar("language") == "japanese") self.timer.y += 10;
+				if(isdierise()) self.timer.y = 30;
+				break;
+			case TOP_LEFT_TIMER:
+				self.timer.alignx = "left";
+				self.timer.aligny = "top";
+				self.timer.horzalign = "user_left";
+				self.timer.vertalign = "user_top";
+				self.timer.x = 1;
+				self.timer.y = 0;
+				self.timer.alpha = 1;
+				self.roundtimer.alpha = 1;
+				if(isorigins()) self.timer.y = 45;
+				if(issurvivalmap()) self.timer.y = 40;
+				if(isdierise() && level.springpad_hud.alpha != 0) self.timer.y = 10;
+				if(isburied() && level.springpad_hud.alpha != 0) self.timer.y = 35;
+				break;
+			case MID_LEFT_TIMER:
+				self.timer.alignx = "left";
+				self.timer.aligny = "top";
+				self.timer.horzalign = "user_left";
+				self.timer.vertalign = "user_top";
+				self.timer.x = 1;
+				self.timer.y = 250;
+				self.timer.alpha = 1;
+				self.roundtimer.alpha = 1;
+				break;
+			case AMMO_TIMER:
+				self.timer.alignx = "right";
+				self.timer.aligny = "top";
+				self.timer.horzalign = "user_right";
+				self.timer.vertalign = "user_top";
+				self.timer.x = -170;
+                if(isorigins())
+				    self.timer.y = 400;
+                else
+				    self.timer.y = 415;
+				self.timer.alpha = 1;
+				self.roundtimer.alpha = 1;
+				break;
+			default: break;
+		}
+
+		self.roundtimer.alignx = self.timer.alignx;
+		self.roundtimer.aligny = self.timer.aligny;
+		self.roundtimer.horzalign = self.timer.horzalign;
+		self.roundtimer.vertalign = self.timer.vertalign;
+		self.roundtimer.x = self.timer.x;
+		self.roundtimer.y = self.timer.y + offset;
+
+        current_y = self.roundtimer.y;
+
+        if(isdefined(self.despawnersTimer) && iswhite(self))
+        {
+            self.despawnersTimer.alignx = self.timer.alignx;
+            self.despawnersTimer.aligny = self.timer.aligny;
+            self.despawnersTimer.horzalign = self.timer.horzalign;
+            self.despawnersTimer.vertalign = self.timer.vertalign;
+            self.despawnersTimer.x = self.timer.x;
+            self.despawnersTimer.alpha = getDvarInt("st_despawners");
+            
+            if (self.despawnersTimer.alpha > 0)
+                current_y += offset;
+                
+            self.despawnersTimer.y = current_y;
+        }
+
+        if(isdefined(self.traptimer))
+        {
+            self.traptimer.alignx = self.timer.alignx;
+            self.traptimer.aligny = self.timer.aligny;
+            self.traptimer.horzalign = self.timer.horzalign;
+            self.traptimer.vertalign = self.timer.vertalign;
+            self.traptimer.x = self.timer.x;
+            
+            if (self.traptimer.alpha > 0)
+                current_y += offset;
+                
+            self.traptimer.y = current_y;
+        }
+
+		if(isdefined(self.icestafftimer))
+		{
+            self.icestafftimer.alignx = self.timer.alignx;
+            self.icestafftimer.aligny = self.timer.aligny;
+            self.icestafftimer.horzalign = self.timer.horzalign;
+            self.icestafftimer.vertalign = self.timer.vertalign;
+            self.icestafftimer.x = self.timer.x;
+            
+            if (self.icestafftimer.alpha > 0)
+                current_y += offset;
+                
+            self.icestafftimer.y = current_y;
+		}
+
+		if(isdefined(self.windstafftimer))
+		{
+            self.windstafftimer.alignx = self.timer.alignx;
+            self.windstafftimer.aligny = self.timer.aligny;
+            self.windstafftimer.horzalign = self.timer.horzalign;
+            self.windstafftimer.vertalign = self.timer.vertalign;
+            self.windstafftimer.x = self.timer.x;
+            
+            if (self.windstafftimer.alpha > 0)
+                current_y += offset;
+                
+            self.windstafftimer.y = current_y;
+		}
+
+		if(GetDvar("language") == "japanese")
+			self.timer.fontscale = 1.5;
+        else
+			self.timer.fontscale = 1.7;
+
+		self.roundtimer.fontscale = self.timer.fontscale;
+		self.despawnersTimer.fontscale = self.timer.fontscale;
+        if(isdefined(self.traptimer)) self.traptimer.fontscale = self.timer.fontscale;
+        if(isdefined(self.icestafftimer)) self.icestafftimer.fontscale = self.timer.fontscale;
+        if(isdefined(self.windstafftimer)) self.windstafftimer.fontscale = self.timer.fontscale;
+
+        wait 0.1;
 	}
 }
