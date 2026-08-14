@@ -102,18 +102,6 @@ zombie_tracking_init()
 			waittillframeend;
 		}
 	}
-	
-	// WE DONT TIME ON BURIED BC ITS EVERY 0.1 SECONDS AND IT GET ANOYING
-	
-	// for ( ;; )
-	// {
-	// 	wait level.zombie_tracking_wait;
-		// 
-		// WE DONT PRINT ON BURIED BC ITS EVERY 0.1 SECONDS AND IT GET ANOYING
-		// if(getDvarInt("st_despawners"))
-		// 	strattesterprint( "Distance checking zombies...", "Comprobando distancia con los zombis...");
-		// text settimer( level.zombie_tracking_wait );
-	// }
 }
 
 on_zombie_death()
