@@ -369,6 +369,9 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         -- ELEVATOR KILLS
         local ElevatorChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_ELEVATOR_KILLS"), "st_elevatorkills", Engine.Localize("ST_MENU_HUD_ELEVATOR_KILLS_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(ElevatorChoice, 0, "hud")
+
+        local SliquifireChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_SLIQUIFIRE_TIMER"), "st_sliquifiretimer", Engine.Localize("ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(SliquifireChoice, 0, "hud")
     end
 
     if isBuried then

@@ -51,7 +51,10 @@ watch_new_players_hud()
         else if(isnuketown())
             level thread fast_restart_warning();
         else if(isdierise())
+        {
             player thread displayElevatorKills();
+            player thread sliquifiretimer();
+        }
         else if(ismob())
             player thread traptimer();
         else if(isburied())
@@ -70,21 +73,22 @@ watch_new_players_hud()
 
 load_persisted_hud()
 {
-    self set_menu_hud( "st_boxhits",            getDvarInt( "st_boxhits" ) );
-    self set_menu_hud( "st_busloc",             getDvarInt( "st_busloc" ) );
-    self set_menu_hud( "st_bustimer",           getDvarInt( "st_bustimer" ) );
-    self set_menu_hud( "st_despawners",     	getDvarInt( "st_despawners" ) );
-    self set_menu_hud( "st_elevatorkills",      getDvarInt( "st_elevatorkills" ) );
-    self set_menu_hud( "st_healthbar",          getDvarInt( "st_healthbar" ) );
-    self set_menu_hud( "st_remaining",          getDvarInt( "st_remaining" ) );
-    self set_menu_hud( "st_remaining_denizens", getDvarInt( "st_remaining_denizens" ) );
-    self set_menu_hud( "st_sph",                getDvarInt( "st_sph" ) );
-    self set_menu_hud( "st_stafftimer",     	getDvarInt( "st_stafftimer" ) );
-    self set_menu_hud( "st_stomp",     			getDvarInt( "st_stomp" ) );
-    self set_menu_hud( "st_subwooferkills",     getDvarInt( "st_subwooferkills" ) );
-    self set_menu_hud( "st_tank",     			getDvarInt( "st_tank" ) );
-    self set_menu_hud( "st_tumble",     		getDvarInt( "st_tumble" ) );
-    self set_menu_hud( "st_zone",               getDvarInt( "st_zone" ) );
+    self set_menu_hud("st_boxhits",             getDvarInt("st_boxhits"));
+    self set_menu_hud("st_busloc",              getDvarInt("st_busloc"));
+    self set_menu_hud("st_bustimer",            getDvarInt("st_bustimer"));
+    self set_menu_hud("st_despawners",     	    getDvarInt("st_despawners"));
+    self set_menu_hud("st_elevatorkills",       getDvarInt("st_elevatorkills"));
+    self set_menu_hud("st_healthbar",           getDvarInt("st_healthbar"));
+    self set_menu_hud("st_remaining",           getDvarInt("st_remaining"));
+    self set_menu_hud("st_remaining_denizens",  getDvarInt("st_remaining_denizens"));
+    self set_menu_hud("st_sliquifiretimer",     getDvarInt("st_sliquifiretimer"));
+    self set_menu_hud("st_sph",                 getDvarInt("st_sph"));
+    self set_menu_hud("st_stafftimer",     	    getDvarInt("st_stafftimer"));
+    self set_menu_hud("st_stomp",     		    getDvarInt("st_stomp"));
+    self set_menu_hud("st_subwooferkills",      getDvarInt("st_subwooferkills"));
+    self set_menu_hud("st_tank",     		    getDvarInt("st_tank"));
+    self set_menu_hud("st_tumble",     		    getDvarInt("st_tumble"));
+    self set_menu_hud("st_zone",                getDvarInt("st_zone"));
 }
 
 get_menu_hud( element )
@@ -94,12 +98,13 @@ get_menu_hud( element )
 
     switch ( element )
     {
-        case "st_healthbar":      return 0;
-        case "st_bustimer":       return 0;
         case "st_busloc":         return 0;
-        case "st_elevatorkills":  return 0;
-        case "st_subwooferkills": return 0;
+        case "st_bustimer":       return 0;
         case "st_despawners":     return 0;
+        case "st_elevatorkills":  return 0;
+        case "st_healthbar":      return 0;
+        case "st_sliquifiretimer": return 0;
+        case "st_subwooferkills": return 0;
     }
     return 1;
 }
@@ -571,7 +576,7 @@ fast_restart_warning()
     level.fast_restart_warning.aligny = "top";
     level.fast_restart_warning.alpha = 1;
     level.fast_restart_warning.hidewheninmenu = true;
-    level.fast_restart_warning.label = &"ST_RESTART_WARNING_NUKETOWN";
+    level.fast_restart_warning.label = &"ST_HUD_RESTART_WARNING_NUKETOWN";
 
     flag_wait("initial_blackscreen_passed");
     level.fast_restart_warning destroy();
@@ -677,51 +682,6 @@ origins_hud()
         self.tank_hud.alpha = get_menu_hud("st_tank");
 
         wait 0.1;
-    }
-}
-
-prevent_hud_overlapping()
-{
-    level endon("end_game");
-    self endon("disconnect");
-
-    offset = 15;
-    while(true)
-    {
-        wait 0.1;
-
-        start = self.sph.y + offset + 10;
-
-        self.despawnersCounter.y = start;
-        self.anchorLeakCounter.y = offset + self.despawnersCounter.y;
-        self.zombiesInView.y = offset + self.anchorLeakCounter.y;
-        self.zombiesFar.y = offset + self.zombiesInView.y;
-
-        if (self.zombiesFar.alpha > 0)
-            start = self.zombiesFar.y + offset;
-
-        if(isburied())
-        {
-            if ( isdefined( self.subwooferkills ) )
-            {
-                self.subwooferkills.y = (offset + last.y) * last.alpha;
-                last = self.subwooferkills;
-            }
-        }
-        else if(isdierise())
-        {
-            if ( isdefined( self.elevatorkills ) )
-            {
-                self.elevatorkills.y = (offset + last.y) * last.alpha;
-                last = self.elevatorkills;
-            }
-        }
-        else if(isorigins())
-        {
-            self.stomp_hud.y = start;
-            self.tank_hud.y = self.stomp_hud.y + (offset * self.stomp_hud.alpha);
-            self.tumble_hud.y = self.tank_hud.y + (offset * self.tank_hud.alpha);
-        }
     }
 }
 
@@ -843,4 +803,87 @@ zombiesFarAway()
         self.zombiesInView setvalue(inview);
         self.zombiesFar setvalue(player_far);
     }
+}
+
+prevent_hud_overlapping()
+{
+    level endon("end_game");
+    self endon("disconnect");
+
+    offset = 15;
+
+    while(true)
+    {
+        current_y = self.sph.y + offset + 10;
+
+        if(isdefined(self.despawnersCounter))
+        {
+            self.despawnersCounter.y = current_y;
+
+            if(self.despawnersCounter.alpha > 0)
+                current_y = self.despawnersCounter.y + offset;
+        }
+
+        if(isdefined(self.anchorLeakCounter))
+        {
+            self.anchorLeakCounter.y = current_y;
+
+            if(self.anchorLeakCounter.alpha > 0)
+                current_y = self.anchorLeakCounter.y + offset;
+        }
+
+        if(isdefined(self.zombiesInView))
+        {
+            self.zombiesInView.y = current_y;
+
+            if(self.zombiesInView.alpha > 0)
+                current_y = self.zombiesInView.y + offset;
+        }
+
+        if(isdefined(self.zombiesFar))
+        {
+            self.zombiesFar.y = current_y;
+
+            if(self.zombiesFar.alpha > 0)
+                current_y = self.zombiesFar.y + offset;
+        }
+
+        if(isburied() && isdefined(self.subwooferkills))
+            current_y = self.subwooferkills setHudLocation(current_y, offset);
+
+        if(isdierise() && isdefined(self.elevatorkills))
+            current_y = self.elevatorkills setHudLocation(current_y, offset);
+
+        if(isorigins())
+        {
+            if(isdefined(self.stomp_hud))
+                current_y = self.stomp_hud setHudLocation(current_y, offset);
+
+            if(isdefined(self.tank_hud))
+                current_y = self.tank_hud setHudLocation(current_y, offset);
+
+            if(isdefined(self.tumble_hud))
+                current_y = self.tumble_hud setHudLocation(current_y, offset);
+        }
+
+        wait 0.1;
+    }
+}
+
+setHudLocation(current_y, offset)
+{
+    if(!isdefined(offset))
+        offset = 15;
+
+    if(self.alpha > 0)
+    {
+        self.y = current_y;
+        current_y += offset;
+    }
+    else
+    {
+        self.y = current_y;
+    }
+
+    return current_y;
 }

@@ -210,6 +210,13 @@ LANG_ENGLISH        "TEMPORTIZADOR DE BASTÓN"
 REFERENCE           ST_MENU_HUD_STAFF_TIMER_DESC
 LANG_ENGLISH        "Mostra un temportizador dos disparos cargados dos bastones de xeo e vento."
 
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER
+LANG_ENGLISH        "TEMPORTIZADOR DE ESLIDIFICADOR"
+
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC
+LANG_ENGLISH        "Mostra a duración da viscosidade do eslificador."
+
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_TOWN_DOOR_JUG

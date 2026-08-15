@@ -146,7 +146,7 @@ icestafftimer()
 		level waittill("blizzard_shot", time);
         if(self get_menu_hud("st_stafftimer") == 0)
             continue;
-        self.icestafftimer thread setstafftimer("ice", time + 1);
+        self.icestafftimer thread setnotifytimer("ice", time + 1);
 	}
 }
 
@@ -163,11 +163,13 @@ windstafftimer()
 	while(true)
 	{
         level waittill("whirlwind_active", time);
-        self.windstafftimer setstafftimer("wind", time);
+        if(self get_menu_hud("st_stafftimer") == 0)
+            continue;
+        self.windstafftimer setnotifytimer("wind", time);
 	}
 }
 
-setstafftimer(end, time)
+setnotifytimer(end, time)
 {
     self notify("end_timer_" + end);
     self endon("end_timer_" + end);
@@ -196,6 +198,24 @@ bustimer()
     self.bustimer.x = -1;
 }
 
+sliquifiretimer()
+{
+    self endon( "disconnect" );
+
+    self.sliquifiretimer = newclienthudelem( self );
+    self.sliquifiretimer.fontscale = 1.4;
+    self.sliquifiretimer.hidewheninmenu = 1;
+    self.sliquifiretimer.color = (0.9, 0.1, 0.9);
+    self.sliquifiretimer.alpha = 0;
+    
+    while(true)
+    {
+        level waittill("sliq_fired", time);
+        if(self get_menu_hud("st_sliquifiretimer") == 0)
+            continue;
+        self.sliquifiretimer thread setnotifytimer("sliq", time);
+    }
+}
 
 timerlocation()
 {
@@ -279,25 +299,26 @@ timerlocation()
             current_y = self.despawnersTimer setLocation(self.timer, current_y, offset);
         }
 
-        if(isdefined(self.traptimer))
+        if(isdefined(self.sliquifireTimer))
         {
-            current_y = self.traptimer setLocation(self.timer, current_y, offset);
+            self.sliquifiretimer .alpha = self get_menu_hud("st_sliquifiretimer");
+            current_y = self.sliquifiretimer setLocation(self.timer, current_y, offset);
         }
+
+        if(isdefined(self.traptimer))
+            current_y = self.traptimer setLocation(self.timer, current_y, offset);
 
         if(isdefined(self.icestafftimer))
-        {
             current_y = self.icestafftimer setLocation(self.timer, current_y, offset);
-        }
 
         if(isdefined(self.windstafftimer))
-        {
             current_y = self.windstafftimer setLocation(self.timer, current_y, offset);
-        }
 
         if(isdefined(self.bustimer))
-        {
             current_y = self.bustimer setLocation(self.timer, current_y, offset);
-        }
+
+        if(isdefined(self.sliquifiretimer))
+            current_y = self.sliquifiretimer setLocation(self.timer, current_y, offset);
 
         if(GetDvar("language") == "japanese")
             self.timer.fontscale = 1.5;

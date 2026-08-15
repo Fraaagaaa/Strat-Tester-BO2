@@ -14,6 +14,7 @@ init()
 {
 	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
 	replacefunc(getfunction("maps/mp/zombies/_zm_weap_slipgun", "slip_bolt"), ::slip_bolt);
+    replacefunc(getfunction("maps/mp/zombies/_zm_weap_slipgun", "pool_of_goo"), ::pool_of_goo);
 	level.zombies_died_to_elevator = 0;
 	level thread check_special_round();
     level thread lock_elevators();
@@ -118,4 +119,23 @@ lock_elevators()
                         elevator.body notify( "forcego" );
         }
     }
+}
+
+pool_of_goo( origin, duration, is_recursive )
+{
+    effect_life = 24;
+
+    if ( !is_true(is_recursive) )
+        level notify("sliq_fired", duration);
+
+    if ( duration > effect_life )
+    {
+        pool_of_goo(origin, duration - effect_life, true);
+        duration = effect_life;
+    }
+
+    if ( isdefined( level._effect["slipgun_splatter"] ) )
+        playfx( level._effect["slipgun_splatter"], origin );
+
+    wait( duration );
 }

@@ -210,6 +210,11 @@ LANG_ENGLISH        "DENIZEN COUNTER"
 REFERENCE           ST_MENU_HUD_DENIZEN_COUNTER_DESC
 LANG_ENGLISH        "Show the amount of denizens that are alive."
 
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER
+LANG_ENGLISH        "SLIQUIFIRE TIMER"
+
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC
+LANG_ENGLISH        "Displays the time remaining of slquifire's goo."
 
 // PESTAÑA MAP SETTINGS
 
