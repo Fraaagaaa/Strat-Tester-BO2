@@ -4,6 +4,7 @@
 #include maps\mp\zm_highrise_buildables;
 #include maps\mp\zombies\_zm_ai_leaper;
 #include maps\mp\zombies\_zm_utility;
+#include maps\mp\zombies\_zm_weap_slipgun;
 
 #include scripts\zm\strattester\buildables;
 #include scripts\zm\strattester\hud;
@@ -12,8 +13,10 @@
 init()
 {
 	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
+	replacefunc(getfunction("maps/mp/zombies/_zm_weap_slipgun", "slip_bolt"), ::slip_bolt);
 	level.zombies_died_to_elevator = 0;
 	level thread check_special_round();
+    level thread lock_elevators();
 }
 
 
@@ -75,5 +78,44 @@ check_special_round()
         if(level.next_leaper_round > (level.round_number + 6))
             level.next_leaper_round = level.round_number + randomintrange( 4, 6 );
         wait 1;
+    }
+}
+
+slip_bolt( player, upgraded )
+{
+    startpos = player getweaponmuzzlepoint();
+    self waittill( "explode", position );
+    duration = 24;
+
+    if ( upgraded )
+        duration = 36;
+
+    level notify("sliq_fired", duration);
+
+    thread add_slippery_spot( position, duration, startpos );
+}
+
+lock_elevators()
+{
+    dvar = getDvarInt("st_lockelevators");
+    while(true)
+    {
+        while(dvar == getDvarInt("st_lockelevators"))
+            wait 0.1;
+        dvar = getDvarInt("st_lockelevators");
+
+        if(getDvarInt("st_lockelevators"))
+        {
+            level.elevators_stop = 1;
+        }
+        else
+        {
+            level.elevators_stop = 0;
+
+            if ( isdefined( level.elevators ) )
+                foreach ( elevator in level.elevators )
+                    if ( isdefined( elevator.body ) )
+                        elevator.body notify( "forcego" );
+        }
     }
 }

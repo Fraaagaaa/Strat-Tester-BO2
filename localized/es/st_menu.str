@@ -350,6 +350,12 @@ LANG_ENGLISH        "MOVER CAJA"
 REFERENCE           ST_MENU_MAP_MOVE_BOX_DEC
 LANG_ENGLISH        "Mueve la caja misteriosa a la zona seleccionada."
 
+REFERENCE           ST_MENU_MAP_ELEVATOR_LOCK
+LANG_ENGLISH        "BLOQUEAR ASCENSORES"
+
+REFERENCE           ST_MENU_MAP_ELEVATOR_LOCK_DESC
+LANG_ENGLISH        "Evita que los acensores se muevan."
+
 
 // PESTAÑA START SETTINGS
 REFERENCE           ST_MENU_START_INITIAL_ROUND

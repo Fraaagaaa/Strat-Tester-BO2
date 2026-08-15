@@ -444,6 +444,11 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         TownSetUpChoice:setChoice( currentJug )
     end
 
+    if isDieRise then
+        local LockElevatorsChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_ELEVATOR_LOCK"), "st_lockelevators", Engine.Localize("ST_MENU_MAP_ELEVATOR_LOCK_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(LockElevatorsChoice, 0)
+    end
+
     if isBuried then
         local BuriedChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLES"), "st_setupBuried", Engine.Localize("ST_MENU_MAP_BUILDABLES_DESC"))
         BuriedChoice:addChoice(Engine.Localize("ST_MENU_MAP_RESONATOR_JUG"), 0, nil, CoD.StratTester.OnDvarChanged)

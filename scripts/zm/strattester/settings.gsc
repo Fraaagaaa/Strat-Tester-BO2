@@ -91,9 +91,13 @@ createDvars()
 		createDvar("st_traptimer", ON);
 		createDvar("st_lives", ON);
 	}
+    if(isdierise())
+    {
+        createDVar("st_lockelevators", OFF);
+    }
 
 	flag_wait("initial_blackscreen_passed");
-    level.start_time = int(gettime() / 1000);
+level.start_time = int(gettime() / 1000);
 }
 
 
