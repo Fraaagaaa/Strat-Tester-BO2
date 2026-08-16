@@ -541,4 +541,3 @@ dvar_tracker()
         level notify("dvar_" + dvar + "_changed", new);
     }
 }
-

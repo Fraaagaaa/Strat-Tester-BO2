@@ -30,7 +30,7 @@ readchat()
         msg = strtok(tolower(message), " ");
         if(msg[0][0] != "!")
             continue;
-		if(!in_array(msg[0], level.commands))
+	    if(!in_array(msg[0], level.commands) && !in_array(msg[0], level.commandsaliases))
 		{
 			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
@@ -484,5 +484,32 @@ commandmenulistener()
 remainingcase(rem)
 {
     rem = string_to_float(rem);
-    level.zombie_total = rem;
+    if(rem < 24)
+    {
+        while(get_current_zombie_count() > rem)
+        {
+            z = get_zombie_to_delete();
+
+            if (isdefined(z))
+            {
+                z ghost();
+                z delete();
+            }
+        }
+    }
+
+    level.zombie_total = rem - get_current_zombie_count();
+    foreach(player in getplayers())
+        player thread sph_round_tracker(); // reset sph
+}
+
+get_zombie_to_delete()
+{
+    ai_zombie = undefined;
+    a_zombies = get_round_enemy_array();
+
+    if ( a_zombies.size > 0 )
+        ai_zombie = random( a_zombies );
+
+    return ai_zombie;
 }
