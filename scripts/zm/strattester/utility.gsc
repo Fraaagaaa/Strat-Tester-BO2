@@ -530,3 +530,15 @@ localize_zone(zone)
 		}
     return name;
 }
+
+dvar_tracker()
+{
+    level endon("end_game");
+
+    while(true)
+    {
+        level waittill("dvar_changed", dvar, new, old);
+        level notify("dvar_" + dvar + "_changed", new);
+    }
+}
+

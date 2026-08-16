@@ -186,16 +186,25 @@ bustimer()
     self endon( "disconnect" );
 
     self.bustimer = newclienthudelem(self);
-    self.bustimer.alpha = 1;
+    self.bustimer.alpha = 0;
     self.bustimer.color = (0.505, 0.478, 0.721);
     self.bustimer.hidewheninmenu = true;
     self.bustimer.fontscale = 1.7;
-    self.bustimer settimerup(0);
     self.bustimer.alignx = "right";
     self.bustimer.aligny = "top";
     self.bustimer.horzalign = "user_right";
     self.bustimer.vertalign = "user_top";
-    self.bustimer.x = -1;
+    self.bustimer.x = 0;
+    while(true)
+    {
+        wait 0.1;
+        zone = level.the_bus get_current_zone();
+        if(!isdefined(zone))
+            continue;
+
+        if( zone == "zone_station_ext")
+            self.bustimer settimerup(0);
+    }
 }
 
 sliquifiretimer()
@@ -315,7 +324,10 @@ timerlocation()
             current_y = self.windstafftimer setLocation(self.timer, current_y, offset);
 
         if(isdefined(self.bustimer))
+        {
+            self.bustimer .alpha = self get_menu_hud("st_bustimer");
             current_y = self.bustimer setLocation(self.timer, current_y, offset);
+        }
 
         if(isdefined(self.sliquifiretimer))
             current_y = self.sliquifiretimer setLocation(self.timer, current_y, offset);

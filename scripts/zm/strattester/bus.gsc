@@ -31,13 +31,9 @@ busscheduleadd( stopname, isambush, maxwaittimebeforeleaving, busspeedleaving, g
 
 busstatus()
 {
-    dvar = getDvarInt("st_busstatus");
     while(true)
     {
-        wait 0.1;
-        if(dvar == getDvarInt("st_busstatus"))
-            continue;
-        dvar = getDvarInt("st_busstatus");
+        level waittill("dvar_st_busstatus_changed");
 
 	    if(!isdefined(level.the_bus.off))
 		    level.the_bus.off = false;
