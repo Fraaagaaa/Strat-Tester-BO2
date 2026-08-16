@@ -70,6 +70,10 @@ CoD.StratTester.OnToggleChanged = function ( choice, isUserRequest )
     if isUserRequest ~= true then return end
 
     local controller = choice.parentSelectorButton.m_currentController
+    if controller == nil then
+        controller = 0
+    end
+
     local dvarName = choice.parentSelectorButton.m_profileVarName
     local moduleName = choice.parentSelectorButton.m_stModule
 
@@ -383,14 +387,17 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     if isOrigins then
         -- TANK
         local TankChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_TANK_KILLS"), "st_tank", Engine.Localize("ST_MENU_HUD_TANK_KILLS_DESC"))
+        TankChoice.m_currentController = LocalClientIndex
         CoD.StratTester.AddChoices_OnOrOff(TankChoice, 0, "hud")
 
         -- TUMBLE
         local TumbleChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_TUMBLE_ANIM"), "st_tumble", Engine.Localize("ST_MENU_HUD_TUMBLE_ANIM_DESC"))
+        TumbleChoice.m_currentController = LocalClientIndex
         CoD.StratTester.AddChoices_OnOrOff(TumbleChoice, 0, "hud")
 
         -- STOMP
         local StompChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_STOMP_KILLS"), "st_stomp", Engine.Localize("ST_MENU_HUD_STOMP_KILLS_DESC"))
+        StompChoice.m_currentController = LocalClientIndex
         CoD.StratTester.AddChoices_OnOrOff(StompChoice, 0, "hud")
     end
 

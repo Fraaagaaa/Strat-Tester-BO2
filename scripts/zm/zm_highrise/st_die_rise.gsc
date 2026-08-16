@@ -98,14 +98,11 @@ slip_bolt( player, upgraded )
 
 lock_elevators()
 {
-    dvar = getDvarInt("st_lockelevators");
+    lock = getDvarInt("st_lockelevators");
     while(true)
     {
-        while(dvar == getDvarInt("st_lockelevators"))
-            wait 0.1;
-        dvar = getDvarInt("st_lockelevators");
 
-        if(getDvarInt("st_lockelevators"))
+        if(lock == "1")
         {
             level.elevators_stop = 1;
         }
@@ -118,6 +115,7 @@ lock_elevators()
                     if ( isdefined( elevator.body ) )
                         elevator.body notify( "forcego" );
         }
+        level waittill("dvar_st_lockelevators_changed", lock);
     }
 }
 

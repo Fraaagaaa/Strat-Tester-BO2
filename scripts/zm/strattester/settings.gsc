@@ -28,13 +28,12 @@ init_settings()
 
 createDvars()
 {
+    level thread dvar_tracker();
     setdvar("player_strafeSpeedScale", 1 );
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
 
 	createdvar("st_despawners", OFF);
-    createDvar("st_despawnersCounter", OFF);
-    createDvar("st_perkrng", ON);
 	createDvar("st_healthbar", OFF);
 	createDvar("st_timer", ON);
 	createDvar("st_zone", ON);
@@ -49,6 +48,11 @@ createDvars()
 	createDvar("st_enable_drops", ON);
 	createDvar("st_boxhits", ON);
     createDvar("st_changeround", level.round_number);
+
+    enabledvarchangednotify("st_changeround");
+    enabledvarchangednotify("st_despawners");
+
+
     createDvar("chat", "xxxxxxxxxxxx");
 
 	if(isorigins() || ismob())
@@ -66,7 +70,10 @@ createDvars()
 	if(istown())
 		createDvar("st_jug_setup", OFF); 
 	if(issurvivalmap())
+    {
 		createDvar("st_avg", ON);
+        enabledvarchangednotify("st_avg");
+    }
 	if(isburied())
 	{
 		createDvar("st_keepBarricades", OFF);
@@ -85,6 +92,8 @@ createDvars()
 		createDvar("st_depart_farm", 1);
 		createDvar("st_depart_diner", 1);
 		createDvar("st_denizens", ON);
+
+        enabledvarchangednotify("st_busstatus");
 	}
 	if(ismob())
 	{
@@ -94,10 +103,11 @@ createDvars()
     if(isdierise())
     {
         createDVar("st_lockelevators", OFF);
+        enabledvarchangednotify("st_lockelevators");
     }
 
 	flag_wait("initial_blackscreen_passed");
-level.start_time = int(gettime() / 1000);
+    level.start_time = int(gettime() / 1000);
 }
 
 

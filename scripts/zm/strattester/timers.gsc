@@ -310,7 +310,7 @@ timerlocation()
 
         if(isdefined(self.sliquifireTimer))
         {
-            self.sliquifiretimer .alpha = self get_menu_hud("st_sliquifiretimer");
+            self.sliquifiretimer.alpha = self get_menu_hud("st_sliquifiretimer");
             current_y = self.sliquifiretimer setLocation(self.timer, current_y, offset);
         }
 
@@ -325,7 +325,7 @@ timerlocation()
 
         if(isdefined(self.bustimer))
         {
-            self.bustimer .alpha = self get_menu_hud("st_bustimer");
+            self.bustimer.alpha = self get_menu_hud("st_bustimer");
             current_y = self.bustimer setLocation(self.timer, current_y, offset);
         }
 

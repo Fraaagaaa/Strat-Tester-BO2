@@ -140,6 +140,14 @@ set_menu_hud( element, value )
         self.st_hud = [];
 
     self.st_hud[ element ] = value;
+
+    // Apply Origins tracker visibility immediately when the menu toggles it.
+    if ( element == "st_stomp" && isdefined( self.stomp_hud ) )
+        self.stomp_hud.alpha = value;
+    else if ( element == "st_tank" && isdefined( self.tank_hud ) )
+        self.tank_hud.alpha = value;
+    else if ( element == "st_tumble" && isdefined( self.tumble_hud ) )
+        self.tumble_hud.alpha = value;
 }
 
 // GENERAL
@@ -382,8 +390,8 @@ despawnerCounter()
 
     while(true)
     {
-        self.despawnersCounter setvalue(level.despawners);
         self.despawnersCounter.alpha = self get_menu_hud("st_despawners");
+        self.despawnersCounter setvalue(level.despawners);
         wait 0.1;
     }
 }
@@ -550,8 +558,12 @@ buslocation()
     prev_zone = "";
     while(true)
     {
+        wait 0.1;
         self.busloc.alpha = get_menu_hud("st_busloc");
         zone = localize_zone(level.the_bus get_current_zone());
+    
+        if(!isdefined(zone))
+            continue;
 
         if(prev_zone != zone)
         {
@@ -559,7 +571,6 @@ buslocation()
             self.busloc settext(zone);
             self.busloc.alpha = get_menu_hud("st_busloc");
         }
-        wait 0.05;
     }
 }
 
@@ -631,8 +642,6 @@ displaysubwooferkills()
     self.subwooferkills.y = 0;
     self.subwooferkills.x = 0;
     self.subwooferkills.fontscale = 1.4;
-    self.subwooferkills.alignx = "center";
-    self.subwooferkills.horzalign = "user_center";
     self.subwooferkills.vertalign = "user_top";
     self.subwooferkills.aligny = "top";
     self.subwooferkills.label = &"ST_HUD_SUBWOOFER_KILLS";
@@ -658,13 +667,33 @@ origins_hud()
     self thread icestafftimer();
     self thread windstafftimer();
 
-    self.stomp_hud   = self createHudElem(&"^3Stomp: ^5", 0, -220, 1.6, 0, "left", "bottom");
-    self.tank_hud  = self createHudElem(&"^3Tank: ^5", 0, -180, 1.6, 0, "left", "bottom");
-    self.tumble_hud  = self createHudElem(&"^3Tumble: ^5", 0, -200, 1.6, 0, "left", "bottom");
+    self.stomp_hud = createfontstring( "objective", 1.4 );
+    self.tank_hud = createfontstring( "objective", 1.4 );
+    self.tumble_hud = createfontstring( "objective", 1.4 );
 
-    self.stomp_hud.fontscale = 1.4;
-    self.tank_hud.fontscale = 1.4;
-    self.tumble_hud.fontscale = 1.4;
+    self.stomp_hud.hidewheninmenu = true;
+    self.tank_hud.hidewheninmenu = true;
+    self.tumble_hud.hidewheninmenu = true;
+
+    self.stomp_hud.alpha = 0;
+    self.tank_hud.alpha = 0;
+    self.tumble_hud.alpha = 0;
+
+    self.stomp_hud setvalue(0);
+    self.tank_hud setvalue(0);
+    self.tumble_hud setvalue(0);
+
+    self.stomp_hud.label = &"ST_HUD_STOMP_ORIGINS";
+    self.tank_hud.label = &"ST_HUD_TANK_ORIGINS";
+    self.tumble_hud.label = &"ST_HUD_TUMBLE_ORIGINS";
+
+    self.stomp_hud.alignx = "left";
+    self.tank_hud.alignx = "left";
+    self.tumble_hud.alignx = "left";
+
+    self.stomp_hud.horzalign = "user_left";
+    self.tank_hud.horzalign = "user_left";
+    self.tumble_hud.horzalign = "user_left";
 
     if(!isdefined(level.tumbles)) level.tumbles = 0;
     if(!isdefined(level.tankkills)) level.tankkills = 0;
@@ -676,11 +705,6 @@ origins_hud()
         self.stomp_hud setvalue(level.stompkills);
         self.tank_hud setvalue(level.tankkills);
         self.tumble_hud setvalue(level.tumbles);
-
-        self.stomp_hud.alpha = get_menu_hud("st_stomp");
-        self.tumble_hud.alpha = get_menu_hud("st_tumble");
-        self.tank_hud.alpha = get_menu_hud("st_tank");
-
         wait 0.1;
     }
 }
@@ -856,14 +880,23 @@ prevent_hud_overlapping()
 
         if(isorigins())
         {
-            if(isdefined(self.stomp_hud))
-                current_y = self.stomp_hud setHudLocation(current_y, offset);
-
             if(isdefined(self.tank_hud))
+            {
+                self.tank_hud.alpha = self get_menu_hud("st_tank");
                 current_y = self.tank_hud setHudLocation(current_y, offset);
+            }
 
             if(isdefined(self.tumble_hud))
+            {
+                self.tumble_hud.alpha = self get_menu_hud("st_tumble");
                 current_y = self.tumble_hud setHudLocation(current_y, offset);
+            }
+
+            if(isdefined(self.stomp_hud))
+            {
+                self.stomp_hud.alpha = self get_menu_hud("st_stomp");
+                current_y = self.stomp_hud setHudLocation(current_y, offset);
+            }
         }
 
         wait 0.1;
