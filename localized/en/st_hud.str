@@ -33,7 +33,7 @@ LANG_ENGLISH        "^3Denizens: ^5"
 REFERENCE           ST_HUD_REMAINING
 LANG_ENGLISH        "^3Zombies: ^5"
 
-REFERENCE           ST_HUD_SPH_HUD
+REFERENCE           ST_HUD_SPH
 LANG_ENGLISH        "^3SPH: ^5"
 
 REFERENCE           ST_HUD_ZOMBIES_IN_VIEW
