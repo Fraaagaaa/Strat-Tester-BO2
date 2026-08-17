@@ -23,6 +23,17 @@
 > The PT version stands for portuguesse, not plutonium.
 
 # Features
+
+
+> [!TIP]
+> All of the following settings can be changed inside the pause menu.
+
+> [!CAUTION]
+> If a player does not have the mod he will not be able to see the menu
+
+> [!TIP]
+> The hud player based, it does not depend on the host
+
 ## Game settings
 - Change round slider
 - Kill horde button
@@ -33,7 +44,7 @@
 - Enable/Disable fog
 - Teleports
 
-## Perks settings
+## Perk settings
 Perks can not be obtain via perk machines, they have to be selected inside the strat tester menu.
 ## HUD settings
 - Game timer
