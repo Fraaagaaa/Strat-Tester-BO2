@@ -97,7 +97,7 @@ REFERENCE           ST_MENU_HUD_DESPAWNERS
 LANG_ENGLISH        "DESPAWNERS"
 
 REFERENCE           ST_MENU_HUD_DESPAWNERS_DESC
-LANG_ENGLISH        "Ativa ou desativa os zumbis darem respawn."
+LANG_ENGLISH        "Ativa ou desativa os contadores de respawn de zumbis. Incluindo Respawners e Vazamentos de âncora."
 
 REFERENCE           ST_MENU_HUD_STAFF_TIMER
 LANG_ENGLISH        "CRONÔMETRO DO BASTÃO"
