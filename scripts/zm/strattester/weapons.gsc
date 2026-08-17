@@ -122,13 +122,19 @@ giveloadout()
 		self equipment_buy(equipment);
 
 	foreach(weapon in self.st_loadout_weapons)
+    {
 		self weapon_give( weapon, undefined, undefined, 0 );
+        if (isorigins() && issubstr(weapon, "staff"))
+        {
+            self thread [[getfunction("maps/mp/zm_tomb_main_quest", "watch_staff_ammo_reload")]]();
+            [[getfunction("maps/mp/zm_tomb_craftables", "set_player_staff")]]( weapon, self );
+        }
+    }
 
 	if(map_has_mulekick() && isdefined(self.st_loadout_mule))
 		self thread mulekick_wepaon();
 
-	// if(istranzit() && getDvarInt("st_power"))
-		self give_melee_weapon_instant(self.st_loadout_melee);
+	self give_melee_weapon_instant(self.st_loadout_melee);
 
 	self switchToWeapon(self.st_loadout_main);
 }
@@ -141,6 +147,13 @@ mulekick_wepaon()
 	self waitformulekick();
     gun = self getcurrentweapon();
 	self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
+
+    if (isorigins() && issubstr(self.st_loadout_mule, "staff"))
+    {
+        self thread [[getfunction("maps/mp/zm_tomb_main_quest", "watch_staff_ammo_reload")]]();
+        [[getfunction("maps/mp/zm_tomb_craftables", "set_player_staff")]](self.st_loadout_mule, self );
+    }
+
 	if(!isorigins())
 		self switchtoweapon( gun );
 }
@@ -275,9 +288,9 @@ main_loadouts()
 		if(iswhite(self) && level.players.size == 1)
 		{
 			if(getDvarInt("st_wm_origins"))
-				self.st_loadout_weapons = array(MK2_U, MP40_U, MONKS, SEMTEX, CLAYMORE);
+				self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
 			else
-				self.st_loadout_weapons = array(MK2_U, MP40_U, MONKS, SEMTEX, CLAYMORE);
+				self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
 
 			switch(getDvarInt("st_staff"))
 			{
@@ -297,7 +310,7 @@ main_loadouts()
 				else
 					self.st_loadout_mule = MP40_U;
 
-				self.st_loadout_weapons = array(MK2_U, SEMTEX, MONKS);
+				self.st_loadout_weapons = array(MK2_U, SEMTEX, AIR_STRIKE);
 			}
 			else
 			{
