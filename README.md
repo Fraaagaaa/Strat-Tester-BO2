@@ -15,7 +15,7 @@
 
 - Unzip the download in `%localappdata%\Plutonium\storage\t6\mods`.
 
-> [!WARNING]
+> [!CAUTION]
 > All users need to have the mod installed. Players who do not have the mod installed will be unable to use the in-game menu and, therefore, will be unable to change their perks or HUD.
 
 
@@ -28,7 +28,7 @@
 > [!TIP]
 > All of the following settings can be changed inside the pause menu.
 
-> [!CAUTION]
+> [!WARNING]
 > If a player does not have the mod he will not be able to see the menu
 
 > [!TIP]
