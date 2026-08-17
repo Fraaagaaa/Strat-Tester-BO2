@@ -14,14 +14,15 @@
 addCommands(commands)
 {
     foreach(command in commands)
-        level.commands[level.commands.size] = command;
+        level.chatcommands[level.chatcommands.size] = command;
 }
 
 readchat() 
 {
     self endon("end_game");
     if(!isdefined(level.commands))
-	    level.commands = [];
+	    level.chatcommands = [];
+
     addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining"));
 
     while (true) 
@@ -30,7 +31,7 @@ readchat()
         msg = strtok(tolower(message), " ");
         if(msg[0][0] != "!")
             continue;
-	    if(!in_array(msg[0], level.commands) && !in_array(msg[0], level.commandsaliases))
+	    if(!in_array(msg[0], level.chatcommands) && !in_array(msg[0], level.chatcommandsaliases))
 		{
 			strattesterprint("Unknown command ^1" + message, "Comando desconocido ^1" + message);
 			continue;
