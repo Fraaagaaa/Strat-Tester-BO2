@@ -329,9 +329,6 @@ timerlocation()
             current_y = self.bustimer setLocation(self.timer, current_y, offset);
         }
 
-        if(isdefined(self.sliquifiretimer))
-            current_y = self.sliquifiretimer setLocation(self.timer, current_y, offset);
-
         if(GetDvar("language") == "japanese")
             self.timer.fontscale = 1.5;
         else
