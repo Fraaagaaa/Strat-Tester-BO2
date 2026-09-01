@@ -102,7 +102,7 @@ createDvars()
 	}
     if(isdierise())
     {
-        createDVar("st_lockelevators", OFF);
+        createDvar("st_lockelevators", OFF);
         enabledvarchangednotify("st_lockelevators");
     }
 
