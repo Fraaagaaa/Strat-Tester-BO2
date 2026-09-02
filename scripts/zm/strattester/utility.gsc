@@ -541,3 +541,19 @@ dvar_tracker()
         level notify("dvar_" + dvar + "_changed", new);
     }
 }
+
+track_playinground()
+{
+	while(true)
+	{
+		level.roundstarted = false;
+		level waittill("start_of_round");
+		level.roundstarted = true;
+		level waittill("end_of_round");
+	}
+}
+
+playinground()
+{
+	return level.roundstarted;
+}

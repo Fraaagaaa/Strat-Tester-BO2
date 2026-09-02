@@ -41,6 +41,7 @@ init()
     level thread init_start();
 	level thread readChat();
     level thread wait_for_players();
+    level thread track_playinground();
 	setDvar("player_reviveTriggerRadius", 64);
 	setDvar("revive_trigger_radius", 75);
     

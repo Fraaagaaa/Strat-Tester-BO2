@@ -285,11 +285,14 @@ changeroundrework()
 
         last_requested = requested_ui;
 
+        if(!playinground())
+            strattesterprint("Waiting for round transition to end.", "Esperando a que termine la transición de la ronda");
+        while(!playinground())
+            wait 0.1;
+
         changeRound(desired_rnd);
 
         strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
-
-        level waittill("start_of_round");
     }
 }
 
