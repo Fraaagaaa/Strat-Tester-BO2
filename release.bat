@@ -8,6 +8,7 @@ SET "EN_NAME=Strat Tester BO2"
 SET "ES_NAME=Strat Tester BO2 Espanol"
 SET "PT_NAME=Strat Tester BO2 PT-BR"
 SET "GL_NAME=Strat Tester BO2 Galego"
+SET "JA_NAME=Strat Tester BO2 Japanese"
 
 if not exist "%RELEASE_DIR%" mkdir "%RELEASE_DIR%"
 
@@ -36,6 +37,29 @@ pushd "%RELEASE_DIR%\%EN_NAME%"
 popd
 
 rmdir /S /Q "%RELEASE_DIR%\%EN_NAME%"
+
+:: --- VERSIÓN EN JAPONÉS ---
+if exist "%RELEASE_DIR%\%JA_NAME%" rmdir /S /Q "%RELEASE_DIR%\%JA_NAME%"
+mkdir "%RELEASE_DIR%\%JA_NAME%\zm_strattester"
+
+XCOPY "%RELEASE_DIR%\mod.iwd" "%RELEASE_DIR%\%JA_NAME%\zm_strattester\" /Y
+XCOPY "mod.json" "%RELEASE_DIR%\%JA_NAME%\zm_strattester\" /Y
+XCOPY "docs\scriptdata" "%RELEASE_DIR%\%JA_NAME%\zm_strattester\scriptdata" /E /I /Y
+
+XCOPY ".\localized\ja\st_hud.str" ".\english\localizedstrings\st_hud.str" /Y
+XCOPY ".\localized\ja\st_menu.str" ".\english\localizedstrings\st_menu.str" /Y
+XCOPY ".\localized\ja\st_perks.str" ".\english\localizedstrings\st_perks.str" /Y
+XCOPY ".\localized\ja\zone.str" ".\english\localizedstrings\zone.str" /Y
+
+cmd /c builder
+
+XCOPY "zone\mod.ff" "%RELEASE_DIR%\%JA_NAME%\zm_strattester\" /Y
+
+pushd "%RELEASE_DIR%\%JA_NAME%"
+"%WINRAR%" a -r "..\%JA_NAME%.rar" "zm_strattester"
+popd
+
+rmdir /S /Q "%RELEASE_DIR%\%JA_NAME%"
 
 :: --- VERSIÓN EN ESPAÑOL ---
 if exist "%RELEASE_DIR%\%ES_NAME%" rmdir /S /Q "%RELEASE_DIR%\%ES_NAME%"

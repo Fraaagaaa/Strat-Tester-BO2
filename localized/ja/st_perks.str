@@ -1,0 +1,36 @@
+FILENOTES           "TRANSLATED BY AzRy"
+
+REFERENCE          ST_PERK_JUG
+LANG_ENGLISH       "ジャガーノグ"
+
+REFERENCE          ST_PERK_DOUBLETAP
+LANG_ENGLISH       "ダブルタップ"
+
+REFERENCE          ST_PERK_STAMINUP
+LANG_ENGLISH       "スタミナアップ"
+
+REFERENCE          ST_PERK_SPEED
+LANG_ENGLISH       "スピードコーラ"
+
+REFERENCE          ST_PERK_MULEKICK
+LANG_ENGLISH       "ミュールキック"
+
+REFERENCE          ST_PERK_REVIVE
+LANG_ENGLISH       "クイックリバイヴ"
+
+REFERENCE          ST_PERK_CHERRY
+LANG_ENGLISH       "エレクトリックチェリー"
+
+REFERENCE          ST_PERK_PHD
+LANG_ENGLISH       "PHDフロッパー"
+
+REFERENCE          ST_PERK_DEADSHOT
+LANG_ENGLISH       "デッドショットダイキリ"
+
+REFERENCE          ST_PERK_WHOISWHO
+LANG_ENGLISH       "フーズフー"
+
+REFERENCE          ST_PERK_VULTURE
+LANG_ENGLISH       "ヴァルチャーエイド"
+
+ENDMARKER

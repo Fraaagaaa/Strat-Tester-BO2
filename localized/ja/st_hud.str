@@ -1,0 +1,57 @@
+FILENOTES           "TRANSLATED BY AzRy"
+
+REFERENCE           ST_HUD_BOX_HITS
+LANG_ENGLISH        "^3ボックスヒット: ^5"
+
+REFERENCE           ST_HUD_AVG_MK2
+LANG_ENGLISH        "^3レイガン MK2 平均: ^5"
+
+REFERENCE           ST_HUD_AVG_RAY
+LANG_ENGLISH        "^3レイガン 平均: ^5"
+
+REFERENCE           ST_HUD_TOTAL_RAY
+LANG_ENGLISH        "^3合計 レイガン: ^5"
+
+REFERENCE           ST_HUD_TOTAL_MK2
+LANG_ENGLISH        "^3合計 レイガン MK2: ^5"
+
+REFERENCE           ST_HUD_SUBWOOFER_KILLS
+LANG_ENGLISH        "^3レゾネーターキル^5"
+
+REFERENCE           ST_HUD_ELEVATOR_KILLS
+LANG_ENGLISH        "^3エレベーター キル: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_DESPAWNED
+LANG_ENGLISH        "^3ゾンビ デスポーン: ^5"
+
+REFERENCE           ST_HUD_ANCHOR_LEAKS
+LANG_ENGLISH        "^3アンカー リーク: ^5"
+
+REFERENCE           ST_HUD_DENIZENS
+LANG_ENGLISH        "^3デニズン: ^5"
+
+REFERENCE           ST_HUD_REMAINING
+LANG_ENGLISH        "^3ゾンビ: ^5"
+
+REFERENCE           ST_HUD_SPH
+LANG_ENGLISH        "^3SPH: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_IN_VIEW
+LANG_ENGLISH        "^3見えたゾンビ: ^5"
+
+REFERENCE           ST_HUD_ZOMBIES_FAR
+LANG_ENGLISH        "^3遠すぎるゾンビ: ^5"
+
+REFERENCE           ST_HUD_RESTART_WARNING_NUKETOWN
+LANG_ENGLISH        "^3PAP位置のために自動再起動中、数秒かかる場合があります"
+
+REFERENCE			ST_HUD_STOMP_ORIGINS
+LANG_ENGLISH        "^3踏まれたゾンビ: ^5"
+
+REFERENCE			ST_HUD_TANK_ORIGINS
+LANG_ENGLISH        "^3戦車でキル: ^5"
+
+REFERENCE			ST_HUD_TUMBLE_ORIGINS
+LANG_ENGLISH        "^3転んだゾンビ: ^5"
+
+ENDMARKER
