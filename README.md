@@ -12,6 +12,12 @@
 - [**日本語をダウンロード**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Japanese.rar)
 - [**Baixar em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.PT-BR.rar), traduzido por [NoMoleMan](https://www.twitch.tv/nomoleman)
 
+> [!WARNING]
+> To use the Japanese version your game must be in japanese.
+
+> [!WARNING]
+> To use the spanish, galician or portuguese versions your game can not be in japanese or polish.
+
 ## How to install
 
 - Unzip the download in `%localappdata%\Plutonium\storage\t6\mods`.
