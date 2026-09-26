@@ -9,6 +9,7 @@
 - [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)
 - [**Download in english**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
 - [**Descargar en galego**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Galego.rar)
+- [**日本語をダウンロード**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Japanese.rar)
 - [**Baixar em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.PT-BR.rar), traduzido por [NoMoleMan](https://www.twitch.tv/nomoleman)
 
 ## How to install
@@ -171,3 +172,4 @@ f()
 - [Hadi77KSA](https://github.com/Hadi77KSA) for making the script to power on afterlife doors.
 - [MJ](https://github.com/mjmodz) for helping me with the perk selection menu.
 - [Astrox](https://www.twitch.tv/lastroxl) for the No Power setups.
+- [AzRy](https://www.twitch.tv/azry_s) for translating the menus into japanese.
