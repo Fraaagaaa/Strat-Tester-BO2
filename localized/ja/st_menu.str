@@ -1,0 +1,522 @@
+FILENOTES           "TRANSLATED BY AzRy"
+
+// TÍTULOS Y PESTAÑAS
+
+REFERENCE           ST_MENU_TITLE
+LANG_ENGLISH        "ストラトテスター"
+
+REFERENCE           ST_MENU_TAB_GAME
+LANG_ENGLISH        "ゲーム"
+
+REFERENCE           ST_MENU_TAB_HUD
+LANG_ENGLISH        "HUD"
+
+REFERENCE           ST_MENU_TAB_MAP
+LANG_ENGLISH        "マップ"
+
+REFERENCE           ST_MENU_TAB_START
+LANG_ENGLISH        "スタート"
+
+REFERENCE           ST_MENU_TAB_PERKS
+LANG_ENGLISH        "パーク"
+
+REFERENCE           ST_MENU_OFF
+LANG_ENGLISH        "オフ"
+
+REFERENCE           ST_MENU_ON
+LANG_ENGLISH        "オン"
+
+REFERENCE           ST_MENU_NONE
+LANG_ENGLISH        "非表示"
+
+REFERENCE           ST_MENU_NOT_SUPPORTED
+LANG_ENGLISH        "非対応"
+
+REFERENCE           ST_MENU_NOT_SUPPORTED_DESC
+LANG_ENGLISH        "このマップでは、この機能は対応しておりません"
+
+// PESTAÑA GAME
+
+REFERENCE           ST_MENU_GAME_CHANGE_ROUND
+LANG_ENGLISH        "ラウンド変更"
+
+REFERENCE           ST_MENU_GAME_CHANGE_ROUND_DESC
+LANG_ENGLISH        "現在のラウンドを設定"
+
+REFERENCE           ST_MENU_GAME_KILL_HORDE
+LANG_ENGLISH        "ホードキル"
+
+REFERENCE           ST_MENU_GAME_KILL_HORDE_DESC
+LANG_ENGLISH        "現在のホードを即座にキル"
+
+REFERENCE           ST_MENU_GAME_END_ROUND
+LANG_ENGLISH        "ラウンド終了"
+
+REFERENCE           ST_MENU_GAME_END_ROUND_DESC
+LANG_ENGLISH        "今のラウンドをすぐに終わらせる"
+
+REFERENCE           ST_MENU_GAME_NOTARGET
+LANG_ENGLISH        "ノーターゲット"
+
+REFERENCE           ST_MENU_GAME_NOTARGET_DESC
+LANG_ENGLISH        "ゾンビはプレイヤーを無視する"
+
+REFERENCE           ST_MENU_GAME_DROPS
+LANG_ENGLISH        "ドロップ"
+
+REFERENCE           ST_MENU_GAME_DROPS_DESC
+LANG_ENGLISH        "パワーアップのオン・オフ"
+
+REFERENCE           ST_MENU_GAME_FOG
+LANG_ENGLISH        "霧"
+
+REFERENCE           ST_MENU_GAME_FOG_DESC
+LANG_ENGLISH        "霧のオン・オフ"
+
+REFERENCE           ST_MENU_GAME_TP_DESTINATION
+LANG_ENGLISH        "目的地にテレポート"
+
+REFERENCE           ST_MENU_GAME_TP_DESTINATION_DESC
+LANG_ENGLISH        "テレポートする場所を選んでください"
+
+REFERENCE           ST_MENU_GAME_EXECUTE_TELEPORT
+LANG_ENGLISH        "テレポート実行"
+
+REFERENCE           ST_MENU_GAME_EXECUTE_TELEPORT_DESC
+LANG_ENGLISH        "選んだ場所にテレポートします"
+
+REFERENCE           ST_MENU_GAME_DEVELOPER
+LANG_ENGLISH        "開発者モード"
+
+REFERENCE           ST_MENU_GAME_DEVELOPER_DESC
+LANG_ENGLISH        "ゾンビの消滅についての追加情報を見るために開発者モードを有効化します。警告: マップを退出する前に必ず無効にしてください。"
+
+// PESTAÑA HUD
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS
+LANG_ENGLISH        "デスポーン"
+
+REFERENCE           ST_MENU_HUD_DESPAWNERS_DESC
+LANG_ENGLISH        "ゾンビのリスポーンのオン・オフ."
+
+REFERENCE           ST_MENU_HUD_HEALTHBAR
+LANG_ENGLISH        "体力ゲージ"
+
+REFERENCE           ST_MENU_HUD_HEALTHBAR_DESC
+LANG_ENGLISH        "ゾンビの上に体力ゲージを表示."
+
+REFERENCE           ST_MENU_HUD_ZOMBIE_COUNTER
+LANG_ENGLISH        "ゾンビの数"
+
+REFERENCE           ST_MENU_HUD_ZOMBIE_COUNTER_DESC
+LANG_ENGLISH        "ラウンドの残りのゾンビの数を表示."
+
+REFERENCE           ST_MENU_HUD_SPH_METER
+LANG_ENGLISH        "SPH メーター"
+
+REFERENCE           ST_MENU_HUD_SPH_METER_DESC
+LANG_ENGLISH        "SPHを表示."
+
+REFERENCE           ST_MENU_HUD_ZONE_NAME
+LANG_ENGLISH        "場所の名前"
+
+REFERENCE           ST_MENU_HUD_ZONE_NAME_DESC
+LANG_ENGLISH        "現在の場所の名前を表示."
+
+REFERENCE           ST_MENU_HUD_TIMER_POSITION
+LANG_ENGLISH        "タイマー位置"
+
+REFERENCE           ST_MENU_HUD_TIMER_POSITION_DESC
+LANG_ENGLISH        "ランタイマーの位置を変更する"
+
+REFERENCE           ST_MENU_HUD_TRAP_TIMER
+LANG_ENGLISH        "トラップタイマー"
+
+REFERENCE           ST_MENU_HUD_TRAT_TIMER_DESC
+LANG_ENGLISH        "トラップの作動時間を表示する."
+
+REFERENCE           ST_MENU_HUD_TIMER_HIDDEN
+LANG_ENGLISH        "非表示"
+
+REFERENCE           ST_MENU_HUD_TIMER_TOP_LEFT
+LANG_ENGLISH        "左上"
+
+REFERENCE           ST_MENU_HUD_TIMER_TOP_RIGHT
+LANG_ENGLISH        "右上"
+
+REFERENCE           ST_MENU_HUD_TIMER_MIDDLE_LEFT
+LANG_ENGLISH        "左真ん中"
+
+REFERENCE           ST_MENU_HUD_TIMER_BOTTOM
+LANG_ENGLISH        "下"
+
+REFERENCE           ST_MENU_HUD_BUS_TIMER
+LANG_ENGLISH        "バスタイマー"
+
+REFERENCE           ST_MENU_HUD_BUS_TIMER_DESC
+LANG_ENGLISH        "バスの出発までのカウントダウンを表示."
+
+REFERENCE           ST_MENU_HUD_BUS_LOCATION
+LANG_ENGLISH        "バスの現在位置"
+
+REFERENCE           ST_MENU_HUD_BUS_LOCATION_DESC
+LANG_ENGLISH        "現在のバスの現在位置を表示."
+
+REFERENCE           ST_MENU_HUD_BOX_HITS
+LANG_ENGLISH        "ボックス情報"
+
+REFERENCE           ST_MENU_HUD_BOX_HITS_DESC
+LANG_ENGLISH        "ボックスヒット数とレイガンの平均を表示"
+
+REFERENCE           ST_MENU_HUD_ELEVATOR_KILLS
+LANG_ENGLISH        "エレベーターキル"
+
+REFERENCE           ST_MENU_HUD_ELEVATOR_KILLS_DESC
+LANG_ENGLISH        "エレベーターを使ったキル数を追跡する."
+
+REFERENCE           ST_MENU_HUD_SUBWOOFER
+LANG_ENGLISH        "レゾネーターキル"
+
+REFERENCE           ST_MENU_HUD_SUBWOOFER_DESC
+LANG_ENGLISH        "レゾネーターによるキル数を表示"
+
+REFERENCE           ST_MENU_HUD_TANK_KILLS
+LANG_ENGLISH        "戦車キル"
+
+REFERENCE           ST_MENU_HUD_TANK_KILLS_DESC
+LANG_ENGLISH        "戦車を使ったキル数を追跡"
+
+REFERENCE           ST_MENU_HUD_STOMP_KILLS
+LANG_ENGLISH        "踏まれたゾンビの数"
+
+REFERENCE           ST_MENU_HUD_STOMP_KILLS_DESC
+LANG_ENGLISH        "ロボットに踏まれたゾンビの数を追跡."
+
+REFERENCE           ST_MENU_HUD_TUMBLE_ANIM
+LANG_ENGLISH        "転ぶアニメーション"
+
+REFERENCE           ST_MENU_HUD_TUMBLE_ANIM_DESC
+LANG_ENGLISH        "ゾンビが転んだ数を追跡"
+
+REFERENCE           ST_MENU_HUD_STAFF_TIMER
+LANG_ENGLISH        "杖タイマー"
+
+REFERENCE           ST_MENU_HUD_STAFF_TIMER_DESC
+LANG_ENGLISH        "アップグレードされた風と氷の杖のチャージショットの持続時間を表示するタイマー"
+
+REFERENCE           ST_MENU_HUD_DENIZEN_COUNTER
+LANG_ENGLISH        "デニズンの数"
+
+REFERENCE           ST_MENU_HUD_DENIZEN_COUNTER_DESC
+LANG_ENGLISH        "生きているデニズンの数を表示."
+
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER
+LANG_ENGLISH        "スリッキーファイアタイマー"
+
+REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC
+LANG_ENGLISH        "スリッキーファイアの液だまり残り時間を表示する"
+
+// PESTAÑA MAP SETTINGS
+
+REFERENCE           ST_MENU_MAP_FARM_DEPART
+LANG_ENGLISH        "農場 出発"
+
+REFERENCE           ST_MENU_MAP_DINER_DEPART
+LANG_ENGLISH        "ダイナー 発"
+
+REFERENCE           ST_MENU_MAP_DINER_DEPART_DESC
+LANG_ENGLISH        "ダイナーからのバスの出発時間を調整する."
+
+REFERENCE           ST_MENU_MAP_FARM_DEPART_DESC
+LANG_ENGLISH        "農場からのバスの出発時間を調整する."
+
+REFERENCE           ST_MENU_MAP_DENIZENS
+LANG_ENGLISH        "デニズン"
+
+REFERENCE           ST_MENU_MAP_DENIZENS_DESC
+LANG_ENGLISH        "デニズンのオン・オフ."
+
+REFERENCE           ST_MENU_MAP_BUS_STATUS
+LANG_ENGLISH        "バスが移動中"
+
+REFERENCE           ST_MENU_MAP_BUS_STATUS_DESC
+LANG_ENGLISH        "バスが動いているか止まっているかを表示"
+
+REFERENCE           ST_MENU_MAP_FORCE_PAP
+LANG_ENGLISH        "強制パックアパンチ"
+
+REFERENCE           ST_MENU_MAP_FORCE_PAP_DESC
+LANG_ENGLISH        "パックアパンチマシンを出現させる"
+
+REFERENCE           ST_MENU_MAP_BUILDABLES
+LANG_ENGLISH        "レゾネーター"
+
+REFERENCE           ST_MENU_MAP_BUILDABLES_DESC
+LANG_ENGLISH        "レゾネーターの作成位置を設定"
+
+REFERENCE           ST_MENU_MAP_RESONATOR_JUG
+LANG_ENGLISH        "ジャグ"
+
+REFERENCE           ST_MENU_MAP_RESONATOR_SALOON
+LANG_ENGLISH        "サルーン"
+
+REFERENCE           ST_MENU_MAP_INFINITE_LIVES
+LANG_ENGLISH        "無限アフターライフ"
+
+REFERENCE           ST_MENU_MAP_INFINITE_LIVES_DESC
+LANG_ENGLISH        "無限アフターライフモードを有効にする."
+
+REFERENCE           ST_MENU_MAP_SHIELD
+LANG_ENGLISH        "ゾンビシールド"
+
+REFERENCE           ST_MENU_MAP_SHIELD_DESC
+LANG_ENGLISH        "プレイヤーにゾンビシールドを与える."
+
+REFERENCE           ST_MENU_MAP_SOLO_STAFF
+LANG_ENGLISH        "杖"
+
+REFERENCE           ST_MENU_MAP_SOLO_STAFF_DESC
+LANG_ENGLISH        "スポーン時に装備する杖を選択してください"
+
+REFERENCE           ST_MENU_MAP_ICE_STAFF
+LANG_ENGLISH        "氷の杖"
+
+REFERENCE           ST_MENU_MAP_WIND_STAFF
+LANG_ENGLISH        "風の杖"
+
+REFERENCE           ST_MENU_MAP_FIRE_STAFF
+LANG_ENGLISH        "炎の杖"
+
+REFERENCE           ST_MENU_MAP_LIGHTNING_STAFF
+LANG_ENGLISH        "雷の杖"
+
+REFERENCE           ST_MENU_MAP_ELECTRIC_CHERRY
+LANG_ENGLISH        "エレクトリックチェリー"
+
+REFERENCE           ST_MENU_MAP_ELECTRIC_CHERRY_DESC
+LANG_ENGLISH        "スポーン時にエレクトリックチェリーを付与"
+
+REFERENCE           ST_MENU_MAP_MOOVING_WALLS
+LANG_ENGLISH        "クレイジープレイス壁"
+
+REFERENCE           ST_MENU_MAP_MOOVING_WALLS_DESC
+LANG_ENGLISH        "クレイジープレイスの壁を動かす"
+
+REFERENCE           ST_MENU_MAP_WAR_MACHINE
+LANG_ENGLISH        "ウォーマシン"
+
+REFERENCE           ST_MENU_MAP_WAR_MACHINE_DESC
+LANG_ENGLISH        "スポーン時にウォーマシンを付与"
+
+REFERENCE           ST_MENU_MAP_UNLOCK_GENERATORS
+LANG_ENGLISH        "ジェネレーターをアンロック"
+
+REFERENCE           ST_MENU_MAP_UNLOCK_GENERATORS_DESC
+LANG_ENGLISH        "すべてのジェネレーターを起動"
+
+REFERENCE           ST_MENU_MAP_BOX_DESTINATION
+LANG_ENGLISH        "ボックス位置"
+
+REFERENCE           ST_MENU_MAP_BOX_DESTINATION_DESC
+LANG_ENGLISH        "ボックスをどこに移動させるか選択してください"
+
+REFERENCE           ST_MENU_MAP_MOVE_BOX
+LANG_ENGLISH        "ボックスを移動"
+
+REFERENCE           ST_MENU_MAP_MOVE_BOX_DEC
+LANG_ENGLISH        "選んだ場所にボックスを移動します"
+
+REFERENCE          ST_MENU_MAP_BARRICADES_BURIED
+LANG_ENGLISH       "バリケードを維持する"
+
+REFERENCE          ST_MENU_MAP_BARRICADES_BURIED_DESC
+LANG_ENGLISH       "オフにすると、ジャガーノグ、洋館、キャンディショップの隣にある瓦礫が破壊されます。"
+
+REFERENCE          ST_MENU_MAP_BUILD_BUS
+LANG_ENGLISH       "バスのカスタム"
+
+REFERENCE          ST_MENU_MAP_BUILD_BUS_DESC
+LANG_ENGLISH       "ゲームの最初にすべての部品をバスに追加する"
+
+REFERENCE          ST_MENU_MAP_BUILD_BUILDABLES_TRANZIT
+LANG_ENGLISH       "作業台アイテム"
+
+REFERENCE          ST_MENU_MAP_BUILD_BUILDABLES_TRANZIT_DESC
+LANG_ENGLISH       "最初にタービン、タレット、シールド、電気トラップ、ジェットガンを作る."
+
+REFERENCE           ST_MENU_MAP_TOWN_DOORS
+LANG_ENGLISH        "開けるドアを選択"
+
+REFERENCE           ST_MENU_MAP_TOWN_DOORS_DESC
+LANG_ENGLISH        "タウンでどのドアを開けるかを選択."
+
+REFERENCE           ST_MENU_MAP_DENIZEN_SPAWNS
+LANG_ENGLISH        "デニズンスポナー"
+
+REFERENCE           ST_MENU_MAP_DENIZEN_SPAWNS_DESC
+LANG_ENGLISH        "デニズンのスポナーにマネキンを配置する"
+
+REFERENCE           ST_MENU_MAP_TOWN_DOOR_JUG
+LANG_ENGLISH        "ジャガーノグ"
+
+REFERENCE           ST_MENU_MAP_TOWN_DOOR_SPEED
+LANG_ENGLISH        "スピードコーラ"
+
+REFERENCE           ST_MENU_MAP_ELEVATOR_LOCK
+LANG_ENGLISH        "エレベーター停止"
+
+REFERENCE           ST_MENU_MAP_ELEVATOR_LOCK_DESC
+LANG_ENGLISH        "エレベーターを動かなくする"
+
+// PESTAÑA START
+
+REFERENCE           ST_MENU_START_INITIAL_ROUND
+LANG_ENGLISH        "開始ラウンド"
+
+REFERENCE           ST_MENU_START_INITIAL_ROUND_DESC
+LANG_ENGLISH        "ゲーム開始時のラウンドを設定する."
+
+REFERENCE           ST_MENU_START_INITIAL_DELAY
+LANG_ENGLISH        "準備時間"
+
+REFERENCE           ST_MENU_START_INITIAL_DELAY_DESC
+LANG_ENGLISH        "最初のラウンドが始まる前の準備時間を設定する."
+
+REFERENCE           ST_MENU_START_BOARDS
+LANG_ENGLISH        "バリケード"
+
+REFERENCE           ST_MENU_START_BOARDS_DESC
+LANG_ENGLISH        "起動時に窓のバリケードを全破壊"
+
+REFERENCE           ST_MENU_START_POWER
+LANG_ENGLISH        "電源"
+
+REFERENCE           ST_MENU_START_POWER_DESC
+LANG_ENGLISH        "自動で電源を入れる"
+
+REFERENCE           ST_MENU_START_OPEN_DOORS
+LANG_ENGLISH        "ドアを開ける"
+
+REFERENCE           ST_MENU_START_OPEN_DOORS_DESC
+LANG_ENGLISH        "自動で全ドアを開ける."
+
+REFERENCE           ST_MENU_START_WEAPONS
+LANG_ENGLISH        "武器"
+
+REFERENCE           ST_MENU_START_WEAPONS_DESC
+LANG_ENGLISH        "スポーン時に自動で武器をセットする."
+
+// Nombres de zonas de los mapas
+
+REFERENCE           ST_MENU_LOCATION_FARM
+LANG_ENGLISH        "農場"
+
+REFERENCE           ST_MENU_LOCATION_TOWN
+LANG_ENGLISH        "タウン"
+
+REFERENCE           ST_MENU_LOCATION_DINER
+LANG_ENGLISH        "ダイナー"
+
+REFERENCE           ST_MENU_LOCATION_TUNEL
+LANG_ENGLISH        "トンネル"
+
+REFERENCE           ST_MENU_LOCATION_DEPOT
+LANG_ENGLISH        "デポット"
+
+REFERENCE           ST_MENU_LOCATION_POWER_STATION
+LANG_ENGLISH        "電源部屋"
+
+REFERENCE           ST_MENU_LOCATION_BUS
+LANG_ENGLISH        "バス"
+
+REFERENCE           ST_MENU_LOCATION_NACHT
+LANG_ENGLISH        "NACHT DER UNTOTEN"
+
+REFERENCE           ST_MENU_LOCATION_AK74U
+LANG_ENGLISH        "電源外"
+
+REFERENCE           ST_MENU_LOCATION_WAREHOUSE
+LANG_ENGLISH        "倉庫"
+
+REFERENCE           ST_MENU_LOCATION_SHAFT
+LANG_ENGLISH        "エレベーターシャフト"
+
+REFERENCE           ST_MENU_LOCATION_TRAMPLESTEAM
+LANG_ENGLISH        "トランプルスチーム部屋"
+
+REFERENCE           ST_MENU_LOCATION_SALOON
+LANG_ENGLISH        "酒場"
+
+REFERENCE           ST_MENU_LOCATION_CAFETERIA
+LANG_ENGLISH        "カフェテリア"
+
+REFERENCE           ST_MENU_LOCATION_WARDENS_OFFICE
+LANG_ENGLISH        "看守部屋"
+
+REFERENCE           ST_MENU_LOCATION_DOUBLE_TAP
+LANG_ENGLISH        "ダブルタップ"
+
+REFERENCE           ST_MENU_LOCATION_CAGE
+LANG_ENGLISH        "ケージ"
+
+REFERENCE           ST_MENU_LOCATION_CHURCH
+LANG_ENGLISH        "教会"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_1
+LANG_ENGLISH        "ジェネレーターR1"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_2
+LANG_ENGLISH        "ジェネレーターR2"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_3
+LANG_ENGLISH        "ジェネレーターR3"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_4
+LANG_ENGLISH        "ジェネレーターR4"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_5
+LANG_ENGLISH        "ジェネレーターR5"
+
+REFERENCE           ST_MENU_LOCATION_GENERATOR_6
+LANG_ENGLISH        "ジェネレーターR6"
+
+REFERENCE           ST_MENU_LOCATION_THE_CRAZY_PLACE
+LANG_ENGLISH        "クレイジープレイス"
+
+REFERENCE           ST_MENU_LOCATION_TANK
+LANG_ENGLISH        "戦車"
+
+REFERENCE           ST_MENU_LOCATION_QUICK_REVIVE
+LANG_ENGLISH        "クイックリバイブ"
+
+REFERENCE           ST_MENU_LOCATION_BUNKER
+LANG_ENGLISH        "バンカー"
+
+REFERENCE           ST_MENU_LOCATION_YELLOW_HOUSE
+LANG_ENGLISH        "黄色の家"
+
+REFERENCE           ST_MENU_LOCATION_GARDEN
+LANG_ENGLISH        "庭"
+
+REFERENCE           ST_MENU_LOCATION_GREEN_HOUSE
+LANG_ENGLISH        "緑の家"
+
+REFERENCE           ST_MENU_LOCATION_GARAGE
+LANG_ENGLISH        "ガレージ"
+
+REFERENCE           ST_MENU_LOCATION_ROOF
+LANG_ENGLISH        "屋根"
+
+REFERENCE           ST_MENU_LOCATION_M16
+LANG_ENGLISH        "M16"
+
+REFERENCE           ST_MENU_LOCATION_BAR
+LANG_ENGLISH        "BAR"
+
+REFERENCE           ST_MENU_LOCATION_DOCK
+LANG_ENGLISH        "ドック"
+
+REFERENCE           ST_MENU_LOCATION_JUG
+LANG_ENGLISH        "ジャガーノグ"
+
+ENDMARKER
