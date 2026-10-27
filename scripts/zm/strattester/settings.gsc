@@ -21,6 +21,16 @@
 #define WHOISWHO_PERK "specialty_finalstand"
 #define VULTURE_PERK "specialty_nomotionsensor"
 
+#define BURIED_BUILDABLE_JUG_DVAR "buried_jug_buildable"
+#define BURIED_BUILDABLE_SALOON_DVAR "buried_saloon_buildable"
+#define BURIED_BUILDABLE_COURT_DVAR "buried_court_buildable"
+#define BURIED_BUILDABLE_CHURCH_DVAR "buried_church_buildable"
+
+#define SUBWOOFER 1
+#define TURBINE 2
+#define SPRINGPAD 3
+#define HEADCHOPPER 4
+
 init_settings()
 {
     thread createDvars();
@@ -47,6 +57,7 @@ createDvars()
 	createDvar("st_sph", ON);
 	createDvar("st_enable_drops", ON);
 	createDvar("st_boxhits", ON);
+	createDvar("st_debugPosition", ON);
     createDvar("st_changeround", level.round_number);
 
     enabledvarchangednotify("st_changeround");
@@ -79,6 +90,16 @@ createDvars()
 		createDvar("st_keepBarricades", OFF);
     	createDvar("st_subwooferkills", OFF);
 		createDvar("st_setupBuried", OFF); 
+
+		createDvar("st_buried_jug_buildable", SUBWOOFER);
+		createDvar("st_buried_saloon_buildable", SPRINGPAD);
+		createDvar("st_buried_court_buildable", TURBINE);
+		createDvar("st_buried_church_buildable", HEADCHOPPER);
+
+		enabledvarchangednotify("st_buried_jug_buildable");
+		enabledvarchangednotify("st_buried_saloon_buildable");
+		enabledvarchangednotify("st_buried_court_buildable");
+		enabledvarchangednotify("st_buried_church_buildable");
 	}
 	if(istranzit())
 	{

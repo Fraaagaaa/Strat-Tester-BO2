@@ -35,6 +35,7 @@ watch_new_players_hud()
         player thread despawnersTimer();
         player thread remaining();
         player thread zone();
+        player thread playerPosition();
         if(!issurvivalmap())
         {
             player thread despawnerCounter();
