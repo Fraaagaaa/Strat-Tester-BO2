@@ -6,6 +6,36 @@
 
 #include scripts\zm\strattester\utility;
 
+#define SPRINGPAD "equip_springpad_zm"
+#define SUBWOOFER "equip_subwoofer_zm"
+#define TURBINE "equip_turbine_zm"
+#define HEADCHOPPER "equip_headchopper_zm"
+#define SHIELD_MOB "alcatraz_shield_zm"
+#define SHIELD_ORIGINS "tomb_shield_zm"
+
+#define SUBWOOFER_ID 1
+#define TURBINE_ID 2
+#define SPRINGPAD_ID 3
+#define HEADCHOPPER_ID 4
+
+#define SUBWOOFER_STRING &"ZM_BURIED_EQ_SW_PHS"
+#define TURBINE_STRING &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING"
+#define SPRINGPAD_STRING_BURIED &"ZM_BURIED_EQ_SP_PHS"
+#define SPRINGPAD_STRING_DIERISE &"ZM_HIGHRISE_GRAB_SPRINGPAD"
+#define HEADCHOPPER_STRING &"ZM_BURIED_EQ_HC_PHS"
+
+#define SHIELD_STRING &"ZOMBIE_GRAB_RIOTSHIELD"
+
+#define BUILDABLE_BURIED_JUG_ORIGIN (-327, 751, 140)
+#define BUILDABLE_BURIED_SALOON_ORIGIN (662, -1124, 47)
+#define BUILDABLE_BURIED_COURT_ORIGIN (-135, 946, 19)
+#define BUILDABLE_BURIED_CHURCH_ORIGIN (1266, 1490, 13)
+
+#define BUILDABLE_DIERISE_SPRINGPAD_ORIGIN (1879, 1354, 3034)
+
+#define BUILDABLE_MOB_CAFETERIA_ORIGIN (3366, 9406, 1336)
+
+
 changecraftableoption( index )
 {
 	foreach (craftable in level.a_uts_craftables)
@@ -143,36 +173,84 @@ equipment_buy( equipment )
     self equipment_give( equipment );
 }
 
-spawn_buildable_trigger(origin, build)
+createBuildable(buildable, origin, hintstring, dvar)
 {
-	trigger = spawn("trigger_radius", origin, 40, 70, 140);
-	trigger.targetname = "shield_trigger";
-	trigger SetCursorHint("HINT_NOICON");
+    b = spawnStruct();
 
-	if(issubstr(build, "shield"))
-		trigger sethintstring(&"ZOMBIE_GRAB_RIOTSHIELD");
-	else if(issubstr(build, "subwoofer"))
-		trigger sethintstring(&"ZM_BURIED_EQ_SW_PHS");
-	else if(issubstr(build, "headchopper"))
-		trigger sethintstring(&"ZM_BURIED_EQ_HC_PHS");
-	else if(issubstr(build, "turbine"))
-		trigger sethintstring(&"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING");
-	else if(issubstr(build, "spring") && isburied())
-		trigger sethintstring(&"ZM_BURIED_EQ_SP_PHS");
-	else if(issubstr(build, "spring") && isdierise())
-		trigger sethintstring(&"ZM_HIGHRISE_GRAB_SPRINGPAD");
-	else
-		trigger sethintstring("Press^3 &&1 ^7for buildable");
+    b.build = buildable;
+    b.origin = origin;
+    b.hintstring = hintstring;
+    b.trigger = spawn("trigger_radius", origin, 40, 70, 140);
 
-	while(true)
-	{
-		trigger waittill( "trigger", player );
-		if( player UseButtonPressed() )
-			if( !player hasWeapon( build ) )
-				player equipment_buy( build );
+    b.trigger.targetname = "shield_trigger";
+    b.trigger SetCursorHint("HINT_NOICON");
+    b.trigger SetHintString(b.hintstring);
 
-		wait 0.1;
-	}
+    if(isdefined(dvar))
+    {
+        b.dvar = dvar;
+        b thread buildableWatchDvarChange();
+        println("Creating new buildable:\n" + b.build + "\n" + b.origin + "\n" + b.hintstring + "\n" + b.dvar);
+    }
+
+    println("Creating new buildable:\n" + b.build + "\n" + b.origin + "\n" + b.hintstring + "\ndvar undefined");
+
+    while(true)
+    {
+        b.trigger waittill("trigger", player);
+
+        if(player UseButtonPressed())
+        {
+            if(!player hasWeapon(b.build))
+                player equipment_buy(b.build);
+        }
+
+        wait 0.1;
+    }
+}
+
+buildableWatchDvarChange()
+{
+    if(!isdefined(self.dvar))
+        return;
+
+    oldBuildable = undefined;
+
+    newBuildable = getDvarInt(self.dvar);
+
+    while(true)
+    {
+        if(newBuildable == SUBWOOFER_ID)
+        {
+            self.build = SUBWOOFER;
+            self.hintstring = SUBWOOFER_STRING;
+        }
+        else if(newBuildable == TURBINE_ID)
+        {
+            self.build = TURBINE;
+            self.hintstring = TURBINE_STRING;
+        }
+        else if(newBuildable == SPRINGPAD_ID && isburied())
+        {
+            self.build = SPRINGPAD;
+            self.hintstring = SPRINGPAD_STRING_BURIED;
+        }
+        else if(newBuildable == SPRINGPAD_ID && isdierise())
+        {
+            self.build = SPRINGPAD;
+            self.hintstring = SPRINGPAD_STRING_DIERISE;
+        }
+        else if(newBuildable == HEADCHOPPER_ID)
+        {
+            self.build = HEADCHOPPER;
+            self.hintstring = HEADCHOPPER_STRING;
+        }
+
+        self.trigger SetHintString(self.hintstring);
+
+        level waittill("dvar_" + self.dvar + "_changed", newBuildable);
+        newBuildable = int(newBuildable);
+    }
 }
 
 init_buildables()
@@ -180,47 +258,22 @@ init_buildables()
 	flag_wait( "initial_blackscreen_passed" );
 	if(isburied())
 	{
-		setup = getDvarInt("st_setupBuried");
-		power = getDvarInt("st_power");
-    	if(setup == -1)
-			return;
-		
-		if(power)
-		{
-			if(setup == 0)
-			{
-				level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm"); // jug
-				level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm"); // saloon
-				level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm"); // church
-			}
-			if(setup == 1)
-			{
-				level thread spawn_buildable_trigger((-327, 751, 140), "equip_subwoofer_zm"); // jug
-				level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm"); // jug
-				level thread spawn_buildable_trigger((662, -1124, 47), "equip_subwoofer_zm"); // saloon
-				level thread spawn_buildable_trigger((-135, 946, 19), "equip_turbine_zm"); // church
-			}
-		}
-		else
-		{
-			level thread spawn_buildable_trigger((-327, 751, 140), "equip_springpad_zm"); // jug
-			level thread spawn_buildable_trigger((662, -1124, 47), "equip_springpad_zm"); // saloon
-		}
-		return;
+		level thread createBuildable(SUBWOOFER, BUILDABLE_BURIED_JUG_ORIGIN, SUBWOOFER_STRING, "st_buried_jug_buildable");
+		level thread createBuildable(TURBINE, BUILDABLE_BURIED_COURT_ORIGIN, TURBINE_STRING, "st_buried_court_buildable");
+		level thread createBuildable(SPRINGPAD, BUILDABLE_BURIED_SALOON_ORIGIN, SPRINGPAD_STRING_BURIED, "st_buried_saloon_buildable");
+		level thread createBuildable(HEADCHOPPER, BUILDABLE_BURIED_CHURCH_ORIGIN, HEADCHOPPER_STRING, "st_buried_church_buildable");
 	}
-	if(isorigins())
+	else if(isorigins())
 	{
-		level thread spawn_buildable_trigger((110, -3000, 60), "tomb_shield_zm");
-	    level thread spawn_buildable_trigger((2308, 689, -23), "tomb_shield_zm");
-		return;
+		level thread createBuildable(SHIELD_ORIGINS, (110, -3000, 60) , SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, (2308, 689, -23) , SHIELD_STRING);
 	}
-	if(ismob())
+	else if(ismob())
 	{
-		level thread spawn_buildable_trigger((3366, 9406, 1336), "alcatraz_shield_zm");
-		return;
+		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN , SHIELD_STRING);
 	}
-	if(isdierise())
+	else if(isdierise())
 	{
-		level thread spawn_buildable_trigger((1879, 1354, 3034), "equip_springpad_zm");
+		level thread createBuildable(SPRINGPAD, BUILDABLE_DIERISE_SPRINGPAD_ORIGIN, SPRINGPAD_STRING_DIERISE);
 	}
 }
