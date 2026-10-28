@@ -589,6 +589,7 @@ playerPosition()
     hud_xl.font = "small"; hud_xl.fontscale = 1.1;
     hud_xl.color = ( 0.6, 1, 0.6 ); hud_xl.alpha = 0; hud_xl.foreground = 1;
     hud_xl settext( "X:" );
+    hud_xl.hidewheninmenu = true;
 
     hud_xv = newclienthudelem( self );
     hud_xv.horzalign = "left"; hud_xv.vertalign = "bottom";
@@ -597,6 +598,7 @@ playerPosition()
     hud_xv.font = "small"; hud_xv.fontscale = 1.1;
     hud_xv.color = ( 1, 1, 1 ); hud_xv.alpha = 0; hud_xv.foreground = 1;
     hud_xv setvalue( 0 );
+    hud_xv.hidewheninmenu = true;
 
     hud_yl = newclienthudelem( self );
     hud_yl.horzalign = "left"; hud_yl.vertalign = "bottom";
@@ -605,6 +607,7 @@ playerPosition()
     hud_yl.font = "small"; hud_yl.fontscale = 1.1;
     hud_yl.color = ( 0.6, 1, 0.6 ); hud_yl.alpha = 0; hud_yl.foreground = 1;
     hud_yl settext( "Y:" );
+    hud_yl.hidewheninmenu = true;
 
     hud_yv = newclienthudelem( self );
     hud_yv.horzalign = "left"; hud_yv.vertalign = "bottom";
@@ -613,6 +616,7 @@ playerPosition()
     hud_yv.font = "small"; hud_yv.fontscale = 1.1;
     hud_yv.color = ( 1, 1, 1 ); hud_yv.alpha = 0; hud_yv.foreground = 1;
     hud_yv setvalue( 0 );
+    hud_yv.hidewheninmenu = true;
 
     hud_zl = newclienthudelem( self );
     hud_zl.horzalign = "left"; hud_zl.vertalign = "bottom";
@@ -621,6 +625,7 @@ playerPosition()
     hud_zl.font = "small"; hud_zl.fontscale = 1.1;
     hud_zl.color = ( 0.6, 1, 0.6 ); hud_zl.alpha = 0; hud_zl.foreground = 1;
     hud_zl settext( "Z:" );
+    hud_zl.hidewheninmenu = true;
 
     hud_zv = newclienthudelem( self );
     hud_zv.horzalign = "left"; hud_zv.vertalign = "bottom";
@@ -629,6 +634,7 @@ playerPosition()
     hud_zv.font = "small"; hud_zv.fontscale = 1.1;
     hud_zv.color = ( 1, 1, 1 ); hud_zv.alpha = 0; hud_zv.foreground = 1;
     hud_zv setvalue( 0 );
+    hud_zv.hidewheninmenu = true;
 
     hud_yawl = newclienthudelem( self );
     hud_yawl.horzalign = "left"; hud_yawl.vertalign = "bottom";
@@ -637,6 +643,7 @@ playerPosition()
     hud_yawl.font = "small"; hud_yawl.fontscale = 1.1;
     hud_yawl.color = ( 0.6, 1, 0.6 ); hud_yawl.alpha = 0; hud_yawl.foreground = 1;
     hud_yawl settext( "Yaw:" );
+    hud_yawl.hidewheninmenu = true;
 
     hud_yawv = newclienthudelem( self );
     hud_yawv.horzalign = "left"; hud_yawv.vertalign = "bottom";
@@ -645,6 +652,7 @@ playerPosition()
     hud_yawv.font = "small"; hud_yawv.fontscale = 1.1;
     hud_yawv.color = ( 1, 1, 1 ); hud_yawv.alpha = 0; hud_yawv.foreground = 1;
     hud_yawv setvalue( 0 );
+    hud_yawv.hidewheninmenu = true;
 
     while ( isdefined( self ) )
     {

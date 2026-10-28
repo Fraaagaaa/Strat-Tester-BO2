@@ -35,6 +35,8 @@
 
 #define BUILDABLE_MOB_CAFETERIA_ORIGIN (3366, 9406, 1336)
 
+#define BUILDABLE_ORIGINS_WIND_ORIGIN (2308, 689, -23)
+#define BUILDABLE_ORIGINS_CHURCH_ORIGIN (110, -3000, 60) 
 
 changecraftableoption( index )
 {
@@ -265,8 +267,8 @@ init_buildables()
 	}
 	else if(isorigins())
 	{
-		level thread createBuildable(SHIELD_ORIGINS, (110, -3000, 60) , SHIELD_STRING);
-		level thread createBuildable(SHIELD_ORIGINS, (2308, 689, -23) , SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, SHIELD_STRING);
 	}
 	else if(ismob())
 	{

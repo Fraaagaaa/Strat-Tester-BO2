@@ -57,7 +57,7 @@ createDvars()
 	createDvar("st_sph", ON);
 	createDvar("st_enable_drops", ON);
 	createDvar("st_boxhits", ON);
-	createDvar("st_debugPosition", ON);
+	createDvar("st_debugPosition", OFF);
     createDvar("st_changeround", level.round_number);
 
     enabledvarchangednotify("st_changeround");
