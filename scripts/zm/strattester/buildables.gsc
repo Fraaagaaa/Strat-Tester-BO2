@@ -6,6 +6,22 @@
 
 #include scripts\zm\strattester\utility;
 
+#define BUILDABLE_BURIED_JUG_ORIGIN (-340, 747.4, 188)
+#define BUILDABLE_BURIED_COURT_ORIGIN (-107.4, 951.4, 76)
+#define BUILDABLE_BURIED_SALOON_ORIGIN (675.67, -1145.29, 116.78)
+#define BUILDABLE_BURIED_CHURCH_ORIGIN (1262.05, 1488.44, 60.15)
+
+#define BUILDABLE_BURIED_JUG_ANGLES (0, 180, 0)
+#define BUILDABLE_BURIED_COURT_ANGLES (0, -180, 0)
+#define BUILDABLE_BURIED_SALOON_ANGLES (61.5365, 270.343, 0.216167)
+#define BUILDABLE_BURIED_CHURCH_ANGLES (0, 340, 0)
+
+#define BUILDABLE_DIERISE_SPRINGPAD_ORIGIN (1890, 1350.11, 3105)
+#define BUILDABLE_DIERISE_SPRINGPAD_ANGLES (75, 0, 0)
+
+#define BUILDABLE_DIERISE_SLIQUIFIRE_ORIGIN (2399.31, -327.68, 1181.41)
+#define BUILDABLE_DIERISE_SLIQUIFIRE_ANGLES (0, 150.4, 0)
+
 #define SPRINGPAD "equip_springpad_zm"
 #define SUBWOOFER "equip_subwoofer_zm"
 #define TURBINE "equip_turbine_zm"
@@ -18,6 +34,11 @@
 #define SPRINGPAD_ID 3
 #define HEADCHOPPER_ID 4
 
+#define SUBWOOFER_MODEL "t6_wpn_zmb_subwoofer"
+#define TURBINE_MODEL "p6_anim_zm_buildable_turbine"
+#define SPRINGPAD_MODEL "p6_anim_zm_buildable_tramplesteam"
+#define HEADCHOPPER_MODEL "t6_wpn_zmb_chopper"
+
 #define SUBWOOFER_STRING &"ZM_BURIED_EQ_SW_PHS"
 #define TURBINE_STRING &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING"
 #define SPRINGPAD_STRING_BURIED &"ZM_BURIED_EQ_SP_PHS"
@@ -25,13 +46,6 @@
 #define HEADCHOPPER_STRING &"ZM_BURIED_EQ_HC_PHS"
 
 #define SHIELD_STRING &"ZOMBIE_GRAB_RIOTSHIELD"
-
-#define BUILDABLE_BURIED_JUG_ORIGIN (-327, 751, 140)
-#define BUILDABLE_BURIED_SALOON_ORIGIN (662, -1124, 47)
-#define BUILDABLE_BURIED_COURT_ORIGIN (-135, 946, 19)
-#define BUILDABLE_BURIED_CHURCH_ORIGIN (1266, 1490, 13)
-
-#define BUILDABLE_DIERISE_SPRINGPAD_ORIGIN (1879, 1354, 3034)
 
 #define BUILDABLE_MOB_CAFETERIA_ORIGIN (3366, 9406, 1336)
 
@@ -175,15 +189,19 @@ equipment_buy( equipment )
     self equipment_give( equipment );
 }
 
-createBuildable(buildable, origin, hintstring, dvar)
+createBuildable(buildable, origin, angles, hintstring, dvar)
 {
     b = spawnStruct();
 
     b.build = buildable;
     b.origin = origin;
+    b.angles = angles;
     b.hintstring = hintstring;
-    b.trigger = spawn("trigger_radius", origin, 40, 70, 140);
 
+    b.model = spawn("script_model", (b.origin));
+    b.model.angles = (b.angles + vectorScale((0, 0, 0), 90));
+
+    b.trigger = spawn("trigger_radius", b.origin, 40, 70, 140);
     b.trigger.targetname = "shield_trigger";
     b.trigger SetCursorHint("HINT_NOICON");
     b.trigger SetHintString(b.hintstring);
@@ -192,10 +210,18 @@ createBuildable(buildable, origin, hintstring, dvar)
     {
         b.dvar = dvar;
         b thread buildableWatchDvarChange();
-        println("Creating new buildable:\n" + b.build + "\n" + b.origin + "\n" + b.hintstring + "\n" + b.dvar);
     }
-
-    println("Creating new buildable:\n" + b.build + "\n" + b.origin + "\n" + b.hintstring + "\ndvar undefined");
+    else
+    {
+        if(buildable == SPRINGPAD)
+            b setBuildableData(SPRINGPAD_ID);
+        else if(buildable == TURBINE)
+            b setBuildableData(TURBINE_ID);
+        else if(buildable == SUBWOOFER)
+            b setBuildableData(SUBWOOFER_ID);
+        else if(buildable == HEADCHOPPER)
+            b setBuildableData(HEADCHOPPER_ID);
+    }
 
     while(true)
     {
@@ -222,36 +248,45 @@ buildableWatchDvarChange()
 
     while(true)
     {
-        if(newBuildable == SUBWOOFER_ID)
-        {
-            self.build = SUBWOOFER;
-            self.hintstring = SUBWOOFER_STRING;
-        }
-        else if(newBuildable == TURBINE_ID)
-        {
-            self.build = TURBINE;
-            self.hintstring = TURBINE_STRING;
-        }
-        else if(newBuildable == SPRINGPAD_ID && isburied())
-        {
-            self.build = SPRINGPAD;
-            self.hintstring = SPRINGPAD_STRING_BURIED;
-        }
-        else if(newBuildable == SPRINGPAD_ID && isdierise())
-        {
-            self.build = SPRINGPAD;
-            self.hintstring = SPRINGPAD_STRING_DIERISE;
-        }
-        else if(newBuildable == HEADCHOPPER_ID)
-        {
-            self.build = HEADCHOPPER;
-            self.hintstring = HEADCHOPPER_STRING;
-        }
-
+        self setBuildableData(newBuildable);
         self.trigger SetHintString(self.hintstring);
 
         level waittill("dvar_" + self.dvar + "_changed", newBuildable);
         newBuildable = int(newBuildable);
+    }
+}
+
+setBuildableData(id)
+{
+    if(id == SUBWOOFER_ID)
+    {
+        self.build = SUBWOOFER;
+        self.hintstring = SUBWOOFER_STRING;
+        self.model setmodel(SUBWOOFER_MODEL);
+    }
+    else if(id == TURBINE_ID)
+    {
+        self.build = TURBINE;
+        self.hintstring = TURBINE_STRING;
+        self.model setmodel(TURBINE_MODEL);
+    }
+    else if(id == SPRINGPAD_ID && isburied())
+    {
+        self.build = SPRINGPAD;
+        self.hintstring = SPRINGPAD_STRING_BURIED;
+        self.model setmodel(SPRINGPAD_MODEL);
+    }
+    else if(id == SPRINGPAD_ID && isdierise())
+    {
+        self.build = SPRINGPAD;
+        self.hintstring = SPRINGPAD_STRING_DIERISE;
+        self.model setmodel(SPRINGPAD_MODEL);
+    }
+    else if(id == HEADCHOPPER_ID)
+    {
+        self.build = HEADCHOPPER;
+        self.hintstring = HEADCHOPPER_STRING;
+        self.model setmodel(HEADCHOPPER_MODEL);
     }
 }
 
@@ -260,22 +295,22 @@ init_buildables()
 	flag_wait( "initial_blackscreen_passed" );
 	if(isburied())
 	{
-		level thread createBuildable(SUBWOOFER, BUILDABLE_BURIED_JUG_ORIGIN, SUBWOOFER_STRING, "st_buried_jug_buildable");
-		level thread createBuildable(TURBINE, BUILDABLE_BURIED_COURT_ORIGIN, TURBINE_STRING, "st_buried_court_buildable");
-		level thread createBuildable(SPRINGPAD, BUILDABLE_BURIED_SALOON_ORIGIN, SPRINGPAD_STRING_BURIED, "st_buried_saloon_buildable");
-		level thread createBuildable(HEADCHOPPER, BUILDABLE_BURIED_CHURCH_ORIGIN, HEADCHOPPER_STRING, "st_buried_church_buildable");
+		level thread createBuildable(SUBWOOFER, BUILDABLE_BURIED_JUG_ORIGIN, BUILDABLE_BURIED_JUG_ANGLES, SUBWOOFER_STRING, "st_buried_jug_buildable");
+		level thread createBuildable(TURBINE, BUILDABLE_BURIED_COURT_ORIGIN, BUILDABLE_BURIED_COURT_ANGLES, TURBINE_STRING, "st_buried_court_buildable");
+		level thread createBuildable(SPRINGPAD, BUILDABLE_BURIED_SALOON_ORIGIN, BUILDABLE_BURIED_SALOON_ANGLES, SPRINGPAD_STRING_BURIED, "st_buried_saloon_buildable");
+		level thread createBuildable(HEADCHOPPER, BUILDABLE_BURIED_CHURCH_ORIGIN, BUILDABLE_BURIED_CHURCH_ANGLES, HEADCHOPPER_STRING, "st_buried_church_buildable");
 	}
 	else if(isorigins())
 	{
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, SHIELD_STRING);
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, undefined, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, undefined, SHIELD_STRING);
 	}
 	else if(ismob())
 	{
-		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN , SHIELD_STRING);
+		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN, undefined, SHIELD_STRING);
 	}
 	else if(isdierise())
 	{
-		level thread createBuildable(SPRINGPAD, BUILDABLE_DIERISE_SPRINGPAD_ORIGIN, SPRINGPAD_STRING_DIERISE);
+		level thread createBuildable(SPRINGPAD, BUILDABLE_DIERISE_SPRINGPAD_ORIGIN, BUILDABLE_DIERISE_SPRINGPAD_ANGLES, SPRINGPAD_STRING_DIERISE);
 	}
 }

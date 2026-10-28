@@ -676,3 +676,34 @@ playerPosition()
         hud_yawv setvalue( int( angles[1] ) );
     }
 }
+
+printCraftingTables()
+{
+    wait 10;
+
+    if(isdefined(level.buildable_stubs))
+    {
+        foreach(stub in level.buildable_stubs)
+        {
+            if(!isdefined(stub.model))
+                continue;
+
+            println("BUILDABLE: " + stub.equipname);
+            println("Origin: " + stub.model.origin);
+            println("Angles: " + stub.model.angles);
+        }
+    }
+
+    if(isdefined(level.a_uts_craftables))
+    {
+        foreach(stub in level.a_uts_craftables)
+        {
+            if(!isdefined(stub.model))
+                continue;
+
+            println("CRAFTABLE: " + stub.equipname);
+            println("Origin: " + stub.model.origin);
+            println("Angles: " + stub.model.angles);
+        }
+    }
+}
