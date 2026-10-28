@@ -22,6 +22,16 @@
 #define BUILDABLE_DIERISE_SLIQUIFIRE_ORIGIN (2399.31, -327.68, 1181.41)
 #define BUILDABLE_DIERISE_SLIQUIFIRE_ANGLES (0, 150.4, 0)
 
+#define BUILDABLE_MOB_CAFETERIA_ORIGIN (3380, 9406, 1407)
+#define BUILDABLE_MOB_CAFETERIA_ANGLES (0, 180, 0)
+
+#define BUILDABLE_ORIGINS_WIND_ORIGIN (2308, 700, 50)
+#define BUILDABLE_ORIGINS_WIND_ANGLES (0, 90, 0)
+
+#define BUILDABLE_ORIGINS_CHURCH_ORIGIN (130, -2990, 120) 
+#define BUILDABLE_ORIGINS_CHURCH_ANGLES (0, 15, 0) 
+
+
 #define SPRINGPAD "equip_springpad_zm"
 #define SUBWOOFER "equip_subwoofer_zm"
 #define TURBINE "equip_turbine_zm"
@@ -33,24 +43,22 @@
 #define TURBINE_ID 2
 #define SPRINGPAD_ID 3
 #define HEADCHOPPER_ID 4
+#define SHIELD_MOB_ID 5
+#define SHIELD_ORIGINS_ID 6
 
 #define SUBWOOFER_MODEL "t6_wpn_zmb_subwoofer"
 #define TURBINE_MODEL "p6_anim_zm_buildable_turbine"
 #define SPRINGPAD_MODEL "p6_anim_zm_buildable_tramplesteam"
 #define HEADCHOPPER_MODEL "t6_wpn_zmb_chopper"
+#define SHIELD_MOB_MODEL "t6_wpn_zmb_shield_dlc2_dmg0_world"
+#define SHIELD_ORIGINS_MODEL "t6_wpn_zmb_shield_dlc4_dmg0_world"
 
 #define SUBWOOFER_STRING &"ZM_BURIED_EQ_SW_PHS"
 #define TURBINE_STRING &"ZOMBIE_EQUIP_TURBINE_PICKUP_HINT_STRING"
 #define SPRINGPAD_STRING_BURIED &"ZM_BURIED_EQ_SP_PHS"
 #define SPRINGPAD_STRING_DIERISE &"ZM_HIGHRISE_GRAB_SPRINGPAD"
 #define HEADCHOPPER_STRING &"ZM_BURIED_EQ_HC_PHS"
-
 #define SHIELD_STRING &"ZOMBIE_GRAB_RIOTSHIELD"
-
-#define BUILDABLE_MOB_CAFETERIA_ORIGIN (3366, 9406, 1336)
-
-#define BUILDABLE_ORIGINS_WIND_ORIGIN (2308, 689, -23)
-#define BUILDABLE_ORIGINS_CHURCH_ORIGIN (110, -3000, 60) 
 
 changecraftableoption( index )
 {
@@ -221,6 +229,10 @@ createBuildable(buildable, origin, angles, hintstring, dvar)
             b setBuildableData(SUBWOOFER_ID);
         else if(buildable == HEADCHOPPER)
             b setBuildableData(HEADCHOPPER_ID);
+        else if(buildable == SHIELD_MOB)
+            b setBuildableData(SHIELD_MOB_ID);
+        else if(buildable == SHIELD_ORIGINS)
+            b setBuildableData(SHIELD_ORIGINS_ID);
     }
 
     while(true)
@@ -288,6 +300,18 @@ setBuildableData(id)
         self.hintstring = HEADCHOPPER_STRING;
         self.model setmodel(HEADCHOPPER_MODEL);
     }
+    else if(id == SHIELD_MOB_ID)
+    {
+        self.build = SHIELD_MOB;
+        self.hintstring = SHIELD_STRING;
+        self.model setmodel(SHIELD_MOB_MODEL);
+    }
+    else if(id == SHIELD_ORIGINS_ID)
+    {
+        self.build = SHIELD_ORIGINS;
+        self.hintstring = SHIELD_STRING;
+        self.model setmodel(SHIELD_ORIGINS_MODEL);
+    }
 }
 
 init_buildables()
@@ -302,12 +326,12 @@ init_buildables()
 	}
 	else if(isorigins())
 	{
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, undefined, SHIELD_STRING);
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, undefined, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, BUILDABLE_ORIGINS_CHURCH_ANGLES, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, BUILDABLE_ORIGINS_WIND_ANGLES, SHIELD_STRING);
 	}
 	else if(ismob())
 	{
-		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN, undefined, SHIELD_STRING);
+		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN, BUILDABLE_MOB_CAFETERIA_ANGLES, SHIELD_STRING);
 	}
 	else if(isdierise())
 	{
