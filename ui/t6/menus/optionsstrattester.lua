@@ -460,17 +460,60 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
     end
 
     if isBuried then
-        local BuriedChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLES"), "st_setupBuried", Engine.Localize("ST_MENU_MAP_BUILDABLES_DESC"))
-        BuriedChoice:addChoice(Engine.Localize("ST_MENU_MAP_RESONATOR_JUG"), 0, nil, CoD.StratTester.OnDvarChanged)
-        BuriedChoice:addChoice(Engine.Localize("ST_MENU_MAP_RESONATOR_SALOON"), 1, nil, CoD.StratTester.OnDvarChanged)
-        BuriedChoice:addChoice(Engine.Localize("ST_MENU_NONE"), -1, nil, CoD.StratTester.OnDvarChanged)
+        local JugBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_JUG_BURIED"), "st_buried_jug_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_JUG_BURIED"))
+        JugBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SW"), 1, nil, CoD.StratTester.OnDvarChanged )
+        JugBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_TB"), 2, nil, CoD.StratTester.OnDvarChanged )
+        JugBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SP"), 3, nil, CoD.StratTester.OnDvarChanged )
+        JugBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_HC"), 4, nil, CoD.StratTester.OnDvarChanged )
 
-        local currentsetup = UIExpression.DvarInt( nil, "st_setupBuried")
-        if UIExpression.DvarString( nil, "st_setupBuried") == "" then
-            currentsetup = 0
-            Engine.SetDvar("st_setupBuried", currentsetup )
+        local currentBuildableVal = UIExpression.DvarInt( nil, "st_buried_jug_buildable")
+        if UIExpression.DvarString( nil, "st_buried_jug_buildable") == "" then
+            currentBuildableVal = 1
+            Engine.SetDvar("st_buried_jug_buildable", currentBuildableVal )
         end
-        BuriedChoice:setChoice( currentsetup )
+        JugBuildableChoice:setChoice( currentBuildableVal )
+
+
+        local CourtBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_COURT_BURIED"), "st_buried_court_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_COURT_BURIED"))
+        CourtBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SW"), 1, nil, CoD.StratTester.OnDvarChanged )
+        CourtBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_TB"), 2, nil, CoD.StratTester.OnDvarChanged )
+        CourtBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SP"), 3, nil, CoD.StratTester.OnDvarChanged )
+        CourtBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_HC"), 4, nil, CoD.StratTester.OnDvarChanged )
+
+        local currentBuildableVal = UIExpression.DvarInt( nil, "st_buried_court_buildable")
+        if UIExpression.DvarString( nil, "st_buried_court_buildable") == "" then
+            currentBuildableVal = 2
+            Engine.SetDvar("st_buried_court_buildable", currentBuildableVal )
+        end
+        CourtBuildableChoice:setChoice( currentBuildableVal )
+
+
+        local SaloonBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_SALOON_BURIED"), "st_buried_saloon_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_SALOON_BURIED"))
+        SaloonBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SW"), 1, nil, CoD.StratTester.OnDvarChanged )
+        SaloonBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_TB"), 2, nil, CoD.StratTester.OnDvarChanged )
+        SaloonBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SP"), 3, nil, CoD.StratTester.OnDvarChanged )
+        SaloonBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_HC"), 4, nil, CoD.StratTester.OnDvarChanged )
+
+        local currentBuildableVal = UIExpression.DvarInt( nil, "st_buried_saloon_buildable")
+        if UIExpression.DvarString( nil, "st_buried_saloon_buildable") == "" then
+            currentBuildableVal = 3
+            Engine.SetDvar("st_buried_saloon_buildable", currentBuildableVal )
+        end
+        SaloonBuildableChoice:setChoice( currentBuildableVal )
+
+
+        local ChurchBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_CHURCH_BURIED"), "st_buried_jug_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_JUG_BURIED"))
+        ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SW"), 1, nil, CoD.StratTester.OnDvarChanged )
+        ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_TB"), 2, nil, CoD.StratTester.OnDvarChanged )
+        ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SP"), 3, nil, CoD.StratTester.OnDvarChanged )
+        ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_HC"), 4, nil, CoD.StratTester.OnDvarChanged )
+
+        local currentBuildableVal = UIExpression.DvarInt( nil, "st_buried_church_buildable")
+        if UIExpression.DvarString( nil, "st_buried_church_buildable") == "" then
+            currentBuildableVal = 4
+            Engine.SetDvar("st_buried_church_buildable", currentBuildableVal )
+        end
+        ChurchBuildableChoice:setChoice( currentBuildableVal )
 
         local BarricadesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BARRICADES_BURIED"), "st_keepBarricades", Engine.Localize("ST_MENU_MAP_BARRICADES_BURIED_DESC"))
         CoD.StratTester.AddChoices_OnOrOff( BarricadesChoice, 0)

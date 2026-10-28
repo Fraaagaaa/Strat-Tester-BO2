@@ -519,4 +519,16 @@ LANG_ENGLISH        "ドック"
 REFERENCE           ST_MENU_LOCATION_JUG
 LANG_ENGLISH        "ジャガーノグ"
 
+REFERENCE           ST_MENU_EQ_HC
+LANG_ENGLISH       "ヘッドチョッパー"
+
+REFERENCE           ST_MENU_EQ_TB
+LANG_ENGLISH        "で タービン"
+
+REFERENCE           ST_MENU_EQ_SP
+LANG_ENGLISH       "トランプル・スチーム "
+
+REFERENCE           ST_MENU_EQ_SW
+LANG_ENGLISH       "サブサーフェス・レゾネーター"
+
 ENDMARKER
