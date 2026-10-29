@@ -36,7 +36,7 @@
 #define SPRINGPAD_ANGLES (64.2, 180, 0)
 #define HEADCHOPPER_ANGLES (61.5365, 0, 0.216167)
 
-#define SPRINGPAD_OFFSET (5, 0, 21)
+#define SPRINGPAD_OFFSET (5, 0, 21 * isburied())
 #define HEADCHOPPER_OFFSET (0, 0, 15)
 
 #define SPRINGPAD "equip_springpad_zm"
@@ -220,7 +220,6 @@ createBuildable(buildable, tableOrigin, yaw, dvar)
     b.trigger = spawn("trigger_radius", b.tableOrigin, 40, 70, 140);
     b.trigger.targetname = "shield_trigger";
     b.trigger SetCursorHint("HINT_NOICON");
-    b.trigger SetHintString(b.hintstring);
 
     if(isdefined(dvar))
     {
@@ -230,17 +229,17 @@ createBuildable(buildable, tableOrigin, yaw, dvar)
     else
     {
         if(buildable == SPRINGPAD)
-            b setBuildableData(SPRINGPAD_ID);
+            b thread setBuildableData(SPRINGPAD_ID);
         else if(buildable == TURBINE)
-            b setBuildableData(TURBINE_ID);
+            b thread setBuildableData(TURBINE_ID);
         else if(buildable == SUBWOOFER)
-            b setBuildableData(SUBWOOFER_ID);
+            b thread setBuildableData(SUBWOOFER_ID);
         else if(buildable == HEADCHOPPER)
-            b setBuildableData(HEADCHOPPER_ID);
+            b thread setBuildableData(HEADCHOPPER_ID);
         else if(buildable == SHIELD_MOB)
-            b setBuildableData(SHIELD_MOB_ID);
+            b thread setBuildableData(SHIELD_MOB_ID);
         else if(buildable == SHIELD_ORIGINS)
-            b setBuildableData(SHIELD_ORIGINS_ID);
+            b thread setBuildableData(SHIELD_ORIGINS_ID);
     }
 
     while(true)
@@ -269,8 +268,6 @@ buildableWatchDvarChange()
     while(true)
     {
         self setBuildableData(newBuildable);
-        self.trigger SetHintString(self.hintstring);
-
         level waittill("dvar_" + self.dvar + "_changed", newBuildable);
         newBuildable = int(newBuildable);
     }
@@ -296,7 +293,7 @@ setBuildableData(id)
         self.model setmodel(TURBINE_MODEL);
         angles = TURBINE_ANGLES;
     }
-    else if(id == SPRINGPAD_ID && isburied())
+    else if(id == SPRINGPAD_ID)
     {
         if(isburied())
             self.hintstring = SPRINGPAD_STRING_BURIED;
@@ -327,6 +324,8 @@ setBuildableData(id)
         self.hintstring = SHIELD_STRING;
         self.model setmodel(SHIELD_ORIGINS_MODEL);
     }
+
+    self.trigger SetHintString(self.hintstring);
 
     if(isdefined(angles))
         self.model RotateTo((angles[0], self.tableYaw, angles[2]), 0.05);

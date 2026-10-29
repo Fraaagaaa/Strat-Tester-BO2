@@ -502,7 +502,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         SaloonBuildableChoice:setChoice( currentBuildableVal )
 
 
-        local ChurchBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_CHURCH_BURIED"), "st_buried_jug_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_JUG_BURIED"))
+        local ChurchBuildableChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_MAP_BUILDABLE_CHURCH_BURIED"), "st_buried_church_buildable", Engine.Localize("ST_MENU_MAP_BUILDABLE_JUG_BURIED"))
         ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SW"), 1, nil, CoD.StratTester.OnDvarChanged )
         ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_TB"), 2, nil, CoD.StratTester.OnDvarChanged )
         ChurchBuildableChoice:addChoice(Engine.Localize("ST_MENU_EQ_SP"), 3, nil, CoD.StratTester.OnDvarChanged )
