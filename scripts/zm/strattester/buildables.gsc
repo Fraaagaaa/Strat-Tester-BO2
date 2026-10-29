@@ -3,6 +3,7 @@
 #include maps\mp\zombies\_zm_buildables;
 #include maps\mp\zombies\_zm_craftables;
 #include maps\mp\zombies\_zm_equipment;
+#include maps\mp\zombies\_zm_unitrigger;
 
 #include scripts\zm\strattester\utility;
 
@@ -11,6 +12,11 @@
 #define BUILDABLE_TABLE_BURIED_SALOON_ORIGIN (665, -1150, 99)
 #define BUILDABLE_TABLE_BURIED_CHURCH_ORIGIN (1271, 1488, 60)
 
+#define BUILDABLE_TRIGGER_BURIED_JUG_ORIGIN (-370, 747, 192)
+#define BUILDABLE_TRIGGER_BURIED_COURT_ORIGIN (-97, 959, 81)
+#define BUILDABLE_TRIGGER_BURIED_SALOON_ORIGIN (670, -1166, 114)
+#define BUILDABLE_TRIGGER_BURIED_CHURCH_ORIGIN (1282.36, 1487.05, 59)
+
 #define BUILDABLE_TABLE_BURIED_JUG_YAW 180
 #define BUILDABLE_TABLE_BURIED_COURT_YAW 0
 #define BUILDABLE_TABLE_BURIED_SALOON_YAW 270
@@ -18,18 +24,19 @@
 
 #define BUILDABLE_TABLE_DIERISE_SPRINGPAD_ORIGIN (1890, 1350.11, 3105)
 #define BUILDABLE_TABLE_DIERISE_SPRINGPAD_YAW 0
-
-#define BUILDABLE_TABLE_DIERISE_SLIQUIFIRE_ORIGIN (2399.31, -327.68, 1181.41)
-#define BUILDABLE_TABLE_DIERISE_SLIQUIFIRE_YAW 150
+#define BUILDABLE_TRIGGER_DIERISE_SPRINGPAD_ORIGIN (1916, 1354, 3097)
 
 #define BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN (3380, 9406, 1407)
 #define BUILDABLE_TABLE_MOB_CAFETERIA_YAW 180
+#define BUILDABLE_TRIGGER_MOB_CAFERERIA_ORIGIN (3363, 9405, 1392)
 
 #define BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN (2315, 700, 50)
 #define BUILDABLE_TABLE_ORIGINS_WIND_YAW 90
+#define BUILDABLE_TRIGGER_ORIGINS_WIND_ORIGIN (2312, 729, 40)
 
 #define BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN (130, -2990, 120) 
 #define BUILDABLE_TABLE_ORIGINS_CHURCH_YAW 15
+#define BUILDABLE_TRIGGER_ORIGINS_CHURCH_ORIGIN (146.353, -2981.08, 108)
 
 #define TURBINE_ANGLES (0, 0, 0)
 #define SUBWOOFER_ANGLES (0, 180, 0)
@@ -217,7 +224,10 @@ createBuildable(buildable, tableOrigin, yaw, dvar)
     b.model.angles = (b.angles + vectorScale((0, 0, 0), 90));
     b.model.origin = tableOrigin;
 
-    b.trigger = spawn("trigger_radius", b.tableOrigin, 40, 70, 140);
+    if(ismob())
+        b.trigger = spawn("trigger_radius", b.tableOrigin + (0, 0, -20), 40, 70, 140);
+    else
+        b.trigger = spawn("trigger_radius", b.tableOrigin, 40, 70, 140);
     b.trigger.targetname = "shield_trigger";
     b.trigger SetCursorHint("HINT_NOICON");
 
@@ -340,25 +350,104 @@ setBuildableData(id)
 
 init_buildables()
 {
-	flag_wait( "initial_blackscreen_passed" );
-	if(isburied())
-	{
-		level thread createBuildable(SUBWOOFER, BUILDABLE_TABLE_BURIED_JUG_ORIGIN, BUILDABLE_TABLE_BURIED_JUG_YAW, "st_buried_jug_buildable");
-		level thread createBuildable(TURBINE, BUILDABLE_TABLE_BURIED_COURT_ORIGIN, BUILDABLE_TABLE_BURIED_COURT_YAW, "st_buried_court_buildable");
-		level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_BURIED_SALOON_ORIGIN, BUILDABLE_TABLE_BURIED_SALOON_YAW, "st_buried_saloon_buildable");
-		level thread createBuildable(HEADCHOPPER, BUILDABLE_TABLE_BURIED_CHURCH_ORIGIN, BUILDABLE_TABLE_BURIED_CHURCH_YAW, "st_buried_church_buildable");
-	}
-	else if(isorigins())
-	{
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN, BUILDABLE_TABLE_ORIGINS_CHURCH_YAW);
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN, BUILDABLE_TABLE_ORIGINS_WIND_YAW);
-	}
-	else if(ismob())
-	{
-		level thread createBuildable(SHIELD_MOB, BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN, BUILDABLE_TABLE_MOB_CAFETERIA_YAW);
-	}
-	else if(isdierise())
-	{
-		level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_DIERISE_SPRINGPAD_ORIGIN, BUILDABLE_TABLE_DIERISE_SPRINGPAD_YAW);
-	}
+    flag_wait("initial_blackscreen_passed");
+
+    originArray = [];
+
+    if(isburied())
+    {
+        level thread createBuildable(SUBWOOFER, BUILDABLE_TABLE_BURIED_JUG_ORIGIN, BUILDABLE_TABLE_BURIED_JUG_YAW, "st_buried_jug_buildable");
+        level thread createBuildable(TURBINE, BUILDABLE_TABLE_BURIED_COURT_ORIGIN, BUILDABLE_TABLE_BURIED_COURT_YAW, "st_buried_court_buildable");
+        level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_BURIED_SALOON_ORIGIN, BUILDABLE_TABLE_BURIED_SALOON_YAW, "st_buried_saloon_buildable");
+        level thread createBuildable(HEADCHOPPER, BUILDABLE_TABLE_BURIED_CHURCH_ORIGIN, BUILDABLE_TABLE_BURIED_CHURCH_YAW, "st_buried_church_buildable");
+
+        originArray[0] = BUILDABLE_TRIGGER_BURIED_JUG_ORIGIN;
+        originArray[1] = BUILDABLE_TRIGGER_BURIED_COURT_ORIGIN;
+        originArray[2] = BUILDABLE_TRIGGER_BURIED_SALOON_ORIGIN;
+        originArray[3] = BUILDABLE_TRIGGER_BURIED_CHURCH_ORIGIN;
+    }
+    else if(isorigins())
+    {
+        level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN, BUILDABLE_TABLE_ORIGINS_CHURCH_YAW);
+        level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN, BUILDABLE_TABLE_ORIGINS_WIND_YAW);
+
+        originArray[0] = BUILDABLE_TRIGGER_ORIGINS_WIND_ORIGIN;
+        originArray[1] = BUILDABLE_TRIGGER_ORIGINS_CHURCH_ORIGIN;
+    }
+    else if(ismob())
+    {
+        level thread createBuildable(SHIELD_MOB, BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN, BUILDABLE_TABLE_MOB_CAFETERIA_YAW);
+
+        originArray[0] = BUILDABLE_TRIGGER_MOB_CAFERERIA_ORIGIN;
+    }
+    else if(isdierise())
+    {
+        level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_DIERISE_SPRINGPAD_ORIGIN, BUILDABLE_TABLE_DIERISE_SPRINGPAD_YAW);
+
+        originArray[0] = BUILDABLE_TRIGGER_DIERISE_SPRINGPAD_ORIGIN;
+    }
+    level thread destroyTriggers(originArray);
+}
+
+findBuildableStubNear(origin)
+{
+    if(isdefined(level.buildable_stubs))
+    {
+        foreach(stub in level.buildable_stubs)
+        {
+            if(!isdefined(stub.origin) || !isdefined(stub.registered) || !stub.registered)
+                continue;
+
+            if(distanceSquared(stub.origin, origin) <= 144)
+                return stub;
+        }
+    }
+
+    if(isdefined(level.a_uts_craftables))
+    {
+        foreach(stub in level.a_uts_craftables)
+        {
+            if(!isdefined(stub.origin) || !isdefined(stub.registered) || !stub.registered)
+                continue;
+
+            if(distanceSquared(stub.origin, origin) <= 144)
+                return stub;
+        }
+    }
+
+    return undefined;
+}
+
+destroyTriggers(originArray)
+{
+    removed = [];
+    count = 0;
+    total = originArray.size;
+
+    while(count < total)
+    {
+        for(i = 0; i < total; i++)
+        {
+            if(isdefined(removed[i]))
+                continue;
+
+            stub = findBuildableStubNear(originArray[i]);
+
+            if(!isdefined(stub))
+                continue;
+
+            maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(stub);
+
+            removed[i] = 1;
+            count++;
+
+            println("Triggers removed: " + count + "/" + total);
+            println("Triggers remaining: " + (total - count));
+        }
+
+        if(count < total)
+            wait 0.2;
+    }
+
+    println("All buildable triggers removed!");
 }

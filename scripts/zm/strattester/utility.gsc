@@ -213,6 +213,7 @@ killHorde()
     {
         if ( !isdefined( nuked_zombie ) )
             continue;
+		println(nuked_zombie.targetname);
 
         if ( is_magic_bullet_shield_enabled( nuked_zombie ) )
             continue;
@@ -728,4 +729,41 @@ printCraftingTables()
             println("Angles: " + stub.model.angles);
         }
     }
+}
+
+printAllTriggers()
+{
+	flag_wait("initial_blackscreen_passed");
+	wait 300;
+    ents = getEntArray();
+    count = 0;
+
+    foreach(ent in ents)
+    {
+        if(!isdefined(ent.classname))
+            continue;
+
+        if(getSubStr(ent.classname, 0, 8) != "trigger_")
+            continue;
+
+        if(!isdefined(ent.origin))
+            continue;
+		
+        println("TRIGGER " + count);
+        println("Classname: " + ent.classname);
+        println("Origin: " + ent.origin);
+
+        if(isdefined(ent.angles))
+            println("Angles: " + ent.angles);
+
+        if(isdefined(ent.targetname))
+            println("Targetname: " + ent.targetname);
+
+        if(isdefined(ent.script_noteworthy))
+            println("Script Noteworthy: " + ent.script_noteworthy);
+
+        count++;
+    }
+
+    println("Total triggers: " + count);
 }
