@@ -42,7 +42,6 @@ init()
 	level thread readChat();
     level thread wait_for_players();
     level thread track_playinground();
-    level thread printCraftingTables();
 	setDvar("player_reviveTriggerRadius", 64);
 	setDvar("revive_trigger_radius", 75);
     
