@@ -30,10 +30,7 @@ init_start()
 	level thread track_rounds();
     level thread turn_on_power();
     level thread remove_boards_from_windows();
-	if(isburied())
-    	level thread changeRound(getDvarInt("st_round"), 2); // This avoids killing Leroy
-	else
-    	level thread changeRound(getDvarInt("st_round"));
+    level thread changeRound(getDvarInt("st_round"));
 
 	setDvar("magic_chest_movable", !isburied());
 }
