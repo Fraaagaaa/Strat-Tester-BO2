@@ -6,31 +6,38 @@
 
 #include scripts\zm\strattester\utility;
 
-#define BUILDABLE_BURIED_JUG_ORIGIN (-340, 747.4, 188)
-#define BUILDABLE_BURIED_COURT_ORIGIN (-107.4, 951.4, 76)
-#define BUILDABLE_BURIED_SALOON_ORIGIN (675.67, -1145.29, 116.78)
-#define BUILDABLE_BURIED_CHURCH_ORIGIN (1262.05, 1488.44, 60.15)
+#define BUILDABLE_TABLE_BURIED_JUG_ORIGIN (-348.5, 747, 188)
+#define BUILDABLE_TABLE_BURIED_COURT_ORIGIN (-111, 950, 76)
+#define BUILDABLE_TABLE_BURIED_SALOON_ORIGIN (665, -1150, 99)
+#define BUILDABLE_TABLE_BURIED_CHURCH_ORIGIN (1271, 1488, 60)
 
-#define BUILDABLE_BURIED_JUG_ANGLES (0, 180, 0)
-#define BUILDABLE_BURIED_COURT_ANGLES (0, -180, 0)
-#define BUILDABLE_BURIED_SALOON_ANGLES (61.5365, 270.343, 0.216167)
-#define BUILDABLE_BURIED_CHURCH_ANGLES (0, 340, 0)
+#define BUILDABLE_TABLE_BURIED_JUG_YAW 180
+#define BUILDABLE_TABLE_BURIED_COURT_YAW 0
+#define BUILDABLE_TABLE_BURIED_SALOON_YAW 270
+#define BUILDABLE_TABLE_BURIED_CHURCH_YAW 340
 
-#define BUILDABLE_DIERISE_SPRINGPAD_ORIGIN (1890, 1350.11, 3105)
-#define BUILDABLE_DIERISE_SPRINGPAD_ANGLES (75, 0, 0)
+#define BUILDABLE_TABLE_DIERISE_SPRINGPAD_ORIGIN (1890, 1350.11, 3105)
+#define BUILDABLE_TABLE_DIERISE_SPRINGPAD_YAW 0
 
-#define BUILDABLE_DIERISE_SLIQUIFIRE_ORIGIN (2399.31, -327.68, 1181.41)
-#define BUILDABLE_DIERISE_SLIQUIFIRE_ANGLES (0, 150.4, 0)
+#define BUILDABLE_TABLE_DIERISE_SLIQUIFIRE_ORIGIN (2399.31, -327.68, 1181.41)
+#define BUILDABLE_TABLE_DIERISE_SLIQUIFIRE_YAW 150
 
-#define BUILDABLE_MOB_CAFETERIA_ORIGIN (3380, 9406, 1407)
-#define BUILDABLE_MOB_CAFETERIA_ANGLES (0, 180, 0)
+#define BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN (3380, 9406, 1407)
+#define BUILDABLE_TABLE_MOB_CAFETERIA_YAW 180
 
-#define BUILDABLE_ORIGINS_WIND_ORIGIN (2308, 700, 50)
-#define BUILDABLE_ORIGINS_WIND_ANGLES (0, 90, 0)
+#define BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN (2308, 700, 50)
+#define BUILDABLE_TABLE_ORIGINS_WIND_YAW 90
 
-#define BUILDABLE_ORIGINS_CHURCH_ORIGIN (130, -2990, 120) 
-#define BUILDABLE_ORIGINS_CHURCH_ANGLES (0, 15, 0) 
+#define BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN (130, -2990, 120) 
+#define BUILDABLE_TABLE_ORIGINS_CHURCH_YAW 15
 
+#define TURBINE_ANGLES (0, 0, 0)
+#define SUBWOOFER_ANGLES (0, 180, 0)
+#define SPRINGPAD_ANGLES (64.2, 180, 0)
+#define HEADCHOPPER_ANGLES (61.5365, 0, 0.216167)
+
+#define SPRINGPAD_OFFSET (5, 0, 21)
+#define HEADCHOPPER_OFFSET (0, 0, 15)
 
 #define SPRINGPAD "equip_springpad_zm"
 #define SUBWOOFER "equip_subwoofer_zm"
@@ -197,19 +204,20 @@ equipment_buy( equipment )
     self equipment_give( equipment );
 }
 
-createBuildable(buildable, origin, angles, hintstring, dvar)
+createBuildable(buildable, tableOrigin, yaw, dvar)
 {
     b = spawnStruct();
 
     b.build = buildable;
-    b.origin = origin;
-    b.angles = angles;
-    b.hintstring = hintstring;
+    b.tableOrigin = tableOrigin;
+    b.tableYaw = yaw;
+    b.hintstring = undefined;
 
-    b.model = spawn("script_model", (b.origin));
+    b.model = spawn("script_model", (b.tableOrigin));
     b.model.angles = (b.angles + vectorScale((0, 0, 0), 90));
+    b.model.origin = tableOrigin;
 
-    b.trigger = spawn("trigger_radius", b.origin, 40, 70, 140);
+    b.trigger = spawn("trigger_radius", b.tableOrigin, 40, 70, 140);
     b.trigger.targetname = "shield_trigger";
     b.trigger SetCursorHint("HINT_NOICON");
     b.trigger SetHintString(b.hintstring);
@@ -270,35 +278,42 @@ buildableWatchDvarChange()
 
 setBuildableData(id)
 {
+    angles = undefined;
+    offset = undefined;
+
     if(id == SUBWOOFER_ID)
     {
         self.build = SUBWOOFER;
         self.hintstring = SUBWOOFER_STRING;
         self.model setmodel(SUBWOOFER_MODEL);
+        self.model.angles = SUBWOOFER_ANGLES;
+        angles = SUBWOOFER_ANGLES;
     }
     else if(id == TURBINE_ID)
     {
         self.build = TURBINE;
         self.hintstring = TURBINE_STRING;
         self.model setmodel(TURBINE_MODEL);
+        angles = TURBINE_ANGLES;
     }
     else if(id == SPRINGPAD_ID && isburied())
     {
+        if(isburied())
+            self.hintstring = SPRINGPAD_STRING_BURIED;
+        else
+            self.hintstring = SPRINGPAD_STRING_DIERISE;
         self.build = SPRINGPAD;
-        self.hintstring = SPRINGPAD_STRING_BURIED;
         self.model setmodel(SPRINGPAD_MODEL);
-    }
-    else if(id == SPRINGPAD_ID && isdierise())
-    {
-        self.build = SPRINGPAD;
-        self.hintstring = SPRINGPAD_STRING_DIERISE;
-        self.model setmodel(SPRINGPAD_MODEL);
+        angles = SPRINGPAD_ANGLES;
+        offset = SPRINGPAD_OFFSET;
     }
     else if(id == HEADCHOPPER_ID)
     {
         self.build = HEADCHOPPER;
         self.hintstring = HEADCHOPPER_STRING;
         self.model setmodel(HEADCHOPPER_MODEL);
+        angles = HEADCHOPPER_ANGLES;
+        offset = HEADCHOPPER_OFFSET;
     }
     else if(id == SHIELD_MOB_ID)
     {
@@ -312,6 +327,13 @@ setBuildableData(id)
         self.hintstring = SHIELD_STRING;
         self.model setmodel(SHIELD_ORIGINS_MODEL);
     }
+
+    if(isdefined(angles))
+        self.model RotateTo((angles[0], self.tableYaw, angles[2]), 0.05);
+    if(isdefined(offset))
+        self.model moveTo(self.tableOrigin + offset, 0.05);
+    else
+        self.model moveTo(self.tableOrigin, 0.05);
 }
 
 init_buildables()
@@ -319,22 +341,22 @@ init_buildables()
 	flag_wait( "initial_blackscreen_passed" );
 	if(isburied())
 	{
-		level thread createBuildable(SUBWOOFER, BUILDABLE_BURIED_JUG_ORIGIN, BUILDABLE_BURIED_JUG_ANGLES, SUBWOOFER_STRING, "st_buried_jug_buildable");
-		level thread createBuildable(TURBINE, BUILDABLE_BURIED_COURT_ORIGIN, BUILDABLE_BURIED_COURT_ANGLES, TURBINE_STRING, "st_buried_court_buildable");
-		level thread createBuildable(SPRINGPAD, BUILDABLE_BURIED_SALOON_ORIGIN, BUILDABLE_BURIED_SALOON_ANGLES, SPRINGPAD_STRING_BURIED, "st_buried_saloon_buildable");
-		level thread createBuildable(HEADCHOPPER, BUILDABLE_BURIED_CHURCH_ORIGIN, BUILDABLE_BURIED_CHURCH_ANGLES, HEADCHOPPER_STRING, "st_buried_church_buildable");
+		level thread createBuildable(SUBWOOFER, BUILDABLE_TABLE_BURIED_JUG_ORIGIN, BUILDABLE_TABLE_BURIED_JUG_YAW, "st_buried_jug_buildable");
+		level thread createBuildable(TURBINE, BUILDABLE_TABLE_BURIED_COURT_ORIGIN, BUILDABLE_TABLE_BURIED_COURT_YAW, "st_buried_court_buildable");
+		level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_BURIED_SALOON_ORIGIN, BUILDABLE_TABLE_BURIED_SALOON_YAW, "st_buried_saloon_buildable");
+		level thread createBuildable(HEADCHOPPER, BUILDABLE_TABLE_BURIED_CHURCH_ORIGIN, BUILDABLE_TABLE_BURIED_CHURCH_YAW, "st_buried_church_buildable");
 	}
 	else if(isorigins())
 	{
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_CHURCH_ORIGIN, BUILDABLE_ORIGINS_CHURCH_ANGLES, SHIELD_STRING);
-		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_ORIGINS_WIND_ORIGIN, BUILDABLE_ORIGINS_WIND_ANGLES, SHIELD_STRING);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN, BUILDABLE_TABLE_ORIGINS_CHURCH_YAW);
+		level thread createBuildable(SHIELD_ORIGINS, BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN, BUILDABLE_TABLE_ORIGINS_WIND_YAW);
 	}
 	else if(ismob())
 	{
-		level thread createBuildable(SHIELD_MOB, BUILDABLE_MOB_CAFETERIA_ORIGIN, BUILDABLE_MOB_CAFETERIA_ANGLES, SHIELD_STRING);
+		level thread createBuildable(SHIELD_MOB, BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN, BUILDABLE_TABLE_MOB_CAFETERIA_YAW);
 	}
 	else if(isdierise())
 	{
-		level thread createBuildable(SPRINGPAD, BUILDABLE_DIERISE_SPRINGPAD_ORIGIN, BUILDABLE_DIERISE_SPRINGPAD_ANGLES, SPRINGPAD_STRING_DIERISE);
+		level thread createBuildable(SPRINGPAD, BUILDABLE_TABLE_DIERISE_SPRINGPAD_ORIGIN, BUILDABLE_TABLE_DIERISE_SPRINGPAD_YAW);
 	}
 }

@@ -576,15 +576,14 @@ playerPosition()
     self endon( "disconnect" );
     level endon( "end_game" );
 
-    // Helper to make one label + one value element pair at a given Y position.
-    // Label uses settext() — one configstring ever per unique label string.
-    // Value uses setvalue() — zero configstrings per update.
-    lx = 10;   // left edge X for label column
-    vx = 52;   // left edge X for value column
+    lx = 10;
+    vx = 52;
+    ax = 160;
+    av = 215;
 
     hud_xl = newclienthudelem( self );
     hud_xl.horzalign = "left"; hud_xl.vertalign = "bottom";
-    hud_xl.alignx = "left";   hud_xl.aligny = "bottom";
+    hud_xl.alignx = "left"; hud_xl.aligny = "bottom";
     hud_xl.x = lx; hud_xl.y = -135;
     hud_xl.font = "small"; hud_xl.fontscale = 1.1;
     hud_xl.color = ( 0.6, 1, 0.6 ); hud_xl.alpha = 0; hud_xl.foreground = 1;
@@ -593,7 +592,7 @@ playerPosition()
 
     hud_xv = newclienthudelem( self );
     hud_xv.horzalign = "left"; hud_xv.vertalign = "bottom";
-    hud_xv.alignx = "left";   hud_xv.aligny = "bottom";
+    hud_xv.alignx = "left"; hud_xv.aligny = "bottom";
     hud_xv.x = vx; hud_xv.y = -135;
     hud_xv.font = "small"; hud_xv.fontscale = 1.1;
     hud_xv.color = ( 1, 1, 1 ); hud_xv.alpha = 0; hud_xv.foreground = 1;
@@ -602,7 +601,7 @@ playerPosition()
 
     hud_yl = newclienthudelem( self );
     hud_yl.horzalign = "left"; hud_yl.vertalign = "bottom";
-    hud_yl.alignx = "left";   hud_yl.aligny = "bottom";
+    hud_yl.alignx = "left"; hud_yl.aligny = "bottom";
     hud_yl.x = lx; hud_yl.y = -120;
     hud_yl.font = "small"; hud_yl.fontscale = 1.1;
     hud_yl.color = ( 0.6, 1, 0.6 ); hud_yl.alpha = 0; hud_yl.foreground = 1;
@@ -611,7 +610,7 @@ playerPosition()
 
     hud_yv = newclienthudelem( self );
     hud_yv.horzalign = "left"; hud_yv.vertalign = "bottom";
-    hud_yv.alignx = "left";   hud_yv.aligny = "bottom";
+    hud_yv.alignx = "left"; hud_yv.aligny = "bottom";
     hud_yv.x = vx; hud_yv.y = -120;
     hud_yv.font = "small"; hud_yv.fontscale = 1.1;
     hud_yv.color = ( 1, 1, 1 ); hud_yv.alpha = 0; hud_yv.foreground = 1;
@@ -620,7 +619,7 @@ playerPosition()
 
     hud_zl = newclienthudelem( self );
     hud_zl.horzalign = "left"; hud_zl.vertalign = "bottom";
-    hud_zl.alignx = "left";   hud_zl.aligny = "bottom";
+    hud_zl.alignx = "left"; hud_zl.aligny = "bottom";
     hud_zl.x = lx; hud_zl.y = -105;
     hud_zl.font = "small"; hud_zl.fontscale = 1.1;
     hud_zl.color = ( 0.6, 1, 0.6 ); hud_zl.alpha = 0; hud_zl.foreground = 1;
@@ -629,17 +628,35 @@ playerPosition()
 
     hud_zv = newclienthudelem( self );
     hud_zv.horzalign = "left"; hud_zv.vertalign = "bottom";
-    hud_zv.alignx = "left";   hud_zv.aligny = "bottom";
+    hud_zv.alignx = "left"; hud_zv.aligny = "bottom";
     hud_zv.x = vx; hud_zv.y = -105;
     hud_zv.font = "small"; hud_zv.fontscale = 1.1;
     hud_zv.color = ( 1, 1, 1 ); hud_zv.alpha = 0; hud_zv.foreground = 1;
     hud_zv setvalue( 0 );
     hud_zv.hidewheninmenu = true;
 
+    hud_pitchl = newclienthudelem( self );
+    hud_pitchl.horzalign = "left"; hud_pitchl.vertalign = "bottom";
+    hud_pitchl.alignx = "left"; hud_pitchl.aligny = "bottom";
+    hud_pitchl.x = ax; hud_pitchl.y = -120;
+    hud_pitchl.font = "small"; hud_pitchl.fontscale = 1.1;
+    hud_pitchl.color = ( 0.6, 1, 0.6 ); hud_pitchl.alpha = 0; hud_pitchl.foreground = 1;
+    hud_pitchl settext( "Pitch:" );
+    hud_pitchl.hidewheninmenu = true;
+
+    hud_pitchv = newclienthudelem( self );
+    hud_pitchv.horzalign = "left"; hud_pitchv.vertalign = "bottom";
+    hud_pitchv.alignx = "left"; hud_pitchv.aligny = "bottom";
+    hud_pitchv.x = av; hud_pitchv.y = -120;
+    hud_pitchv.font = "small"; hud_pitchv.fontscale = 1.1;
+    hud_pitchv.color = ( 1, 1, 1 ); hud_pitchv.alpha = 0; hud_pitchv.foreground = 1;
+    hud_pitchv setvalue( 0 );
+    hud_pitchv.hidewheninmenu = true;
+
     hud_yawl = newclienthudelem( self );
     hud_yawl.horzalign = "left"; hud_yawl.vertalign = "bottom";
-    hud_yawl.alignx = "left";   hud_yawl.aligny = "bottom";
-    hud_yawl.x = lx; hud_yawl.y = -90;
+    hud_yawl.alignx = "left"; hud_yawl.aligny = "bottom";
+    hud_yawl.x = ax; hud_yawl.y = -105;
     hud_yawl.font = "small"; hud_yawl.fontscale = 1.1;
     hud_yawl.color = ( 0.6, 1, 0.6 ); hud_yawl.alpha = 0; hud_yawl.foreground = 1;
     hud_yawl settext( "Yaw:" );
@@ -647,8 +664,8 @@ playerPosition()
 
     hud_yawv = newclienthudelem( self );
     hud_yawv.horzalign = "left"; hud_yawv.vertalign = "bottom";
-    hud_yawv.alignx = "left";   hud_yawv.aligny = "bottom";
-    hud_yawv.x = vx; hud_yawv.y = -90;
+    hud_yawv.alignx = "left"; hud_yawv.aligny = "bottom";
+    hud_yawv.x = av; hud_yawv.y = -105;
     hud_yawv.font = "small"; hud_yawv.fontscale = 1.1;
     hud_yawv.color = ( 1, 1, 1 ); hud_yawv.alpha = 0; hud_yawv.foreground = 1;
     hud_yawv setvalue( 0 );
@@ -656,23 +673,28 @@ playerPosition()
 
     while ( isdefined( self ) )
     {
-        wait 0.1;
+        wait 0.05;
 
-        alpha = getDvarInt("st_debugPosition");
+        alpha = getDvarInt( "st_debugPosition" );
 
-        hud_xl.alpha  = alpha; hud_xv.alpha  = alpha;
-        hud_yl.alpha  = alpha; hud_yv.alpha  = alpha;
-        hud_zl.alpha  = alpha; hud_zv.alpha  = alpha;
+        hud_xl.alpha = alpha; hud_xv.alpha = alpha;
+        hud_yl.alpha = alpha; hud_yv.alpha = alpha;
+        hud_zl.alpha = alpha; hud_zv.alpha = alpha;
+
+        hud_pitchl.alpha = alpha; hud_pitchv.alpha = alpha;
         hud_yawl.alpha = alpha; hud_yawv.alpha = alpha;
 
         if ( !alpha )
             continue;
 
-        pos    = self.origin;
+        pos = self.origin;
         angles = self getplayerangles();
-        hud_xv   setvalue( int( pos[0] ) );
-        hud_yv   setvalue( int( pos[1] ) );
-        hud_zv   setvalue( int( pos[2] ) );
+
+        hud_xv setvalue( int( pos[0] ) );
+        hud_yv setvalue( int( pos[1] ) );
+        hud_zv setvalue( int( pos[2] ) );
+
+        hud_pitchv setvalue( int( angles[0] ) );
         hud_yawv setvalue( int( angles[1] ) );
     }
 }
