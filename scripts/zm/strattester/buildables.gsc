@@ -25,7 +25,7 @@
 #define BUILDABLE_TABLE_MOB_CAFETERIA_ORIGIN (3380, 9406, 1407)
 #define BUILDABLE_TABLE_MOB_CAFETERIA_YAW 180
 
-#define BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN (2308, 700, 50)
+#define BUILDABLE_TABLE_ORIGINS_WIND_ORIGIN (2315, 700, 50)
 #define BUILDABLE_TABLE_ORIGINS_WIND_YAW 90
 
 #define BUILDABLE_TABLE_ORIGINS_CHURCH_ORIGIN (130, -2990, 120) 
@@ -329,6 +329,9 @@ setBuildableData(id)
 
     if(isdefined(angles))
         self.model RotateTo((angles[0], self.tableYaw, angles[2]), 0.05);
+    else
+        self.model RotateTo((0, self.tableYaw, 0), 0.05);
+
     if(isdefined(offset))
         self.model moveTo(self.tableOrigin + offset, 0.05);
     else
