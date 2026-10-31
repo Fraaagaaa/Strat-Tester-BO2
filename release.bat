@@ -14,6 +14,8 @@ if not exist "%RELEASE_DIR%" mkdir "%RELEASE_DIR%"
 
 if exist "%RELEASE_DIR%\mod.iwd" del /Q "%RELEASE_DIR%\mod.iwd"
 
+XCOPY ".\localized\st_watermark.str" ".\english\localizedstrings\st_watermark.str" /Y
+
 "%WINRAR%" a -afzip -r "%RELEASE_DIR%\mod.iwd" "ui\*"
 
 if exist "%RELEASE_DIR%\%EN_NAME%" rmdir /S /Q "%RELEASE_DIR%\%EN_NAME%"
