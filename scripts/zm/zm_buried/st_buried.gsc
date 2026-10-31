@@ -15,6 +15,7 @@ init()
     replaceFunc(getfunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink"), ::subwooferthink);
 	flag_wait("initial_blackscreen_passed");
     deleteBarricades();
+    level.sloth sloth_set_state("roam");
 }
 
 deleteBarricades()
@@ -173,7 +174,6 @@ subwooferthink( weapon, armed )
 
 deleteSlothbarricades()
 {
-
     deleteSlothBarricade( "juggernaut_alley" );
     deleteSlothBarricade( "candystore_alley" );
     deleteSlothBarricade( "jail" );

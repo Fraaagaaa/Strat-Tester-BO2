@@ -164,13 +164,16 @@ isgreenrun()
 	return (istown() || istranzit() || isfarm() || isdepot());
 }
 
-changeRound(rnd, w)
+changeRound(rnd, killZombies)
 {
-	if(!isdefined(w)) w = 0;
-	wait w;
+	if(!isdefined(killZombies))
+		killZombies = true;
+
 	setDvar("st_round", rnd);
 	level.round_number = rnd;
-	endRound();
+
+	if(killZombies)
+		endRound();
 	changeSpawnRate();
 }
 
@@ -213,7 +216,6 @@ killHorde()
     {
         if ( !isdefined( nuked_zombie ) )
             continue;
-		println(nuked_zombie.targetname);
 
         if ( is_magic_bullet_shield_enabled( nuked_zombie ) )
             continue;

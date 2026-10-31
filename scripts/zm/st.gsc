@@ -30,6 +30,9 @@ main()
 init()
 {
 	level.strat_tester = true;
+
+	setDvar("ai_disableSpawn", 0); // Make sure this is set to 0 otherwise Leroy wont spawn.
+
 	level thread enable_cheats();
 	level thread init_box();
 	level thread init_buildables();
@@ -47,9 +50,6 @@ init()
     
     if(!isDefined(level.total_chest_accessed))
         level.total_chest_accessed = 0;
-	flag_wait("initial_blackscreen_passed");
-	level thread openAllDoors();
-    level thread round_pause_st();
 }
 
 wait_for_players()

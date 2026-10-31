@@ -29,8 +29,10 @@ init_start()
 {
 	level thread track_rounds();
     level thread turn_on_power();
+	level thread openAllDoors();
+    level thread round_pause_st();
     level thread remove_boards_from_windows();
-    level thread changeRound(getDvarInt("st_round"));
+    level thread changeRound(getDvarInt("st_round"), false);
 
 	setDvar("magic_chest_movable", !isburied());
 }
@@ -106,17 +108,19 @@ openAllDoors()
 
 zombie_spawn_wait()
 {
-	setDvar("ai_disableSpawn", 1);
+	// setDvar("ai_disableSpawn", 1);
 
-	wait getDvarInt("st_delay");
+	// wait getDvarInt("st_delay");
 
-	setDvar("ai_disableSpawn", 0);
+	// setDvar("ai_disableSpawn", 0);
 }
 
 round_pause_st()
 {   
+	flag_wait("initial_blackscreen_passed");
+
 	if(ismob())
-	flag_wait( "afterlife_start_over" );
+		flag_wait("afterlife_start_over");
 
 	level.countdown_hud = create_simple_hud();
 	level.countdown_hud.fontscale = 24;
@@ -131,7 +135,6 @@ round_pause_st()
 	level.countdown_hud.horzalign = "user_center";
 	level.countdown_hud.vertalign = "user_center";
 
-	wait 2;
 	level thread zombie_spawn_wait();
 
 	for(delay = getDvarInt("st_delay"); delay > 0; delay--)
