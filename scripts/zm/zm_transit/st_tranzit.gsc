@@ -22,6 +22,7 @@
 
 init()
 {
+    precacheString(&"strattester_jetgun_pct");
 	replacefunc(getfunction("maps/mp/zm_transit_bus", "busschedule"), ::print_busschedule);
 	replaceFunc(getfunction("maps/mp/zombies/_zm_ai_screecher", "screecher_spawning_logic"), ::screecher_spawning_logic);
 
@@ -43,6 +44,7 @@ waitSpawn()
     {
         level waittill("connecting", player);
         player thread fridge();
+        player thread jetgun_hud_watcher();
     }
 }
 
@@ -446,4 +448,30 @@ spawn_turbine(origin)
 {
 	turbine = spawn("script_model", (origin));
 	turbine SetModel("p6_zm_buildable_turbine_mannequin");
+}
+
+jetgun_hud_watcher()
+{
+    self endon("disconnect");
+    while (true)
+    {
+        if (self getcurrentweapon() == "jetgun_zm")
+        {
+            overheated = self isweaponoverheating(0);
+            heat = int(self isweaponoverheating(1));
+
+            if (heat < 0)
+                heat = 0;
+            if (heat > 100)
+                heat = 100;
+
+            self luinotifyevent(&"strattester_jetgun_pct", 2, int(overheated), heat);
+        }
+        else
+        {
+            self luinotifyevent(&"strattester_jetgun_pct", 2, -1, 0);
+        }
+
+        wait 0.01;
+    }
 }

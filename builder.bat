@@ -14,7 +14,7 @@ if %err% EQU 0 (
 if exist "%MOD_BASE%\mod.iwd" del /Q "%MOD_BASE%\mod.iwd"
 
 pushd "%MOD_BASE%"
-"%WINRAR%" a -afzip -r "mod.iwd" "ui\*"
+"%WINRAR%" a -afzip -r "mod.iwd" "ui\*" "ui_mp\*"
 popd
 
 XCOPY "%MOD_BASE%\zone\mod.ff" "%LOCALAPPDATA%\plutonium\storage\t6\mods\%MOD_NAME%\mod.ff" /Y
