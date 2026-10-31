@@ -179,3 +179,4 @@ f()
 - [MJ](https://github.com/mjmodz) for helping me with the perk selection menu.
 - [Astrox](https://www.twitch.tv/lastroxl) for the No Power setups.
 - [AzRy](https://www.twitch.tv/azry_s) for translating the menus into japanese.
+- [Jbleezy](https://github.com/Jbleezy) for making the Jet Gun and Paralyzer overheat display for the HUD in his [BO2 Reimagined mod](https://github.com/Jbleezy/BO2-Reimagined).
