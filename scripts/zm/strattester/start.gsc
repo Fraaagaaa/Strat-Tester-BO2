@@ -108,11 +108,11 @@ openAllDoors()
 
 zombie_spawn_wait()
 {
-	// setDvar("ai_disableSpawn", 1);
+	setDvar("ai_disableSpawn", 1);
 
-	// wait getDvarInt("st_delay");
+	wait getDvarInt("st_delay");
 
-	// setDvar("ai_disableSpawn", 0);
+	setDvar("ai_disableSpawn", 0);
 }
 
 round_pause_st()
