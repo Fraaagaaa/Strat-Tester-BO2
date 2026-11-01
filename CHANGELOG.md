@@ -16,6 +16,7 @@ Changes:
 - Uncap rounds
 - Fix elevators not activiating by power
 - Fix changing round not working in round transitions
+
 # 2.7
 Features added:
 - Wind and Ice Staff timer
@@ -66,5 +67,28 @@ Fixes:
 # 2.5.1
 - Fixed not getting the mulekick weapon back
 - Force the revive trigger radious to be the default one
+
+
+# 2.5.0
+Features added:
+- Localized HUD elements
+- On NukeTown the map will automatically restart untill the Pack A Punch is in the green house
+- The walls inside the crazy place on origins will not fall
+
+Fixes:
+- Fixed some of the menus
+
+# 2.4
+Fixes:
+- Fixed special rounds on Origins and MOTD
+- Fixed infinite afterlife lives
+
+Features added:
+- Added !points command to set the player's score
+- Added an anchor leak counter on the HUD
+
+Changes:
+- Removed the anchor leak counter print
+
 
 Unfortunatly I did not keep track of the changes before this point.

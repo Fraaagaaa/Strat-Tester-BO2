@@ -4,6 +4,8 @@
 - [**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20ES.md)
 - [**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20PT-BR.md)
 
+## [Historial de cambios](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/CHANGELOG.md)
+
 ## Descargas:
 
 - [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)

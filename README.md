@@ -4,7 +4,9 @@
 - [**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20ES.md)
 - [**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20PT-BR.md)
 
-## Downloads:
+## [Changelog](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/CHANGELOG.md)
+
+# Downloads:
 
 - [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)
 - [**Download in english**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
@@ -30,6 +32,7 @@
 > The PT version stands for portuguesse, not plutonium.
 
 # Features
+
 
 > [!TIP]
 > All of the following settings can be changed inside the pause menu.
