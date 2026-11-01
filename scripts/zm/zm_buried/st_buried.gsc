@@ -10,18 +10,25 @@
 #include scripts\zm\strattester\utility;
 #include scripts\zm\strattester\buildables;
 
+#define ARMORY_BARRIER_ORIGIN (-602, -994, 41)
+#define ARMORY_BARRIER2_ORIGIN (-802, -829, 16)
+
 init()
 {
     replacefunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink", ::override_subwooferthink);
 	flag_wait("initial_blackscreen_passed");
     deleteBarricades();
-    level.sloth sloth_set_state("roam");
 }
 
 deleteBarricades()
 {
 	if(!getDvarInt("st_keepBarricades"))
 		deleteSlothbarricades();
+
+    wait 1;
+    activateFountain();
+
+    level.sloth sloth_set_state("roam");
 }
 
 override_subwooferthink( weapon, armed )
@@ -174,10 +181,63 @@ override_subwooferthink( weapon, armed )
 
 deleteSlothbarricades()
 {
-    deleteSlothBarricade( "juggernaut_alley" );
-    deleteSlothBarricade( "candystore_alley" );
-    deleteSlothBarricade( "jail" );
-    deleteSlothBarricade( "mansion" );
-    level notify( "jail_barricade_down" );
+    sloth_triggers = getentarray( "sloth_barricade", "targetname" );
+
+    foreach ( trigger in sloth_triggers )
+    {
+        if(trigger.origin == ARMORY_BARRIER_ORIGIN || trigger.origin == ARMORY_BARRIER2_ORIGIN)
+            continue;
+        trigger deleteBarricade(trigger.script_flag, trigger.target);
+    }
     level notify( "cell_open" );
+    level notify("courtyard_fountain_open");
+    level notify("courtyard_fountain_broken");
+}
+
+deleteBarricade(script_flag, target)
+{
+    if ( isdefined( script_flag ) && level flag_exists( script_flag ) )
+        flag_set( script_flag );
+
+    if ( isdefined( target ) )
+    {
+        barricades = getentarray( target, "targetname" );
+
+        if ( isdefined( barricades ) && barricades.size )
+        {
+            foreach ( barricade in barricades )
+            {
+                if ( isdefined( self.func_no_delete ) )
+                {
+                    barricade [[ self.func_no_delete ]]();
+                    continue;
+                }
+
+                barricade delete();
+            }
+        }
+    }
+
+    if ( isdefined( self.func_no_delete ) )
+        self [[ self.func_no_delete ]]();
+    else
+        self delete();
+}
+
+activateFountain()
+{
+    flag_set("courtyard_fountain_broken");
+
+    if (!flag("maze_fountain_broken"))
+    {
+        trigger = getent("maze_fountain_trigger", "targetname");
+
+        while(!flag("maze_fountain_broken"))
+        {
+            trigger notify("damage", 20000, undefined, undefined, undefined, "MOD_EXPLOSIVE");
+            wait 0.1;
+        }
+    }
+
+    flag_set("fountain_transport_active");
 }
