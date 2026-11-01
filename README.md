@@ -4,6 +4,9 @@
 - [**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20ES.md)
 - [**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20PT-BR.md)
 
+
+This mod is meant to be used alongside [Plutonium](https://plutonium.pw/) and has no support outside this client, if you have problems loading the mod try updating plutonium by running the `plutonium.exe` that you can get from their website.
+
 ## [Changelog](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/CHANGELOG.md)
 
 # Downloads:
