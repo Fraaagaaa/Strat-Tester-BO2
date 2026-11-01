@@ -12,7 +12,7 @@
 
 init()
 {
-    replaceFunc(getfunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink"), ::subwooferthink);
+    replacefunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink", ::override_subwooferthink);
 	flag_wait("initial_blackscreen_passed");
     deleteBarricades();
     level.sloth sloth_set_state("roam");
@@ -24,7 +24,7 @@ deleteBarricades()
 		deleteSlothbarricades();
 }
 
-subwooferthink( weapon, armed )
+override_subwooferthink( weapon, armed )
 {
     self endon( "death" );
     self endon( "disconnect" );

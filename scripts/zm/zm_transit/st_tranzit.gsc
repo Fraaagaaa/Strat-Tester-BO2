@@ -23,8 +23,8 @@
 init()
 {
     precacheString(&"strattester_jetgun_pct");
-	replacefunc(getfunction("maps/mp/zm_transit_bus", "busschedule"), ::print_busschedule);
-	replaceFunc(getfunction("maps/mp/zombies/_zm_ai_screecher", "screecher_spawning_logic"), ::screecher_spawning_logic);
+	replacefunction("maps/mp/zm_transit_bus", "busschedule", ::print_busschedule);
+	replacefunction("maps/mp/zombies/_zm_ai_screecher", "screecher_spawning_logic", ::screecher_spawning_logic);
 
     level thread waitSpawn();
 	flag_wait("initial_blackscreen_passed");

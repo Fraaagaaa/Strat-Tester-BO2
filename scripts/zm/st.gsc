@@ -11,7 +11,6 @@
 #include scripts\zm\strattester\bus;
 #include scripts\zm\strattester\commands;
 #include scripts\zm\strattester\despawners;
-#include scripts\zm\strattester\fixes;
 #include scripts\zm\strattester\hud;
 #include scripts\zm\strattester\menu; 
 #include scripts\zm\strattester\perks;
@@ -23,8 +22,8 @@
 
 main()
 {
-	replaceFunc(getfunction("maps/mp/zombies/_zm_spawner", "zombie_can_drop_powerups"), ::zombie_can_drop_powerups);
-	replaceFunc(getfunction("maps/mp/zombies/_zm", "round_think"), ::round_think);
+	replacefunction("maps/mp/zombies/_zm_spawner", "zombie_can_drop_powerups", ::override_zombie_can_drop_powerups);
+	replacefunction("maps/mp/zombies/_zm", "round_think", ::override_round_think);
 }
 
 init()
@@ -88,7 +87,7 @@ enable_cheats()
 	level.player_out_of_playable_area_monitor = 0;
     level.player_too_many_players_check = 0;
 }
-round_think( restart )
+override_round_think( restart )
 {
     if ( !isdefined( restart ) )
         restart = 0;

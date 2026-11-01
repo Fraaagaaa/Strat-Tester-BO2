@@ -15,7 +15,7 @@ Contador de tiradas de caja y rayguns en la función original para mayor precisi
 
 init_box()
 {
-	replaceFunc(getfunction("maps/mp/zombies/_zm_magicbox", "treasure_chest_weapon_spawn"), ::treasure_chest_weapon_spawn);
+	replacefunction("maps/mp/zombies/_zm_magicbox", "treasure_chest_weapon_spawn", ::override_treasure_chest_weapon_spawn);
 }
 
 fast_chest_move()
@@ -39,7 +39,7 @@ fast_chest_move()
     self.zbarrier.chest_moving = 0;
 }
 
-treasure_chest_weapon_spawn( chest, player, respin )
+override_treasure_chest_weapon_spawn( chest, player, respin )
 {
     if ( isdefined( level.using_locked_magicbox ) && level.using_locked_magicbox )
     {

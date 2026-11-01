@@ -132,7 +132,7 @@ createDvars()
 }
 
 
-zombie_can_drop_powerups(zombie)
+override_zombie_can_drop_powerups(zombie)
 {
     if ( is_tactical_grenade( zombie.damageweapon ) || !flag( "zombie_drop_powerups" ) )
         return false;

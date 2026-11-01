@@ -16,16 +16,16 @@
 
 init()
 {
-	replacefunc(getfunction("maps/mp/zm_tomb_capture_zones", "pack_a_punch_think"), ::pack_a_punch_think);
-	replacefunc(getfunction("maps/mp/zm_tomb_capture_zones", "recapture_round_tracker"), ::recapture_round_tracker);
-	replacefunc(getfunction("maps/mp/zm_tomb_chamber", "move_wall_down"), ::move_wall_down);
-	replacefunc(getfunction("maps/mp/zm_tomb_giant_robot", "zombie_stomp_death"), ::custom_zombie_stomp_death);
-	replacefunc(getfunction("maps/mp/zm_tomb_tank", "flamethrower_damage_zombies"), ::custom_flamethrower_damage_zombies);
-	replacefunc(getfunction("maps/mp/zm_tomb_tank", "tank_drop_powerups"), ::tank_drop_powerups);
-	replacefunc(getfunction("maps/mp/zm_tomb_utility", "watch_staff_usage"), ::watch_staff_usage);
-	replacefunc(getfunction("maps/mp/zombies/_zm_weap_one_inch_punch", "knockdown_zombie_animate_state"), ::custom_knockdown_zombie_animate_state);
-	replacefunc(getfunction("maps/mp/zombies/_zm_weap_staff_water", "staff_water_position_source"), ::staff_water_position_source);
-	replacefunc(getfunction("maps/mp/zombies/_zm_weap_staff_air", "staff_air_position_source"), ::staff_air_position_source);
+	replacefunction("maps/mp/zm_tomb_capture_zones", "pack_a_punch_think", ::override_pack_a_punch_think);
+	replacefunction("maps/mp/zm_tomb_capture_zones", "recapture_round_tracker", ::override_recapture_round_tracker);
+	replacefunction("maps/mp/zm_tomb_chamber", "move_wall_down", ::override_move_wall_down);
+	replacefunction("maps/mp/zm_tomb_giant_robot", "zombie_stomp_death", ::override_zombie_stomp_death);
+	replacefunction("maps/mp/zm_tomb_tank", "flamethrower_damage_zombies", ::override_flamethrower_damage_zombies);
+	replacefunction("maps/mp/zm_tomb_tank", "tank_drop_powerups", ::override_tank_drop_powerups);
+	replacefunction("maps/mp/zm_tomb_utility", "watch_staff_usage", ::override_watch_staff_usage);
+	replacefunction("maps/mp/zombies/_zm_weap_one_inch_punch", "knockdown_zombie_animate_state", ::override_knockdown_zombie_animate_state);
+	replacefunction("maps/mp/zombies/_zm_weap_staff_water", "staff_water_position_source", ::override_staff_water_position_source);
+	replacefunction("maps/mp/zombies/_zm_weap_staff_air", "staff_air_position_source", ::override_staff_air_position_source);
 
 	level thread pack_a_punch_enable();
 	level thread enable_all_teleporters();
@@ -63,12 +63,12 @@ connected_st()
     }
 }
 
-pack_a_punch_think()
+override_pack_a_punch_think()
 {
 	pack_a_punch_enable();
 }
 
-watch_staff_usage()
+override_watch_staff_usage()
 {
     self notify( "watch_staff_usage" );
     self endon( "watch_staff_usage" );
@@ -171,7 +171,7 @@ call_tank()
 }
 
 
-custom_zombie_stomp_death(robot, a_zombies_to_kill)
+override_zombie_stomp_death(robot, a_zombies_to_kill)
 {
 	n_interval = 0;
 	for(i = 0; i < a_zombies_to_kill.size; i++)
@@ -191,7 +191,7 @@ custom_zombie_stomp_death(robot, a_zombies_to_kill)
 	}
 }
 
-custom_knockdown_zombie_animate_state()
+override_knockdown_zombie_animate_state()
 {
 	level.tumbles++;
 	self endon("death");
@@ -274,7 +274,7 @@ open_gramophone_door()
 	trig_position.trigger = undefined;
 }
 
-custom_flamethrower_damage_zombies(n_flamethrower_id, str_tag)
+override_flamethrower_damage_zombies(n_flamethrower_id, str_tag)
 {
 	self endon("flamethrower_stop_" + n_flamethrower_id);
 	while(1)
@@ -306,7 +306,7 @@ custom_flamethrower_damage_zombies(n_flamethrower_id, str_tag)
 	}
 }
 
-tank_drop_powerups()
+override_tank_drop_powerups()
 {
     flag_wait( "start_zombie_round_logic" );
     a_drop_nodes = [];
@@ -378,7 +378,7 @@ turn_gens_on()
 	}
 }
 
-recapture_round_tracker()
+override_recapture_round_tracker()
 {
     n_next_recapture_round = 10;
 
@@ -427,7 +427,7 @@ fixPanzerRounds()
 	}
 }
 
-move_wall_down()
+override_move_wall_down()
 {
 	if(getDvarInt("st_origins_walls_mooving") == 0)
 		return;
@@ -439,7 +439,7 @@ move_wall_down()
     self disconnectpaths();
 }
 
-staff_water_position_source( v_detonate, n_lifetime_sec, str_weapon )
+override_staff_water_position_source( v_detonate, n_lifetime_sec, str_weapon )
 {
     self endon( "disconnect" );
 
@@ -467,7 +467,7 @@ staff_water_position_source( v_detonate, n_lifetime_sec, str_weapon )
 }
 
 
-staff_air_position_source( v_detonate, str_weapon )
+override_staff_air_position_source( v_detonate, str_weapon )
 {
     self endon( "disconnect" );
 

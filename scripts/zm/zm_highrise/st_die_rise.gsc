@@ -12,16 +12,16 @@
 
 init()
 {
-	replacefunc(getfunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn"), ::watch_for_elevator_during_faller_spawn);
-	replacefunc(getfunction("maps/mp/zombies/_zm_weap_slipgun", "slip_bolt"), ::slip_bolt);
-    replacefunc(getfunction("maps/mp/zombies/_zm_weap_slipgun", "pool_of_goo"), ::pool_of_goo);
+	replacefunction("maps/mp/zm_highrise_elevators", "watch_for_elevator_during_faller_spawn", ::override_watch_for_elevator_during_faller_spawn);
+	replacefunction("maps/mp/zombies/_zm_weap_slipgun", "slip_bolt", ::override_slip_bolt);
+    replacefunction("maps/mp/zombies/_zm_weap_slipgun", "pool_of_goo", ::override_pool_of_goo);
 	level.zombies_died_to_elevator = 0;
 	level thread check_special_round();
     level thread lock_elevators();
 }
 
 
-watch_for_elevator_during_faller_spawn()
+override_watch_for_elevator_during_faller_spawn()
 {
     self endon( "death" );
     self endon( "risen" );
@@ -82,7 +82,7 @@ check_special_round()
     }
 }
 
-slip_bolt( player, upgraded )
+override_slip_bolt( player, upgraded )
 {
     startpos = player getweaponmuzzlepoint();
     self waittill( "explode", position );
@@ -125,7 +125,7 @@ lock_elevators()
     }
 }
 
-pool_of_goo( origin, duration, is_recursive )
+override_pool_of_goo( origin, duration, is_recursive )
 {
     effect_life = 24;
 

@@ -8,11 +8,11 @@
 
 replacefuncs()
 {
-	replacefunc( getfunction( "maps/mp/zm_tomb_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_origins );
-	replacefunc( getfunction( "maps/mp/zm_buried_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_buried );
-	replacefunc( getfunction( "maps/mp/zm_alcatraz_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_mob );
-	replacefunc( getfunction( "maps/mp/zm_highrise_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_dierise );
-	replacefunc( getfunction( "maps/mp/zm_transit_distance_tracking", "delete_zombie_noone_looking" ), ::delete_zombie_noone_looking_tranzit );
+	replacefunction("maps/mp/zm_tomb_distance_tracking", "delete_zombie_noone_looking", ::override_delete_zombie_noone_looking_origins);
+	replacefunction("maps/mp/zm_buried_distance_tracking", "delete_zombie_noone_looking", ::override_delete_zombie_noone_looking_buried);
+	replacefunction("maps/mp/zm_alcatraz_distance_tracking", "delete_zombie_noone_looking", ::override_delete_zombie_noone_looking_mob);
+	replacefunction("maps/mp/zm_highrise_distance_tracking", "delete_zombie_noone_looking", ::override_delete_zombie_noone_looking_dierise);
+	replacefunction("maps/mp/zm_transit_distance_tracking", "delete_zombie_noone_looking", ::override_delete_zombie_noone_looking_tranzit);
 }
 
 init_despawners()
@@ -139,7 +139,7 @@ custom_zombie_setup()
     }
 }
 
-delete_zombie_noone_looking_origins( how_close, how_high )
+override_delete_zombie_noone_looking_origins( how_close, how_high )
 {
     self endon( "death" );
 
@@ -276,7 +276,7 @@ delete_zombie_noone_looking_origins( how_close, how_high )
     }
 }
 
-delete_zombie_noone_looking_buried( how_close, how_high )
+override_delete_zombie_noone_looking_buried( how_close, how_high )
 {
     self endon( "death" );
 
@@ -410,7 +410,7 @@ delete_zombie_noone_looking_buried( how_close, how_high )
     }
 }
 
-delete_zombie_noone_looking_mob( how_close, how_high )
+override_delete_zombie_noone_looking_mob( how_close, how_high )
 {
     self endon( "death" );
 
@@ -524,7 +524,7 @@ delete_zombie_noone_looking_mob( how_close, how_high )
     }
 }
 
-delete_zombie_noone_looking_dierise( how_close, how_high )
+override_delete_zombie_noone_looking_dierise( how_close, how_high )
 {
     self endon( "death" );
 
@@ -626,7 +626,7 @@ delete_zombie_noone_looking_dierise( how_close, how_high )
     }
 }
 
-delete_zombie_noone_looking_tranzit( how_close )
+override_delete_zombie_noone_looking_tranzit( how_close )
 {
     self endon( "death" );
 

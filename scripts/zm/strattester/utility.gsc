@@ -29,6 +29,13 @@ createDvar(dvar, set)
 		setDvar(dvar, set);
 }
 
+replacefunction(namespace, func, override)
+{
+    fn = getfunction(namespace, func);
+    if (isdefined(fn))
+        replacefunc(fn, override);
+}
+
 in_array(data, array)
 {
 	foreach(element in array)

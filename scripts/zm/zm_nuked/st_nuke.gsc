@@ -6,15 +6,16 @@
 
 #include scripts\zm\strattester\box;
 #include scripts\zm\strattester\hud;
+#include scripts\zm\strattester\utility;
 
 init()
 {
-	replacefunc(getfunction("maps/mp/zm_nuked_perks", "perks_from_the_sky"), ::perks_from_the_sky);
+	replacefunction("maps/mp/zm_nuked_perks", "perks_from_the_sky", ::override_perks_from_the_sky);
     level.total_chest_accessed = 0;
     level thread checkpaplocation();
 }
 
-perks_from_the_sky()
+override_perks_from_the_sky()
 {
     level thread turn_perks_on();
     top_height = 300;
