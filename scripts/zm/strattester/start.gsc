@@ -51,6 +51,8 @@ openAllDoors()
 {
 	if(!getDvarInt("st_doors"))
 		return;
+	flag_wait("initial_blackscreen_passed");
+
     setdvar( "zombie_unlock_all", 1 );
     players = get_players();
     zombie_doors = getentarray( "zombie_door", "targetname" );
