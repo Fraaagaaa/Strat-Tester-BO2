@@ -183,6 +183,24 @@ f()
 }
 ```
 
+# Compilar desde o código fonte
+
+Dependencias:
+- [Open Asset Tools](https://openassettools.dev/)
+- [WinRAR](https://www.rarlab.com/download.htm)
+
+Requisitos previos:
+- Ter OAT instalado en `C:\OAT`.
+- Ter `WinRAR.exe` instalado en `C:\Program Files\WinRAR\WinRAR.exe`.
+- Ter Plutonium instalado en `%LOCALAPPDATA%`.
+- **ALTERNATIVAMENTE**, podes modificar [estas liñas do builder.bat](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/builder.bat#L3-L5).
+
+Compilación:
+1. Crea o directorio `english\localizedstrings`.
+2. Desde `localized\language`, copia os ficheiros do idioma que prefiras a `english\localizedstrings`.
+3. Engade o ficheiro `localized\st_watermark.str` ao directorio `english\localizedstrings`.
+4. Executa `builder.bat`.
+
 # Un saúdo especial a:
 - [NoMoleMan](https://www.twitch.tv/nomoleman) Por ser o principal tester do mod e traducir os menús ao portugués.
 - [Guy](https://github.com/ineedbots) Por facer o script para a reaparición dos zombies.

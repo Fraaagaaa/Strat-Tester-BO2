@@ -212,6 +212,23 @@ f()
     addCommands(array("zombiecount", "totalzombiecount"), false);
 }
 ```
+# Compilar a partir do código-fonte
+
+Dependências:
+- [Open Asset Tools](https://openassettools.dev/)
+- [WinRAR](https://www.rarlab.com/download.htm)
+
+Pré-requisitos:
+- Ter o OAT instalado em `C:\OAT`.
+- Ter o `WinRAR.exe` instalado em `C:\Program Files\WinRAR\WinRAR.exe`.
+- Ter o Plutonium instalado em `%LOCALAPPDATA%`.
+- **ALTERNATIVAMENTE**, você pode modificar [estas linhas no builder.bat](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/builder.bat#L3-L5).
+
+Compilação:
+1. Crie o diretório `english\localizedstrings`.
+2. A partir de `localized\language`, copie os arquivos do idioma de sua preferência para `english\localizedstrings`.
+3. Adicione o arquivo `localized\st_watermark.str` ao diretório `english\localizedstrings`.
+4. Execute o `builder.bat`.
 
 # Agradecimentos
 

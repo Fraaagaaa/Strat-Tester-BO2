@@ -180,6 +180,23 @@ f()
 }
 ```
 
+# Build from source
+Dependencies:
+- [Open asset tools](https://openassettools.dev/)
+- [Winrar](https://www.rarlab.com/download.htm)
+
+Prerequisites:
+- Have your OAT instalation in `C:\OAT`
+- Have your `WinRAR.exe` instalation in `C:\Program Files\WinRAR\WinRAR.exe`
+- Have your Plutonium instalation in `%LOCALAPPDATA%`
+- **ALTERNATIVELY**,  you can modify [these lines in the builder.bat](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/builder.bat#L3-L5)
+
+Building:
+1. Create the directory `english\localizedstrings`.
+2. From `localized\language` copy the files from the language of your choice into `english\localizedstrings`.
+3. Add `localized\st_watermark.str` into `english\localizedstrings`.
+4. Execute the `builder.bat`
+
 # Shout out to:
 - [NoMoleMan](https://www.twitch.tv/nomoleman) for beeing the main tester and translating the menus into portuguese.
 - [Guy](https://github.com/ineedbots) for making the despawner test script.
