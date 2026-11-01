@@ -31,7 +31,6 @@
 
 # Features
 
-
 > [!TIP]
 > All of the following settings can be changed inside the pause menu.
 
@@ -53,6 +52,7 @@
 
 ## Perk settings
 Perks can not be obtain via perk machines, they have to be selected inside the strat tester menu.
+
 ## HUD settings
 - Game timer
 - Round timer
@@ -80,8 +80,8 @@ Perks can not be obtain via perk machines, they have to be selected inside the s
 - Tank kills counter
 - Tumble animation counter
 - Stomp counter
-### survival maps
-- Box hits (survival maps)
+### Survival maps
+- Box hits
 ## Map specific settings
 ### Tranzit
 - Adjust farm and diner bus depart time
@@ -93,17 +93,22 @@ Perks can not be obtain via perk machines, they have to be selected inside the s
 ### Town
 - Change door setup
 ### Die Rise
+- Tramplesteam built from the start
 - Lock elevators
 ### Mob of the Dead
 - Infinite lives
-- Build the shield at cafeteria (only shows the trigger, not the model)
+- Build the shield at cafeteria
 ### Buried
-- Change buildable setup
+- Buildables can be changed inside the menu without restarting
 - Delete Leroy's barricades
 ### Origins
 - On solo, chose the staff
+- White player strats with golden shovel and helmet
 - Stop the walls from moving in the crazy place
-- Build the shield at church (only shows the trigger, not the model)
+- The shield is built at church and wind tunel
+- All players are awarded the "Activate 6 generators" max ammo.
+- All staffs are built in the Crazy Place
+- All portals are opened
 - Spawn with War Machine instead of MP40
 - Unlock all generators
 ## Start settings
@@ -112,7 +117,7 @@ Perks can not be obtain via perk machines, they have to be selected inside the s
 - Remove all boards from windows
 - Turn on power
 - Open all doors
-- Give weapons
+- Give weapons, [check loadouts](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README.md#loadouts)
 
 # Loadouts
 You can choose the weapons provided by the mod at the start of the game.
@@ -135,11 +140,12 @@ In the `zm_strattester\scriptdata\loadouts` folder, you will find the files that
 - `!tp`            teleports player to desired location.
 - `!tpc`           teleports player to desired coordinates.
 - `!points`        sets the player's score, can be used with `inf` to get infinite points.
-- `!remaing`       sets the remaining zombies on the round.
-- `!gen x`         activates generator number x on origins.
+- `!remainig`      sets the remaining zombies on the round.
+- `!gen x`         activates/deactivates generator number x on origins.
 
 # For developers
-This mods sets `level.strat_tester` to true in `init()`.
+This mods sets `level.strat_tester` to true in `init()`, although a better way to check if the mod is loaded is by checking the `fs_game` dvar.
+
 To avoid the "Unknown command" message from strat tester, add your commands in `level.chatcommands` or `level.chatcommandsaliases`, for example, use the following code:
 ``` cpp
 addCommands(commands, alias)

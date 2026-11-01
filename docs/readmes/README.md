@@ -9,74 +9,117 @@
 - [**Descargar en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Espanol.rar)
 - [**Download in english**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.rar)
 - [**Descargar en galego**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Galego.rar)
+- [**日本語をダウンロード**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.Japanese.rar), 翻訳は[AzRy](https://www.twitch.tv/azry_s)
 - [**Baixar em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/releases/latest/download/Strat.Tester.BO2.PT-BR.rar), traduzido por [NoMoleMan](https://www.twitch.tv/nomoleman)
+
+> [!WARNING]
+> To use the Japanese version your game must be in japanese.
+
+> [!WARNING]
+> To use the spanish, galician or portuguese versions your game can not be in japanese or polish.
 
 ## How to install
 
 - Unzip the download in `%localappdata%\Plutonium\storage\t6\mods`.
 
-> [!WARNING]
+> [!CAUTION]
 > All users need to have the mod installed. Players who do not have the mod installed will be unable to use the in-game menu and, therefore, will be unable to change their perks or HUD.
 
-## General changes
-- Perks are given on spawn
-- Weapons are given on spawn
-- All doors are oppened (except the ones needed for a certain strat)
-- Game starts at round 100
-- Game, round and trap timers
+
+> [!WARNING]
+> The PT version stands for portuguesse, not plutonium.
+
+# Features
+
+> [!TIP]
+> All of the following settings can be changed inside the pause menu.
+
+> [!WARNING]
+> If a player does not have the mod he will not be able to see the menu
+
+> [!TIP]
+> The hud player based, it does not depend on the host
+
+## Game settings
+- Change round slider
+- Kill horde button
+- End round button
+- Developer mode (check master spawners and spawn locations)
+- Implemented Notarget
+- Enable/Disable power-ups
+- Enable/Disable fog
+- Teleports
+
+## Perk settings
+Perks can not be obtain via perk machines, they have to be selected inside the strat tester menu.
+
+## HUD settings
+- Game timer
+- Round timer
 - Healthbar
 - Zombie counter
+- SPH meter
 - Zone display
-- Seconds per horde meter
-- Box can be moved on most maps
-- Power-Ups can be desabled
-- Implemented notarget
-- Fog can be desabled
-- Zombie despawner tracker by [Guy](https://github.com/ineedbots)
-
-## Changes by map
+- Despawners counter by [Guy](https://github.com/ineedbots)
+- Zombies in sight counter
+- Zombies too far away counter
+- Anchor leaks counter
 ### Tranzit
-- Added a third timer for the bus
-- Added a display for the bus location
-- Players will get a notification when a denizen spawns
-- Can choose the depart time for farm
-
-### Town
-- 2 game setups
-- Jug opened
-- Speed cola opened
-
-### Nuketown
-- All perks fall from the sky at the start of the game
-- Can automatically restart for pap on green house
-
+- Bus timer
+- Bus location
+- Denizen counter
 ### Die Rise
-- Spawned trample steam buildable
-- Elevator kills tracker
-
-### MOTD
-- Spawned shield buildable at cafeteria
-- Infinite afterlives
-- All pieces are collected at the start of the game
-
+- Elevator kills counter
+- Sliquifire timer
+### Mob of the Dead
+- Trap timer
 ### Buried
-- Box is locked
-- Two buildable setups:
-    - Resonator at jug, Turbine at church and Springpad at saloon (default)
-    - Resonator at saloon, Turbine at church and Springpad at jug
-- Subwoofer kill counter
-
+- Subwoofer kills per shot counter
 ### Origins
-- White player starts with shovel and golden helmet
-- Players are able to call tank from gen 2 for the first time
-- Spawned shield buildable at church
-- Awarded max ammo reward for each player
-- Staffs are placed in the crazy place
-- All portals are oppened
-- Trackers for zombies stopmpt and tumbled
-- Tracker for tank kills
+- Ice and Wind staff timer
+- Tank kills counter
+- Tumble animation counter
+- Stomp counter
+### Survival maps
+- Box hits
+## Map specific settings
+### Tranzit
+- Adjust farm and diner bus depart time
+- Disable denizens
+- Show denizen spawners
+- Turn on/off the bus
+- Build the bus at the start
+- Build all of the buildables
+### Town
+- Change door setup
+### Die Rise
+- Tramplesteam built from the start
+- Lock elevators
+### Mob of the Dead
+- Infinite lives
+- Build the shield at cafeteria
+### Buried
+- Buildables can be changed inside the menu without restarting
+- Delete Leroy's barricades
+### Origins
+- On solo, chose the staff
+- White player strats with golden shovel and helmet
+- Stop the walls from moving in the crazy place
+- The shield is built at church and wind tunel
+- All players are awarded the "Activate 6 generators" max ammo.
+- All staffs are built in the Crazy Place
+- All portals are opened
+- Spawn with War Machine instead of MP40
+- Unlock all generators
+## Start settings
+- Start round
+- Start delay
+- Remove all boards from windows
+- Turn on power
+- Open all doors
+- Give weapons, [check loadouts](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/README.md#loadouts)
 
-## Loadouts
+# Loadouts
 You can choose the weapons provided by the mod at the start of the game.
 In the `zm_strattester\scriptdata\loadouts` folder, you will find the files that the mod reads for each map. To ensure the format is valid, it must follow these rules:
 
@@ -86,22 +129,53 @@ In the `zm_strattester\scriptdata\loadouts` folder, you will find the files that
 4. Fourth Line: Enter the melee weapon you wish to receive (e.g., `tazer_knuckles_zm`).
 5. No line can be left blank: If you do not want a specific item, you must write `undefined`.
 
-## Chat Commands
+# Chat Commands
+- `!nuke`          spawns a nuke power up on top of the player.
+- `!x2`            spawns a double points power up on top of the player.
+- `!max`           spawns a max power up on top of the player.
+- `!insta`         spawns a insta kill power up on top of the player.
+- `!sale`          spawns a fire sale power up on top of the player.
+- `!blood`         spawns a zombie blood power up on top of the player.
+- `!perk`          spawns a random perk power up on top of the player.
+- `!tp`            teleports player to desired location.
+- `!tpc`           teleports player to desired coordinates.
+- `!points`        sets the player's score, can be used with `inf` to get infinite points.
+- `!remainig`      sets the remaining zombies on the round.
+- `!gen x`         activates/deactivates generator number x on origins.
 
-### General
-- `!nuke`          spawns a nuke power up on top of the player
-- `!x2`            spawns a double points power up on top of the player
-- `!max`           spawns a max power up on top of the player
-- `!insta`           spawns a insta kill power up on top of the player
-- `!sale`          spawns a fire sale power up on top of the player
-- `!blood`         spawns a zombie blood power up on top of the player
-- `!perk`          spawns a random perk power up on top of the player
-- `!tp`            teleports player to desired location
-- `!tpc`           teleports player to desired coordinates
-- `!points`        sets the player's score, can be used with `inf` to get infinite points
+# For developers
+This mods sets `level.strat_tester` to true in `init()`, although a better way to check if the mod is loaded is by checking the `fs_game` dvar.
 
-### Origins
-- `!gen x`       activates generator number x
+To avoid the "Unknown command" message from strat tester, add your commands in `level.chatcommands` or `level.chatcommandsaliases`, for example, use the following code:
+``` cpp
+addCommands(commands, alias)
+{
+    if(!isdefined(alias))
+        alias = false;
+
+    if(!alias)
+    {
+	    foreach(command in commands)
+		    level.chatcommands[level.chatcommands.size] = "!" + command;
+    }
+    else
+    {
+	    foreach(command in commands)
+		    level.chatcommandsaliases[level.chatcommandsaliases.size] = "!" + command;
+    }
+}
+
+f()
+{
+    if(!isdefined(level.chatcommands))
+	    level.chatcommands = [];
+    if(!isdefined(level.chatcommandsaliases))
+	    level.chatcommandsaliases = [];
+
+    addCommands(array("zc", "tzc"), true);
+    addCommands(array("zombiecount", "totalzombiecount"), false);
+}
+```
 
 # Shout out to:
 - [NoMoleMan](https://www.twitch.tv/nomoleman) for beeing the main tester and translating the menus into portuguese.
@@ -109,4 +183,6 @@ In the `zm_strattester\scriptdata\loadouts` folder, you will find the files that
 - [5and5](https://github.com/5and5) for making the original strat tester and helping me 5 years ago when I started modding Black Ops.
 - [Hadi77KSA](https://github.com/Hadi77KSA) for making the script to power on afterlife doors.
 - [MJ](https://github.com/mjmodz) for helping me with the perk selection menu.
-- [Astrox](https://www.twitch.tv/lastroxl) for explaining the no power set ups.
+- [Astrox](https://www.twitch.tv/lastroxl) for the No Power setups.
+- [AzRy](https://www.twitch.tv/azry_s) for translating the menus into japanese.
+- [Jbleezy](https://github.com/Jbleezy) for making the Jet Gun and Paralyzer overheat display for the HUD in his [BO2 Reimagined mod](https://github.com/Jbleezy/BO2-Reimagined).
