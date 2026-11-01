@@ -90,5 +90,14 @@ Features added:
 Changes:
 - Removed the anchor leak counter print
 
+# 2.3.3
+Improvements
+- The Game, Map and Perks menu tabs are now only displayed during gameplay.
+- Improved tab navigation and selection when switching between the main menu and gameplay.
+
+Fixes
+- Fixed an issue where the menu could attempt to open a tab that was no longer available.
+- Removed the Perks option from Start Settings.
+- Adjusted the Despawners option to only be available during gameplay.
 
 Unfortunatly I did not keep track of the changes before this point.
