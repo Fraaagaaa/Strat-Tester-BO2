@@ -134,7 +134,7 @@ override_pool_of_goo( origin, duration, is_recursive )
 
     if ( duration > effect_life )
     {
-        pool_of_goo(origin, duration - effect_life, true);
+        override_pool_of_goo(origin, duration - effect_life, true);
         duration = effect_life;
     }
 
