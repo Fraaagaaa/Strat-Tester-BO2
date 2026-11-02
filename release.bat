@@ -132,5 +132,7 @@ popd
 
 rmdir /S /Q "%RELEASE_DIR%\%GL_NAME%"
 del /Q "%RELEASE_DIR%\mod.iwd"
+rd /s /q "%MOD_BASE%\zone"
 
 endlocal
+pause
