@@ -57,4 +57,10 @@ LANG_ENGLISH        "^3Eliminações do Tank: ^5"
 REFERENCE			ST_HUD_TUMBLE_ORIGINS
 LANG_ENGLISH        "^3Zumbis tombados: ^5"
 
+REFERENCE           ST_HUD_GENERATOR_KILLS
+LANG_ENGLISH        "^3Eliminações com Gerador: ^5"
+
+REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
+LANG_ENGLISH        "^3Eliminações com Gerador nesta rodada: ^5"
+
 ENDMARKER

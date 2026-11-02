@@ -57,4 +57,10 @@ LANG_ENGLISH        "^3Bajas del tanque: ^5"
 REFERENCE			ST_HUD_TUMBLE_ORIGINS
 LANG_ENGLISH        "^3Zombis tumbados: ^5"
 
+REFERENCE           ST_HUD_GENERATOR_KILLS
+LANG_ENGLISH        "^3Bajas por generador: ^5"
+
+REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
+LANG_ENGLISH        "^3Bajas por generador esta ronda: ^5"
+
 ENDMARKER

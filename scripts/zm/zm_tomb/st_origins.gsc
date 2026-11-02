@@ -26,6 +26,7 @@ init()
 	replacefunction("maps/mp/zombies/_zm_weap_one_inch_punch", "knockdown_zombie_animate_state", ::override_knockdown_zombie_animate_state);
 	replacefunction("maps/mp/zombies/_zm_weap_staff_water", "staff_water_position_source", ::override_staff_water_position_source);
 	replacefunction("maps/mp/zombies/_zm_weap_staff_air", "staff_air_position_source", ::override_staff_air_position_source);
+	replacefunction("maps/mp/zm_tomb_capture_zones", "capture_event_handle_ai_limit", ::override_capture_event_handle_ai_limit);
 
 	level thread pack_a_punch_enable();
 	level thread enable_all_teleporters();
@@ -34,6 +35,12 @@ init()
     level thread wait_for_players();
     level thread fixPanzerRounds();
     
+	if(!isdefined(level.generatorKills))
+	{
+		level.generatorKills = 0;
+		level.generatorKillsThisRound = 0;
+	}
+
 	flag_wait("initial_blackscreen_passed");
     
     give_max_ammo_reward();
@@ -500,4 +507,24 @@ override_staff_air_position_source( v_detonate, str_weapon )
     wait 0.5;
     e_whirlwind.player_owner = self;
     e_whirlwind thread whirlwind_seek_zombies( self.chargeshotlevel, str_weapon );
+}
+
+override_capture_event_handle_ai_limit()
+{
+    n_capture_zombies_needed = calculate_capture_event_zombies_needed();
+    level.zombie_ai_limit = 24 - n_capture_zombies_needed;
+
+    while ( get_current_zombie_count() > level.zombie_ai_limit )
+    {
+        ai_zombie = get_zombie_to_delete();
+
+        if ( isdefined( ai_zombie ) )
+		{
+            ai_zombie thread delete_zombie_for_capture_event();
+			level.generatorKills++;
+			level.generatorKillsThisRound++;
+		}
+
+        wait_network_frame();
+    }
 }

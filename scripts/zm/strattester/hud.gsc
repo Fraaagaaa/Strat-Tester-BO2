@@ -64,8 +64,11 @@ watch_new_players_hud()
             player thread displaySubwooferKillsAvg();
         }
         else if(isorigins())
+        {
+            player thread generatorKillsThisRound();
+            player thread generatorKills();
             player thread origins_hud();
-
+        }
         if(issurvivalmap())
         {
             player thread displayBoxHits();
@@ -737,6 +740,64 @@ origins_hud()
     }
 }
 
+generatorKillsThisRound()
+{
+    self.generatorKillsThisRound = createfontstring("objective", 1.4);
+    self.generatorKillsThisRound.hidewheninmenu = true;
+    self.generatorKillsThisRound.x = 0;
+    self.generatorKillsThisRound.aligny = "top";
+    self.generatorKillsThisRound.alignx = "left";
+    self.generatorKillsThisRound.label = &"ST_HUD_GENERATOR_KILLS_ROUND";
+    self.generatorKillsThisRound.horzalign = "user_left";
+    self.generatorKillsThisRound.vertalign = "user_top";
+    self.generatorKillsThisRound.alpha = 0;
+    self.generatorKillsThisRound setvalue(0);
+
+    while(true)
+    {
+        self.generatorKillsThisRound setvalue(level.generatorKillsThisRound);
+        // self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
+        self.generatorKillsThisRound.alpha = 1;
+        wait 0.1;
+    }
+}
+
+generatorKills()
+{
+    self.generatorKills = createfontstring("objective", 1.4);
+    self.generatorKills.hidewheninmenu = true;
+    self.generatorKills.x = 0;
+    self.generatorKills.aligny = "top";
+    self.generatorKills.alignx = "left";
+    self.generatorKills.label = &"ST_HUD_GENERATOR_KILLS";
+    self.generatorKills.horzalign = "user_left";
+    self.generatorKills.vertalign = "user_top";
+    self.generatorKills.alpha = 0;
+    self.generatorKills setvalue(0);
+
+    thread restartGeneratorKillsAtRoundEnd();
+    while(true)
+    {
+        self.generatorKills setvalue(level.generatorKills);
+        // self.generatorKills.alpha = get_menu_hud("st_generatorkills");
+        self.generatorKills.alpha = 1;
+        wait 0.1;
+    }
+}
+
+restartGeneratorKillsAtRoundEnd()
+{
+    self notify("restartGeneratorKillsAtRoundEnd_called");
+    self endon("restartGeneratorKillsAtRoundEnd_called");
+    while(true)
+    {
+        level waittill("end_of_round");
+        level.generatorKillsThisRound = 0;
+    }
+
+}
+
+// GENERAL
 zombiesFarAway()
 {
     self.zombiesInView = createfontstring("objective", 1.4);
@@ -911,6 +972,14 @@ prevent_hud_overlapping()
 
         if(isorigins())
         {
+            if(isdefined(self.generatorKillsThisRound))
+            {
+                // self.generatorKills.alpha = get_menu_hud("st_generatorkills");
+                current_y = self.generatorKills setHudLocation(current_y, offset);
+
+                // self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
+                current_y = self.generatorKillsThisRound setHudLocation(current_y, offset);
+            }
             if(isdefined(self.tank_hud))
             {
                 self.tank_hud.alpha = self get_menu_hud("st_tank");

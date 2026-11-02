@@ -57,4 +57,10 @@ LANG_ENGLISH        "^3Tank kills: ^5"
 REFERENCE			ST_HUD_TUMBLE_ORIGINS
 LANG_ENGLISH        "^3Zombies tumbled: ^5"
 
+REFERENCE           ST_HUD_GENERATOR_KILLS
+LANG_ENGLISH        "^3Generator kills: ^5"
+
+REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
+LANG_ENGLISH        "^3Generator kills this round: ^5"
+
 ENDMARKER
