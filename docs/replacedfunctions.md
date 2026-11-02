@@ -9,6 +9,7 @@
 | `maps/mp/zm_transit_distance_tracking`    | `delete_zombie_noone_looking`             | Tracking zombie respawns |
 | `maps/mp/zm_highrise_elevators`           | `watch_for_elevator_during_faller_spawn`  | Tracking zombie deaths by elevators |
 | `maps/mp/zm_nuked_perks`                  | `perks_from_the_sky`                      | Remove the wait between perks |
+| `maps/mp/zm_tomb_capture_zones`           | `capture_event_handle_ai_limit`           | Track generator kills |
 | `maps/mp/zm_tomb_capture_zones`           | `pack_a_punch_think`                      | Always enable Pack-A-Punch |
 | `maps/mp/zm_tomb_capture_zones`           | `recapture_round_tracker`                 | Adjust templars when changing to a lower round |
 | `maps/mp/zm_tomb_chamber`                 | `move_wall_down`                          | Toggle mooving walls |
