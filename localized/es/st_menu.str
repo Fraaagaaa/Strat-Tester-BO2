@@ -216,6 +216,12 @@ LANG_ENGLISH        "TEMPORTIZADOR DE ESLIDIFICADOR"
 REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC
 LANG_ENGLISH        "Muestra la duración de la viscosidad del eslificador."
 
+REFERENCE           ST_MENU_HUD_GENERATOR_KILLS
+LANG_ENGLISH        "BAJAS POR GENERADORES"
+
+REFERENCE           ST_MENU_HUD_GENERATOR_KILLS_DESC
+LANG_ENGLISH        "Muestra la cantidad de zombis borrados para hacer hueco a los zombies de captura."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_FARM_DEPART

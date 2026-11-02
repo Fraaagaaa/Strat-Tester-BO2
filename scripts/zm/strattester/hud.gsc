@@ -93,6 +93,7 @@ load_persisted_hud()
     self set_menu_hud("st_stafftimer",     	    getDvarInt("st_stafftimer"));
     self set_menu_hud("st_stomp",     		    getDvarInt("st_stomp"));
     self set_menu_hud("st_subwooferkills",      getDvarInt("st_subwooferkills"));
+    self set_menu_hud("st_generatorkills",      getDvarInt("st_generatorkills"));
     self set_menu_hud("st_tank",     		    getDvarInt("st_tank"));
     self set_menu_hud("st_tumble",     		    getDvarInt("st_tumble"));
     self set_menu_hud("st_zone",                getDvarInt("st_zone"));
@@ -756,8 +757,7 @@ generatorKillsThisRound()
     while(true)
     {
         self.generatorKillsThisRound setvalue(level.generatorKillsThisRound);
-        // self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
-        self.generatorKillsThisRound.alpha = 1;
+        self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
         wait 0.1;
     }
 }
@@ -779,8 +779,7 @@ generatorKills()
     while(true)
     {
         self.generatorKills setvalue(level.generatorKills);
-        // self.generatorKills.alpha = get_menu_hud("st_generatorkills");
-        self.generatorKills.alpha = 1;
+        self.generatorKills.alpha = get_menu_hud("st_generatorkills");
         wait 0.1;
     }
 }
@@ -974,10 +973,10 @@ prevent_hud_overlapping()
         {
             if(isdefined(self.generatorKillsThisRound))
             {
-                // self.generatorKills.alpha = get_menu_hud("st_generatorkills");
+                self.generatorKills.alpha = get_menu_hud("st_generatorkills");
                 current_y = self.generatorKills setHudLocation(current_y, offset);
 
-                // self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
+                self.generatorKillsThisRound.alpha = get_menu_hud("st_generatorkills");
                 current_y = self.generatorKillsThisRound setHudLocation(current_y, offset);
             }
             if(isdefined(self.tank_hud))

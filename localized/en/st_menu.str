@@ -216,6 +216,12 @@ LANG_ENGLISH        "SLIQUIFIRE TIMER"
 REFERENCE           ST_MENU_HUD_SLIQUIFIRE_TIMER_DESC
 LANG_ENGLISH        "Displays the time remaining of slquifire's goo."
 
+REFERENCE           ST_MENU_HUD_GENERATOR_KILLS
+LANG_ENGLISH        "GENERATOR KILLS"
+
+REFERENCE           ST_MENU_HUD_GENERATOR_KILLS_DESC
+LANG_ENGLISH        "Display the ammount of zombies deleted to make room for capture zombies."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_FARM_DEPART

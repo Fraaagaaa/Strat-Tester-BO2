@@ -385,6 +385,10 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     end
 
     if isOrigins then
+        -- GENERATOR KILLS
+        local GeneratorKillsChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_GENERATOR_KILLS"), "st_generatorkills", Engine.Localize("ST_MENU_HUD_GENERATOR_KILLS_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(GeneratorKillsChoice, 0, "hud")
+
         -- TANK
         local TankChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_TANK_KILLS"), "st_tank", Engine.Localize("ST_MENU_HUD_TANK_KILLS_DESC"))
         TankChoice.m_currentController = LocalClientIndex
@@ -868,6 +872,7 @@ CoD.StratTester.sync_hud_menu = function ( controller )
         { "st_busloc",             0 },
         { "st_elevatorkills",      0 },
         { "st_subwooferkills",     0 },
+        { "st_generatorkills",     0 },
         { "st_stomp",              0 },
         { "st_tumble",             0 },
         { "st_tank",               0 },
