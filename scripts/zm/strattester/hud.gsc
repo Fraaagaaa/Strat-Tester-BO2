@@ -59,7 +59,10 @@ watch_new_players_hud()
         else if(ismob())
             player thread traptimer();
         else if(isburied())
-            player thread displaysubwooferkills();
+        {
+            player thread displaySubwooferKills();
+            player thread displaySubwooferKillsAvg();
+        }
         else if(isorigins())
             player thread origins_hud();
 
@@ -627,34 +630,58 @@ displayElevatorKills()
 }
 
 //BURIED
-displaysubwooferkills()
+displaySubwooferKills()
 {
     level endon( "end_game" );
     self endon( "disconnect" );
 
-    if(isdefined(level.subwooferkills))
-        return;
-
-
-    level.subwooferkills = 0;
-
-    self.subwooferkills = createfontstring( "objective", 1.3 );
-    self.subwooferkills.hidewheninmenu = true;
-    self.subwooferkills.y = 0;
-    self.subwooferkills.x = 0;
-    self.subwooferkills.fontscale = 1.4;
-    self.subwooferkills.vertalign = "user_top";
-    self.subwooferkills.aligny = "top";
-    self.subwooferkills.label = &"ST_HUD_SUBWOOFER_KILLS";
-    self.subwooferkills.alignx = "left";
-    self.subwooferkills.horzalign = "user_left";
-    self.subwooferkills.alpha = 0;
-    self.subwooferkills setvalue(0);
+    self.subwooferKills = createfontstring( "objective", 1.3 );
+    self.subwooferKills.hidewheninmenu = true;
+    self.subwooferKills.y = 0;
+    self.subwooferKills.x = 0;
+    self.subwooferKills.fontscale = 1.4;
+    self.subwooferKills.vertalign = "user_top";
+    self.subwooferKills.aligny = "top";
+    self.subwooferKills.label = &"ST_HUD_SUBWOOFER_KILLS";
+    self.subwooferKills.alignx = "left";
+    self.subwooferKills.horzalign = "user_left";
+    self.subwooferKills.alpha = 0;
+    self.subwooferKills setvalue(0);
 
     while(true)
     {
-        self.subwooferkills setvalue(level.subwooferkills_count);
-        self.subwooferkills.alpha = get_menu_hud("st_subwooferkills");
+        self.subwooferKills setvalue(level.subwooferKillsLastShot);
+        self.subwooferKills.alpha = get_menu_hud("st_subwooferkills");
+        wait 0.1;
+    }
+}
+
+displaySubwooferKillsAvg()
+{
+    level endon( "end_game" );
+    self endon( "disconnect" );
+
+    self.subwooferKillsAvg = createfontstring( "objective", 1.3 );
+    self.subwooferKillsAvg.hidewheninmenu = true;
+    self.subwooferKillsAvg.y = 0;
+    self.subwooferKillsAvg.x = 0;
+    self.subwooferKillsAvg.fontscale = 1.4;
+    self.subwooferKillsAvg.vertalign = "user_top";
+    self.subwooferKillsAvg.aligny = "top";
+    self.subwooferKillsAvg.label = &"ST_HUD_SUBWOOFER_KILLS_AVG";
+    self.subwooferKillsAvg.alignx = "left";
+    self.subwooferKillsAvg.horzalign = "user_left";
+    self.subwooferKillsAvg.alpha = 0;
+    self.subwooferKillsAvg setvalue(0);
+
+    while(true)
+    {
+        if(level.subwooferShots > 0)
+            self.subwooferKillsAvg setvalue(level.subwooferKillsTotal / level.subwooferShots);
+        else
+            self.subwooferKillsAvg setvalue(0);
+
+        self.subwooferKillsAvg.alpha = get_menu_hud("st_subwooferkills");
         wait 0.1;
     }
 }
@@ -874,7 +901,10 @@ prevent_hud_overlapping()
         }
 
         if(isburied() && isdefined(self.subwooferkills))
+        {
             current_y = self.subwooferkills setHudLocation(current_y, offset);
+            current_y = self.subwooferKillsAvg setHudLocation(current_y, offset);
+        }
 
         if(isdierise() && isdefined(self.elevatorkills))
             current_y = self.elevatorkills setHudLocation(current_y, offset);

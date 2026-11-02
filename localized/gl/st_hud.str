@@ -18,6 +18,9 @@ LANG_ENGLISH        "^3Armas de raios MK2: ^5"
 REFERENCE           ST_HUD_SUBWOOFER_KILLS
 LANG_ENGLISH        "^3Baixas por Resonador: ^5"
 
+REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
+LANG_ENGLISH        "^3Resonador AVG: ^5"
+
 REFERENCE           ST_HUD_ELEVATOR_KILLS
 LANG_ENGLISH        "^3Baixas por ascensor: ^5"
 

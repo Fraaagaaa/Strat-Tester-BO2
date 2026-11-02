@@ -18,6 +18,12 @@ init()
     replacefunction("maps/mp/zombies/_zm_equip_subwoofer","subwooferthink", ::override_subwooferthink);
 	flag_wait("initial_blackscreen_passed");
     deleteBarricades();
+    if(!isdefined(level.subwooferKillsTotal))
+    {
+        level.subwooferKillsTotal = 0;
+        level.subwooferKillsLastShot = 0;
+        level.subwooferShots = 0;
+    }
 }
 
 deleteBarricades()
@@ -85,8 +91,8 @@ override_subwooferthink( weapon, armed )
         props = get_array_of_closest( weapon.origin, getentarray( "subwoofer_target", "script_noteworthy" ), undefined, undefined, 1200 );
         entities = arraycombine( zombies, players, 0, 0 );
         entities = arraycombine( entities, props, 0, 0 );
-        level.subwooferkills_count = 0;
         diff = 0;
+        level.subwooferShots++;
         foreach ( ent in entities )
         {
             if ( !isdefined( ent ) || ( isplayer( ent ) || isai( ent ) ) && !isalive( ent ) )
@@ -172,7 +178,8 @@ override_subwooferthink( weapon, armed )
             }
         }
 
-        level.subwooferkills_count += diff;
+        level.subwooferKillsLastShot = diff;
+        level.subwooferKillsTotal += diff;
 
         if ( weapon.subwoofer_kills >= 45 )
             self thread subwoofer_expired( weapon );

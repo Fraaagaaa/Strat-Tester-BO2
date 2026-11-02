@@ -18,6 +18,9 @@ LANG_ENGLISH        "^3合計 レイガン MK2: ^5"
 REFERENCE           ST_HUD_SUBWOOFER_KILLS
 LANG_ENGLISH        "^3レゾネーターキル^5"
 
+REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
+LANG_ENGLISH        "^3レゾネーターキル平均: ^5"
+
 REFERENCE           ST_HUD_ELEVATOR_KILLS
 LANG_ENGLISH        "^3エレベーター キル: ^5"
 

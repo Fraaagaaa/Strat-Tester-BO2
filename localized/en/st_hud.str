@@ -18,6 +18,9 @@ LANG_ENGLISH        "^3Total Raygun MK2: ^5"
 REFERENCE           ST_HUD_SUBWOOFER_KILLS
 LANG_ENGLISH        "^3Subwoofer kills: ^5"
 
+REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
+LANG_ENGLISH        "^3Subwoofer AVG: ^5"
+
 REFERENCE           ST_HUD_ELEVATOR_KILLS
 LANG_ENGLISH        "^3Elevator kills: ^5"
 

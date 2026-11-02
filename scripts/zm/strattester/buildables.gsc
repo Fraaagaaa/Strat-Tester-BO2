@@ -440,14 +440,9 @@ destroyTriggers(originArray)
 
             removed[i] = 1;
             count++;
-
-            println("Triggers removed: " + count + "/" + total);
-            println("Triggers remaining: " + (total - count));
         }
 
         if(count < total)
             wait 0.2;
     }
-
-    println("All buildable triggers removed!");
 }

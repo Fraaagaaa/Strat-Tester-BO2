@@ -18,6 +18,9 @@ LANG_ENGLISH        "^3Total Raygun MK2: ^5"
 REFERENCE           ST_HUD_SUBWOOFER_KILLS
 LANG_ENGLISH        "^3Eliminações de Ressonador: ^5"
 
+REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
+LANG_ENGLISH        "^3Ressonador AVG: ^5"
+
 REFERENCE           ST_HUD_ELEVATOR_KILLS
 LANG_ENGLISH        "^3Eliminações de Elevador: ^5"
 
