@@ -65,8 +65,7 @@ connected_st()
     while(true)
     {
         self waittill( "spawned_player" );
-		if(iswhite(self))
-			self tomb_give_equipment();
+		self giveShovelAndHelmet();
     }
 }
 
@@ -114,7 +113,7 @@ override_watch_staff_usage()
 }
 
 
-tomb_give_equipment()
+giveShovelAndHelmet()
 {
 	flag_wait( "start_zombie_round_logic" );
 	self.dig_vars[ "has_shovel" ] = 1;
