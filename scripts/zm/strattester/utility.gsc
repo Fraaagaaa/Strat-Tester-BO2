@@ -151,6 +151,11 @@ isorigins()
 	return (level.script == "zm_tomb");
 }
 
+mapHasMulekick()
+{
+	return (isdierise() || isburied() || isorigins());
+}
+
 is_round(round)
 {
 	return round <= level.round_number;

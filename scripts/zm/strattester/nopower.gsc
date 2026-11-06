@@ -65,9 +65,8 @@
 #define KNIFE "knife_zm"
 #define TOMAHAWK "bouncing_tomahawk_zm"
 
-nopower_loadout()
+nopowerLoadout()
 {
-	self.st_loadout_completed = false;
 	self.st_loadout_weapons = array();
 	self.st_loadout_equipment = array();
 	self.st_loadout_main = undefined;
@@ -172,8 +171,6 @@ nopower_loadout()
             self.st_loadout_main = ELECTRIC;
         }
 	}
-
-	self.st_loadout_completed = true;
 }
 
 givetomahawk_unupgraded()

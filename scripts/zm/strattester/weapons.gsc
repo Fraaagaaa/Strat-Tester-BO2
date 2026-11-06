@@ -12,7 +12,7 @@
 #include scripts\zm\strattester\nopower;
 
 #define FILE_TRANZIT 	"loadouts/tranzit.loadout"
-#define FILE_DEPOT 		"loadouts/buried.loadout"
+#define FILE_DEPOT 		"loadouts/depot.loadout"
 #define FILE_FARM 		"loadouts/farm.loadout"
 #define FILE_TOWN	 	"loadouts/town.loadout"
 #define FILE_NUKETOWN 	"loadouts/nuketown.loadout"
@@ -62,35 +62,6 @@
 #define EMPS "emp_grenade_zm"
 #define KNIFE "knife_zm"
 
-map_has_mulekick()
-{
-	return (isdierise() || isburied() || isorigins());
-}
-
-player_wants_mulekick(player)
-{
-	if(!getDvarInt("st_weapons"))
-		return false;
-
-	while(!isdefined(player.wants_mule))
-		wait 0.05;
-
-	return player.wants_mule;
-}
-
-waitformulekick()
-{
-	self endon("disconnect");
-	level endon("end_game");
-
-	while(true)
-	{
-		wait 0.1;
-		if(self hasperk(MULE_PERK))
-			return;
-	}
-}
-
 init_loadouts()
 {
 	if(!getDvarInt("st_weapons"))
@@ -98,25 +69,29 @@ init_loadouts()
 	
     level waittill("initial_blackscreen_passed");
 
-	if(!getDvarInt("st_power"))
-		self thread nopower_loadout();
-	else if(!checkCustomLoadouts())
-		self thread main_loadouts();
-
 	if(ismob())
 		flag_wait( "afterlife_start_over" );
 
-	self thread remove_starting_pistol();
-	self thread giveloadout();
-	if(map_has_mulekick())
-		self thread give_mule_weapon_on_revive();
+ 	self initializeLoadout();
+
+	if(!checkCustomLoadouts())
+	{
+		if(!getDvarInt("st_power"))
+			self nopowerLoadout();
+
+		self getMapLoadout();
+	}
+
+	self removeStartingPistol();
+	self giveLoadout();
+
+	if(mapHasMulekick())
+		self giveMuleWeaponOnRevive();
 }
 
-giveloadout()
+giveLoadout()
 {
     level.player_too_many_players_check = 0;
-	while(!self.st_loadout_completed)
-		wait 0.1;
 
 	foreach(equipment in self.st_loadout_equipment)
 		self equipment_buy(equipment);
@@ -131,34 +106,14 @@ giveloadout()
         }
     }
 
-	if(map_has_mulekick() && isdefined(self.st_loadout_mule))
-		self thread mulekick_wepaon();
+	if(mapHasMulekick() && isdefined(self.st_loadout_mule) && self.st_loadout_mule != "undefined")
+		self mulekickWepaon();
 
-	self give_melee_weapon_instant(self.st_loadout_melee);
-
+	self giveMelee(self.st_loadout_melee);
 	self switchToWeapon(self.st_loadout_main);
 }
 
-mulekick_wepaon()
-{
-	self endon("disconnect");
-	level endon("end_game");
-
-	self waitformulekick();
-    gun = self getcurrentweapon();
-	self weapon_give( self.st_loadout_mule, undefined, undefined, 0 );
-
-    if (isorigins() && issubstr(self.st_loadout_mule, "staff"))
-    {
-        self thread [[getfunction("maps/mp/zm_tomb_main_quest", "watch_staff_ammo_reload")]]();
-        [[getfunction("maps/mp/zm_tomb_craftables", "set_player_staff")]](self.st_loadout_mule, self );
-    }
-
-	if(!isorigins())
-		self switchtoweapon( gun );
-}
-
-remove_starting_pistol()
+removeStartingPistol()
 {
 	if(isorigins())
 		self takeweapon(MAUSER);
@@ -166,232 +121,212 @@ remove_starting_pistol()
 		self takeweapon(M1911);
 }
 
-main_loadouts()
+initializeLoadout()
 {
-	self.st_loadout_completed = false;
 	self.st_loadout_weapons = array();
 	self.st_loadout_equipment = array();
 	self.st_loadout_main = undefined;
 	self.st_loadout_mule = undefined;
 	self.st_loadout_melee = KNIFE;
+}
 
-	if(istranzit())
+getMapLoadout()
+{
+	if(istranzit()) 		self tranzitLoadout();
+	else if(istown()) 		self townLoadout();
+	else if(isfarm()) 		self farmLoadout();
+	else if(isdepot()) 		self depotLoadout();
+	else if(isnuketown()) 	self nuketownLoadout();
+	else if(isdierise()) 	self dieriseLoadout();
+	else if(ismob()) 		self mobLoadout();
+	else if(isburied()) 	self buriedLoadout();
+	else if(isorigins()) 	self originsLoadout();
+}
+
+tranzitLoadout()
+{
+	self.st_loadout_weapons = array(M16, SALLYS, EMPS);
+	self.st_loadout_melee = GALVA;
+	self.st_loadout_main = M16;
+	if(iswhite(self))
+		self.st_loadout_weapons[self.st_loadout_weapons.size] = JETGUN;
+}
+
+townLoadout()
+{
+	if(iswhite(self))
 	{
-		self.st_loadout_weapons = array(M16, SALLYS, EMPS);
+		self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS, SEMTEX);
+		self.st_loadout_main = MK2_U;
+	}
+	else
+	{
+		self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS, SEMTEX);
+		self.st_loadout_main = RAY_U;
+	}
+	self.st_loadout_melee = GALVA;
+}
+
+farmLoadout()
+{
+
+	if(iswhite(self))
+	{
+		self.st_loadout_weapons = array(MK2, CHICOM , MONKS);
+		self.st_loadout_main = MK2;
+	}
+	else
+	{
+		self.st_loadout_weapons = array(RAY, CHICOM, MONKS);
+		self.st_loadout_main = RAY;
+	}
+	self.st_loadout_melee = GALVA;
+}
+
+depotLoadout()
+{
+
+	if(iswhite(self))
+	{
+		self.st_loadout_weapons = array(MK2, CHICOM , MONKS);
+		self.st_loadout_main = MK2;
+	}
+	else
+	{
+		self.st_loadout_weapons = array(RAY, CHICOM, MONKS);
+		self.st_loadout_main = RAY;
+	}
+}
+
+nuketownLoadout()
+{
+	if(iswhite(self))
+		self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS, CLAYMORE);
+	else
+		self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS, CLAYMORE);
+	self.st_loadout_main = SALLYS;
+	self.st_loadout_melee = GALVA;
+}
+
+dieriseLoadout()
+{
+	if(iswhite(self))
+	{
+		self.st_loadout_weapons = array(SLIQ, MK2_U, MONKS, SEMTEX, CLAYMORE);
+		self.st_loadout_mule = AN_U;
+		self.st_loadout_equipment = array(SPRINGPAD);
+		self.st_loadout_main = SLIQ;
+	}
+	else
+	{
+		self.st_loadout_weapons = array(SALLYS, MK2_U, MONKS, SEMTEX, CLAYMORE);
 		self.st_loadout_melee = GALVA;
-		self.st_loadout_main = M16;
-		if(iswhite(self))
-			self.st_loadout_weapons[self.st_loadout_weapons.size] = JETGUN;
+		self.st_loadout_mule = AN_U;
+		self.st_loadout_equipment = array(SPRINGPAD);
+		self.st_loadout_main = AN_U;
 	}
-	if(istown())
+}
+
+mobLoadout()
+{
+	if(getDvarInt("st_shield"))
+		self.st_loadout_equipment = array(SHIELD_MOB);
+
+	if(iswhite(self))
 	{
-		if(iswhite(self))
-		{
-			self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS, SEMTEX);
-			self.st_loadout_main = MK2_U;
-		}
-		else
-		{
-			self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS, SEMTEX);
-			self.st_loadout_main = RAY_U;
-		}
-		self.st_loadout_melee = GALVA;
+		self.st_loadout_weapons = array(GAT, MK2_U, CLAYMORE);
+		self.st_loadout_main = GAT;
 	}
-	if(isfarm() || isdepot())
+	if(isblue(self))
 	{
-		if(iswhite(self))
-		{
-			self.st_loadout_weapons = array(MK2, CHICOM , MONKS);
-			self.st_loadout_main = MK2;
-		}
-		else
-		{
-			self.st_loadout_weapons = array(RAY, CHICOM, MONKS);
-			self.st_loadout_main = RAY;
-		}
-		if(isfarm())
-			self.st_loadout_melee = GALVA;
+		self.st_loadout_weapons = array(GAT, SALLYS, CLAYMORE);
+		self.st_loadout_main = GAT;
 	}
-	if(isnuketown())
+	if(isyellow(self) || isgreen(self))
 	{
-		if(iswhite(self))
-			self.st_loadout_weapons = array(MK2_U, SALLYS, MONKS, CLAYMORE);
-		else
-			self.st_loadout_weapons = array(RAY_U, SALLYS, MONKS, CLAYMORE);
+		self.st_loadout_weapons = array(UZI, SALLYS, CLAYMORE);
 		self.st_loadout_main = SALLYS;
+	}
+	self givetomahawk();
+	self setclientfieldtoplayer( "upgraded_tomahawk_in_use", 1 );
+}
+
+buriedLoadout()
+{
+	if(iswhite(self))
+	{
+		self.st_loadout_weapons = array(WAR_MACHINE, PARA_U, MONKS, CLAYMORE);
 		self.st_loadout_melee = GALVA;
+		self.st_loadout_main = PARA_U;
+		self.st_loadout_mule = SALLYS;
 	}
-	if(isdierise())
+	else
 	{
-		if(iswhite(self))
-		{
-			self.st_loadout_weapons = array(SLIQ, MK2_U, MONKS, SEMTEX, CLAYMORE);
-			self.st_loadout_mule = AN_U;
-			self.st_loadout_equipment = array(SPRINGPAD);
-			self.st_loadout_main = SLIQ;
-		}
-		else
-		{
-			self.st_loadout_weapons = array(SALLYS, MK2_U, MONKS, SEMTEX, CLAYMORE);
-			self.st_loadout_melee = GALVA;
-			self.st_loadout_mule = AN_U;
-			self.st_loadout_equipment = array(SPRINGPAD);
-			self.st_loadout_main = AN_U;
-		}
+		self.st_loadout_weapons = array(WAR_MACHINE, MK2_U, MONKS, CLAYMORE);
+		self.st_loadout_melee = GALVA;
+		self.st_loadout_mule = SALLYS;
+		self.st_loadout_main = WAR_MACHINE;
 	}
-	if(ismob())
-	{
-		if(getDvarInt("st_shield"))
-			self.st_loadout_equipment = array(SHIELD_MOB);
+}
 
-		if(iswhite(self))
-		{
-			self.st_loadout_weapons = array(GAT, MK2_U, CLAYMORE);
-			self.st_loadout_main = GAT;
-			// self.st_loadout_melee = SPORK;
-		}
-		if(isblue(self))
-		{
-			self.st_loadout_weapons = array(GAT, SALLYS, CLAYMORE);
-			self.st_loadout_main = GAT;
-		}
-		if(isyellow(self) || isgreen(self))
-		{
-			self.st_loadout_weapons = array(UZI, SALLYS, CLAYMORE);
-			self.st_loadout_main = SALLYS;
-		}
-		self givetomahawk();
-		self setclientfieldtoplayer( "upgraded_tomahawk_in_use", 1 );
-	}
-	if(isburied())
-	{
-		if(iswhite(self))
-		{
-			self.st_loadout_weapons = array(WAR_MACHINE, PARA_U, MONKS, CLAYMORE);
-			self.st_loadout_melee = GALVA;
-			self.st_loadout_main = PARA_U;
-			self.st_loadout_mule = SALLYS;
-		}
-		else
-		{
-			self.st_loadout_weapons = array(WAR_MACHINE, MK2_U, MONKS, CLAYMORE);
-			self.st_loadout_melee = GALVA;
-			self.st_loadout_mule = SALLYS;
-			self.st_loadout_main = WAR_MACHINE;
-		}
-	}
-	if(isorigins())
-	{
-		if(getDvarInt("st_shield"))
-			self.st_loadout_equipment = array(SHIELD_ORIGINS);
+originsLoadout()
+{
 
-		if(iswhite(self) && level.players.size == 1)
+	if(getDvarInt("st_shield"))
+		self.st_loadout_equipment = array(SHIELD_ORIGINS);
+
+	if(iswhite(self) && level.players.size == 1)
+	{
+		if(getDvarInt("st_wm_origins"))
+			self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
+		else
+			self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
+
+		switch(getDvarInt("st_staff"))
+		{
+			case 0: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
+			case 1: self.st_loadout_mule = WIND; self.st_loadout_main = WIND; break;
+			case 2: self.st_loadout_mule = FIRE; self.st_loadout_main = FIRE; break;
+			case 3: self.st_loadout_mule = ELECTRIC; self.st_loadout_main = ELECTRIC; break;
+			default: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
+		}
+	}
+	else
+	{
+		if(iswhite(self))
 		{
 			if(getDvarInt("st_wm_origins"))
-				self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
+				self.st_loadout_mule = WAR_MACHINE_U;
 			else
-				self.st_loadout_weapons = array(MK2_U, MP40_U, AIR_STRIKE, SEMTEX, CLAYMORE);
+				self.st_loadout_mule = MP40_U;
 
-			switch(getDvarInt("st_staff"))
-			{
-				case 0: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
-				case 1: self.st_loadout_mule = WIND; self.st_loadout_main = WIND; break;
-				case 2: self.st_loadout_mule = FIRE; self.st_loadout_main = FIRE; break;
-				case 3: self.st_loadout_mule = ELECTRIC; self.st_loadout_main = ELECTRIC; break;
-				default: self.st_loadout_mule = ICE; self.st_loadout_main = ICE; break;
-			}
+			self.st_loadout_weapons = array(MK2_U, SEMTEX, AIR_STRIKE);
 		}
 		else
 		{
-			if(iswhite(self))
-			{
-				if(getDvarInt("st_wm_origins"))
-					self.st_loadout_mule = WAR_MACHINE_U;
-				else
-					self.st_loadout_mule = MP40_U;
-
-				self.st_loadout_weapons = array(MK2_U, SEMTEX, AIR_STRIKE);
-			}
-			else
-			{
-				self.st_loadout_weapons = array(BOOMHILDA, SEMTEX, AIR_STRIKE);
-				self.st_loadout_mule = MP40_U;
-			}
-
-			if(iswhite(self))	{self.st_loadout_weapons[self.st_loadout_weapons.size] = ICE; self.st_loadout_main = ICE;}
-			if(isblue(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = WIND; self.st_loadout_main = WIND;}
-			if(isyellow(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = FIRE; self.st_loadout_main = FIRE;}
-			if(isgreen(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = ELECTRIC; self.st_loadout_main = ELECTRIC;}
+			self.st_loadout_weapons = array(BOOMHILDA, SEMTEX, AIR_STRIKE);
+			self.st_loadout_mule = MP40_U;
 		}
-	}
-	self.st_loadout_completed = true;
-}
-
-/////////////////////////////////////////////////////////
-// GIVE WEAPONS BACK AFTER DEATH
-/////////////////////////////////////////////////////////
-
-scanweapons()
-{
-	prev = undefined;
-	while(true)
-	{
-		wait 5;
-		while(true)
-		{
-			prev = self.saved_mule_weapon;
-			wait 0.1;
-			if(isdefined(self.revivetrigger))
-			{
-				while(isdefined(self.revivetrigger))
-					wait 0.1;
-				break;
-			}
-			if(self.origin[2] < 0 && isdierise())
-			{
-				while(self.origin[2] < 0)
-					wait 0.1;
-				break;
-			}
-			weap = self getweaponslistprimaries();
-			self.saved_mule_weapon = maps\mp\zombies\_zm_weapons::get_player_weapondata( self, weap[2]);
-			wait 0.1;
-		}
+		if(iswhite(self))	{self.st_loadout_weapons[self.st_loadout_weapons.size] = ICE; self.st_loadout_main = ICE;}
+		if(isblue(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = WIND; self.st_loadout_main = WIND;}
+		if(isyellow(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = FIRE; self.st_loadout_main = FIRE;}
+		if(isgreen(self)) 	{self.st_loadout_weapons[self.st_loadout_weapons.size] = ELECTRIC; self.st_loadout_main = ELECTRIC;}
 	}
 }
 
-give_mule_weapon_on_revive()
-{
-	level endon("end_game");
-	self endon( "disconnect" );
-	self thread scanweapons();
-
-	while(true)
-	{
-		self waittill( "player_revived", reviver );
-        if(isdefined(self.saved_mule_weapon))
-		{
-			self waitformulekick();
-			self maps\mp\zombies\_zm_weapons::weapondata_give(self.saved_mule_weapon);
-		}
-	}
-}
-
-give_melee_weapon_instant( weapon_name )
+giveMelee(weapon_name )
 {
 	if(!isdefined(weapon_name))
 		return;
 
-	// wait 1;
-	// gun = change_melee_weapon( weapon_name, "knife_zm" );
-	if ( self hasweapon( "knife_zm" ) )
-		self takeweapon( "knife_zm" );
+	if (self hasweapon("knife_zm"))
+		self takeweapon("knife_zm");
 
-	self weapon_give( weapon_name, undefined, undefined, 0 );
+	self weapon_give(weapon_name, undefined, undefined, 0);
 
     gun = self getcurrentweapon();
-	if ( gun != "none" && !is_placeable_mine( gun ) && !is_equipment( gun ) )
-		self switchtoweapon( gun );
+	if (gun != "none" && !is_placeable_mine(gun) && !is_equipment(gun))
+		self switchtoweapon(gun);
 }
 
 givetomahawk()
@@ -420,43 +355,69 @@ givetomahawk()
 
 checkCustomLoadouts()
 {
-	if(istranzit()) path = FILE_TRANZIT;
-	if(isdepot()) path = FILE_DEPOT;
-	if(isfarm()) path = FILE_FARM;
-	if(istown()) path = FILE_TOWN;
-	if(isnuketown()) path = FILE_NUKETOWN;
-	if(isdierise()) path = FILE_DIERISE;
-	if(ismob()) path = FILE_MOB;
-	if(isburied()) path = FILE_BURIED;
-	if(isorigins()) path = FILE_ORIGINS;
+    loadout = validateLoadoutFile(getLoadoutFilePath());
 
+    if(!isdefined(loadout))
+        return false;
+
+    self.st_loadout_melee = loadout[3];
+    self.st_loadout_mule = loadout[1];
+
+    weapons = strtok(loadout[0], " ");
+    equipment = strtok(loadout[2], " ");
+
+    self.st_loadout_weapons = array();
+    self.st_loadout_equipment = array();
+
+    for(i = 0; i < weapons.size; i++)
+        self.st_loadout_weapons[i] = weapons[i];
+
+    for(i = 0; i < equipment.size; i++)
+        self.st_loadout_equipment[i] = equipment[i];
+
+    if(self.st_loadout_weapons.size > 0)
+        self.st_loadout_main = self.st_loadout_weapons[0];
+
+    return true;
+}
+
+getLoadoutFilePath()
+{
+	if(istranzit()) return FILE_TRANZIT;
+	else if(isdepot()) return FILE_DEPOT;
+	else if(isfarm()) return FILE_FARM;
+	else if(istown()) return FILE_TOWN;
+	else if(isnuketown()) return FILE_NUKETOWN;
+	else if(isdierise()) return FILE_DIERISE;
+	else if(ismob()) return FILE_MOB;
+	else if(isburied()) return FILE_BURIED;
+	else if(isorigins()) return FILE_ORIGINS;
+}
+
+validateLoadoutFile(path)
+{
     f = fs_fopen(path, "read");
-	if(f == -1) return false;
 
-	weapons = fs_readline(f);
-	if(!isdefined(weapons)) return false;
-	mule = fs_readline(f);
-	if(!isdefined(mule)) return false;
-	equipment = fs_readline(f);
-	if(!isdefined(equipment)) return false;
-	melee = fs_readline(f);
-	if(!isdefined(melee)) return false;
+    if(f == -1)
+        return undefined;
 
-	self.st_loadout_melee = melee;
-	self.st_loadout_mule = mule;
+    loadout = array();
 
-	weapons = strtok(weapons, " ");
-	equipment = strtok(equipment, " ");
-	self.loadout_equipment = array();
-	for(i = 0; i < equipment.size; i++)
-		self.st_loadout_equipment[i] = equipment[i];
-	for(i = 0; i < weapons.size; i++)
-		self.st_loadout_weapons[i] = weapons[i];
+    for(i = 0; i < 4; i++)
+    {
+        line = fs_readline(f);
 
-	self.st_loadout_main = self.st_loadout_weapons[0];
+        if(!isdefined(line))
+        {
+            fs_fclose(f);
+            return undefined;
+        }
 
-	self.st_loadout_completed = true;
-	return true;
+        loadout[i] = line;
+    }
+
+    fs_fclose(f);
+    return loadout;
 }
 
 fridge()
@@ -468,5 +429,87 @@ fridge()
 		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "clip", 30);
 		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "alt_clip", 1);
 		self setdstat("PlayerStatsByMap", "zm_transit", "weaponLocker", "alt_stock", 8);
+	}
+}
+
+// MULEKICK STUFF
+mulekickWepaon()
+{
+	self endon("disconnect");
+	level endon("end_game");
+
+	if(self waitForMulekick() == false)
+		return;
+
+    gun = self getCurrentWeapon();
+	self weapon_give(self.st_loadout_mule, undefined, undefined, 0);
+
+    if (isorigins() && issubstr(self.st_loadout_mule, "staff"))
+    {
+        self thread [[getfunction("maps/mp/zm_tomb_main_quest", "watch_staff_ammo_reload")]]();
+        [[getfunction("maps/mp/zm_tomb_craftables", "set_player_staff")]](self.st_loadout_mule, self);
+		return;
+    }
+
+	self switchtoweapon(gun);
+}
+
+waitForMulekick()
+{
+	self endon("disconnect");
+	level endon("end_game");
+
+	for(i = 0; i < 50; i++)
+	{
+		if(self hasperk(MULE_PERK))
+			return true;
+		wait 0.1;
+	}
+	return false;
+}
+
+giveMuleWeaponOnRevive()
+{
+	level endon("end_game");
+	self endon( "disconnect" );
+	self thread scanweapons();
+
+	while(true)
+	{
+		self waittill( "player_revived", reviver );
+        if(isdefined(self.saved_mule_weapon))
+		{
+			if(self waitForMulekick())
+				self maps\mp\zombies\_zm_weapons::weapondata_give(self.saved_mule_weapon);
+		}
+	}
+}
+
+scanweapons()
+{
+	prev = undefined;
+	while(true)
+	{
+		wait 5;
+		while(true)
+		{
+			prev = self.saved_mule_weapon;
+			wait 0.1;
+			if(isdefined(self.revivetrigger))
+			{
+				while(isdefined(self.revivetrigger))
+					wait 0.1;
+				break;
+			}
+			if(self.origin[2] < 0 && isdierise())
+			{
+				while(self.origin[2] < 0)
+					wait 0.1;
+				break;
+			}
+			weap = self getweaponslistprimaries();
+			self.saved_mule_weapon = maps\mp\zombies\_zm_weapons::get_player_weapondata( self, weap[2]);
+			wait 0.1;
+		}
 	}
 }
