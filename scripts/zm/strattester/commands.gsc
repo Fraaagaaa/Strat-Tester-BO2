@@ -265,95 +265,55 @@ boxhitscase()
 	setDvar("st_boxhits", !getDvarInt("st_boxhits"));
 }
 
-changeroundrework()
+changeRoundFromMenu(requestedRound)
 {
-    flag_wait("initial_blackscreen_passed");
-
-    last_requested = getDvarInt("round");
-    setDvar("st_changeround", last_requested);
-
-    while(true)
+    if(requestedRound == level.round_number)
     {
-        wait 0.1;
-
-        requested_ui = getDvarInt("st_changeround");
-        desired_rnd = requested_ui - 1;
-        current_rnd = level.round_number;
-
-        if(requested_ui == last_requested || desired_rnd == current_rnd)
-            continue;
-
-        last_requested = requested_ui;
-
-        if(!playinground())
-            strattesterprint("Waiting for round transition to end.", "Esperando a que termine la transición de la ronda");
-        while(!playinground())
-            wait 0.1;
-
-        changeRound(desired_rnd);
-
-        strattesterprint("Changing round to " + requested_ui, "Cambiado ronda a " + requested_ui);
-    }
-}
-
-killhorderework()
-{
-	flag_wait("initial_blackscreen_passed");
-    setDvar("st_killhorde", 0);
-    while(true)
-    {
-        while(getDvarInt("st_killhorde") == 0)
-            wait 0.1;
-        setDvar("st_killhorde", 0);
-        killHorde();
-        strattesterprint("Killing current horde", "Matando horda actual");
-    }
-}
-
-endroundrework()
-{
-	flag_wait("initial_blackscreen_passed");
-    while(true)
-    {
-        wait 0.1;
-        if(getDvarInt("st_endround") == 0)
-            continue;
-        desired_rnd = getDvarInt("st_endround");
-        setDvar("st_endround", 0);
-        endround();
-        strattesterprint("Ending current round", "Terminando ronda actual");
-    }
-}
-
-unlockgensrework()
-{
-    if(!isorigins())
+        strattesterprint("Already at round " + requestedRound, "Ya estás en la ronda " + requestedRound);
         return;
-    setDvar("st_unlockgens", 0);
-    gens = getstructarray("s_generator", "targetname");
-    while(true)
-    {
-        while(getDvarInt("st_unlockgens") == 0)
-            wait 0.1;
-        setDvar("st_unlockgens", 0);
-        foreach (gen in gens)
-            gen thread [[getfunction("maps/mp/zm_tomb_capture_zones", "init_capture_zone")]]();
-        strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
     }
+
+    if(inRoundTransition())
+        strattesterprint("Waiting for round transition to end.", "Esperando a que termine la transición de la ronda");
+
+    while(inRoundTransition())
+        wait 0.1;
+
+    changeRound(requestedRound);
+    strattesterprint("Changing round to " + requestedRound, "Cambiado ronda a " + requestedRound);
+}
+
+killHordeFromMenu()
+{
+    killHorde();
+    strattesterprint("Killing current horde", "Matando horda actual");
+}
+
+endRoundFromMenu()
+{
+    if(inRoundTransition())
+        strattesterprint("Waiting for round transition to end.", "Esperando a que termine la transición de la ronda");
+
+    while(inRoundTransition())
+        wait 0.1;
+
+    endround();
+    strattesterprint("Ending current round", "Terminando ronda actual");
+}
+
+unlockAllGenerators()
+{
+    foreach (gen in getstructarray("s_generator", "targetname"))
+        gen thread [[getfunction("maps/mp/zm_tomb_capture_zones", "init_capture_zone")]]();
+
+    strattesterprint("All generators have been unlocked", "Todos los generadores han sido desbloqueados");
 }
 
 changeGenStatus(generator)
 {
-	generator = string_to_float(generator);
-	switch(generator)
-	{
-		case 1: name = "generator_start_bunker"; break;
-		case 2: name = "generator_tank_trench"; break;
-		case 3: name = "generator_mid_trench"; break;
-		case 4: name = "generator_nml_right"; break;
-		case 5: name = "generator_nml_left"; break;
-		case 6: name = "generator_church"; break;
-	}
+	generator = int(generator);
+    name = getGeneratorName(generator);
+
 	foreach (gen in getstructarray( "s_generator", "targetname" ))
 	{
 		if(gen.script_noteworthy == name)
@@ -362,14 +322,14 @@ changeGenStatus(generator)
 			{
 				gen.n_current_progress = 0;
                 gen [[getfunction("maps/mp/zm_tomb_capture_zones", "set_zombie_controlled_area")]]();
-				level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+				level setclientfield( gen.script_noteworthy, 0);
 				level setclientfield( "state_" + gen.script_noteworthy, 0 );
 			}
 			else
 			{
 				gen.n_current_progress = 100;
                 gen [[getfunction("maps\mp\zm_tomb_capture_zones", "players_capture_zone")]]();
-				level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+				level setclientfield( gen.script_noteworthy, 1);
 				level setclientfield( "state_" + gen.script_noteworthy, 2 );
 			}
 		}
@@ -427,16 +387,8 @@ force_next_location()
             level.chest_index = i;
 }
 
-specialcommands()
-{
-    self thread unlockgensrework();
-    self thread endroundrework();
-    self thread killhorderework();
-    self thread commandmenulistener();
-    self thread changeroundrework();
-}
 
-commandmenulistener()
+commandMenuListener()
 {
     self endon( "disconnect" );
     self notify( "commandmenulistener" );
@@ -445,42 +397,60 @@ commandmenulistener()
 
     while ( true )
     {
-        self waittill( "menuresponse", menu, response );
+        self waittill("menuresponse", menu, response);
 
-        if ( !isdefined( menu ) || !isdefined( response ) )
+        if(!isdefined(menu) || !isdefined(response))
             continue;
 
-        if ( menu != "restartgamepopup" )
+        if(menu != "restartgamepopup")
             continue;
 
-        if ( issubstr( response, "sttp+" ) )
+        else if(issubstr(response, "st_tp+"))
         {
-            parts = strtok( response, "+" );
-            if ( parts.size >= 2 )
-                tpcase( self, parts[1], undefined );
-            continue;
+            parts = strtok(response, "+");
+            if(parts.size >= 2)
+                tpcase(self, parts[1], undefined);
         }
 
-        if ( issubstr( response, "stnotarget+" ) )
+        else if(issubstr(response, "st_notarget+"))
         {
-            parts = strtok( response, "+" );
-            if ( parts.size >= 2 )
+            parts = strtok(response, "+");
+            if(parts.size >= 2)
             {
-                self.ignoreme = ( parts[1] == "1" );
-                if ( self.ignoreme )
-                    strattesterprint( self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis" );
+                self.ignoreme = (parts[1] == "1");
+                if(self.ignoreme)
+                    strattesterprint(self.name + " will be ignored by zombies", self.name + " será ignorado por los zombis");
                 else
-                    strattesterprint( self.name + " can be targeted by zombies", self.name + " atraerá zombis" );
+                    strattesterprint(self.name + " can be targeted by zombies", self.name + " atraerá zombis");
             }
-            continue;
         }
 
-        if ( issubstr( response, "stboxmove+" ) )
+        else if(issubstr(response, "st_boxmove+"))
         {
-            parts = strtok( response, "+" );
-            if ( parts.size >= 2 )
-                level thread boxmove( parts[1] );
-            continue;
+            parts = strtok(response, "+");
+            if(parts.size >= 2)
+                level thread boxmove(parts[1]);
+        }
+
+        else if(IsSubStr(response, "st_endround"))
+        {
+            thread endRoundFromMenu();
+        }
+
+        else if(IsSubStr(response, "st_changeround+"))
+        {
+            round = int(strtok(response, "+")[1]);
+            thread changeRoundFromMenu(round);
+        }
+
+        else if(IsSubStr(response, "st_unlockgenerators+"))
+        {
+            thread unlockAllGenerators();
+        }
+
+        else if(IsSubStr(response, "st_killhorde"))
+        {
+            thread killHordeFromMenu();
         }
     }
 }

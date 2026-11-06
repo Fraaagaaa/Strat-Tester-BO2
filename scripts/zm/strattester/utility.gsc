@@ -177,7 +177,7 @@ changeRound(rnd, killZombies)
 		killZombies = true;
 
 	setDvar("st_round", rnd);
-	level.round_number = rnd;
+	level.round_number = rnd - 1;
 
 	if(killZombies)
 		endRound();
@@ -552,20 +552,20 @@ dvar_tracker()
     }
 }
 
-track_playinground()
+trackBetweenRounds()
 {
 	while(true)
 	{
-		level.roundstarted = false;
+		level.betweenRoundTransition = true;
 		level waittill("start_of_round");
-		level.roundstarted = true;
+		level.betweenRoundTransition = false;
 		level waittill("end_of_round");
 	}
 }
 
-playinground()
+inRoundTransition()
 {
-	return level.roundstarted;
+	return level.betweenRoundTransition;
 }
 
 // Code by Banq (most likely ai)
@@ -775,4 +775,16 @@ printAllTriggers()
     }
 
     println("Total triggers: " + count);
+}
+
+getGeneratorName(generatorNumber)
+{
+	if(generatorNumber == 1) return "generator_start_bunker";
+	if(generatorNumber == 2) return "generator_tank_trench";
+	if(generatorNumber == 3) return "generator_mid_trench";
+	if(generatorNumber == 4) return "generator_nml_right";
+	if(generatorNumber == 5) return "generator_nml_left";
+	if(generatorNumber == 6) return "generator_church";
+
+	return "unknownGenerator";
 }

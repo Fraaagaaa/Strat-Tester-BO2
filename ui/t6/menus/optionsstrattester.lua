@@ -164,16 +164,22 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 	local ChangeRoundSlider = CoD.OptionsSettings.AddDvarLeftRightSlider( ButtonList, LocalClientIndex, Engine.Localize("ST_MENU_GAME_CHANGE_ROUND"), "st_changeround", 1, 255, Engine.Localize("ST_MENU_GAME_CHANGE_ROUND_DESC"))
 	ChangeRoundSlider:setNumericDisplayFormatString("%d")
 
+	local ExecuteChangeRoundBtn = ButtonList:addButton(Engine.Localize("ST_MENU_GAME_CHANGE_ROUND"), Engine.Localize("ST_MENU_GAME_CHANGE_ROUND_DESC"))
+	ExecuteChangeRoundBtn:registerEventHandler("button_action", function ( element, event )
+		local round = UIExpression.DvarInt( nil, "st_changeround" )
+		Engine.SendMenuResponse( event.controller or LocalClientIndex, "restartgamepopup", "st_changeround+" .. tostring( round ) )
+	end )
+
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
 
 	local KillHordeBtn = ButtonList:addButton(Engine.Localize("ST_MENU_GAME_KILL_HORDE"), Engine.Localize("ST_MENU_GAME_KILL_HORDE_DESC"))
 	KillHordeBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.SetDvar( "st_killhorde", 1 )
+		Engine.SendMenuResponse( event.controller or LocalClientIndex, "restartgamepopup", "st_killhorde" )
 	end )
 
 	local EndRoundBtn = ButtonList:addButton(Engine.Localize("ST_MENU_GAME_END_ROUND"), Engine.Localize("ST_MENU_GAME_END_ROUND_DESC"))
 	EndRoundBtn:registerEventHandler("button_action", function ( element, event )
-		Engine.SetDvar( "st_endround", 1 )
+		Engine.SendMenuResponse( event.controller or LocalClientIndex, "restartgamepopup", "st_endround" )
 	end )
 
 	ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
@@ -280,7 +286,7 @@ CoD.StratTester.CreateGameTab = function ( Tab, LocalClientIndex )
 
         ExecuteTPBtn:registerEventHandler("button_action", function ( element, event )
             local selectedDest = UIExpression.DvarString( event.controller, tpDvar )
-            Engine.SendMenuResponse( event.controller, "restartgamepopup", "sttp+" .. selectedDest )
+            Engine.SendMenuResponse( event.controller, "restartgamepopup", "st_tp+" .. selectedDest )
         end )
     end
 
@@ -560,7 +566,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
 
         local UnlockGensBtn = ButtonList:addButton(Engine.Localize("ST_MENU_MAP_UNLOCK_GENERATORS"), Engine.Localize("ST_MENU_MAP_UNLOCK_GENERATORS_DESC"))
         UnlockGensBtn:registerEventHandler("button_action", function ( element, event )
-            Engine.SetDvar( "st_unlockgens", 1 )
+            Engine.SendMenuResponse( event.controller or LocalClientIndex, "restartgamepopup", "st_unlockgenerators+1" )
         end )
     end
 
@@ -641,7 +647,7 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
         local ExecuteBoxBtn = ButtonList:addButton(Engine.Localize("ST_MENU_MAP_MOVE_BOX"), Engine.Localize("ST_MENU_MAP_MOVE_BOX_DEC"))
         ExecuteBoxBtn:registerEventHandler("button_action", function ( element, event )
             local selectedDest = UIExpression.DvarString( event.controller, boxDvarUI )
-            Engine.SendMenuResponse( event.controller, "restartgamepopup", "stboxmove+" .. selectedDest )
+            Engine.SendMenuResponse( event.controller, "restartgamepopup", "st_boxmove+" .. selectedDest )
         end )
     end
 
@@ -923,6 +929,6 @@ end
 CoD.StratTester.OnNotargetChanged = function ( choice, isUserRequest )
     if isUserRequest ~= true then return end
     local controller = choice.parentSelectorButton.m_currentController
-    Engine.SendMenuResponse( controller, "restartgamepopup", "stnotarget+" .. tostring( choice.value ) )
+    Engine.SendMenuResponse( controller, "restartgamepopup", "st_notarget+" .. tostring( choice.value ) )
     Engine.SetDvar( choice.parentSelectorButton.m_profileVarName, choice.value )
 end

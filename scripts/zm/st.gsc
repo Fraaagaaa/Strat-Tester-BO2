@@ -43,7 +43,7 @@ init()
     level thread init_start();
 	level thread readChat();
     level thread wait_for_players();
-    level thread track_playinground();
+    level thread trackBetweenRounds();
 	setDvar("player_reviveTriggerRadius", 64);
 	setDvar("revive_trigger_radius", 75);
     
@@ -72,7 +72,7 @@ connected_st()
 		self.score = 1000000;
         self thread perk_apply_loop();
 		self thread init_loadouts();
-        self thread specialcommands();
+        self thread commandMenuListener();
 		self waittill("spawned_player");
     }
 }
