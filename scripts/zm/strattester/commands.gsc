@@ -19,11 +19,12 @@ addCommands(commands)
 
 readchat() 
 {
+    level endon("disconnect")
     self endon("end_game");
     if(!isdefined(level.commands))
 	    level.chatcommands = [];
 
-    addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining"));
+    addCommands(array("!tpc", "!tp", "!nuke", "!max", "!x2", "!sale", "!blood", "!perk", "!insta", "!gen", "!perma", "!points", "!remaining", "!rem"));
 
     while (true) 
     {
@@ -38,7 +39,7 @@ readchat()
 		}
         switch(msg[0])
         {
-            case "!remaining": remainingcase(msg[1]); break;
+            case "!remaining": case "!rem": remainingcase(msg[1]); break;
             case "!points": pointscase(player, msg[1]); break;
             case "!perma": permacase(player); break;
             case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
@@ -473,8 +474,7 @@ remainingcase(rem)
     }
 
     level.zombie_total = rem - get_current_zombie_count();
-    foreach(player in getplayers())
-        player thread sph_round_tracker(); // reset sph
+    level notify("st_sph_restart");
 }
 
 get_zombie_to_delete()

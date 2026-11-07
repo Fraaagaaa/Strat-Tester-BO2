@@ -14,11 +14,13 @@
 
 timer()
 {
-	self endon("disconnect");
+    level endon("end_game");
+    self endon("disconnect");
 
 	self thread roundtimer();
 	self.timer = newclienthudelem(self);
 	self.timer.hidewheninmenu = 1;
+    self.timer.alpha = 0;
 	self.timer.fontscale = 1.7;
 	self thread timerlocation();
 	flag_wait("initial_blackscreen_passed");
@@ -35,7 +37,6 @@ roundtimer()
     self endon("disconnect");
 
 	self.roundtimer = newclienthudelem(self);
-	self.roundtimer.alpha = 1;
 	self.roundtimer.fontscale = 1.7;
 	self.roundtimer.color = (0.8, 0.8, 0.8);
 	self.roundtimer.hidewheninmenu = true;
@@ -57,6 +58,7 @@ roundtimer()
 display_round_time(time)
 {
     level endon("end_game");
+    self endon("disconnect");
     level endon("start_of_round");
 
     while (true)
@@ -90,6 +92,7 @@ despawnersTimer()
     self.despawnersTimer.font = "objective";
     self.despawnersTimer.fontscale = 1.4;
     self.despawnersTimer.hidewheninmenu = 1;
+    self.despawnersTimer.alpha = 0;
     self.despawnersTimer.color = (0.7, 0.7, 0.7);
 
     while(true)
@@ -102,7 +105,8 @@ despawnersTimer()
 
 traptimer()
 {
-	self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
 	self.traptimer = newclienthudelem( self );
 	self.traptimer.alignx = "left";
@@ -133,7 +137,8 @@ traptimer()
 
 icestafftimer()
 {
-	self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
 	self.icestafftimer = newclienthudelem( self );
 	self.icestafftimer.fontscale = 1.4;
@@ -152,7 +157,8 @@ icestafftimer()
 
 windstafftimer()
 {
-	self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
 	self.windstafftimer = newclienthudelem( self );
 	self.windstafftimer.fontscale = 1.4;
@@ -171,6 +177,8 @@ windstafftimer()
 
 setnotifytimer(end, time)
 {
+    level endon("end_game");
+    self endon("disconnect");
     self notify("end_timer_" + end);
     self endon("end_timer_" + end);
 
@@ -209,7 +217,8 @@ bustimer()
 
 sliquifiretimer()
 {
-    self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
     self.sliquifiretimer = newclienthudelem( self );
     self.sliquifiretimer.fontscale = 1.4;
