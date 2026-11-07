@@ -19,7 +19,7 @@ addCommands(commands)
 
 readchat() 
 {
-    level endon("disconnect")
+    level endon("disconnect");
     self endon("end_game");
     if(!isdefined(level.commands))
 	    level.chatcommands = [];

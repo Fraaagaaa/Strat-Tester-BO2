@@ -29,10 +29,10 @@ init()
 	replacefunction("maps/mp/zm_tomb_capture_zones", "capture_event_handle_ai_limit", ::override_capture_event_handle_ai_limit);
 
 	level thread pack_a_punch_enable();
-	level thread enable_all_teleporters();
+	level thread enableAllTeleporters();
 	level thread takeAllParts();
-	level thread call_tank();
-    level thread wait_for_players();
+	level thread callTank();
+    level thread waitConnecting();
     level thread fixPanzerRounds();
     
 	if(!isdefined(level.generatorKills))
@@ -43,72 +43,29 @@ init()
 
 	flag_wait("initial_blackscreen_passed");
     
-    give_max_ammo_reward();
-    turn_gens_on();
-	takecraftableparts("");
+    giveAmmoReward();
+    turnGeneratorsOn();
+	takeCraftableParts("");
     placeStaffsInChargers();
 }
 
-wait_for_players()
+waitConnecting()
 {
     while(true)
     {
-        level waittill( "connected" , player);
-        player thread connected_st();
+        level waittill("connected" , player);
+        player thread waitSpawn();
     }
 }
 
-connected_st()
+waitSpawn()
 {
-    self endon( "disconnect" );
+    self endon("disconnect");
 
     while(true)
     {
-        self waittill( "spawned_player" );
+        self waittill("spawned_player");
 		self giveShovelAndHelmet();
-    }
-}
-
-override_pack_a_punch_think()
-{
-	pack_a_punch_enable();
-}
-
-override_watch_staff_usage()
-{
-    self notify( "watch_staff_usage" );
-    self endon( "watch_staff_usage" );
-    self endon( "disconnect" );
-    self setclientfieldtoplayer( "player_staff_charge", 0 );
-
-    while ( true )
-    {
-        self waittill( "weapon_change", weapon );
-        has_upgraded_staff = 0;
-        has_revive_staff = 0;
-        weapon_is_upgraded_staff = is_weapon_upgraded_staff( weapon );
-        str_upgraded_staff_weapon = undefined;
-        a_str_weapons = self getweaponslist();
-
-        foreach ( str_weapon in a_str_weapons )
-        {
-            if ( is_weapon_upgraded_staff( str_weapon ) )
-            {
-                has_upgraded_staff = 1;
-                str_upgraded_staff_weapon = str_weapon;
-            }
-
-            if ( str_weapon == "staff_revive_zm" )
-                has_revive_staff = 1;
-        }
-
-        if ( !has_revive_staff || !weapon_is_upgraded_staff && "none" != weapon && "none" != weaponaltweaponname( weapon ) )
-            self setactionslot( 3, "altmode" );
-        else
-            self setactionslot( 3, "weapon", "staff_revive_zm" );
-
-        if ( weapon_is_upgraded_staff )
-            self thread staff_charge_watch_wrapper( weapon );
     }
 }
 
@@ -149,7 +106,7 @@ placeStaffsInChargers()
     }
 }
 
-call_tank()
+callTank()
 {
     str_loc = level.vh_tank.str_location_current;
     a_trigs = getentarray( "trig_tank_station_call", "targetname" );
@@ -176,38 +133,7 @@ call_tank()
 	wait 0.1;
 }
 
-
-override_zombie_stomp_death(robot, a_zombies_to_kill)
-{
-	n_interval = 0;
-	for(i = 0; i < a_zombies_to_kill.size; i++)
-	{
-		zombie = a_zombies_to_kill[i];
-		if(isdefined(zombie) && isalive(zombie))
-		{
-			zombie dodamage(zombie.health, zombie.origin, robot);
-			level.stompkills++;
-			n_interval++;
-			if(n_interval >= 4)
-			{
-				wait_network_frame();
-				n_interval = 0;
-			}
-		}
-	}
-}
-
-override_knockdown_zombie_animate_state()
-{
-	level.tumbles++;
-	self endon("death");
-	self.is_knocked_down = 1;
-	self waittill_any("damage", "back_up");
-	self.is_knocked_down = 0;
-}
-
-
-enable_all_teleporters()
+enableAllTeleporters()
 {
 	flag_wait( "initial_blackscreen_passed" );
 	flag_set( "activate_zone_chamber" );
@@ -278,6 +204,147 @@ open_gramophone_door()
 	self delete();
 	t_door tomb_unitrigger_delete();
 	trig_position.trigger = undefined;
+}
+
+giveAmmoReward()
+{
+	foreach(player in level.players)
+			for(i = 0; i < 6; i++)
+				player maps\mp\zombies\_zm_challenges::increment_stat( "zc_zone_captures" );
+}
+
+turnGeneratorsOn()
+{
+	foreach (gen in getstructarray( "s_generator", "targetname" ))
+	{
+		if(gen.script_noteworthy == "generator_nml_right")
+			continue;
+		gen.n_current_progress = 100;
+		gen players_capture_zone();
+		level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
+    	level setclientfield( "state_" + gen.script_noteworthy, 2 );
+	}
+}
+
+override_recapture_round_tracker()
+{
+    n_next_recapture_round = 10;
+
+    while ( true )
+    {
+        level waittill_any( "between_round_over", "force_recapture_start" );
+        if ( level.round_number >= n_next_recapture_round && !flag( "zone_capture_in_progress" ) && get_captured_zone_count() >= get_player_controlled_zone_count_for_recapture() )
+        {
+            n_next_recapture_round = level.round_number + randomintrange( 3, 6 );
+            level thread recapture_round_start();
+        }
+		if(n_next_recapture_round > (level.round_number + 7))
+		{
+            n_next_recapture_round = level.round_number + randomintrange( 3, 6 );
+		}
+    }
+}
+
+fixPanzerRounds()
+{
+	while(true)
+	{
+		level waittill("between_round_over");
+		if(level.next_mechz_round < level.round_number)
+		{
+            if ( isdefined( level.is_forever_solo_game ) && level.is_forever_solo_game )
+                level.next_mechz_round = randomintrange( level.mechz_min_round_fq_solo, level.mechz_max_round_fq_solo );
+            else
+                level.next_mechz_round = randomintrange( level.mechz_min_round_fq, level.mechz_max_round_fq );
+		}
+        if ( isdefined( level.is_forever_solo_game ) && level.is_forever_solo_game )
+		{
+			if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq_solo))
+			{
+                level.next_mechz_round = randomintrange( level.mechz_min_round_fq_solo, level.mechz_max_round_fq_solo );
+			}
+		}
+		else if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq))
+		{
+			if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq_solo))
+			{
+				level.players[0] IPrintLn("Fixing rounds, coop");
+                level.next_mechz_round = randomintrange( level.mechz_min_round_fq, level.mechz_max_round_fq );
+			}
+		}
+	}
+}
+
+override_pack_a_punch_think()
+{
+	pack_a_punch_enable();
+}
+
+override_watch_staff_usage()
+{
+    self notify( "watch_staff_usage" );
+    self endon( "watch_staff_usage" );
+    self endon( "disconnect" );
+    self setclientfieldtoplayer( "player_staff_charge", 0 );
+
+    while ( true )
+    {
+        self waittill( "weapon_change", weapon );
+        has_upgraded_staff = 0;
+        has_revive_staff = 0;
+        weapon_is_upgraded_staff = is_weapon_upgraded_staff( weapon );
+        str_upgraded_staff_weapon = undefined;
+        a_str_weapons = self getweaponslist();
+
+        foreach ( str_weapon in a_str_weapons )
+        {
+            if ( is_weapon_upgraded_staff( str_weapon ) )
+            {
+                has_upgraded_staff = 1;
+                str_upgraded_staff_weapon = str_weapon;
+            }
+
+            if ( str_weapon == "staff_revive_zm" )
+                has_revive_staff = 1;
+        }
+
+        if ( !has_revive_staff || !weapon_is_upgraded_staff && "none" != weapon && "none" != weaponaltweaponname( weapon ) )
+            self setactionslot( 3, "altmode" );
+        else
+            self setactionslot( 3, "weapon", "staff_revive_zm" );
+
+        if ( weapon_is_upgraded_staff )
+            self thread staff_charge_watch_wrapper( weapon );
+    }
+}
+
+override_zombie_stomp_death(robot, a_zombies_to_kill)
+{
+	n_interval = 0;
+	for(i = 0; i < a_zombies_to_kill.size; i++)
+	{
+		zombie = a_zombies_to_kill[i];
+		if(isdefined(zombie) && isalive(zombie))
+		{
+			zombie dodamage(zombie.health, zombie.origin, robot);
+			level.stompkills++;
+			n_interval++;
+			if(n_interval >= 4)
+			{
+				wait_network_frame();
+				n_interval = 0;
+			}
+		}
+	}
+}
+
+override_knockdown_zombie_animate_state()
+{
+	level.tumbles++;
+	self endon("death");
+	self.is_knocked_down = 1;
+	self waittill_any("damage", "back_up");
+	self.is_knocked_down = 0;
 }
 
 override_flamethrower_damage_zombies(n_flamethrower_id, str_tag)
@@ -358,81 +425,6 @@ override_tank_drop_powerups()
         wait 2.0;
     }
 }
-
-fixed_tank_push_player_off_edge()
-{
-    return;
-}
-
-give_max_ammo_reward()
-{
-	foreach(player in level.players)
-			for(i = 0; i < 6; i++)
-				player maps\mp\zombies\_zm_challenges::increment_stat( "zc_zone_captures" );
-}
-
-turn_gens_on()
-{
-	foreach (gen in getstructarray( "s_generator", "targetname" ))
-	{
-		if(gen.script_noteworthy == "generator_nml_right")
-			continue;
-		gen.n_current_progress = 100;
-		gen players_capture_zone();
-		level setclientfield( gen.script_noteworthy, gen.n_current_progress / 100 );
-    	level setclientfield( "state_" + gen.script_noteworthy, 2 );
-	}
-}
-
-override_recapture_round_tracker()
-{
-    n_next_recapture_round = 10;
-
-    while ( true )
-    {
-        level waittill_any( "between_round_over", "force_recapture_start" );
-        if ( level.round_number >= n_next_recapture_round && !flag( "zone_capture_in_progress" ) && get_captured_zone_count() >= get_player_controlled_zone_count_for_recapture() )
-        {
-            n_next_recapture_round = level.round_number + randomintrange( 3, 6 );
-            level thread recapture_round_start();
-        }
-		if(n_next_recapture_round > (level.round_number + 7))
-		{
-            n_next_recapture_round = level.round_number + randomintrange( 3, 6 );
-		}
-    }
-}
-
-fixPanzerRounds()
-{
-	while(true)
-	{
-		level waittill("between_round_over");
-		if(level.next_mechz_round < level.round_number)
-		{
-            if ( isdefined( level.is_forever_solo_game ) && level.is_forever_solo_game )
-                level.next_mechz_round = randomintrange( level.mechz_min_round_fq_solo, level.mechz_max_round_fq_solo );
-            else
-                level.next_mechz_round = randomintrange( level.mechz_min_round_fq, level.mechz_max_round_fq );
-		}
-        if ( isdefined( level.is_forever_solo_game ) && level.is_forever_solo_game )
-		{
-			if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq_solo))
-			{
-                level.next_mechz_round = randomintrange( level.mechz_min_round_fq_solo, level.mechz_max_round_fq_solo );
-			}
-		}
-		else if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq))
-		{
-			if(level.next_mechz_round > (level.round_number + level.mechz_max_round_fq_solo))
-			{
-				level.players[0] IPrintLn("Fixing rounds, coop");
-                level.next_mechz_round = randomintrange( level.mechz_min_round_fq, level.mechz_max_round_fq );
-			}
-		}
-	}
-}
-
 override_move_wall_down()
 {
 	if(getDvarInt("st_origins_walls_mooving") == 0)
