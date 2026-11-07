@@ -17,28 +17,40 @@
 
 #include scripts\zm\strattester\utility;
 
-/*
-Abrir las puertas
-Activar la electricidad
-Quitar las barreras de las ventanas
-Cambiar la ronda inical
-Bloquear la caja en buried, desbloquearla si se cambia de mapa
-*/
+#define DEBRIS_ORIGIN_BURIED_TUNELCOUCH (-435, 498, 478)
+#define DEBRIS_ORIGIN_BURIED_STORECOUCH (-190, 141, 193)
+
+#define DOOR_ORIGIN_TRANZIT_JUG (625, -1222, 166)
+#define DOOR_ORIGIN_TRANZIT_BANK1 (1045, -28, 28)
+#define DOOR_ORIGIN_TRANZIT_BANK2 (1113, 469, 8)
+
+#define DOOR_ORIGIN_MOB_SALLYPORT (-149, 8679, 1166)
+#define DOOR_ORIGIN_MOB_INFIRMARY (2281, 9484, 1564)
+#define DOOR_ORIGIN_MOB_MICHIGANAVENUE (1601, 9223, 1482)
+#define DOOR_ORIGIN_MOB_SHOWERS (2138, 9210, 1375)
+
+#define DOOR_ORIGIN_BURIED_SALOON (453, -1188, 100)
+#define DOOR_ORIGIN_BURIED_OUTSIDEGENERALSTORE (-384, -628, 52)
+#define DOOR_ORIGIN_BURIED_CANDYSHOP (525, 61, 53)
+#define DOOR_ORIGIN_BURIED_FRONTGENERALSTORE (0, 92, 52)
+#define DOOR_ORIGIN_BURIED_TOYSTORE (508, -672, 52)
+#define DOOR_ORIGIN_BURIED_GENERALSTOREROOF (-188, -440, 188)
 
 init_start()
 {
-	level thread track_rounds();
-    level thread turn_on_power();
+	level thread resetSPH();
+    level thread turnOnPower();
 	level thread openAllDoors();
-    level thread round_pause_st();
-    level thread remove_boards_from_windows();
-    level thread changeRound(getDvarInt("st_round"), false);
+    level thread zombieSpawnDelay();
+    level thread removeBoardsFromWindows();
+    level thread changeRound(getDvarInt("st_round"));
 
 	setDvar("magic_chest_movable", !isburied());
 }
 
-track_rounds()
+resetSPH()
 {
+	level endon("end_game");
 	while (true) 
 	{
 		level waittill("start_of_round");
@@ -55,100 +67,112 @@ openAllDoors()
 
     setdvar( "zombie_unlock_all", 1 );
     players = get_players();
-    zombie_doors = getentarray( "zombie_door", "targetname" );
-    foreach(door in zombie_doors)
+
+    foreach(door in getentarray("zombie_door", "targetname"))
     {
 		wait 0.1;
-		if(istown() && !getDvarInt("st_jug_setup") && door.origin == (625, -1222, 166))
+		if(istown() && !getDvarInt("st_jug_setup") && door.origin == DOOR_ORIGIN_TRANZIT_JUG)
 			continue;
-		if(istown() && getDvarInt("st_jug_setup") && door.origin == (1045, -28, 28))
+		if(istown() && getDvarInt("st_jug_setup") && door.origin == DOOR_ORIGIN_TRANZIT_BANK1)
 			continue;
-		if(istown() && getDvarInt("st_jug_setup") && door.origin == (1113, 469, 8))
+		if(istown() && getDvarInt("st_jug_setup") && door.origin == DOOR_ORIGIN_TRANZIT_BANK2)
 			continue;
-		if(istranzit() && door.origin[0] > 7000 && door.origin[0] < 8400)
+		if(istranzit() && door.origin[0] > 7000 && door.origin[0] < 8400) // Farm area
 			continue;
 		if(ismob())
 		{
-			if(door.origin == (-149, 8679, 1166))
+			if(door.origin == DOOR_ORIGIN_MOB_SALLYPORT)
 				continue;
-			if(door.origin == (2281, 9484, 1564))
+			if(door.origin == DOOR_ORIGIN_MOB_INFIRMARY)
 				continue;
-			if(door.origin == (1601, 9223, 1482))
+			if(door.origin == DOOR_ORIGIN_MOB_MICHIGANAVENUE)
 				continue;
-			if(door.origin == (2138, 9210, 1375))
+			if(door.origin == DOOR_ORIGIN_MOB_SHOWERS)
 				continue;
 		}
 		if(isburied())
 		{
-			if(door.origin == (453, -1188, 100) || door.origin == (-384, -628, 52) || door.origin == (525, 61, 53) || door.origin == (0, 92, 52) || door.origin == (508, -672, 52) || door.origin == (-188, -440, 188))
-				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_SALOON)
+ 				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_OUTSIDEGENERALSTORE)
+ 				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_CANDYSHOP)
+ 				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_FRONTGENERALSTORE)
+ 				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_TOYSTORE)
+ 				continue;
+			if(door.origin == DOOR_ORIGIN_BURIED_GENERALSTOREROOF)
+ 				continue;
 		}
 
-        if ( is_true( door.power_door_ignore_flag_wait ) )
-            door notify( "power_on" );
+        if (is_true(door.power_door_ignore_flag_wait))
+            door notify("power_on");
 			
-        door notify( "trigger", players[0] );
-
+        door notify("trigger", players[0]);
         wait 0.05;
     }
 
-    zombie_debris = getentarray( "zombie_debris", "targetname" );
-
-    for ( i = 0; i < zombie_debris.size; i++ )
-    {
-		origin = zombie_debris[i].origin;
+	foreach(debri in getentarray("zombie_debris", "targetname"))
+	{
 		if(isburied())
 		{
-			if(origin == (-435, 498, 478) || origin == (-190, 141, 193))
-				continue;
-
+			if(debri.origin == DEBRIS_ORIGIN_BURIED_TUNELCOUCH)
+ 				continue;
+			if(debri.origin == DEBRIS_ORIGIN_BURIED_STORECOUCH)
+ 				continue;
 		}
-        zombie_debris[i] notify( "trigger", players[0] );
+        debri notify("trigger", players[0]);
         wait 0.05;
-    }
+	}
 }
 
-zombie_spawn_wait()
+disableAISpawn(time)
 {
 	setDvar("ai_disableSpawn", 1);
 
-	wait getDvarInt("st_delay");
+	wait time;
 
 	setDvar("ai_disableSpawn", 0);
 }
 
-round_pause_st()
+zombieSpawnDelay()
 {   
 	flag_wait("initial_blackscreen_passed");
 
 	if(ismob())
 		flag_wait("afterlife_start_over");
+	
+	time = getDvar("st_delay");
 
-	level.countdown_hud = create_simple_hud();
-	level.countdown_hud.fontscale = 24;
-	level.countdown_hud setshader( "hud_chalk_1", 64, 64 );
-	level.countdown_hud FadeOverTime( 2.0 );
-	level.countdown_hud SetValue(getDvarInt("st_delay"));
-	level.countdown_hud.color = ( 0.21, 0, 0 );
-	level.countdown_hud.alpha = 1;
-	level.countdown_hud.hidewheninmenu = 1;
-	level.countdown_hud.alignx = "center";
-	level.countdown_hud.aligny = "center";
-	level.countdown_hud.horzalign = "user_center";
-	level.countdown_hud.vertalign = "user_center";
+	if(time <= 0)
+		return;
 
-	level thread zombie_spawn_wait();
+	level.startDelayCountdown = create_simple_hud();
+	level.startDelayCountdown.fontscale = 24;
+	level.startDelayCountdown setshader( "hud_chalk_1", 64, 64 );
+	level.startDelayCountdown FadeOverTime( 2.0 );
+	level.startDelayCountdown SetValue(getDvarInt("st_delay"));
+	level.startDelayCountdown.color = ( 0.21, 0, 0 );
+	level.startDelayCountdown.alpha = 1;
+	level.startDelayCountdown.hidewheninmenu = 1;
+	level.startDelayCountdown.alignx = "center";
+	level.startDelayCountdown.aligny = "center";
+	level.startDelayCountdown.horzalign = "user_center";
+	level.startDelayCountdown.vertalign = "user_center";
 
-	for(delay = getDvarInt("st_delay"); delay > 0; delay--)
+	level thread disableAISpawn(time);
+
+	for(; time > 0; time--)
 	{
 		wait 1;
-		level.countdown_hud SetValue(delay);
+		level.startDelayCountdown SetValue(time);
 	}
 	level notify("start_of_round");
 
-	level.countdown_hud FadeOverTime( 1.0 );
-	level.countdown_hud.color = (1,1,1);
-	level.countdown_hud.alpha = 0;
+	level.startDelayCountdown FadeOverTime( 1.0 );
+	level.startDelayCountdown.color = (1,1,1);
+	level.startDelayCountdown.alpha = 0;
 	wait( 1.0 );
 	
 	foreach(player in level.players)
@@ -156,10 +180,10 @@ round_pause_st()
 		player.roundtimer settimerup(0);
 		player.timer settimerup(0);
 	}
-	level.countdown_hud destroy_hud();
+	level.startDelayCountdown destroy_hud();
 }
 
-remove_boards_from_windows()
+removeBoardsFromWindows()
 {
 	if(getDvarInt("st_boards"))
 		return;
@@ -169,25 +193,32 @@ remove_boards_from_windows()
 	maps\mp\zombies\_zm_blockers::open_all_zbarriers();
 }
 
-turn_on_power()
+turnOnPower()
 {
 	if(!getDvarInt("st_power"))
 		return;
 
-	flag_wait( "initial_blackscreen_passed" );
+	flag_wait("initial_blackscreen_passed");
 	wait 5;
-	trig = getEnt( "use_elec_switch", "targetname" );
-	powerSwitch = getEnt( "elec_switch", "targetname" );
-	powerSwitch notSolid();
-	trig setHintString( &"ZOMBIE_ELECTRIC_SWITCH" );
-	trig setVisibleToAll();
-	trig notify( "trigger", self );
-	trig setInvisibleToAll();
-	powerSwitch rotateRoll( -90, 0, 3 );
-	level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
-	powerSwitch waittill( "rotatedone" );
-	flag_set( "power_on" );
-	level setClientField( "zombie_power_on", 1 ); 
 
-	if(istranzit()) [[ getfunction( "maps/mp/zm_transit_power", "raisereactordoors" ) ]]();
+	trig = getEnt("use_elec_switch", "targetname");
+	powerSwitch = getEnt("elec_switch", "targetname");
+
+	powerSwitch notSolid();
+
+	trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+	trig setVisibleToAll();
+	trig notify("trigger", self);
+	trig setInvisibleToAll();
+
+	powerSwitch rotateRoll(-90, 0, 3);
+
+	level thread maps\mp\zombies\_zm_perks::perk_unpause_all_perks();
+
+	powerSwitch waittill("rotatedone");
+
+	flag_set("power_on");
+	level setClientField("zombie_power_on", 1); 
+
+	if(istranzit()) [[getfunction("maps/mp/zm_transit_power", "raisereactordoors")]]();
 }
