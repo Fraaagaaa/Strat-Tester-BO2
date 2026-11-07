@@ -43,7 +43,7 @@ init_start()
 	level thread openAllDoors();
     level thread zombieSpawnDelay();
     level thread removeBoardsFromWindows();
-    level thread changeRound(getDvarInt("st_round"));
+    level thread changeRound(getDvarInt("st_round"), false);
 
 	setDvar("magic_chest_movable", !isburied());
 }
@@ -143,7 +143,7 @@ zombieSpawnDelay()
 	if(ismob())
 		flag_wait("afterlife_start_over");
 	
-	time = getDvar("st_delay");
+	time = getDvarInt("st_delay");
 
 	if(time <= 0)
 		return;
