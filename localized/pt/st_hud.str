@@ -63,4 +63,7 @@ LANG_ENGLISH        "^3Eliminações com Gerador: ^5"
 REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
 LANG_ENGLISH        "^3Eliminações com Gerador nesta rodada: ^5"
 
+REFERENCE           ST_HUD_TURBINE_POWER
+LANG_ENGLISH        "^3Energia da Turbina: ^5"
+
 ENDMARKER
