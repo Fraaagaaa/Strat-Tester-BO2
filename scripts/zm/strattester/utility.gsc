@@ -793,3 +793,10 @@ getGeneratorName(generatorNumber)
 
 	return "unknownGenerator";
 }
+
+roundTo(value, decimals)
+{
+    factor = pow(10, decimals);
+
+    return int(value * factor + 0.5) / factor;
+}

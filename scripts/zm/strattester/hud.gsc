@@ -160,7 +160,10 @@ sph()
             hordes = kills / 24.0;
             if(hordes > 0) value = time_elapsed / hordes;
         }
+
+        value = roundTo(value, 2);
         self.sph setvalue(value);
+
         wait 0.1;
     }
 }
@@ -380,9 +383,9 @@ displayBoxHits()
             {
                 self.total_mk2_display.label = &"ST_HUD_AVG_MK2";
                 self.total_ray_display.label = &"ST_HUD_AVG_RAY";
-                if(level.total_mk2 != 0) self.total_mk2_display setvalue(level.total_chest_accessed_mk2 / level.total_mk2);
+                if(level.total_mk2 != 0) self.total_mk2_display setvalue(roundTo(level.total_chest_accessed_mk2 / level.total_mk2, 2));
                 else self.total_mk2_display setvalue(0);
-                if(level.total_ray != 0) self.total_ray_display setvalue(level.total_chest_accessed_ray / level.total_ray);
+                if(level.total_ray != 0) self.total_ray_display setvalue(roundTo(level.total_chest_accessed_ray / level.total_ray, 2));
                 else self.total_ray_display setvalue(0);
             }
             else
@@ -562,7 +565,7 @@ displaySubwooferKillsAvg()
     while(true)
     {
         if(level.subwooferShots > 0)
-            self.subwooferKillsAvg setvalue(level.subwooferKillsTotal / level.subwooferShots);
+            self.subwooferKillsAvg setvalue(roundTo(level.subwooferKillsTotal / level.subwooferShots, 2));
         else
             self.subwooferKillsAvg setvalue(0);
 
@@ -592,7 +595,11 @@ displayTurbineBattery()
     while(true)
     {
         if (isdefined(self.buildableturbine) && isdefined(self.turbine_health) && self.turbine_health > 0)
-            self.turbineBattery setvalue(self.turbine_health / 1200 * 100);
+        {
+            health = self.turbine_health / 1200 * 100;
+            health = roundTo(health, 2);
+            self.turbineBattery setvalue(health);
+        }
         else
             self.turbineBattery setvalue(0);
         wait 0.05;
