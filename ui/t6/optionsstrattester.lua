@@ -388,6 +388,10 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         -- SUBWOOFER KILLS
         local SubwooferChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_SUBWOOFER"), "st_subwooferkills", Engine.Localize("ST_MENU_HUD_SUBWOOFER_DESC"))
         CoD.StratTester.AddChoices_OnOrOff(SubwooferChoice, 0, "hud")
+
+        -- SUBWOOFER KILLS
+        local TurbineBatteryChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_TURBINE_POWER"), "st_turbinebattery", Engine.Localize("ST_MENU_HUD_TURBINE_POWER_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(TurbineBatteryChoice, 0, "hud")
     end
 
     if isOrigins then
@@ -877,6 +881,7 @@ CoD.StratTester.sync_hud_menu = function ( controller )
         { "st_bustimer",           0 },
         { "st_busloc",             0 },
         { "st_elevatorkills",      0 },
+        { "st_turbinebattery",     0 },
         { "st_subwooferkills",     0 },
         { "st_generatorkills",     0 },
         { "st_stomp",              0 },

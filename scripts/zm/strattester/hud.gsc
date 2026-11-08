@@ -203,8 +203,8 @@ remaining()
     level endon("end_game");
     self endon("disconnect");
 
-    self.zombie_counter_hud = createFontString( "hudsmall" , 1.4 );
-    self.zombie_counter_hud setPoint( "CENTER", "CENTER", "CENTER", 190 );
+    self.zombie_counter_hud = createFontString("hudsmall" , 1.4);
+    self.zombie_counter_hud setPoint("CENTER", "CENTER", "CENTER", 190);
     self.zombie_counter_hud.hidewheninmenu = true;
     self.zombie_counter_hud.alpha = 1;
     self.zombie_counter_hud.label = &"ST_HUD_REMAINING";
@@ -223,7 +223,7 @@ zone()
     level endon("end_game");
     self endon("disconnect");
 
-    self.st_zone_hud = createFontString( "hudsmall", 1.3 );
+    self.st_zone_hud = createFontString("hudsmall", 1.3);
     self.st_zone_hud.x = 8;
     self.st_zone_hud.y = -95;
     if(isburied()) self.st_zone_hud.y += 15;
@@ -238,7 +238,7 @@ zone()
     self.st_zone_hud.hidewheninmenu = true;
     self.st_zone_hud.label = &"";
 
-    flag_wait( "initial_blackscreen_passed" );
+    flag_wait("initial_blackscreen_passed");
 
     prev_zone = "";
     while(true)
@@ -273,7 +273,7 @@ despawnerCounter()
     if(!isdefined(level.despawners))
         level.despawners = 0;
 
-    self.despawnersCounter = createfontstring( "objective", 1.4);
+    self.despawnersCounter = createfontstring("objective", 1.4);
     self.despawnersCounter.hidewheninmenu = true;
     self.despawnersCounter.y = 0;
     self.despawnersCounter.x = 0;
@@ -300,7 +300,7 @@ anchorLeakCounter()
         level.anchorLeaks = 0;
 
 
-    self.anchorLeakCounter = createfontstring( "objective", 1.4);
+    self.anchorLeakCounter = createfontstring("objective", 1.4);
     self.anchorLeakCounter.hidewheninmenu = true;
     self.anchorLeakCounter.x = 0;
     self.anchorLeakCounter.aligny = "top";
@@ -331,7 +331,7 @@ displayBoxHits()
     if(!isdefined(level.total_mk2)) level.total_mk2 = 0;
     if(!isdefined(level.total_ray)) level.total_ray = 0;
 
-    self.boxhits = createfontstring( "objective", 1.3 );
+    self.boxhits = createfontstring("objective", 1.3);
     self.boxhits.hidewheninmenu = true;
     self.boxhits.y = 0;
     self.boxhits.x = 2;
@@ -349,7 +349,7 @@ displayBoxHits()
         self.boxhits.alignx = "left";
         self.boxhits.horzalign = "user_left";
 
-        self.total_ray_display = createfontstring( "objective", 1.3 );
+        self.total_ray_display = createfontstring("objective", 1.3);
         self.total_ray_display .hidewheninmenu = true;
         self.total_ray_display.y = 26;
         self.total_ray_display.x = 2;
@@ -360,7 +360,7 @@ displayBoxHits()
         self.total_ray_display.aligny = "top";
         self.total_ray_display.alpha = 1;
 
-        self.total_mk2_display = createfontstring( "objective", 1.3 );
+        self.total_mk2_display = createfontstring("objective", 1.3);
         self.total_mk2_display.hidewheninmenu = true;
         self.total_mk2_display.y = 14;
         self.total_mk2_display.x = 2;
@@ -401,11 +401,11 @@ displayBoxHits()
 denizensAlive()
 {
     self endon("st_hud_stop_st_remaining_denizens");
-    level endon( "end_game" );
-    self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
-    self.denizen_counter = createFontString( "hudsmall" , 1.4 );
-    self.denizen_counter setPoint( "CENTER", "CENTER", "CENTER", 205);
+    self.denizen_counter = createFontString("hudsmall" , 1.4);
+    self.denizen_counter setPoint("CENTER", "CENTER", "CENTER", 205);
     self.denizen_counter.hidewheninmenu = true;
     self.denizen_counter.alpha = 1;
     self.denizen_counter.label = &"ST_HUD_DENIZENS";
@@ -422,10 +422,10 @@ denizensAlive()
 buslocation()
 {
     self endon("st_hud_stop_st_busloc");
-    level endon( "end_game" );
-    self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
-    self.busloc = createfontstring( "objective", 1.3 );
+    self.busloc = createfontstring("objective", 1.3);
     self.busloc.hidewheninmenu = true;
     self.busloc.x = 0;
     self.busloc.y = 40;
@@ -463,7 +463,7 @@ fastrestartWarning()
 {
     level endon("endgame");
 
-    level.fast_restart_warning = createserverfontstring( "objective", 1.3 );
+    level.fast_restart_warning = createserverfontstring("objective", 1.3);
     level.fast_restart_warning.y = 100;
     level.fast_restart_warning.x = 0;
     level.fast_restart_warning.fontscale = 2;
@@ -489,7 +489,7 @@ displayElevatorKills()
     if(!isdefined(level.zombies_died_to_elevator))
         level.zombies_died_to_elevator = 0;
 
-    self.elevatorkills = createFontString( "objective", 1.3 );
+    self.elevatorkills = createFontString("objective", 1.3);
     self.elevatorkills.hidewheninmenu = true;
     self.elevatorkills.y = 0;
     self.elevatorkills.x = 0;
@@ -516,10 +516,10 @@ displayElevatorKills()
 displaySubwooferKills()
 {
     self endon("st_hud_stop_st_subwooferkills");
-    level endon( "end_game" );
-    self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
-    self.subwooferKills = createfontstring( "objective", 1.3 );
+    self.subwooferKills = createfontstring("objective", 1.3);
     self.subwooferKills.hidewheninmenu = true;
     self.subwooferKills.y = 0;
     self.subwooferKills.x = 0;
@@ -543,10 +543,10 @@ displaySubwooferKills()
 displaySubwooferKillsAvg()
 {
     self endon("st_hud_stop_st_subwooferkills");
-    level endon( "end_game" );
-    self endon( "disconnect" );
+    level endon("end_game");
+    self endon("disconnect");
 
-    self.subwooferKillsAvg = createfontstring( "objective", 1.3 );
+    self.subwooferKillsAvg = createfontstring("objective", 1.3);
     self.subwooferKillsAvg.hidewheninmenu = true;
     self.subwooferKillsAvg.y = 0;
     self.subwooferKillsAvg.x = 0;
@@ -567,6 +567,35 @@ displaySubwooferKillsAvg()
             self.subwooferKillsAvg setvalue(0);
 
         wait 0.1;
+    }
+}
+
+displayTurbineBattery()
+{
+    self endon("st_hud_stop_st_turbinehbattery");
+    level endon("end_game");
+    self endon("disconnect");
+
+    self.turbineBattery = createfontstring("objective", 1.3);
+    self.turbineBattery.hidewheninmenu = true;
+    self.turbineBattery.y = 0;
+    self.turbineBattery.x = 0;
+    self.turbineBattery.fontscale = 1.4;
+    self.turbineBattery.vertalign = "user_top";
+    self.turbineBattery.aligny = "top";
+    self.turbineBattery.label = &"ST_HUD_TURBINE_POWER";
+    self.turbineBattery.alignx = "left";
+    self.turbineBattery.horzalign = "user_left";
+    self.turbineBattery.alpha = 1;
+    self.turbineBattery setvalue(0);
+
+    while(true)
+    {
+        if (isdefined(self.buildableturbine) && isdefined(self.turbine_health) && self.turbine_health > 0)
+            self.turbineBattery setvalue(self.turbine_health / 1200 * 100);
+        else
+            self.turbineBattery setvalue(0);
+        wait 0.05;
     }
 }
 
@@ -800,6 +829,7 @@ preventHUDOverlap()
         if(isdefined(self.zombiesFar)) current_y = self.zombiesFar setHudLocation(current_y, offset);
         if(isburied())
         {
+            if(isdefined(self.turbineBattery)) current_y = self.turbineBattery setHudLocation(current_y, offset);
             if(isdefined(self.subwooferKills)) current_y = self.subwooferKills setHudLocation(current_y, offset);
             if(isdefined(self.subwooferKillsAvg)) current_y = self.subwooferKillsAvg setHudLocation(current_y, offset);
         }
@@ -834,12 +864,12 @@ setHudLocation(current_y, offset)
     return current_y;
 }
 
-get_menu_hud( element )
+get_menu_hud(element)
 {
-    if ( isdefined( self.st_hud ) && isdefined( self.st_hud[ element ] ) )
+    if (isdefined(self.st_hud) && isdefined(self.st_hud[ element ]))
         return self.st_hud[ element ];
 
-    switch ( element )
+    switch (element)
     {
         case "st_busloc":         return 0;
         case "st_bustimer":       return 0;
@@ -852,31 +882,31 @@ get_menu_hud( element )
     return 1;
 }
 
-on_hud_menu( action, args)
+on_hud_menu(action, args)
 {
-    switch ( action )
+    switch (action)
     {
         case "sync":
-            foreach ( arg in args )
-                self hud_menu_set( arg );
+            foreach (arg in args)
+                self hud_menu_set(arg);
             break;
 
 
         case "set":
-            if ( args.size > 0 )
-                self hud_menu_set( args[0] );
+            if (args.size > 0)
+                self hud_menu_set(args[0]);
             break;
 
     }
 }
 
-hud_menu_set( arg )
+hud_menu_set(arg)
 {
-    entry = strtok( arg, ":" );
-    if ( !isdefined( entry ) || entry.size < 2 )
+    entry = strtok(arg, ":");
+    if (!isdefined(entry) || entry.size < 2)
         return;
 
-    self set_menu_hud( entry[0], int( entry[1] ) );
+    self set_menu_hud(entry[0], int(entry[1]));
 }
 
 set_menu_hud(element, value)
@@ -910,6 +940,7 @@ startEnabledMenuHUDs()
     }
     else if(isburied())
     {
+        elements[elements.size] = "st_turbinebattery";
         elements[elements.size] = "st_subwooferkills";
     }
     else if(isorigins())
@@ -963,6 +994,12 @@ start_menu_hud(element)
         case "st_stomp":
             if(isorigins()) self thread origins_counter("st_stomp");
             break;
+
+        case "st_turbinebattery":
+            if(isburied())
+            {
+                self thread displayTurbineBattery();
+            }
 
         case "st_subwooferkills":
             if(isburied())
@@ -1159,6 +1196,7 @@ load_persisted_hud()
     self set_menu_hud("st_sph",                 getDvarInt("st_sph"));
     self set_menu_hud("st_stafftimer",     	    getDvarInt("st_stafftimer"));
     self set_menu_hud("st_stomp",     		    getDvarInt("st_stomp"));
+    self set_menu_hud("st_turbinebattery",      getDvarInt("st_turbinebattery"));
     self set_menu_hud("st_subwooferkills",      getDvarInt("st_subwooferkills"));
     self set_menu_hud("st_generatorkills",      getDvarInt("st_generatorkills"));
     self set_menu_hud("st_tank",     		    getDvarInt("st_tank"));

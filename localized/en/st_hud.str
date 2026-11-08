@@ -16,13 +16,13 @@ REFERENCE           ST_HUD_TOTAL_MK2
 LANG_ENGLISH        "^3Total Raygun MK2: ^5"
 
 REFERENCE           ST_HUD_SUBWOOFER_KILLS
-LANG_ENGLISH        "^3Subwoofer kills: ^5"
+LANG_ENGLISH        "^3Subwoofer Kills: ^5"
 
 REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
 LANG_ENGLISH        "^3Subwoofer AVG: ^5"
 
 REFERENCE           ST_HUD_ELEVATOR_KILLS
-LANG_ENGLISH        "^3Elevator kills: ^5"
+LANG_ENGLISH        "^3Elevator Kills: ^5"
 
 REFERENCE           ST_HUD_ZOMBIES_DESPAWNED
 LANG_ENGLISH        "^3Zombies Despawned: ^5"
@@ -40,27 +40,30 @@ REFERENCE           ST_HUD_SPH
 LANG_ENGLISH        "^3SPH: ^5"
 
 REFERENCE           ST_HUD_ZOMBIES_IN_VIEW
-LANG_ENGLISH        "^3Zombies in sight: ^5"
+LANG_ENGLISH        "^3Zombies In Sight: ^5"
 
 REFERENCE           ST_HUD_ZOMBIES_FAR
-LANG_ENGLISH        "^3Zombies too far: ^5"
+LANG_ENGLISH        "^3Zombies Too Far: ^5"
 
 REFERENCE           ST_HUD_RESTART_WARNING_NUKETOWN
 LANG_ENGLISH        "^3AUTO RESTARTING FOR PAP LOCATION, THIS MAY TAKE A FEW SECONDS"
 
 REFERENCE			ST_HUD_STOMP_ORIGINS
-LANG_ENGLISH        "^3Zombies stomp: ^5"
+LANG_ENGLISH        "^3Zombies Stomp: ^5"
 
 REFERENCE			ST_HUD_TANK_ORIGINS
-LANG_ENGLISH        "^3Tank kills: ^5"
+LANG_ENGLISH        "^3Tank Kills: ^5"
 
 REFERENCE			ST_HUD_TUMBLE_ORIGINS
-LANG_ENGLISH        "^3Zombies tumbled: ^5"
+LANG_ENGLISH        "^3Zombies Tumbled: ^5"
 
 REFERENCE           ST_HUD_GENERATOR_KILLS
-LANG_ENGLISH        "^3Generator kills: ^5"
+LANG_ENGLISH        "^3Generator Kills: ^5"
 
 REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
-LANG_ENGLISH        "^3Generator kills this round: ^5"
+LANG_ENGLISH        "^3Generator Kills This Round: ^5"
+
+REFERENCE           ST_HUD_TURBINE_POWER
+LANG_ENGLISH        "^3Turbine Power: ^5"
 
 ENDMARKER

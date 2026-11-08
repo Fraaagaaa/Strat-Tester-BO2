@@ -63,4 +63,7 @@ LANG_ENGLISH        "^3Baixas por xerador: ^5"
 REFERENCE           ST_HUD_GENERATOR_KILLS_ROUND
 LANG_ENGLISH        "^3Baixas por xerador esta ronda: ^5"
 
+REFERENCE           ST_HUD_TURBINE_POWER
+LANG_ENGLISH        "^3Enerxía da turina: ^5"
+
 ENDMARKER

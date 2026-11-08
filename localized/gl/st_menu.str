@@ -222,6 +222,12 @@ LANG_ENGLISH        "BAIXAS POR XERADORES"
 REFERENCE           ST_MENU_HUD_GENERATOR_KILLS_DESC
 LANG_ENGLISH        "Mostra a cantiade de zombis borrados para facer hoco aos zombis de captura."
 
+REFERENCE           ST_MENU_HUD_TURBINE_POWER
+LANG_ENGLISH        "ENERXÍA DA TURBINA"
+
+REFERENCE           ST_MENU_HUD_TURBINE_POWER_DESC
+LANG_ENGLISH        "Mostra canta enerxía lle queda á tua turbina."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_TOWN_DOOR_JUG

@@ -222,6 +222,12 @@ LANG_ENGLISH        "BAJAS POR GENERADORES"
 REFERENCE           ST_MENU_HUD_GENERATOR_KILLS_DESC
 LANG_ENGLISH        "Muestra la cantidad de zombis borrados para hacer hueco a los zombies de captura."
 
+REFERENCE           ST_MENU_HUD_TURBINE_POWER
+LANG_ENGLISH        "ENERGÍA DE TURBINA"
+
+REFERENCE           ST_MENU_HUD_TURBINE_POWER_DESC
+LANG_ENGLISH        "Muestra cuanta energía le queda a tu turbina."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_FARM_DEPART
