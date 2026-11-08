@@ -1003,6 +1003,7 @@ start_menu_hud(element)
             {
                 self thread displayTurbineBattery();
             }
+            break;
 
         case "st_subwooferkills":
             if(isburied())
