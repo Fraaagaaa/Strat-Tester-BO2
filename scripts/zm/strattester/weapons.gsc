@@ -98,6 +98,9 @@ giveLoadout()
 
 	foreach(weapon in self.st_loadout_weapons)
     {
+		if(!isdefined(level.zombie_weapons[weapon]))
+			continue;
+
 		self weapon_give( weapon, undefined, undefined, 0 );
         if (isorigins() && issubstr(weapon, "staff"))
         {
@@ -109,8 +112,11 @@ giveLoadout()
 	if(mapHasMulekick() && isdefined(self.st_loadout_mule) && self.st_loadout_mule != "undefined")
 		self mulekickWepaon();
 
-	self giveMelee(self.st_loadout_melee);
-	self switchToWeapon(self.st_loadout_main);
+	if(isdefined(level.zombie_weapons[self.st_loadout_melee]))
+		self giveMelee(self.st_loadout_melee);
+
+	if(mapHasMulekick() && isdefined(self.st_loadout_main))
+		self switchToWeapon(self.st_loadout_main);
 }
 
 removeStartingPistol()
@@ -360,23 +366,33 @@ checkCustomLoadouts()
     if(!isdefined(loadout))
         return false;
 
-    self.st_loadout_melee = loadout[3];
-    self.st_loadout_mule = loadout[1];
-
-    weapons = strtok(loadout[0], " ");
-    equipment = strtok(loadout[2], " ");
-
     self.st_loadout_weapons = array();
     self.st_loadout_equipment = array();
 
-    for(i = 0; i < weapons.size; i++)
-        self.st_loadout_weapons[i] = weapons[i];
+    self.st_loadout_main = undefined;
+    self.st_loadout_mule = undefined;
+    self.st_loadout_melee = undefined;
 
-    for(i = 0; i < equipment.size; i++)
-        self.st_loadout_equipment[i] = equipment[i];
+    // Weapons
+    if(loadout[0] != "undefined")
+    {
+        self.st_loadout_weapons = strtok(loadout[0], " ");
 
-    if(self.st_loadout_weapons.size > 0)
-        self.st_loadout_main = self.st_loadout_weapons[0];
+        if(self.st_loadout_weapons.size > 0)
+            self.st_loadout_main = self.st_loadout_weapons[0];
+    }
+
+    // Mule Kick
+    if(loadout[1] != "undefined")
+        self.st_loadout_mule = loadout[1];
+
+    // Equipment
+    if(loadout[2] != "undefined")
+        self.st_loadout_equipment = strtok(loadout[2], " ");
+
+    // Melee
+    if(loadout[3] != "undefined")
+        self.st_loadout_melee = loadout[3];
 
     return true;
 }
@@ -396,6 +412,9 @@ getLoadoutFilePath()
 
 validateLoadoutFile(path)
 {
+    if(!isdefined(path))
+        return undefined;
+
     f = fs_fopen(path, "read");
 
     if(f == -1)
@@ -407,7 +426,7 @@ validateLoadoutFile(path)
     {
         line = fs_readline(f);
 
-        if(!isdefined(line))
+        if(!isdefined(line) || line == "")
         {
             fs_fclose(f);
             return undefined;
@@ -417,6 +436,7 @@ validateLoadoutFile(path)
     }
 
     fs_fclose(f);
+
     return loadout;
 }
 
