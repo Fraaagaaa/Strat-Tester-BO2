@@ -46,9 +46,6 @@ init()
     level thread trackBetweenRounds();
 	setDvar("player_reviveTriggerRadius", 64);
 	setDvar("revive_trigger_radius", 75);
-    
-    if(!isDefined(level.total_chest_accessed))
-        level.total_chest_accessed = 0;
 }
 
 wait_for_players()

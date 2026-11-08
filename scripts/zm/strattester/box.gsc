@@ -15,6 +15,12 @@ Contador de tiradas de caja y rayguns en la función original para mayor precisi
 
 init_box()
 {
+    if(!isdefined(level.total_chest_accessed)) level.total_chest_accessed = 0;
+    if(!isdefined(level.total_chest_accessed_ray)) level.total_chest_accessed_ray = 0;
+    if(!isdefined(level.total_chest_accessed_mk2)) level.total_chest_accessed_mk2 = 0;
+    if(!isdefined(level.total_mk2)) level.total_mk2 = 0;
+    if(!isdefined(level.total_ray)) level.total_ray = 0;
+
 	replacefunction("maps/mp/zombies/_zm_magicbox", "treasure_chest_weapon_spawn", ::override_treasure_chest_weapon_spawn);
 }
 
@@ -94,6 +100,8 @@ override_treasure_chest_weapon_spawn( chest, player, respin )
         rand = maps\mp\zombies\_zm_pers_upgrades_functions::pers_treasure_chest_choosespecialweapon( player );
     else
         rand = treasure_chest_chooseweightedrandomweapon( player );
+
+    level.total_chest_accessed++;
 
     if (rand =="ray_gun_zm")
         level.total_ray++;

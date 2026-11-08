@@ -11,7 +11,6 @@
 
 init()
 {
-    level.total_chest_accessed = 0;
     level thread checkpaplocation();
 }
 

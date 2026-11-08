@@ -328,12 +328,6 @@ displayBoxHits()
     level endon("end_game");
     self endon("disconnect");
 
-    if(!isdefined(level.total_chest_accessed)) level.total_chest_accessed = 0;
-    if(!isdefined(level.total_chest_accessed_ray)) level.total_chest_accessed_ray = 0;
-    if(!isdefined(level.total_chest_accessed_mk2)) level.total_chest_accessed_mk2 = 0;
-    if(!isdefined(level.total_mk2)) level.total_mk2 = 0;
-    if(!isdefined(level.total_ray)) level.total_ray = 0;
-
     self.boxhits = createfontstring("objective", 1.3);
     self.boxhits.hidewheninmenu = true;
     self.boxhits.y = 0;
@@ -379,6 +373,8 @@ displayBoxHits()
 
         while(true)
         {
+
+            self.boxhits setvalue(level.total_chest_accessed);
             if(getDvarInt("st_avg"))
             {
                 self.total_mk2_display.label = &"ST_HUD_AVG_MK2";
