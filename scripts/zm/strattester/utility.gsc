@@ -181,11 +181,14 @@ changeRound(rnd, killZombies)
 	if(!isdefined(killZombies))
 		killZombies = true;
 
-	setDvar("st_round", rnd);
-	level.round_number = rnd - 1;
+	level.round_number = rnd;
 
 	if(killZombies)
+	{
+		level.round_number = rnd - 1;
 		endRound();
+	}
+
 	changeSpawnRate();
 }
 
