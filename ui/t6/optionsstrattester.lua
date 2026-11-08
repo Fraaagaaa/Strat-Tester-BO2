@@ -427,6 +427,16 @@ CoD.StratTester.CreateMapTab = function ( Tab, LocalClientIndex )
     Tab.buttonList = ButtonList
     Container:addElement( ButtonList )
 
+    if isTranzit or isDieRise or isBuried then
+
+	    local PermanPerkBtn = ButtonList:addButton(Engine.Localize("ST_MENU_MAP_GIVE_PERMANPERKS"), Engine.Localize("ST_MENU_MAP_GIVE_PERMANPERKS"))
+	    PermanPerkBtn:registerEventHandler("button_action", function ( element, event )
+		    Engine.SendMenuResponse( event.controller or LocalClientIndex, "restartgamepopup", "st_permanperks" )
+	    end)
+
+        ButtonList:addSpacer( CoD.CoD9Button.Height / 2 )
+    end
+
     if isTranzit then
 
         if UIExpression.DvarString( nil, "st_depart") == "" then

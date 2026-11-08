@@ -21,6 +21,7 @@ readchat()
 {
     level endon("disconnect");
     self endon("end_game");
+
     if(!isdefined(level.commands))
 	    level.chatcommands = [];
 
@@ -39,39 +40,44 @@ readchat()
 		}
         switch(msg[0])
         {
-            case "!remaining": case "!rem": remainingcase(msg[1]); break;
-            case "!points": pointscase(player, msg[1]); break;
-            case "!perma": permacase(player); break;
-            case "!tpc": tpccase(player, msg[1], msg[3], msg[2]); break;
-            case "!tp": tpcase(player, msg[1], msg[2]); break;
-            case "!nuke": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("nuke", player.origin + (0, 0, 40)); break;
-            case "!max": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", player.origin + (0, 0, 40)); break;
-            case "!x2": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("double_points", player.origin + (0, 0, 40)); break;
-            case "!sale": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("fire_sale", player.origin + (0, 0, 40)); break;
-            case "!blood": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("zombie_blood", player.origin + (0, 0, 40)); break;
-            case "!perk": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("free_perk", player.origin + (0, 0, 40)); break;
-            case "!insta": level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("insta_kill", player.origin + (0, 0, 40)); break;
+            case "!remaining": case "!rem": changeZombiesRemaining(msg[1]); break;
+            case "!points": changePlayerScore(player, msg[1]); break;
+            case "!perma": awardAllPermanPerks(player); break;
+            case "!tpc": teleportPlayerToCoordinates(player, msg[1], msg[3], msg[2]); break;
+            case "!tp": teleportPlayerToLocation(player, msg[1], msg[2]); break;
+            case "!nuke": spawnPowerupAbovePlayer("nuke", player); break;
+            case "!max": spawnPowerupAbovePlayer("full_ammo", player); break;
+            case "!x2": spawnPowerupAbovePlayer("double_points", player); break;
+            case "!sale": spawnPowerupAbovePlayer("fire_sale", player); break;
+            case "!blood": spawnPowerupAbovePlayer("zombie_blood", player); break;
+            case "!perk": spawnPowerupAbovePlayer("free_perk", player); break;
+            case "!insta": spawnPowerupAbovePlayer("insta_kill", player); break;
 			case "!gen": changeGenStatus(msg[1]); break;
             default: break;
         }
     }
 }
 
-pointscase(who, score)
+spawnPowerupAbovePlayer(powerup, player)
+{
+    maps\mp\zombies\_zm_powerups::specific_powerup_drop(powerup, player.origin + (0, 0, 40));
+}
+
+changePlayerScore(who, score)
 {
     if(!isdefined(score) || !isdefined(who))
         return;
     if(score == "inf" || score == "infinite")
     {
         who.infpoints = true;
-        who thread infpoints();
+        who thread giveInfinitePoints();
         return;
     }
     who.infpoints = false;
-    who.score = string_to_float(score);
+    who.score = int(score);
 }
 
-infpoints()
+giveInfinitePoints()
 {
 	level endon("end_game");
 	self endon("disconnect");
@@ -82,7 +88,7 @@ infpoints()
     }
 }
 
-permacase(player)
+awardAllPermanPerks(player)
 {
     if(!isvictismap())
     {
@@ -93,17 +99,17 @@ permacase(player)
     player thread award_permaperks_safe();
 }
 
-tpccase(player, x, z, y)
+teleportPlayerToCoordinates(player, x, z, y)
 {
-    // Order is changed just so you can copy the coords from the terminal when using pritnln (IDK why they print wrong)
+    // Order is changed just so you can copy the coords from the terminal when using pritnln (setOrigin is wrong??)
     x = string_to_float(x);
     y = string_to_float(y);
     z = string_to_float(z);
     strattesterprint("Teleporting " + player.name + " to " + x + " " + y + " " + z, "Teletransportando " + player.name + " a " + x + " " + y + " " + z);
-    player setOrigin((string_to_float(x), string_to_float(y), string_to_float(z)));
+    player setOrigin(x, y, z);
 }
 
-tpcase(player, location, who)
+teleportPlayerToLocation(player, location, who)
 {
 	if(istranzit())
 		switch(location)
@@ -162,7 +168,7 @@ tpcase(player, location, who)
     if(isdefined(who))
     {
         foreach(zplayer in level.players)
-            if(level.players.name == who)
+            if(zplayer.name == who)
                 player = zplayer;
     }
 
@@ -196,7 +202,7 @@ award_permaperks_safe()
 
 	foreach (perk in perks_to_process)
 	{
-		if( !(istranzit() && perk == permaperk_array("box_weapon", array("zm_highrise", "zm_buried"), array("zm_transit"))))
+		if(!(istranzit() && perk == permaperk_array("box_weapon", array("zm_highrise", "zm_buried"), array("zm_transit"))))
 		self resolve_permaperk(perk);
 		wait 0.05;
 	}
@@ -261,11 +267,6 @@ remove_permaperk(perk_code)
 	self playsoundtoplayer("evt_player_downgrade", self);
 }
 
-boxhitscase()
-{
-	setDvar("st_boxhits", !getDvarInt("st_boxhits"));
-}
-
 changeRoundFromMenu(requestedRound)
 {
     if(requestedRound == level.round_number)
@@ -315,7 +316,7 @@ changeGenStatus(generator)
 	generator = int(generator);
     name = getGeneratorName(generator);
 
-	foreach (gen in getstructarray( "s_generator", "targetname" ))
+	foreach (gen in getstructarray("s_generator", "targetname"))
 	{
 		if(gen.script_noteworthy == name)
 		{
@@ -323,59 +324,59 @@ changeGenStatus(generator)
 			{
 				gen.n_current_progress = 0;
                 gen [[getfunction("maps/mp/zm_tomb_capture_zones", "set_zombie_controlled_area")]]();
-				level setclientfield( gen.script_noteworthy, 0);
-				level setclientfield( "state_" + gen.script_noteworthy, 0 );
+				level setclientfield(gen.script_noteworthy, 0);
+				level setclientfield("state_" + gen.script_noteworthy, 0);
 			}
 			else
 			{
 				gen.n_current_progress = 100;
                 gen [[getfunction("maps\mp\zm_tomb_capture_zones", "players_capture_zone")]]();
-				level setclientfield( gen.script_noteworthy, 1);
-				level setclientfield( "state_" + gen.script_noteworthy, 2 );
+				level setclientfield(gen.script_noteworthy, 1);
+				level setclientfield("state_" + gen.script_noteworthy, 2);
 			}
 		}
 	}
 }
 
-boxmove( location )
+boxmove(location)
 {
-    if ( isDefined( level._zombiemode_custom_box_move_logic ) )
+    if (isDefined(level._zombiemode_custom_box_move_logic))
         kept_move_logic = level._zombiemode_custom_box_move_logic;
 
     level._zombiemode_custom_box_move_logic = ::force_next_location;
 
-    foreach ( chest in level.chests )
+    foreach (chest in level.chests)
     {
-        if ( !chest.hidden && chest.script_noteworthy == location )
+        if (!chest.hidden && chest.script_noteworthy == location)
         {
-            if ( isDefined( kept_move_logic ) )
+            if (isDefined(kept_move_logic))
                 level._zombiemode_custom_box_move_logic = kept_move_logic;
             return;
         }
-        if ( !chest.hidden )
+        if (!chest.hidden)
         {
             level.chest_min_move_usage = 8;
             level.chest_name = location;
 
-            flag_set( "moving_chest_now" );
+            flag_set("moving_chest_now");
             chest thread fast_chest_move();
 
             wait 0.05;
-            level notify( "weapon_fly_away_start" );
+            level notify("weapon_fly_away_start");
             wait 0.05;
-            level notify( "weapon_fly_away_end" );
+            level notify("weapon_fly_away_end");
 
             break;
         }
     }
 
-    while ( flag( "moving_chest_now" ) )
+    while (flag("moving_chest_now"))
         wait 0.05;
 
-    if ( isDefined( kept_move_logic ) )
+    if (isDefined(kept_move_logic))
         level._zombiemode_custom_box_move_logic = kept_move_logic;
 
-    if ( isDefined( level.chest_name ) && isDefined( level.dig_magic_box_moved ) )
+    if (isDefined(level.chest_name) && isDefined(level.dig_magic_box_moved))
         level.dig_magic_box_moved = 0;
 
     level.chest_min_move_usage = 4;
@@ -391,12 +392,12 @@ force_next_location()
 
 commandMenuListener()
 {
-    self endon( "disconnect" );
-    self notify( "commandmenulistener" );
-    self endon( "commandmenulistener" );
-    level endon( "game_ended" );
+    self endon("disconnect");
+    self notify("commandmenulistener");
+    self endon("commandmenulistener");
+    level endon("game_ended");
 
-    while ( true )
+    while (true)
     {
         self waittill("menuresponse", menu, response);
 
@@ -406,13 +407,12 @@ commandMenuListener()
         if(menu != "restartgamepopup")
             continue;
 
-        else if(issubstr(response, "st_tp+"))
+        if(issubstr(response, "st_tp+"))
         {
             parts = strtok(response, "+");
             if(parts.size >= 2)
-                tpcase(self, parts[1], undefined);
+                teleportPlayerToLocation(self, parts[1], undefined);
         }
-
         else if(issubstr(response, "st_notarget+"))
         {
             parts = strtok(response, "+");
@@ -425,40 +425,39 @@ commandMenuListener()
                     strattesterprint(self.name + " can be targeted by zombies", self.name + " atraerá zombis");
             }
         }
-
         else if(issubstr(response, "st_boxmove+"))
         {
             parts = strtok(response, "+");
             if(parts.size >= 2)
                 level thread boxmove(parts[1]);
         }
-
         else if(IsSubStr(response, "st_endround"))
         {
             thread endRoundFromMenu();
         }
-
         else if(IsSubStr(response, "st_changeround+"))
         {
             round = int(strtok(response, "+")[1]);
             thread changeRoundFromMenu(round);
         }
-
         else if(IsSubStr(response, "st_unlockgenerators+"))
         {
             thread unlockAllGenerators();
         }
-
         else if(IsSubStr(response, "st_killhorde"))
         {
             thread killHordeFromMenu();
         }
+        else if(IsSubStr(response, "st_permanperks"))
+        {
+            thread awardAllPermanPerks(self);
+        }
     }
 }
 
-remainingcase(rem)
+changeZombiesRemaining(rem)
 {
-    rem = string_to_float(rem);
+    rem = int(rem);
     if(rem < 24)
     {
         while(get_current_zombie_count() > rem)
@@ -482,8 +481,8 @@ get_zombie_to_delete()
     ai_zombie = undefined;
     a_zombies = get_round_enemy_array();
 
-    if ( a_zombies.size > 0 )
-        ai_zombie = random( a_zombies );
+    if (a_zombies.size > 0)
+        ai_zombie = random(a_zombies);
 
     return ai_zombie;
 }

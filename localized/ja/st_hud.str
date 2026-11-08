@@ -66,4 +66,7 @@ LANG_ENGLISH        "^3現在のラウンドでのジェネレーターキル: ^
 REFERENCE           ST_HUD_SUBWOOFER_KILLS_AVG
 LANG_ENGLISH        "^3レゾネーター平均: ^5"
 
+REFERENCE           ST_HUD_TURBINE_BATTERY
+LANG_ENGLISH        "^3タービン残電力: ^5"
+
 ENDMARKER

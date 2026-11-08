@@ -91,6 +91,12 @@ LANG_ENGLISH        "DEVELOPER"
 REFERENCE           ST_MENU_GAME_DEVELOPER_DESC
 LANG_ENGLISH        "Activates developer mode to see extra information about zombie despawns. WARNING: DEACTIVATE THIS BEFORE EXITING THE MAP."
 
+REFERENCE           ST_MENU_MAP_GIVE_PERMANPERKS
+LANG_ENGLISH        "AWARD ALL PERMANPERKS."
+
+REFERENCE           ST_MENU_MAP_GIVE_PERMANPERKS_DESC
+LANG_ENGLISH        "Gives all permanperks to the player."
+
 // PESTAÑA HUD
 
 REFERENCE           ST_MENU_HUD_DESPAWNERS

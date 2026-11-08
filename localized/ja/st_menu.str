@@ -222,6 +222,11 @@ LANG_ENGLISH        "ジェネレーターキル"
 REFERENCE           ST_MENU_HUD_GENERATOR_KILLS_DESC
 LANG_ENGLISH        "ジェネレーターによって削除されたゾンビの数"
 
+REFERENCE           ST_HUD_TURBINE_BATTERY
+LANG_ENGLISH        "タービン電力"
+
+REFERENCE           ST_MENU_HUD_TURBINE_BATTERY_DESC
+LANG_ENGLISH     "タービンの残りの電力を表示します"
 
 // PESTAÑA MAP SETTINGS
 
