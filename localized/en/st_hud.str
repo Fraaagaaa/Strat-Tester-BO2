@@ -66,4 +66,7 @@ LANG_ENGLISH        "^3Generator Kills This Round: ^5"
 REFERENCE           ST_HUD_TURBINE_POWER
 LANG_ENGLISH        "^3Turbine Power: ^5"
 
+REFERENCE           ST_HUD_ACTIVE_ZONES
+LANG_ENGLISH        "^3Active Zones: ^5"
+
 ENDMARKER

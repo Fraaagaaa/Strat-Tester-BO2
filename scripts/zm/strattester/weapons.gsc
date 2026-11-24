@@ -98,9 +98,6 @@ giveLoadout()
 
 	foreach(weapon in self.st_loadout_weapons)
     {
-		if(!isdefined(level.zombie_weapons[weapon]))
-			continue;
-
 		self weapon_give( weapon, undefined, undefined, 0 );
         if (isorigins() && issubstr(weapon, "staff"))
         {
@@ -109,14 +106,13 @@ giveLoadout()
         }
     }
 
-	if(mapHasMulekick() && isdefined(self.st_loadout_mule) && self.st_loadout_mule != "undefined")
+	if(mapHasMulekick() && isdefined(self.st_loadout_mule))
 		self mulekickWepaon();
 
 	if(isdefined(level.zombie_weapons[self.st_loadout_melee]))
 		self giveMelee(self.st_loadout_melee);
 
-	if(mapHasMulekick() && isdefined(self.st_loadout_main))
-		self switchToWeapon(self.st_loadout_main);
+	self switchToWeapon(self.st_loadout_main);
 }
 
 removeStartingPistol()

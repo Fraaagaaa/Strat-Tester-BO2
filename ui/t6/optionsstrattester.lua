@@ -358,6 +358,10 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     local ZoneChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_ZONE_NAME"), "st_zone", Engine.Localize("ST_MENU_HUD_ZONE_NAME_DESC"))
     CoD.StratTester.AddChoices_OnOrOff( ZoneChoice, 1, "hud")
 
+    -- ACTIVE ZONES
+    local ActiveZonesChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_ACTIVE_ZONES"), "st_activezones", Engine.Localize("ST_MENU_HUD_ACTIVE_ZONES_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff( ActiveZonesChoice, 0, "hud")
+
      -- BOX HITS
     if isSurvival then
         local BoxHitsChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_BOX_HITS"), "st_boxhits", Engine.Localize("ST_MENU_HUD_BOX_HITS_DESC"))

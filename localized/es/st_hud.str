@@ -66,4 +66,7 @@ LANG_ENGLISH        "^3Bajas por generador esta ronda: ^5"
 REFERENCE           ST_HUD_TURBINE_POWER
 LANG_ENGLISH        "^3Energía de turina: ^5"
 
+REFERENCE           ST_HUD_ACTIVE_ZONES
+LANG_ENGLISH        "^3Zonas activas: ^5"
+
 ENDMARKER

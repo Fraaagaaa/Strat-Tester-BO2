@@ -452,7 +452,6 @@ buslocation()
         {
             prev_zone = zone;
             self.busloc settext(zone);
-
         }
     }
 }
@@ -814,6 +813,52 @@ zombiesFarAway()
     }
 }
 
+activeZones()
+{
+    self endon("st_hud_stop_st_activezones");
+
+    self.activeZones = createfontstring("objective", 1);
+    self.activeZones.hidewheninmenu = true;
+    self.activeZones.x = 0;
+    self.activeZones.y = 15;
+    self.activeZones.aligny = "top";
+    self.activeZones.alignx = "left";
+    self.activeZones.label = &"ST_HUD_ACTIVE_ZONES";
+    self.activeZones.horzalign = "user_left";
+    self.activeZones.vertalign = "user_top";
+
+    while(true)
+    {
+        newText = "";
+        zones = maps\mp\zombies\_zm_zonemgr::get_active_zone_names();
+
+        if(isdefined(zones))
+        {
+            for(i = 0; i < zones.size; i++)
+            {
+                if(i > 0) newText += ", ";
+                newText += simplifyZone(zones[i]);
+            }
+
+            self.activeZones settext(toupper(newText));
+        }
+        wait 0.05;
+    }
+}
+
+simplifyZone(zone)
+{
+    if(zone.size >= 5 && getsubstr(zone, 0, 5) == "zone_")
+        zone = getsubstr(zone, 5, zone.size);
+    name = "";
+    foreach(token in strtok(zone, "_"))
+    {
+        if(name != "") name += " ";
+        name += token;
+    }
+    return name;
+}
+
 preventHUDOverlap()
 {
     level endon("end_game");
@@ -931,7 +976,7 @@ set_menu_hud(element, value)
 
 startEnabledMenuHUDs()
 {
-    elements = array("st_boxhits", "st_despawners", "st_healthbar", "st_remaining", "st_sph", "st_zone");
+    elements = array("st_boxhits", "st_despawners", "st_healthbar", "st_remaining", "st_sph", "st_zone", "st_activezones");
     if(istranzit())
     {
         elements[elements.size] = "st_busloc";
@@ -963,6 +1008,10 @@ start_menu_hud(element)
 {
     switch(element)
     {
+        case "st_activezones":
+            self thread activeZones();
+            break;
+
         case "st_boxhits":
             if(issurvivalmap()) self thread displayBoxHits();
             break;
@@ -1183,6 +1232,13 @@ stop_menu_hud(element)
                 self.st_zone_hud = undefined;
             }
 			break;
+
+        case "st_activezones": if(isdefined(self.activezones))
+            {
+                self.activezones destroy();
+                self.activezones = undefined;
+            }
+			break;
     }
 }
 
@@ -1206,4 +1262,5 @@ load_persisted_hud()
     self set_menu_hud("st_tank",     		    getDvarInt("st_tank"));
     self set_menu_hud("st_tumble",     		    getDvarInt("st_tumble"));
     self set_menu_hud("st_zone",                getDvarInt("st_zone"));
+    self set_menu_hud("st_activezones",         getDvarInt("st_activezones"));
 }
