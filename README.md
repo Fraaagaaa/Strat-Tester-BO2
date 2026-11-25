@@ -80,15 +80,20 @@ Perks can not be obtain via perk machines, they have to be selected inside the s
 ### Mob of the Dead
 - Trap timer
 ### Buried
+- Turbine battery display
 - Subwoofer kills per shot counter
+- Subwoofer kill average
 ### Origins
 - Ice and Wind staff timer
 - Tank kills counter
 - Tumble animation counter
 - Stomp counter
+- Generator kills counter
 ### Survival maps
 - Box hits
 ## Map specific settings
+### Victis
+- Button to give all perman perks
 ### Tranzit
 - Adjust farm and diner bus depart time
 - Disable denizens
