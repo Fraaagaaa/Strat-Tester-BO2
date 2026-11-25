@@ -25,10 +25,9 @@ activateAfterlifeSwitches()
     if(getDvarInt("st_power") == 0)
         return;
 
-    flag_wait("afterlife_start_over");
-
     thread openOfficeDoor();
 
+    flag_wait("afterlife_start_over");
 
     foreach(interact in  getentarray("afterlife_interact", "targetname"))
         if (isdefined(interact.script_string))
