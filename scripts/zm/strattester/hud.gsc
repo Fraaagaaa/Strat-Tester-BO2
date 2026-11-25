@@ -859,6 +859,38 @@ simplifyZone(zone)
     return name;
 }
 
+eyeGlowLeakDisplay()
+{
+    self endon("st_hud_stop_st_eyeglowleak");
+    level.eye_glow_leak_count = 0;
+    replacefunction("maps/mp/zombies/_zm_spawner", "delayed_zombie_eye_glow", ::override_deleted_zombie_eye_glow);
+
+    self.eyeGlowLeak = createfontstring("objective", 1.3);
+    self.eyeGlowLeak.hidewheninmenu = true;
+    self.eyeGlowLeak.x = 0;
+    self.eyeGlowLeak.y = 15;
+    self.eyeGlowLeak.aligny = "top";
+    self.eyeGlowLeak.alignx = "left";
+    self.eyeGlowLeak.label = &"ST_HUD_EYE_GLOW_LEAK";
+    self.eyeGlowLeak.horzalign = "user_left";
+    self.eyeGlowLeak.vertalign = "user_top";
+    self setvalue(0);
+    while (true)
+    {
+        self.eyeGlowLeak setvalue(level.eye_glow_leak_count);
+        wait 0.05;
+    }
+}
+
+private override_deleted_zombie_eye_glow()
+{
+    level.eye_glow_leak_count++;
+    fn = getfunction("maps/mp/zombies/_zm_spawner", "delayed_zombie_eye_glow");
+    disabledetouronce(fn);
+    [[fn]]();
+    level.eye_glow_leak_count--;
+}
+
 preventHUDOverlap()
 {
     level endon("end_game");
@@ -884,6 +916,7 @@ preventHUDOverlap()
         if(isdierise() && isdefined(self.elevatorkills)) current_y = self.elevatorkills setHudLocation(current_y, offset);
         if(isorigins())
         {
+            if(isdefined(self.eyeGlowLeak)) current_y = self.eyeGlowLeak setHudLocation(current_y, offset);
             if(isdefined(self.generatorKills)) current_y = self.generatorKills setHudLocation(current_y, offset);
             if(isdefined(self.generatorKillsThisRound)) current_y = self.generatorKillsThisRound setHudLocation(current_y, offset);
             if(isdefined(self.tank_hud)) current_y = self.tank_hud setHudLocation(current_y, offset);
@@ -993,6 +1026,7 @@ startEnabledMenuHUDs()
     }
     else if(isorigins())
     {
+        elements[elements.size] = "st_eyeglowleak";
         elements[elements.size] = "st_generatorkills";
         elements[elements.size] = "st_stomp";
         elements[elements.size] = "st_tank";
@@ -1008,6 +1042,10 @@ start_menu_hud(element)
 {
     switch(element)
     {
+        case "st_eyeglowleak":
+            if(isorigins()) self thread eyeGlowLeakDisplay();
+            break;
+
         case "st_activezones":
             self thread activeZones();
             break;
@@ -1238,6 +1276,12 @@ stop_menu_hud(element)
                 self.activezones destroy();
                 self.activezones = undefined;
             }
+
+        case "st_eyeglowleak": if(isdefined(self.eyeGlowLeak))
+            {
+                self.eyeGlowLeak destroy();
+                self.eyeGlowLeak = undefined;
+            }
 			break;
     }
 }
@@ -1263,4 +1307,5 @@ load_persisted_hud()
     self set_menu_hud("st_tumble",     		    getDvarInt("st_tumble"));
     self set_menu_hud("st_zone",                getDvarInt("st_zone"));
     self set_menu_hud("st_activezones",         getDvarInt("st_activezones"));
+    self set_menu_hud("st_eyeglowleak",         getDvarInt("st_eyeglowleak"));
 }

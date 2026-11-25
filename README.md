@@ -209,3 +209,5 @@ Building:
 - [Astrox](https://www.twitch.tv/lastroxl) for the No Power setups.
 - [AzRy](https://www.twitch.tv/azry_s) for translating the menus into japanese.
 - [Jbleezy](https://github.com/Jbleezy) for making the Jet Gun and Paralyzer overheat display for the HUD in his [BO2 Reimagined mod](https://github.com/Jbleezy/BO2-Reimagined).
+- [HuthTv](https://github.com/huthtv) for making the active zones display in his [EE Practise menu](https://github.com/HuthTV/T6-EE-Practice-Menu).
+- [Zi0](https://github.com/Zi0MIX) for making the eye glow leak display.

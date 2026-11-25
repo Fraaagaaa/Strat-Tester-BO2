@@ -404,6 +404,12 @@ LANG_ENGLISH        "ZONAS ACTIVAS"
 REFERENCE           ST_MENU_HUD_ACTIVE_ZONES_DESC
 LANG_ENGLISH        "Mostra as zonas nas que os zombis poden aparecer."
 
+REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK
+LANG_ENGLISH        "FUGAS DE OLLOS"
+
+REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK_DESC
+LANG_ENGLISH        "Mostra o erro de matar zombis do chan co bastón de vento"
+
 // PESTAÑA START
 
 REFERENCE           ST_MENU_START_INITIAL_ROUND

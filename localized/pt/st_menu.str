@@ -224,6 +224,18 @@ LANG_ENGLISH        "ENERGIA DA TURBINA"
 REFERENCE           ST_MENU_HUD_TURBINE_POWER_DESC
 LANG_ENGLISH        "Exibe quanto de energia resta na sua turbina."
 
+REFERENCE           ST_MENU_HUD_ACTIVE_ZONES
+LANG_ENGLISH        "ZONAS ATIVAS"
+
+REFERENCE           ST_MENU_HUD_ACTIVE_ZONES_DESC
+LANG_ENGLISH        "Exibe as zonas que os zumbis nascem."
+
+REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK
+LANG_ENGLISH        "VAZAMENTO EYE GLOW"
+
+REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK_DESC
+LANG_ENGLISH        "Exibe o erro por matar os zumbis que nascem do chão (Eye Glow leak)."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_MOVE_BOX

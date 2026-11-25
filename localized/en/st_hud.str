@@ -69,4 +69,7 @@ LANG_ENGLISH        "^3Turbine Power: ^5"
 REFERENCE           ST_HUD_ACTIVE_ZONES
 LANG_ENGLISH        "^3Active Zones: ^5"
 
+REFERENCE           ST_HUD_EYE_GLOW_LEAK
+LANG_ENGLISH        "^3Eye Glow Leak: ^5"
+
 ENDMARKER

@@ -43,6 +43,7 @@ createDvars()
     setdvar("player_backSpeedScale", 1 );
     setdvar("r_dof_enable", 0 );
 
+	createdvar("st_eyeglowleak", OFF);
 	createdvar("st_activezones", OFF);
 	createdvar("st_despawners", OFF);
 	createDvar("st_healthbar", OFF);

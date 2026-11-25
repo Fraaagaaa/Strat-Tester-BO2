@@ -388,6 +388,12 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
         CoD.StratTester.AddChoices_OnOrOff(SliquifireChoice, 0, "hud")
     end
 
+    if isBuried or isOrigins then
+        -- EYE GLOW LEAK
+        local EyeGlowLeakChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_EYE_GLOW_LEAK"), "st_eyeglowleak", Engine.Localize("ST_MENU_HUD_EYE_GLOW_LEAK_DESC"))
+        CoD.StratTester.AddChoices_OnOrOff(EyeGlowLeakChoice, 0, "hud")
+    end
+
     if isBuried then
         -- SUBWOOFER KILLS
         local SubwooferChoice  = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_SUBWOOFER"), "st_subwooferkills", Engine.Localize("ST_MENU_HUD_SUBWOOFER_DESC"))
