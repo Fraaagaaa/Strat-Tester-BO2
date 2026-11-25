@@ -331,7 +331,7 @@ displayBoxHits()
     self.boxhits = createfontstring("objective", 1.3);
     self.boxhits.hidewheninmenu = true;
     self.boxhits.y = 0;
-    self.boxhits.x = 2;
+    self.boxhits.x = 0;
     self.boxhits.fontscale = 1.4;
     self.boxhits.alignx = "center";
     self.boxhits.horzalign = "user_center";
@@ -349,7 +349,7 @@ displayBoxHits()
         self.total_ray_display = createfontstring("objective", 1.3);
         self.total_ray_display .hidewheninmenu = true;
         self.total_ray_display.y = 26;
-        self.total_ray_display.x = 2;
+        self.total_ray_display.x = 0;
         self.total_ray_display.fontscale = 1.3;
         self.total_ray_display.alignx = "left";
         self.total_ray_display.horzalign = "user_left";
@@ -360,7 +360,7 @@ displayBoxHits()
         self.total_mk2_display = createfontstring("objective", 1.3);
         self.total_mk2_display.hidewheninmenu = true;
         self.total_mk2_display.y = 14;
-        self.total_mk2_display.x = 2;
+        self.total_mk2_display.x = 0;
         self.total_mk2_display.fontscale = 1.3;
         self.total_mk2_display.alignx = "left";
         self.total_mk2_display.horzalign = "user_left";
@@ -373,7 +373,6 @@ displayBoxHits()
 
         while(true)
         {
-
             self.boxhits setvalue(level.total_chest_accessed);
             if(getDvarInt("st_avg"))
             {
@@ -390,6 +389,18 @@ displayBoxHits()
                 self.total_ray_display.label = &"ST_HUD_TOTAL_RAY";
                 self.total_mk2_display setvalue(level.total_mk2);
                 self.total_ray_display setvalue(level.total_ray);
+            }
+            if(isdefined(self.activezones))
+            {
+                self.total_mk2_display.y = 40;
+                self.total_ray_display.y = 52;
+                self.boxhits.y = 26;
+            }
+            else
+            {
+                self.total_mk2_display.y = 14;
+                self.total_ray_display.y = 26;
+                self.boxhits.y = 0;
             }
             wait 0.1;
         }
@@ -850,6 +861,10 @@ simplifyZone(zone)
 {
     if(zone.size >= 5 && getsubstr(zone, 0, 5) == "zone_")
         zone = getsubstr(zone, 5, zone.size);
+
+    if(zone.size >= 5 && getsubstr(zone, zone.size - 5, zone.size) == "_zone")
+        zone = getsubstr(zone, 0, zone.size - 5);
+
     name = "";
     foreach(token in strtok(zone, "_"))
     {
@@ -909,6 +924,7 @@ preventHUDOverlap()
         if(isdefined(self.zombiesFar)) current_y = self.zombiesFar setHudLocation(current_y, offset);
         if(isburied())
         {
+            if(isdefined(self.eyeGlowLeak)) current_y = self.eyeGlowLeak setHudLocation(current_y, offset);
             if(isdefined(self.turbineBattery)) current_y = self.turbineBattery setHudLocation(current_y, offset);
             if(isdefined(self.subwooferKills)) current_y = self.subwooferKills setHudLocation(current_y, offset);
             if(isdefined(self.subwooferKillsAvg)) current_y = self.subwooferKillsAvg setHudLocation(current_y, offset);
@@ -1043,7 +1059,7 @@ start_menu_hud(element)
     switch(element)
     {
         case "st_eyeglowleak":
-            if(isorigins()) self thread eyeGlowLeakDisplay();
+            if(isorigins() || isburied()) self thread eyeGlowLeakDisplay();
             break;
 
         case "st_activezones":
