@@ -32,6 +32,10 @@ init()
 
 	setDvar("ai_disableSpawn", 0); // Make sure this is set to 0 otherwise Leroy wont spawn.
 
+    // TIRED OF MANUALLY CHANGING THESE WHEN I TEST THE HUD
+    setDvar("cg_drawidentifier", 0);
+    setDvar("cg_flashScriptHashes", 0);
+
 	level thread enable_cheats();
 	level thread init_box();
 	level thread init_buildables();
