@@ -340,6 +340,10 @@ CoD.StratTester.CreateHUDTab = function ( Tab, LocalClientIndex )
     local HealthbarChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_HEALTHBAR"), "st_healthbar", Engine.Localize("ST_MENU_HUD_HEALTHBAR_DESC"))
     CoD.StratTester.AddChoices_OnOrOff(HealthbarChoice, 0, "hud")
 
+    -- DROP TRACKER
+    local DropTrackerChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_DROP_TRACKER"), "st_droptracker", Engine.Localize("ST_MENU_HUD_DROP_TRACKER_DESC"))
+    CoD.StratTester.AddChoices_OnOrOff(DropTrackerChoice, 0, "hud")
+
     -- ZOMBIE COUNTER
     local RemainingChoice = ButtonList:addHardwareProfileLeftRightSelector(Engine.Localize("ST_MENU_HUD_ZOMBIE_COUNTER"), "st_remaining", Engine.Localize("ST_MENU_HUD_ZOMBIE_COUNTER_DESC"))
     CoD.StratTester.AddChoices_OnOrOff(RemainingChoice, 1, "hud")

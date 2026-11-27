@@ -906,6 +906,44 @@ private override_deleted_zombie_eye_glow()
     level.eye_glow_leak_count--;
 }
 
+dropTracker()
+{
+    self endon("st_hud_stop_st_droptracker");
+
+    self.dropTracker = createfontstring("objective", 1.3);
+    self.dropTracker.hidewheninmenu = true;
+    self.dropTracker.x = 0;
+    self.dropTracker.y = 15;
+    self.dropTracker.aligny = "top";
+    self.dropTracker.alignx = "left";
+    self.dropTracker.label = &"ST_HUD_DROP_TRACKER";
+    self.dropTracker.horzalign = "user_left";
+    self.dropTracker.vertalign = "user_top";
+
+    while(true)
+    {
+        currentDrops = 0;
+        totalDrops = 0;
+
+        for(i = 0; i < level.zombie_powerup_array.size; i++)
+        {
+            powerup = level.zombie_powerup_array[i];
+
+            if(![[level.zombie_powerups[powerup].func_should_drop_with_regular_powerups]]())
+                continue;
+
+            totalDrops++;
+
+            if(i < level.zombie_powerup_index)
+                currentDrops++;
+        }
+
+        self.dropTracker settext(currentDrops % totalDrops + "/" + totalDrops);
+
+        wait 0.05;
+    }
+}
+
 preventHUDOverlap()
 {
     level endon("end_game");
@@ -918,6 +956,7 @@ preventHUDOverlap()
         if(isorigins()) current_y += 45;
         current_y += offset + 10;
 
+        if(isdefined(self.dropTracker)) current_y = self.dropTracker setHudLocation(current_y, offset);
         if(isdefined(self.despawnersCounter)) current_y = self.despawnersCounter setHudLocation(current_y, offset);
         if(isdefined(self.anchorLeakCounter)) current_y = self.anchorLeakCounter setHudLocation(current_y, offset);
         if(isdefined(self.zombiesInView)) current_y = self.zombiesInView setHudLocation(current_y, offset);
@@ -1025,7 +1064,7 @@ set_menu_hud(element, value)
 
 startEnabledMenuHUDs()
 {
-    elements = array("st_boxhits", "st_despawners", "st_healthbar", "st_remaining", "st_sph", "st_zone", "st_activezones");
+    elements = array("st_boxhits", "st_despawners", "st_healthbar", "st_remaining", "st_sph", "st_zone", "st_activezones", "st_droptracker");
     if(istranzit())
     {
         elements[elements.size] = "st_busloc";
@@ -1060,6 +1099,10 @@ start_menu_hud(element)
     {
         case "st_eyeglowleak":
             if(isorigins() || isburied()) self thread eyeGlowLeakDisplay();
+            break;
+        
+        case "st_droptracker":
+            self thread dropTracker();
             break;
 
         case "st_activezones":
@@ -1293,6 +1336,12 @@ stop_menu_hud(element)
                 self.activezones = undefined;
             }
 
+        case "st_droptracker": if(isdefined(self.droptracker))
+            {
+                self.droptracker destroy();
+                self.droptracker = undefined;
+            }
+
         case "st_eyeglowleak": if(isdefined(self.eyeGlowLeak))
             {
                 self.eyeGlowLeak destroy();
@@ -1323,5 +1372,6 @@ load_persisted_hud()
     self set_menu_hud("st_tumble",     		    getDvarInt("st_tumble"));
     self set_menu_hud("st_zone",                getDvarInt("st_zone"));
     self set_menu_hud("st_activezones",         getDvarInt("st_activezones"));
+    self set_menu_hud("st_droptracker",         getDvarInt("st_droptracker"));
     self set_menu_hud("st_eyeglowleak",         getDvarInt("st_eyeglowleak"));
 }

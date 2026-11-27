@@ -404,6 +404,12 @@ LANG_ENGLISH        "FUGAS DE OJOS"
 REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK_DESC
 LANG_ENGLISH        "Muestra el error de matar zombis del suelo con el bastón de viento"
 
+REFERENCE           ST_MENU_HUD_DROP_TRACKER
+LANG_ENGLISH        "DROP TRACKER"
+
+REFERENCE           ST_MENU_HUD_DROP_TRACKER_DESC
+LANG_ENGLISH        "Muestra la cantidad de power-ups del ciclo actual."
+
 // PESTAÑA START SETTINGS
 REFERENCE           ST_MENU_START_INITIAL_ROUND
 LANG_ENGLISH        "RONDA INICIAL"

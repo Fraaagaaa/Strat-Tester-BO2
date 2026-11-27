@@ -246,6 +246,12 @@ LANG_ENGLISH        "EYE GLOW LEAK"
 REFERENCE           ST_MENU_HUD_EYE_GLOW_LEAK_DESC
 LANG_ENGLISH        "Displays the error from killing ground spawners with the wind staff."
 
+REFERENCE           ST_MENU_HUD_DROP_TRACKER
+LANG_ENGLISH        "DROP TRACKER"
+
+REFERENCE           ST_MENU_HUD_DROP_TRACKER_DESC
+LANG_ENGLISH        "Displays the ammount of powerups in the current cycle."
+
 // PESTAÑA MAP SETTINGS
 
 REFERENCE           ST_MENU_MAP_FARM_DEPART

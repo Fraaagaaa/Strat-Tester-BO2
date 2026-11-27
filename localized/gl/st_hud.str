@@ -72,4 +72,7 @@ LANG_ENGLISH        "^3Zonas activas: ^5"
 REFERENCE           ST_HUD_EYE_GLOW_LEAK
 LANG_ENGLISH        "^3Fugas de ollos: ^5"
 
+REFERENCE           ST_HUD_DROP_TRACKER
+LANG_ENGLISH        "^3Drops: ^5"
+
 ENDMARKER
