@@ -212,3 +212,5 @@ Compilación:
 - [Astrox](https://www.twitch.tv/lastroxl) Por explicarme os setups en no power.
 - [AzRy](https://www.twitch.tv/azry_s) Por traducir o mod ao xaponés:
 - [Jbleezy](https://github.com/Jbleezy) Por crear o código para mostrar o sobrequencemento da Jetgun e a paralizadora no seu mod [BO2 Reimagined](https://github.com/Jbleezy/BO2-Reimagined).
+- [HuthTv](https://github.com/huthtv) por desarrollar o indicador de zonas activas no seu [menú de entrenamiento para Easter Eggs](https://github.com/HuthTV/T6-EE-Practice-Menu).
+- [Zi0](https://github.com/Zi0MIX) por desarrollar o indicador de fugas de ollos dos zombis.

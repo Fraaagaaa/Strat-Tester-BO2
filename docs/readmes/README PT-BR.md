@@ -89,9 +89,12 @@ Os perks não podem ser obtidos através das máquinas de perks. Eles precisam s
 ### Buried
 
 - Contador de kills por disparo do Ressonador.
+- Média de eliminações do Ressonador.
+- Indicador de bateria da Turbina.
 
 ### Origins
 
+- Contador de eliminações do Gerador.
 - Timer dos cajados de gelo e vento.
 - Contador de kills com o Tank.
 - Contador de animações de queda (Tumble).
@@ -102,6 +105,9 @@ Os perks não podem ser obtidos através das máquinas de perks. Eles precisam s
 - Contador de usos na Mystery Box.
 
 ## Configurações específicas por mapa
+
+### Victis
+- Botão para conceder todos os Perma Perks.
 
 ### Tranzit
 
@@ -242,3 +248,5 @@ Compilação:
 - [Astrox](https://www.twitch.tv/lastroxl) pelos setups sem energia (No Power).
 - [AzRy](https://www.twitch.tv/azry_s) por traduzir os menus para japonês.
 - [Jbleezy](https://github.com/Jbleezy) por criar a exibição de superaquecimento da Jet Gun e do Paralyzer no HUD em seu [mod BO2 Reimagined](https://github.com/Jbleezy/BO2-Reimagined).
+- [HuthTv](https://github.com/huthtv) por desenvolver o indicador de zonas ativas em seu [menu de treinamento de Easter Eggs](https://github.com/HuthTV/T6-EE-Practice-Menu).
+- [Zi0](https://github.com/Zi0MIX) por desenvolver o indicador de vazamento de Eye Glow dos zumbis

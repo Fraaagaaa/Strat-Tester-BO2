@@ -4,6 +4,9 @@
 - [**Leer en español**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20ES.md)
 - [**Ler em português**](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/docs/readmes/README%20PT-BR.md)
 
+
+This mod is meant to be used alongside [Plutonium](https://plutonium.pw/) and has no support outside this client, if you have problems loading the mod try updating plutonium by running the `plutonium.exe` that you can get from their website.
+
 ## [Changelog](https://github.com/Fraaagaaa/Strat-Tester-BO2/blob/main/CHANGELOG.md)
 
 # Downloads:
@@ -77,15 +80,20 @@ Perks can not be obtain via perk machines, they have to be selected inside the s
 ### Mob of the Dead
 - Trap timer
 ### Buried
+- Turbine battery display
 - Subwoofer kills per shot counter
+- Subwoofer kill average
 ### Origins
 - Ice and Wind staff timer
 - Tank kills counter
 - Tumble animation counter
 - Stomp counter
+- Generator kills counter
 ### Survival maps
 - Box hits
 ## Map specific settings
+### Victis
+- Button to give all perman perks
 ### Tranzit
 - Adjust farm and diner bus depart time
 - Disable denizens
@@ -206,3 +214,5 @@ Building:
 - [Astrox](https://www.twitch.tv/lastroxl) for the No Power setups.
 - [AzRy](https://www.twitch.tv/azry_s) for translating the menus into japanese.
 - [Jbleezy](https://github.com/Jbleezy) for making the Jet Gun and Paralyzer overheat display for the HUD in his [BO2 Reimagined mod](https://github.com/Jbleezy/BO2-Reimagined).
+- [HuthTv](https://github.com/huthtv) for making the active zones display in his [EE Practise menu](https://github.com/HuthTV/T6-EE-Practice-Menu).
+- [Zi0](https://github.com/Zi0MIX) for making the eye glow leak display.
